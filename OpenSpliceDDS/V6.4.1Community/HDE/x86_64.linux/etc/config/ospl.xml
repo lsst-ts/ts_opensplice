@@ -24,6 +24,7 @@
 <!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
       </Compatibility>
    </DDSI2Service>
+<!-- updated parameters to try and speed up discovery phase -->
    <DurabilityService name="durability">
       <Network>
          <HeartBeat>
