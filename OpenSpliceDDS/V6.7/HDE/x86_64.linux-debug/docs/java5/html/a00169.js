@@ -1,0 +1,28 @@
+var a00169 =
+[
+    [ "DataReaderQosImpl", "a00169.html#a5d4b25e340d0ede23213b3b3bda8154f", null ],
+    [ "DataReaderQosImpl", "a00169.html#aa37ce0e3c97f16094542e5ddaf77e99c", null ],
+    [ "convert", "a00169.html#ad5d1f2c1c00d47a4022617ac70cc1814", null ],
+    [ "convert", "a00169.html#aa2ff9b6864885a6cb2c7dd976dc45034", null ],
+    [ "getDeadline", "a00169.html#a3c50a4046ca323382bb09e433ce36e2f", null ],
+    [ "getDestinationOrder", "a00169.html#a01400306e2d30a0d8ea3f4ecab9f57ff", null ],
+    [ "getDurability", "a00169.html#acd71c39a7ad48705cf671285bb76029e", null ],
+    [ "getHistory", "a00169.html#a1694f983f7cad1b32182f77c7e14300c", null ],
+    [ "getLatencyBudget", "a00169.html#a32e72de2575e9de8690df75ee23e9d96", null ],
+    [ "getLiveliness", "a00169.html#ac40ac97e1c0136b30ef6096972fc3a44", null ],
+    [ "getOwnership", "a00169.html#ac676e6abb6aebf309cc00ae6d5f930fe", null ],
+    [ "getReaderDataLifecycle", "a00169.html#aa803564e6cf240ebb914c215277b77c6", null ],
+    [ "getReaderLifespan", "a00169.html#a101f17fe4d9fc9513b681b585dec1892", null ],
+    [ "getReliability", "a00169.html#a2548a46b26447a233322a8132c6fef56", null ],
+    [ "getRepresentation", "a00169.html#ae8190338179f03df4b7cf0b19638ebdf", null ],
+    [ "getResourceLimits", "a00169.html#ac11adaf7c1c7729eac7bed7701e94d78", null ],
+    [ "getShare", "a00169.html#af1bf1cff8eaba37a4513d11ddce3bd2c", null ],
+    [ "getSubscriptionKeys", "a00169.html#a22e119da55ca86b99b68936862bcc005", null ],
+    [ "getTimeBasedFilter", "a00169.html#a95cf592f74bfec5250533d5ceab85945", null ],
+    [ "getTypeConsistency", "a00169.html#ab896fb2c359eef9326e66bff030a7a60", null ],
+    [ "getUserData", "a00169.html#a3a5471bca96797a5eecfeea15b629fb8", null ],
+    [ "mergeTopicQos", "a00169.html#ad4cd8542f3742f8e1c0899bb98ac9e10", null ],
+    [ "setupMissingPolicies", "a00169.html#a30074cdfeb486b2b6625aa6cdd76d9e6", null ],
+    [ "withPolicies", "a00169.html#a267efba9bb7b8d8fb398a505bd6bdfca", null ],
+    [ "withPolicy", "a00169.html#ab99024280b6112f3700c7097edb2a909", null ]
+];

@@ -1,0 +1,82 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+JAVAC         = $(SPLICE_JAVAC)
+JAR           = jar
+JAVACFLAGS    = $(GENFLAGS)
+CLASSEXT      = .class
+CLASSDIR      = classes/
+OUTPUT_OPTION = -d $(CLASSDIR)
+COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
+JAVACCPATH    = "$(SPLICE_EXTRA_CP):$(CLASSDIR):../../../../jar/dcpssaj5.jar:"
+MAKEFILE      = Makefile.saj5_ownership_types
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ./
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+GENFLAGS      =  
+CLASSES       =  $(CLASSDIR)OwnershipData/*$(CLASSEXT) $(CLASSDIR)OwnershipDataPublisher$(CLASSEXT) $(CLASSDIR)OwnershipDataSubscriber$(CLASSEXT)
+JARCLASSES    =  OwnershipData/*$(CLASSEXT) OwnershipDataPublisher$(CLASSEXT) OwnershipDataSubscriber$(CLASSEXT)
+JAREXT        = .jar
+MAINCLASS     = OwnershipDataPublisher
+JARFILE       = $(LTARGETDIR)$(LIBPREFIX)saj5_ownership_types$(LIBSUFFIX)$(JAREXT)
+MANIFEST      = saj5_ownership_types.manifest
+JARFLAGS      = cvfm
+SRC           = OwnershipData/*.java OwnershipDataPublisher.java OwnershipDataSubscriber.java
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES) $(CLASSDIR)$(MANIFEST)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	cd $(CLASSDIR) && $(JAR) $(JARFLAGS) $(JARFILE) $(MANIFEST) $(JARCLASSES) 
+	$(MV) $(CLASSDIR)/$(JARFILE) .
+
+$(CLASSDIR)$(MANIFEST):
+	echo Class-Path: ../../../../jar/dcpssaj5.jar > $(CLASSDIR)$(MANIFEST)
+	echo Main-Class: $(MAINCLASS) >> $(CLASSDIR)$(MANIFEST)
+
+GENERATED_DIRTY = OwnershipData
+
+OwnershipData: ../idl/OwnershipData.idl
+	"../../../../bin/idlpp" -I "../../../../etc/idl" -l java ../idl/OwnershipData.idl
+
+.PRECIOUS: $(GENERATED_DIRTY)
+$(CLASSES): $(GENERATED_DIRTY)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+$(CLASSDIR)OwnershipData/*$(CLASSEXT): OwnershipData
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) OwnershipData/*.java
+
+$(CLASSDIR)OwnershipDataPublisher$(CLASSEXT): OwnershipDataPublisher.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) OwnershipDataPublisher.java
+
+$(CLASSDIR)OwnershipDataSubscriber$(CLASSEXT): OwnershipDataSubscriber.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) OwnershipDataSubscriber.java
+
+clean:
+	-$(RM) $(CLASSES)
+
+realclean: clean
+	-$(RM) $(BIN)
+	-$(RM) $(GENERATED_DIRTY)
+	-$(RM) $(CLASSDIR)$(MANIFEST)
+
+check-syntax:
+	$(COMPILE.java) $(EXPORTFLAGS) $(CHK_SOURCES)
+

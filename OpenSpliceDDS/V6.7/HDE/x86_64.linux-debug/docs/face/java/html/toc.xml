@@ -1,0 +1,1120 @@
+<toc label="OpenSplice Java FACE API" topic="index.html">
+  <topic label="Java FACE API" href="index.html">
+    <topic label="Getting started                                                                " href="a00119.html#mainpage_gettingstarted"/>
+    <topic label="API documentation                                                               " href="a00119.html#mainpage_api"/>
+    <topic label="Examples" href="a00002.html">
+      <topic label="FACE Examples                                                                   " href="a00002.html#face_examples_dcpslist">
+        <topic label="HelloWorld                                                                              " href="a00002.html#helloworld"/>
+      </topic>
+      <topic label="Building the examples                                           " href="a00002.html#face_build_examples">
+        <topic label="POSIX:                                                                                  " href="a00002.html#buildposix">
+          <topic label="General posix build/run environment setup" href="a00002.html#posixgeneral"/>
+        </topic>
+        <topic label="Windows:                                                                                " href="a00002.html#buildwindows">
+          <topic label="General windows build/run environment setup" href="a00002.html#windowsgeneral"/>
+        </topic>
+      </topic>
+      <topic label="Running examples                                                               " href="a00002.html#face_examples_running">
+        <topic label="POSIX:                                                                                  " href="a00002.html#runposix"/>
+        <topic label="Windows:                                                                                " href="a00002.html#runwindows"/>
+      </topic>
+    </topic>
+  </topic>
+  <topic label="DCPS Concepts" href="a00006.html">
+    <topic label="DCPS Modules" href="a00008.html">
+      <topic label="Infrastructure Module" href="a00012.html">
+        <topic label="Entity      " href="a00012.html#DCPS_Modules_Entity"/>
+        <topic label="Listener" href="a00014.html"/>
+        <topic label="Status" href="a00016.html">
+          <topic label="Inconsistent Topic Status" href="a00096.html"/>
+          <topic label="Sample Rejected Status" href="a00114.html"/>
+          <topic label="Liveliness Changed Status" href="a00098.html"/>
+          <topic label="Requested Deadline Missed Status" href="a00108.html"/>
+          <topic label="Requested Incompatible QoS Status" href="a00110.html"/>
+          <topic label="Sample Lost Status" href="a00112.html"/>
+          <topic label="Subscription Matched Status" href="a00116.html"/>
+          <topic label="Liveliness Lost Status" href="a00100.html"/>
+          <topic label="Offered Deadline Missed" href="a00102.html"/>
+          <topic label="Offered Incompatible QoS Status" href="a00104.html"/>
+          <topic label="Publication Matched Status" href="a00106.html"/>
+        </topic>
+        <topic label="Waitset" href="a00018.html"/>
+      </topic>
+      <topic label="Domain Module" href="a00010.html">
+        <topic label="The Domain Participant     " href="a00010.html#DCPS_Modules_DomainParticipant"/>
+      </topic>
+      <topic label="Topic-Definition Module" href="a00034.html">
+        <topic label="Topic                    " href="a00034.html#DCPS_Modules_Topic"/>
+      </topic>
+      <topic label="Publication Module" href="a00020.html">
+        <topic label="The Publisher  " href="a00020.html#DCPS_Modules_Publisher"/>
+        <topic label="The DataWriter" href="a00022.html"/>
+        <topic label="Listener" href="a00014.html"/>
+      </topic>
+      <topic label="Subscription Module" href="a00026.html">
+        <topic label="The Subscriber  " href="a00026.html#DCPS_Modules_Subscriber"/>
+        <topic label="The DataReader" href="a00028.html"/>
+        <topic label="The DataSample" href="a00030.html"/>
+        <topic label="The SampleInfo" href="a00032.html"/>
+        <topic label="Listener" href="a00014.html"/>
+      </topic>
+    </topic>
+    <topic label="Supported Quality of Service (QoS)" href="a00036.html">
+      <topic label="User Data QoS" href="a00088.html"/>
+      <topic label="Topic Data QoS" href="a00084.html"/>
+      <topic label="Group Data QoS" href="a00048.html"/>
+      <topic label="Durability QoS" href="a00042.html"/>
+      <topic label="Durability Service QoS" href="a00044.html"/>
+      <topic label="Presentation QoS" href="a00064.html"/>
+      <topic label="Deadline QoS" href="a00038.html"/>
+      <topic label="Latency Budget QoS" href="a00052.html"/>
+      <topic label="Ownership QoS" href="a00058.html"/>
+      <topic label="Ownership Strength QoS" href="a00060.html"/>
+      <topic label="Liveliness QoS" href="a00056.html"/>
+      <topic label="Time Based Filter QoS" href="a00082.html"/>
+      <topic label="Partition QoS" href="a00062.html"/>
+      <topic label="Reliability QoS" href="a00072.html"/>
+      <topic label="Transport Priority QoS" href="a00086.html"/>
+      <topic label="Lifespan QoS" href="a00054.html"/>
+      <topic label="Destination Order QoS" href="a00040.html"/>
+      <topic label="History QoS" href="a00050.html"/>
+      <topic label="Resource Limits QoS" href="a00074.html"/>
+      <topic label="Entity Factory QoS" href="a00046.html"/>
+      <topic label="Writer Data Lifecycle QoS" href="a00092.html"/>
+      <topic label="Reader Data Lifecycle QoS" href="a00068.html"/>
+      <topic label="SubscriptionKey QoS" href="a00080.html"/>
+      <topic label="ReaderLifespan QoS" href="a00070.html"/>
+      <topic label="Share QoS" href="a00078.html"/>
+      <topic label="ViewKey QoS" href="a00090.html"/>
+      <topic label="Scheduling QoS" href="a00076.html"/>
+    </topic>
+    <topic label="Return Codes" href="a00024.html"/>
+    <topic label="Queries and Filters" href="a00094.html"/>
+    <topic label="Built-in Topics" href="a00004.html">
+      <topic label="Built-in Topics                                                                " href="a00004.html#DCPS_Builtin_Topics_Intro">
+        <topic label="ParticipantBuiltinTopicData                                                    " href="a00004.html#DCPS_Builtin_Topics_ParticipantData"/>
+        <topic label="TopicBuiltinTopicData                                                          " href="a00004.html#DCPS_Builtin_Topics_TopicData"/>
+        <topic label="PublicationBuiltinTopicData                                                    " href="a00004.html#DCPS_Builtin_Topics_PublicationData"/>
+        <topic label="SubscriptionBuiltinTopicData                                                   " href="a00004.html#DCPS_Builtin_Topics_SubscriptionData"/>
+        <topic label="Other built-in topics                                                          " href="a00004.html#DCPS_Builtin_Topics_Others"/>
+      </topic>
+    </topic>
+  </topic>
+  <topic label="QoS Provider" href="a00066.html">
+    <topic label="API reference       " href="a00066.html#DCPS_QoS_Provider_APIref">
+      <topic label="Introduction           " href="a00066.html#DCPS_QoS_Provider_Introduction"/>
+    </topic>
+    <topic label="XML file syntax       " href="a00066.html#DCPS_QoS_Provider_XMLsyn">
+      <topic label="Entity QoS      " href="a00066.html#DCPS_QoS_Provider_Entity_QoS"/>
+      <topic label="QoS Profiles        " href="a00066.html#DCPS_QoS_Provider_QoS_Profiles"/>
+    </topic>
+    <topic label="Example     " href="a00066.html#DCPS_QoS_Provider_Example"/>
+    <topic label="Known limitations       " href="a00066.html#DCPS_QoS_Provider_Limitations"/>
+  </topic>
+  <topic label="FACE Configuration" href="a00118.html"/>
+  <topic label="Packages">
+    <topic label="Packages" href="namespaces.html">
+      <topic label="FACE" href="a00259.html"/>
+      <topic label="org" href="a00260.html">
+        <topic label="vortex" href="a00261.html">
+          <topic label="FACE" href="a00262.html"/>
+        </topic>
+      </topic>
+    </topic>
+  </topic>
+  <topic label="Classes">
+    <topic label="Class List" href="annotated.html">
+      <topic label="FACE" href="a00259.html">
+        <topic label="CONNECTION_DIRECTION_TYPE" href="a00122.html">
+          <topic label="CONNECTION_DIRECTION_TYPE" href="a00122.html#a74772b906eea5cebd761f40865a6435e"/>
+          <topic label="from_int" href="a00122.html#a918b148e222d1487f920214b9e572f59"/>
+          <topic label="value" href="a00122.html#af4daa03a7933c8854ef2eeea3d546f84"/>
+          <topic label="_BI_DIRECTIONAL" href="a00122.html#ade2d7b37850f993993f51f01d41fde57"/>
+          <topic label="_DESTINATION" href="a00122.html#ac352bdfb7ae4c947db4c3850bf4c32cb"/>
+          <topic label="_NOT_DEFINED_CONNECTION_DIRECTION_TYPE" href="a00122.html#ab2beab5536f4f4dacbf926f08a7b4c8c"/>
+          <topic label="_ONE_WAY_REQUEST_DESTINATION" href="a00122.html#ae7a30cbc7f12b17b4a096de51931102d"/>
+          <topic label="_ONE_WAY_REQUEST_SOURCE" href="a00122.html#a9bba47ab0b4fca6fe64e5bc4b573be8a"/>
+          <topic label="_SOURCE" href="a00122.html#ad38faf0950bb6180b978c2feff03b934"/>
+          <topic label="_TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_DESTINATION" href="a00122.html#a4570826c4337fad941554125198e538a"/>
+          <topic label="_TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_SOURCE" href="a00122.html#a73cef5d9da375bab3e1b8c525b729503"/>
+          <topic label="_TWO_WAY_REQUEST_SYNCHRONOUS_DESTINATION" href="a00122.html#ad1355e916e931b4ea151c835954ef7c9"/>
+          <topic label="_TWO_WAY_REQUEST_SYNCHRONOUS_SOURCE" href="a00122.html#aa62a5cac65864e01fa8e64332228f6b2"/>
+          <topic label="BI_DIRECTIONAL" href="a00122.html#a6b74390fa3d4ada74b58e2ddc9ae08ae"/>
+          <topic label="DESTINATION" href="a00122.html#acf501ef24faf3dd3444ce87776bea8f8"/>
+          <topic label="NOT_DEFINED_CONNECTION_DIRECTION_TYPE" href="a00122.html#a73f6f1eeac6e677d6c4ea09bd7657a80"/>
+          <topic label="ONE_WAY_REQUEST_DESTINATION" href="a00122.html#abb5c2d4772cccf74be89adb93f8c7635"/>
+          <topic label="ONE_WAY_REQUEST_SOURCE" href="a00122.html#a1839bcf234c11fa861a3637476404f3d"/>
+          <topic label="SOURCE" href="a00122.html#a8b9caade0bab09e4649f49ec705179dd"/>
+          <topic label="TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_DESTINATION" href="a00122.html#a1d1dd8619c8034f6fea947b781f7ddc3"/>
+          <topic label="TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_SOURCE" href="a00122.html#a2c0bf5eacceb093e068602f313d07992"/>
+          <topic label="TWO_WAY_REQUEST_SYNCHRONOUS_DESTINATION" href="a00122.html#ac91cf08109d2dbf14a8bbf0a49b10ddf"/>
+          <topic label="TWO_WAY_REQUEST_SYNCHRONOUS_SOURCE" href="a00122.html#ad43f574f605a1f60b3394db2cb62848b"/>
+        </topic>
+        <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html">
+          <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html#af10cc7bef8242252b3012fbfd831856b"/>
+          <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html#a2e721e5489cd728fdc68332254f4041e"/>
+          <topic label="value" href="a00123.html#a98d04b3276a712881887558c73131a55"/>
+        </topic>
+        <topic label="CONNECTION_DOMAIN_TYPE" href="a00124.html">
+          <topic label="CONNECTION_DOMAIN_TYPE" href="a00124.html#aec491bea7dd84f37a7ff988eb86e3079"/>
+          <topic label="from_int" href="a00124.html#a31237af4de7ffa6cfdc2fd7308879f09"/>
+          <topic label="value" href="a00124.html#ae5836a9a4e4fd95fecf470f9ad0266af"/>
+          <topic label="_INET" href="a00124.html#afa836d47b3d8c25fb97ede5b19a59838"/>
+          <topic label="_NOT_DEFINED_CONNECTION_DOMAIN_TYPE" href="a00124.html#a98a3e4ba6e42f633f3df2e13fe42fd2d"/>
+          <topic label="_UNIX" href="a00124.html#aa0f48f2c2762c84ac1ab08af80905351"/>
+          <topic label="INET" href="a00124.html#adc652b30621138c6d5869665855a4783"/>
+          <topic label="NOT_DEFINED_CONNECTION_DOMAIN_TYPE" href="a00124.html#af612abcc90f7ae823a68b5b6c1d273b1"/>
+          <topic label="UNIX" href="a00124.html#ae21a51ef898367468cafa338e8e5dfa2"/>
+        </topic>
+        <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html">
+          <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html#a1ae2856bbd33fbfef99426d3727ce403"/>
+          <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html#af1b837d32c2ec3033e4985fa2e1975b0"/>
+          <topic label="value" href="a00125.html#af1a909e1b9443633fb0a682fbe538180"/>
+        </topic>
+        <topic label="CONNECTION_TYPE" href="a00126.html">
+          <topic label="CONNECTION_TYPE" href="a00126.html#ae9243f7498055ec2452161fd1a58d07f"/>
+          <topic label="from_int" href="a00126.html#ab7cfd3f5b419c34d83caf4744d28603d"/>
+          <topic label="value" href="a00126.html#a2279ffe90e0675f0703d3b6678c0e0ce"/>
+          <topic label="_CORBA" href="a00126.html#a8c2f265078cf51df3413d3d116da27cc"/>
+          <topic label="_DDS" href="a00126.html#a716d581fc2f8464fc1e35d191a61bd05"/>
+          <topic label="_MQ" href="a00126.html#a49706eb33f664433439938ecd17344f7"/>
+          <topic label="_QUEUING_PORT" href="a00126.html#a3ba73a52372594436d5ce78b03ef8336"/>
+          <topic label="_SAMPLING_PORT" href="a00126.html#a723795d034f1e6ec86e16ec4c8b0cee1"/>
+          <topic label="_SHM" href="a00126.html#a510bcefa619321d8542e3616c27b0093"/>
+          <topic label="_SOCKET" href="a00126.html#ac39a28bdf40ad0f913ea012a20226015"/>
+          <topic label="CORBA" href="a00126.html#a30b0826fea7ce425bb0fa643c654405c"/>
+          <topic label="DDS" href="a00126.html#ad86ee074305205f262247ece42140b13"/>
+          <topic label="MQ" href="a00126.html#a6a570e5c33ca8392d503c03f7eccd11b"/>
+          <topic label="QUEUING_PORT" href="a00126.html#abb536a52b321994f29442e60864aa67b"/>
+          <topic label="SAMPLING_PORT" href="a00126.html#a98c7d29f79eb15a56fb49c7dbad59091"/>
+          <topic label="SHM" href="a00126.html#a27a874cd1cb5a86b7bb0eabb4f766a9e"/>
+          <topic label="SOCKET" href="a00126.html#a5f3301427d0b6c189a29530783af573f"/>
+        </topic>
+        <topic label="CONNECTION_TYPEHolder" href="a00127.html">
+          <topic label="CONNECTION_TYPEHolder" href="a00127.html#ac4f880f9e726facfcd400f4a692a0e89"/>
+          <topic label="CONNECTION_TYPEHolder" href="a00127.html#ae63aaab41d7653a0fa46748ac3e2551a"/>
+          <topic label="value" href="a00127.html#acfb73531f66b34c29f087624ab57b0e6"/>
+        </topic>
+        <topic label="INF_TIME_VALUE" href="a00132.html">
+          <topic label="value" href="a00132.html#a92b37256edaa48f49900863813c8f907"/>
+        </topic>
+        <topic label="MESSAGING_PATTERN_TYPE" href="a00134.html">
+          <topic label="MESSAGING_PATTERN_TYPE" href="a00134.html#ad55aaa3f4b8b5e53ef6052ce73f6d9a3"/>
+          <topic label="from_int" href="a00134.html#ac250fb6971ffe2056388d08e9a1e2cf1"/>
+          <topic label="value" href="a00134.html#a341319e1f13bfa5bd3542fddef680ee1"/>
+          <topic label="_CLIENT" href="a00134.html#ac044361840db61df3cb7b66e529739bf"/>
+          <topic label="_PUB_SUB" href="a00134.html#a18e83dd6b3cdb57a599c7e1dfd08a203"/>
+          <topic label="_SERVER" href="a00134.html#ae91a44000769d7d5703697234f2306db"/>
+          <topic label="CLIENT" href="a00134.html#a97b596a1272e36310e2f8e6cb607a83e"/>
+          <topic label="PUB_SUB" href="a00134.html#ab523a450240b25fbc8f7e20f144e45f3"/>
+          <topic label="SERVER" href="a00134.html#a75bd5407d451a02dc3778c70fa0e2fdf"/>
+        </topic>
+        <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html">
+          <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html#a1bb08bda36c2d8a0e2143705f92da7eb"/>
+          <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html#a9126c1f5ea67ad7387dab2507ee68468"/>
+          <topic label="value" href="a00135.html#a3462a6239ca9ad6893785c1ddac5e8d9"/>
+        </topic>
+        <topic label="QUEUING_DISCIPLINE_TYPE" href="a00137.html">
+          <topic label="QUEUING_DISCIPLINE_TYPE" href="a00137.html#a0dedcaab547bd0808c032e3e60220799"/>
+          <topic label="from_int" href="a00137.html#afb67e500d2bcd8e421e244e9ffbe8539"/>
+          <topic label="value" href="a00137.html#adc175562595b358a67394f51918f6abc"/>
+          <topic label="_FIFO" href="a00137.html#a1892a12bbd355387d9728430a6f2ecd1"/>
+          <topic label="_NOT_DEFINED_QUEUING_DISCIPLINE_TYPE" href="a00137.html#a7fb252ca1617fd0cca11e3dded161a60"/>
+          <topic label="_PRIORITY" href="a00137.html#ad751c1a764ac605dc3e0b6a8882602ff"/>
+          <topic label="FIFO" href="a00137.html#a9ad75c716a68073fbeb652011080cd14"/>
+          <topic label="NOT_DEFINED_QUEUING_DISCIPLINE_TYPE" href="a00137.html#a4b8e92bf92df8aa86c997615f8cf0416"/>
+          <topic label="PRIORITY" href="a00137.html#acd4004884a241cd2beb36ee6dacae3c2"/>
+        </topic>
+        <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html">
+          <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html#a2e6fa02f41a1d49339703531efdcea37"/>
+          <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html#a29f27c9f54388eb584da2ec14db26e8a"/>
+          <topic label="value" href="a00138.html#ae430e793de66fef07c4012242f2e0805"/>
+        </topic>
+        <topic label="RECEIVE_FLAG_TYPE" href="a00142.html">
+          <topic label="RECEIVE_FLAG_TYPE" href="a00142.html#aff42ff8d4a106dd7c0bd6ac9ef638303"/>
+          <topic label="from_int" href="a00142.html#af061493d57a213701a7c721395ff5079"/>
+          <topic label="value" href="a00142.html#af9b43e34787922a9d3c8d1c896fbb419"/>
+          <topic label="_NOT_DEFINED_RECEIVE_FLAG_TYPE" href="a00142.html#ac02c18ee69876187ffe007279df9e53f"/>
+          <topic label="_OOB_RECEIVE_FLAG_TYPE" href="a00142.html#a8627032b3cc51a428ab3e941f28f2326"/>
+          <topic label="_PEEK" href="a00142.html#a568ac803fc5763aa6909247032555fa4"/>
+          <topic label="_WAITALL" href="a00142.html#a3ea5f7e7b79107ef79b4ddc3d63744b1"/>
+          <topic label="NOT_DEFINED_RECEIVE_FLAG_TYPE" href="a00142.html#a76693e1255c56af7177a0cb6e4379662"/>
+          <topic label="OOB_RECEIVE_FLAG_TYPE" href="a00142.html#aa1c72a7ea9e083844021757c7d24aa27"/>
+          <topic label="PEEK" href="a00142.html#ad9843b81ec285ad51ad22604c2188489"/>
+          <topic label="WAITALL" href="a00142.html#adf78894222ccf066cbb5067118449d7f"/>
+        </topic>
+        <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html">
+          <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html#a9d5f6a5bd4a7f822685f0ba8251967ca"/>
+          <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html#a652f8583ee60fba76e92f3eae6fb0fe2"/>
+          <topic label="value" href="a00143.html#a8c97032e4d25570d45735d356d61a551"/>
+        </topic>
+        <topic label="RETURN_CODE_TYPE" href="a00144.html">
+          <topic label="RETURN_CODE_TYPE" href="a00144.html#a2e062c260dc9c792fb89a085f64662b0"/>
+          <topic label="from_int" href="a00144.html#aaddac78c03bb1165c9d438f40b6d3466"/>
+          <topic label="value" href="a00144.html#ad17a7b0f92b472e344be4d8309f198f8"/>
+          <topic label="_ADDR_IN_USE" href="a00144.html#a42dc271a0188dab5b5517993b6d0c2b2"/>
+          <topic label="_CONNECTION_CLOSED" href="a00144.html#aaf017226eb6bab8854deaa1b7c3fb4d3"/>
+          <topic label="_CONNECTION_IN_PROGRESS" href="a00144.html#a135a83ec0076acfb7b71ce2d48aa916d"/>
+          <topic label="_DATA_BUFFER_TOO_SMALL" href="a00144.html#a9f0b12bfdc21b1bb0fc39c7a0b416875"/>
+          <topic label="_INVALID_CONFIG" href="a00144.html#a7661edccfb42c8a2e7f3d12ed0c34a42"/>
+          <topic label="_INVALID_MODE" href="a00144.html#a6a59e58aba04dc7c6bb314b6bbd414c0"/>
+          <topic label="_INVALID_PARAM" href="a00144.html#a7c8181b8de70d2831215da40efadab47"/>
+          <topic label="_MESSAGE_STALE" href="a00144.html#a93f01e011b1525ec95f25a063d2e634c"/>
+          <topic label="_NO_ACTION" href="a00144.html#a285385c5cf3baada91c1078b9bd976f5"/>
+          <topic label="_NO_ERROR" href="a00144.html#a13a4b67fc656ddac48099ddc1c4b8bae"/>
+          <topic label="_NOT_AVAILABLE" href="a00144.html#a3e1db956a6253da32df64e720b98a104"/>
+          <topic label="_PERMISSION_DENIED" href="a00144.html#afd1b22197d5d6d75efed1c37489d4d6e"/>
+          <topic label="_TIMED_OUT" href="a00144.html#a6a20716d188ad86aa39c35a1dcc0b95a"/>
+          <topic label="ADDR_IN_USE" href="a00144.html#a97c425cf4ae8ef91874c2c8daecadd02"/>
+          <topic label="CONNECTION_CLOSED" href="a00144.html#a28f02a9fe7d308ec29242f1265056a02"/>
+          <topic label="CONNECTION_IN_PROGRESS" href="a00144.html#aa0ffcd6fedfa62a8c1598f5c36c734c8"/>
+          <topic label="DATA_BUFFER_TOO_SMALL" href="a00144.html#a5e5856685a65cc23dbfd04d0b3d7fe77"/>
+          <topic label="INVALID_CONFIG" href="a00144.html#a39cb8f91db49a6ae0329f58f2f59e2c6"/>
+          <topic label="INVALID_MODE" href="a00144.html#aa8add87a438693b28ad408afbdf90dbf"/>
+          <topic label="INVALID_PARAM" href="a00144.html#a69e69f68e6b8c61999410da576457f55"/>
+          <topic label="MESSAGE_STALE" href="a00144.html#af362d4459494371e03ecbc32d3a791df"/>
+          <topic label="NO_ACTION" href="a00144.html#ac462bff967510332aaace9f97a6e794b"/>
+          <topic label="NO_ERROR" href="a00144.html#a4d1597c2eaa7a39d0e57a20a69f1e8a6"/>
+          <topic label="NOT_AVAILABLE" href="a00144.html#a54ad74a93ec930db182766dcdb764af2"/>
+          <topic label="PERMISSION_DENIED" href="a00144.html#aa43c87a696f2044e3544d3a6ba249579"/>
+          <topic label="TIMED_OUT" href="a00144.html#a0485560b9a364f7641839b83d6bda5a3"/>
+        </topic>
+        <topic label="RETURN_CODE_TYPEHolder" href="a00145.html">
+          <topic label="RETURN_CODE_TYPEHolder" href="a00145.html#acc6bbfd46b32c97487b28a92c7376533"/>
+          <topic label="RETURN_CODE_TYPEHolder" href="a00145.html#a7d8686f709385c9b131e8b738c318def"/>
+          <topic label="value" href="a00145.html#ab53b4272b2e667d44372bf60490da9da"/>
+        </topic>
+        <topic label="SEND_FLAG_TYPE" href="a00146.html">
+          <topic label="SEND_FLAG_TYPE" href="a00146.html#af8c945fa7d9fe871f111fdedc03fa280"/>
+          <topic label="from_int" href="a00146.html#a81aeab5f5f905b85bec1cb5f15efe6e2"/>
+          <topic label="value" href="a00146.html#a3b8e5893a213831555bb0b178eaa892a"/>
+          <topic label="_EOR" href="a00146.html#a31e2020685a69eee0fb31be18677c13f"/>
+          <topic label="_NOSIGNAL" href="a00146.html#ae649f93b89ee3c01a38f5ff7e36b0e82"/>
+          <topic label="_NOT_DEFINED_SEND_FLAG_TYPE" href="a00146.html#a5517cfa8962d6b52718c7380adf059f4"/>
+          <topic label="_OOB_SEND_FLAG_TYPE" href="a00146.html#ad04962bbb11275372dc9d5f978f71534"/>
+          <topic label="EOR" href="a00146.html#a2f97c50bba62508273c584baa9fb6c3e"/>
+          <topic label="NOSIGNAL" href="a00146.html#a11f15e0857d0e04b526bd2593d3effa4"/>
+          <topic label="NOT_DEFINED_SEND_FLAG_TYPE" href="a00146.html#a660e1e004bd50a313b2dd796ea3a0416"/>
+          <topic label="OOB_SEND_FLAG_TYPE" href="a00146.html#ae92226731bb8b0e20be4f2f2b60f5dda"/>
+        </topic>
+        <topic label="SEND_FLAG_TYPEHolder" href="a00147.html">
+          <topic label="SEND_FLAG_TYPEHolder" href="a00147.html#a00dc61757b0d143c829de7013a740388"/>
+          <topic label="SEND_FLAG_TYPEHolder" href="a00147.html#a54630d3dec68256e1af8f9d3aaa4bced"/>
+          <topic label="value" href="a00147.html#aaf69b7e0669e4e814595bab5e0893292"/>
+        </topic>
+        <topic label="SOCKET_TYPE" href="a00148.html">
+          <topic label="SOCKET_TYPE" href="a00148.html#ab9799004e9b108119c38574538ab2830"/>
+          <topic label="from_int" href="a00148.html#aea32fe6f8da51b32538fea198b3a4310"/>
+          <topic label="value" href="a00148.html#a72da927755cb0dbc34c3bb235d45706f"/>
+          <topic label="_DGRAM" href="a00148.html#ad720d07e7ec148fee8089b6664b91f67"/>
+          <topic label="_NOT_DEFINED_SOCKET_TYPE" href="a00148.html#a17497dfc45bab2bb3330afc8ded18d32"/>
+          <topic label="_SEQPACKET" href="a00148.html#a4d0d7e147e64c5c67532804c3f8700a9"/>
+          <topic label="_STREAM" href="a00148.html#a3a908d9406c6ef30be38ac2ccc2da947"/>
+          <topic label="DGRAM" href="a00148.html#af0579129a1d3e91685c948858a4ceb6d"/>
+          <topic label="NOT_DEFINED_SOCKET_TYPE" href="a00148.html#a52e06f779a5634af93c055e7528d83f9"/>
+          <topic label="SEQPACKET" href="a00148.html#a9e6c4428fb6994ab1c35d3360aef99d0"/>
+          <topic label="STREAM" href="a00148.html#a1d8776fa294ac559359ed8120583c85d"/>
+        </topic>
+        <topic label="SOCKET_TYPEHolder" href="a00149.html">
+          <topic label="SOCKET_TYPEHolder" href="a00149.html#a2c8c8a05f9fd69e2076ea5d0e8c1934d"/>
+          <topic label="SOCKET_TYPEHolder" href="a00149.html#afdcecc72623156d33a35412f44522e2e"/>
+          <topic label="value" href="a00149.html#a4739bec5079c121049f383ed2122e682"/>
+        </topic>
+        <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html">
+          <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html#ac646052e91df4441292aaf51afe6b008"/>
+          <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html#a1c5869cb17061fcc999c829c832fc35f"/>
+          <topic label="CONNECTION_DIRECTION" href="a00151.html#a65d446774aa1d88a026045e57d8b4ffc"/>
+          <topic label="LAST_MSG_VALIDITY" href="a00151.html#a308781d14ca3c7dfcdedcda0a65addd6"/>
+          <topic label="MAX_MESSAGE" href="a00151.html#aeafd84405e8bc2c1a29629f072b908e6"/>
+          <topic label="MAX_MESSAGE_SIZE" href="a00151.html#a94ca42efbf2eaa9e082a16fe48e7dea7"/>
+          <topic label="MESSAGE" href="a00151.html#a50574dc8ebc5d06518525cd67a077bc6"/>
+          <topic label="REFRESH_PERIOD" href="a00151.html#a45d0d54bc9d42f945ceef273728053ae"/>
+          <topic label="WAITING_PROCESSES_OR_MESSAGES" href="a00151.html#abf721fdff65d95c41a6e9541509ad6dd"/>
+        </topic>
+        <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html">
+          <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html#ad74e9b8192c50066eca5f8f3108dcec5"/>
+          <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html#a2f29b22722336514f6045d2d980617e7"/>
+          <topic label="value" href="a00152.html#a66c9fae7c8a24519e8e192bec08322d7"/>
+        </topic>
+        <topic label="VALIDITY_TYPE" href="a00157.html">
+          <topic label="VALIDITY_TYPE" href="a00157.html#a2b209b488575dff609cc29cdfaddb40d"/>
+          <topic label="from_int" href="a00157.html#aefc5cbbd407c5dd023dc59e7408b3911"/>
+          <topic label="value" href="a00157.html#a6f539cb95c54fe509e9eab619a28e1bf"/>
+          <topic label="_INVALID" href="a00157.html#a4ccaebc7837c27f33f4505b7558af13a"/>
+          <topic label="_VALID" href="a00157.html#a4a7777f13f211980f38be1ec3e529bda"/>
+          <topic label="INVALID" href="a00157.html#abd1a3d26d48b6a5c1696a0308a588f65"/>
+          <topic label="VALID" href="a00157.html#ad3e0987a848af4c7bf71654ffd6a745a"/>
+        </topic>
+        <topic label="VALIDITY_TYPEHolder" href="a00158.html">
+          <topic label="VALIDITY_TYPEHolder" href="a00158.html#a23b760a61ac67c2e49a9c78459dff89c"/>
+          <topic label="VALIDITY_TYPEHolder" href="a00158.html#a9cea9fea676995e84d8aabae27ed2b45"/>
+          <topic label="value" href="a00158.html#a42b664b8d5efa081752c2feebf1c747c"/>
+        </topic>
+        <topic label="WAITSET_TYPEHolder" href="a00159.html">
+          <topic label="WAITSET_TYPEHolder" href="a00159.html#a10862582459eda9f9bb350d485731ddb"/>
+          <topic label="WAITSET_TYPEHolder" href="a00159.html#a75080e05cafcdd7cb103756e3e957c57"/>
+          <topic label="value" href="a00159.html#adb466f5daaf5d4bf81566c7a6aa2f48e"/>
+        </topic>
+      </topic>
+      <topic label="org" href="a00260.html">
+        <topic label="vortex" href="a00261.html">
+          <topic label="FACE" href="a00262.html">
+            <topic label="ConfigurationException" href="a00120.html">
+              <topic label="ConfigurationException" href="a00120.html#ace6e90b4f886f019719a25b335d4e0a0"/>
+            </topic>
+            <topic label="Connection&lt; TYPE &gt;" href="a00121.html">
+              <topic label="Connection" href="a00121.html#a5fb72be8b002b2e3c4e6fe23c2f03a46"/>
+              <topic label="asDestination" href="a00121.html#a6a7030d51807c159ccc61f632991b587"/>
+              <topic label="asSource" href="a00121.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+              <topic label="close" href="a00121.html#a8d1a097e3affee2cdb97b09d607f09c6"/>
+              <topic label="getConnection" href="a00121.html#af1e766e6f401bb9940f3997945c90300"/>
+              <topic label="getDescription" href="a00121.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+              <topic label="getDirection" href="a00121.html#a987815ff3534694d0ce61b84078b8cbc"/>
+              <topic label="getParticipant" href="a00121.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+              <topic label="getStatus" href="a00121.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+              <topic label="getTopic" href="a00121.html#a71d86944d0867375b624f2f1d3628af6"/>
+              <topic label="readLock" href="a00121.html#a72dfb058e07f07c1ba568265fab57f45"/>
+              <topic label="readUnlock" href="a00121.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+              <topic label="setLastMessageValidity" href="a00121.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+              <topic label="writeLock" href="a00121.html#a3df1ac024107f7194474b76ca1d05508"/>
+              <topic label="writeUnlock" href="a00121.html#a150be1eae155bf0fcce61026da193ae3"/>
+            </topic>
+            <topic label="ConnectionDescription" href="a00128.html">
+              <topic label="QosConfiguration" href="a00136.html">
+                <topic label="QosConfiguration" href="a00136.html#a2b0da88bccd8e35756e7ce0b02bee50e"/>
+                <topic label="equals" href="a00136.html#aa8e110fc7b672eff1afa16e4237df102"/>
+                <topic label="getDatareader_qos_id" href="a00136.html#aa4cdee424ad07b1943dbd1fe7812e09c"/>
+                <topic label="getDatawriter_qos_id" href="a00136.html#a2b01b4e58a4e6fbd149343e89e287045"/>
+                <topic label="getDomainparticipant_qos_id" href="a00136.html#a803ba25d1373af3e8b88b2370c076f4a"/>
+                <topic label="getProfile" href="a00136.html#a384f23c9f0a1382cac783f43ba6bbcb2"/>
+                <topic label="getPublisher_qos_id" href="a00136.html#af7c700ed77845eff28fe91978fe20a4c"/>
+                <topic label="getQP" href="a00136.html#a4be393a5dd8b7c36471c59d94b47fbbb"/>
+                <topic label="getSubscriber_qos_id" href="a00136.html#aa9fc122283c25cc2126a0d351002aca6"/>
+                <topic label="getTopic_qos_id" href="a00136.html#a54eec8a061779faf9dfd3c97b63a1b32"/>
+                <topic label="getUri" href="a00136.html#a828f4b1991b69bb08fda3c7dcd0de92e"/>
+                <topic label="hashCode" href="a00136.html#a2fa2910dca42e76ff035d31269ac6372"/>
+                <topic label="setDatareader_qos_id" href="a00136.html#a2bb0eec4f098740db792a099b30cbbf0"/>
+                <topic label="setDatawriter_qos_id" href="a00136.html#a9715330e2cd7dca826b0638a23b2d263"/>
+                <topic label="setDomainparticipant_qos_id" href="a00136.html#a7bc2e405439e0af026a32b377f7bb16a"/>
+                <topic label="setProfile" href="a00136.html#a1358e26c8bad5c03a6e2592e1cb73e7c"/>
+                <topic label="setPublisher_qos_id" href="a00136.html#a10989e1361e194c7376bf9f200ddac0d"/>
+                <topic label="setSubscriber_qos_id" href="a00136.html#a7f70e6fcb0ad80c5364b2b93700f4b50"/>
+                <topic label="setTopic_qos_id" href="a00136.html#a91f046fa4394ef9a6f0bb9cbce911255"/>
+                <topic label="setUri" href="a00136.html#a0259e8e7c9c2bf1dd5416594c7a11520"/>
+                <topic label="toString" href="a00136.html#a54def30d9dd05e210dfe80a8308269ae"/>
+              </topic>
+              <topic label="ConnectionDescription" href="a00128.html#a484b36094b47dbc9beae953e8df4ce66"/>
+              <topic label="ConnectionDescription" href="a00128.html#ab086dc3dde0e84ad028b642c4a03716f"/>
+              <topic label="equals" href="a00128.html#a52551964155dcc70c79617e20cab07e8"/>
+              <topic label="getConfigurations" href="a00128.html#a0af9fe5bf69831801f7c825e6b68246e"/>
+              <topic label="getDataReaderQos" href="a00128.html#ae7c22017b0c7e4d58232a92e1dc6a6e3"/>
+              <topic label="getDataWriterQos" href="a00128.html#a3bcc832c8f1338e23f0fb47e89895df0"/>
+              <topic label="getDirection" href="a00128.html#a25a56254b8591d1d2938802a2a0255f1"/>
+              <topic label="getDomainId" href="a00128.html#ab6172124a96fc320a00ca0e6c8a6b7e4"/>
+              <topic label="getDomainParticipantQos" href="a00128.html#a1e3b96a7bb0870c4f38e46a27ba6e4bf"/>
+              <topic label="getEnvironment" href="a00128.html#a68327513a14e7a588619934cd0abdf35"/>
+              <topic label="getId" href="a00128.html#a195ed5469ca7cf9fb26c6ec2c5f0ce8e"/>
+              <topic label="getName" href="a00128.html#ac3bec5cf90f81d72f2071d82b91acc89"/>
+              <topic label="getPlatformViewGuid" href="a00128.html#ac9ac0a1ca960147040e3116fc23bceed"/>
+              <topic label="getPublisherQos" href="a00128.html#a8e989ba862aee13fc6a6da4099715437"/>
+              <topic label="getQos" href="a00128.html#a969fdd0e5b99b047f5faffe3d925de3f"/>
+              <topic label="getRefreshPeriod" href="a00128.html#a220eff0b5b8abff7bcb9634bbcea7dad"/>
+              <topic label="getSubscriberQos" href="a00128.html#a3224e943045022442d400a53c5d91e4d"/>
+              <topic label="getTopicName" href="a00128.html#a890838a4151462b1ae4898ed85d51095"/>
+              <topic label="getTopicQos" href="a00128.html#ab6e82d495c8724bac03b9f85141eb486"/>
+              <topic label="getTypeName" href="a00128.html#a92fbd90c86bf9c134f18ea3e287d5086"/>
+              <topic label="hashCode" href="a00128.html#a0804b8b8d3cdbbc8e306dd166748a42b"/>
+              <topic label="setQos" href="a00128.html#aa30e38fe353b322a1e21397259934b4f"/>
+            </topic>
+            <topic label="DataTypeTS" href="a00129.html">
+              <topic label="Create_Connection" href="a00129.html#a97ebba550a8d5f903fa56d1687ed4c30"/>
+              <topic label="Destroy_Connection" href="a00129.html#a1fb26b69ead5b44d541547c64e1b1260"/>
+              <topic label="Get_Connection_Parameters" href="a00129.html#a4d684f4318732bd62a466a1a3766ab56"/>
+              <topic label="getImpl" href="a00129.html#ace73bc9ea8fe7170b9e9d524ce9479f6"/>
+              <topic label="getInstance" href="a00129.html#af2b51c576bbacdd25abb653202e0e7bb"/>
+              <topic label="Initialize" href="a00129.html#a11fa1405be29db9e93a6fa0ef89bb2ea"/>
+              <topic label="Receive_Message" href="a00129.html#ab1326ae4cbd73d75d2d550e147d1ab9b"/>
+              <topic label="Register_Callback" href="a00129.html#a19ea1f36b1ba68b9f57a4000c16c8873"/>
+              <topic label="Send_Message" href="a00129.html#aab3b0dd968f552f9b3850b1da367d383"/>
+              <topic label="Unregister_Callback" href="a00129.html#a2dedb619c5f6225b9aa0b4473bfc22ce"/>
+            </topic>
+            <topic label="DestinationConnection&lt; TYPE &gt;" href="a00130.html">
+              <topic label="DestinationConnection" href="a00130.html#a8e45fdaa2128e2de76b8dc1a2dc5f5a4"/>
+              <topic label="asDestination" href="a00130.html#a6a7030d51807c159ccc61f632991b587"/>
+              <topic label="asSource" href="a00130.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+              <topic label="close" href="a00130.html#a33eabb7abd6b8ee4b1b7969b87d8a74e"/>
+              <topic label="getCallback" href="a00130.html#af6dde19acc96c27c9ecb660b9f75cc78"/>
+              <topic label="getConnection" href="a00130.html#af1e766e6f401bb9940f3997945c90300"/>
+              <topic label="getDescription" href="a00130.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+              <topic label="getDirection" href="a00130.html#aede90e173a74bb7f239d0f37da9f5a14"/>
+              <topic label="getParticipant" href="a00130.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+              <topic label="getStatus" href="a00130.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+              <topic label="getTopic" href="a00130.html#a71d86944d0867375b624f2f1d3628af6"/>
+              <topic label="readLock" href="a00130.html#a72dfb058e07f07c1ba568265fab57f45"/>
+              <topic label="readUnlock" href="a00130.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+              <topic label="receiveMessage" href="a00130.html#a12e6db74af80e183ecb264cb086c91b4"/>
+              <topic label="registerCallback" href="a00130.html#a84890cfe117a63fecd7db0963d52216a"/>
+              <topic label="setLastMessageValidity" href="a00130.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+              <topic label="unregisterCallback" href="a00130.html#a8783c691351166478fa65d5d8020bd5f"/>
+              <topic label="writeLock" href="a00130.html#a3df1ac024107f7194474b76ca1d05508"/>
+              <topic label="writeUnlock" href="a00130.html#a150be1eae155bf0fcce61026da193ae3"/>
+            </topic>
+            <topic label="Holder&lt; TYPE &gt;" href="a00131.html">
+              <topic label="Holder" href="a00131.html#a12382a289bbe7fc9d40e33628c57fbd5"/>
+              <topic label="Holder" href="a00131.html#afbfb4d08723b47c674305a51df9f9fae"/>
+              <topic label="value" href="a00131.html#a0d2836a915d93ee4afebcd939de21b00"/>
+            </topic>
+            <topic label="Logger" href="a00133.html">
+              <topic label="exception" href="a00133.html#a3fcb5ffcf3f5a85f69e6d7346d76ed62"/>
+              <topic label="getInstance" href="a00133.html#a4cc2752c63c322d35930c9b5a526103b"/>
+              <topic label="log" href="a00133.html#a13d49e930e91bb1e0d99d87311f6cb22"/>
+            </topic>
+            <topic label="Read_Callback&lt; TYPE &gt;" href="a00139.html">
+              <topic label="send_event" href="a00139.html#ae4e67698c8742e407809052919dc9e47"/>
+            </topic>
+            <topic label="Read_CallbackHolder&lt; TYPE &gt;" href="a00140.html">
+              <topic label="value" href="a00140.html#a699d263867f99707eed5accde43b1612"/>
+            </topic>
+            <topic label="Read_CallbackOperations&lt; TYPE &gt;" href="a00141.html">
+              <topic label="send_event" href="a00141.html#ae4e67698c8742e407809052919dc9e47"/>
+            </topic>
+            <topic label="SourceConnection&lt; TYPE &gt;" href="a00150.html">
+              <topic label="SourceConnection" href="a00150.html#ab78969d990360e02be3d121fdd991532"/>
+              <topic label="asDestination" href="a00150.html#a6a7030d51807c159ccc61f632991b587"/>
+              <topic label="asSource" href="a00150.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+              <topic label="close" href="a00150.html#a8d1a097e3affee2cdb97b09d607f09c6"/>
+              <topic label="getConnection" href="a00150.html#af1e766e6f401bb9940f3997945c90300"/>
+              <topic label="getDescription" href="a00150.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+              <topic label="getDirection" href="a00150.html#a497ae42035f737685a0475006b3b7b4a"/>
+              <topic label="getParticipant" href="a00150.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+              <topic label="getStatus" href="a00150.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+              <topic label="getTopic" href="a00150.html#a71d86944d0867375b624f2f1d3628af6"/>
+              <topic label="readLock" href="a00150.html#a72dfb058e07f07c1ba568265fab57f45"/>
+              <topic label="readUnlock" href="a00150.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+              <topic label="sendMessage" href="a00150.html#a790a83353082111f7ddd75fbad091673"/>
+              <topic label="setLastMessageValidity" href="a00150.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+              <topic label="writeLock" href="a00150.html#a3df1ac024107f7194474b76ca1d05508"/>
+              <topic label="writeUnlock" href="a00150.html#a150be1eae155bf0fcce61026da193ae3"/>
+            </topic>
+            <topic label="TransportServices" href="a00153.html">
+              <topic label="Create_Connection" href="a00153.html#a148355e7fb1742a2f07dfd589c74dd43"/>
+              <topic label="Destroy_Connection" href="a00153.html#af268b85aee19f2c9db41ed405ca3d103"/>
+              <topic label="Get_Connection_Parameters" href="a00153.html#af0cbc68081953efecfb06980f2678461"/>
+              <topic label="Initialize" href="a00153.html#a5cdc771d3bd0ee54b7781c92d6a373a5"/>
+            </topic>
+            <topic label="TS" href="a00154.html">
+              <topic label="TS" href="a00154.html#a755006b0744a56f569c1a332d4920017"/>
+              <topic label="Create_Connection" href="a00154.html#a97ebba550a8d5f903fa56d1687ed4c30"/>
+              <topic label="Destroy_Connection" href="a00154.html#a1fb26b69ead5b44d541547c64e1b1260"/>
+              <topic label="Get_Connection_Parameters" href="a00154.html#a4d684f4318732bd62a466a1a3766ab56"/>
+              <topic label="getImpl" href="a00154.html#ace73bc9ea8fe7170b9e9d524ce9479f6"/>
+              <topic label="getInstance" href="a00154.html#af2b51c576bbacdd25abb653202e0e7bb"/>
+              <topic label="Initialize" href="a00154.html#a11fa1405be29db9e93a6fa0ef89bb2ea"/>
+              <topic label="Unregister_Callback" href="a00154.html#a2dedb619c5f6225b9aa0b4473bfc22ce"/>
+            </topic>
+            <topic label="TSFactory" href="a00155.html">
+              <topic label="getInstance" href="a00155.html#ae1e258f9688e096de1cf2466255da602"/>
+              <topic label="getTS" href="a00155.html#aadfb1eaa74c5c83f9982fe00e9a4c8ab"/>
+            </topic>
+            <topic label="Util" href="a00156.html">
+              <topic label="getenv" href="a00156.html#a99376fbc8684087fafbf04f1aeebef75"/>
+            </topic>
+          </topic>
+        </topic>
+      </topic>
+    </topic>
+    <topic label="Class Index" href="classes.html"/>
+    <topic label="Class Hierarchy" href="hierarchy.html">
+      <topic label="org.vortex.FACE.Connection&lt; TYPE &gt;" href="a00121.html">
+        <topic label="org.vortex.FACE.DestinationConnection&lt; TYPE &gt;" href="a00130.html"/>
+        <topic label="org.vortex.FACE.SourceConnection&lt; TYPE &gt;" href="a00150.html"/>
+      </topic>
+      <topic label="FACE.CONNECTION_DIRECTION_TYPE" href="a00122.html"/>
+      <topic label="FACE.CONNECTION_DIRECTION_TYPEHolder" href="a00123.html"/>
+      <topic label="FACE.CONNECTION_DOMAIN_TYPE" href="a00124.html"/>
+      <topic label="FACE.CONNECTION_DOMAIN_TYPEHolder" href="a00125.html"/>
+      <topic label="FACE.CONNECTION_TYPE" href="a00126.html"/>
+      <topic label="FACE.CONNECTION_TYPEHolder" href="a00127.html"/>
+      <topic label="org.vortex.FACE.ConnectionDescription" href="a00128.html"/>
+      <topic label="Exception">
+        <topic label="org.vortex.FACE.ConfigurationException" href="a00120.html"/>
+      </topic>
+      <topic label="org.vortex.FACE.Holder&lt; TYPE &gt;" href="a00131.html"/>
+      <topic label="FACE.INF_TIME_VALUE" href="a00132.html"/>
+      <topic label="org.vortex.FACE.Logger" href="a00133.html"/>
+      <topic label="FACE.MESSAGING_PATTERN_TYPE" href="a00134.html"/>
+      <topic label="FACE.MESSAGING_PATTERN_TYPEHolder" href="a00135.html"/>
+      <topic label="org.vortex.FACE.ConnectionDescription.QosConfiguration" href="a00136.html"/>
+      <topic label="FACE.QUEUING_DISCIPLINE_TYPE" href="a00137.html"/>
+      <topic label="FACE.QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html"/>
+      <topic label="org.vortex.FACE.Read_CallbackHolder&lt; TYPE &gt;" href="a00140.html"/>
+      <topic label="org.vortex.FACE.Read_CallbackOperations&lt; TYPE &gt;" href="a00141.html">
+        <topic label="org.vortex.FACE.Read_Callback&lt; TYPE &gt;" href="a00139.html"/>
+      </topic>
+      <topic label="FACE.RECEIVE_FLAG_TYPE" href="a00142.html"/>
+      <topic label="FACE.RECEIVE_FLAG_TYPEHolder" href="a00143.html"/>
+      <topic label="FACE.RETURN_CODE_TYPE" href="a00144.html"/>
+      <topic label="FACE.RETURN_CODE_TYPEHolder" href="a00145.html"/>
+      <topic label="FACE.SEND_FLAG_TYPE" href="a00146.html"/>
+      <topic label="FACE.SEND_FLAG_TYPEHolder" href="a00147.html"/>
+      <topic label="FACE.SOCKET_TYPE" href="a00148.html"/>
+      <topic label="FACE.SOCKET_TYPEHolder" href="a00149.html"/>
+      <topic label="FACE.TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html"/>
+      <topic label="FACE.TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html"/>
+      <topic label="org.vortex.FACE.TransportServices" href="a00153.html"/>
+      <topic label="org.vortex.FACE.TS" href="a00154.html">
+        <topic label="org.vortex.FACE.DataTypeTS" href="a00129.html"/>
+      </topic>
+      <topic label="org.vortex.FACE.TSFactory" href="a00155.html"/>
+      <topic label="org.vortex.FACE.Util" href="a00156.html"/>
+      <topic label="FACE.VALIDITY_TYPE" href="a00157.html"/>
+      <topic label="FACE.VALIDITY_TYPEHolder" href="a00158.html"/>
+      <topic label="FACE.WAITSET_TYPEHolder" href="a00159.html"/>
+    </topic>
+    <topic label="Class Members" href="functions.html">
+      <topic label="All" href="functions.html">
+        <topic label="_" href="functions.html"/>
+        <topic label="a" href="functions_0x61.html"/>
+        <topic label="b" href="functions_0x62.html"/>
+        <topic label="c" href="functions_0x63.html"/>
+        <topic label="d" href="functions_0x64.html"/>
+        <topic label="e" href="functions_0x65.html"/>
+        <topic label="f" href="functions_0x66.html"/>
+        <topic label="g" href="functions_0x67.html"/>
+        <topic label="h" href="functions_0x68.html"/>
+        <topic label="i" href="functions_0x69.html"/>
+        <topic label="l" href="functions_0x6c.html"/>
+        <topic label="m" href="functions_0x6d.html"/>
+        <topic label="n" href="functions_0x6e.html"/>
+        <topic label="o" href="functions_0x6f.html"/>
+        <topic label="p" href="functions_0x70.html"/>
+        <topic label="q" href="functions_0x71.html"/>
+        <topic label="r" href="functions_0x72.html"/>
+        <topic label="s" href="functions_0x73.html"/>
+        <topic label="t" href="functions_0x74.html"/>
+        <topic label="u" href="functions_0x75.html"/>
+        <topic label="v" href="functions_0x76.html"/>
+        <topic label="w" href="functions_0x77.html"/>
+      </topic>
+      <topic label="Functions" href="functions_func.html"/>
+      <topic label="Variables" href="functions_vars.html"/>
+    </topic>
+  </topic>
+  <topic label="Files">
+    <topic label="File List" href="files.html">
+      <topic label="face" href="dir_4e3e4ec589c321d98389a01e6ca7e7da.html">
+        <topic label="java" href="dir_126dccc247b7d9bbe5c0cd840e2fee95.html">
+          <topic label="bld" href="dir_f4e1c2c5f26dc3b35da70b6128ac907c.html">
+            <topic label="code" href="dir_72b9b719ece8e029aef48defb586d45b.html">
+              <topic label="x86_64.linux-debug" href="dir_b8c8fa6673a858523c46ca2c26dfb263.html">
+                <topic label="FACE" href="dir_87a078062d492a09468ff7f95576e20e.html">
+                  <topic label="CONNECTION_DIRECTION_TYPE.java" href="a00218.html">
+                    <topic label="CONNECTION_DIRECTION_TYPE" href="a00122.html">
+                      <topic label="CONNECTION_DIRECTION_TYPE" href="a00122.html#a74772b906eea5cebd761f40865a6435e"/>
+                      <topic label="from_int" href="a00122.html#a918b148e222d1487f920214b9e572f59"/>
+                      <topic label="value" href="a00122.html#af4daa03a7933c8854ef2eeea3d546f84"/>
+                      <topic label="_BI_DIRECTIONAL" href="a00122.html#ade2d7b37850f993993f51f01d41fde57"/>
+                      <topic label="_DESTINATION" href="a00122.html#ac352bdfb7ae4c947db4c3850bf4c32cb"/>
+                      <topic label="_NOT_DEFINED_CONNECTION_DIRECTION_TYPE" href="a00122.html#ab2beab5536f4f4dacbf926f08a7b4c8c"/>
+                      <topic label="_ONE_WAY_REQUEST_DESTINATION" href="a00122.html#ae7a30cbc7f12b17b4a096de51931102d"/>
+                      <topic label="_ONE_WAY_REQUEST_SOURCE" href="a00122.html#a9bba47ab0b4fca6fe64e5bc4b573be8a"/>
+                      <topic label="_SOURCE" href="a00122.html#ad38faf0950bb6180b978c2feff03b934"/>
+                      <topic label="_TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_DESTINATION" href="a00122.html#a4570826c4337fad941554125198e538a"/>
+                      <topic label="_TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_SOURCE" href="a00122.html#a73cef5d9da375bab3e1b8c525b729503"/>
+                      <topic label="_TWO_WAY_REQUEST_SYNCHRONOUS_DESTINATION" href="a00122.html#ad1355e916e931b4ea151c835954ef7c9"/>
+                      <topic label="_TWO_WAY_REQUEST_SYNCHRONOUS_SOURCE" href="a00122.html#aa62a5cac65864e01fa8e64332228f6b2"/>
+                      <topic label="BI_DIRECTIONAL" href="a00122.html#a6b74390fa3d4ada74b58e2ddc9ae08ae"/>
+                      <topic label="DESTINATION" href="a00122.html#acf501ef24faf3dd3444ce87776bea8f8"/>
+                      <topic label="NOT_DEFINED_CONNECTION_DIRECTION_TYPE" href="a00122.html#a73f6f1eeac6e677d6c4ea09bd7657a80"/>
+                      <topic label="ONE_WAY_REQUEST_DESTINATION" href="a00122.html#abb5c2d4772cccf74be89adb93f8c7635"/>
+                      <topic label="ONE_WAY_REQUEST_SOURCE" href="a00122.html#a1839bcf234c11fa861a3637476404f3d"/>
+                      <topic label="SOURCE" href="a00122.html#a8b9caade0bab09e4649f49ec705179dd"/>
+                      <topic label="TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_DESTINATION" href="a00122.html#a1d1dd8619c8034f6fea947b781f7ddc3"/>
+                      <topic label="TWO_WAY_REQUEST_REPLY_ASYNCHRONOUS_SOURCE" href="a00122.html#a2c0bf5eacceb093e068602f313d07992"/>
+                      <topic label="TWO_WAY_REQUEST_SYNCHRONOUS_DESTINATION" href="a00122.html#ac91cf08109d2dbf14a8bbf0a49b10ddf"/>
+                      <topic label="TWO_WAY_REQUEST_SYNCHRONOUS_SOURCE" href="a00122.html#ad43f574f605a1f60b3394db2cb62848b"/>
+                    </topic>
+                  </topic>
+                  <topic label="CONNECTION_DIRECTION_TYPEHolder.java" href="a00219.html">
+                    <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html">
+                      <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html#af10cc7bef8242252b3012fbfd831856b"/>
+                      <topic label="CONNECTION_DIRECTION_TYPEHolder" href="a00123.html#a2e721e5489cd728fdc68332254f4041e"/>
+                      <topic label="value" href="a00123.html#a98d04b3276a712881887558c73131a55"/>
+                    </topic>
+                  </topic>
+                  <topic label="CONNECTION_DOMAIN_TYPE.java" href="a00220.html">
+                    <topic label="CONNECTION_DOMAIN_TYPE" href="a00124.html">
+                      <topic label="CONNECTION_DOMAIN_TYPE" href="a00124.html#aec491bea7dd84f37a7ff988eb86e3079"/>
+                      <topic label="from_int" href="a00124.html#a31237af4de7ffa6cfdc2fd7308879f09"/>
+                      <topic label="value" href="a00124.html#ae5836a9a4e4fd95fecf470f9ad0266af"/>
+                      <topic label="_INET" href="a00124.html#afa836d47b3d8c25fb97ede5b19a59838"/>
+                      <topic label="_NOT_DEFINED_CONNECTION_DOMAIN_TYPE" href="a00124.html#a98a3e4ba6e42f633f3df2e13fe42fd2d"/>
+                      <topic label="_UNIX" href="a00124.html#aa0f48f2c2762c84ac1ab08af80905351"/>
+                      <topic label="INET" href="a00124.html#adc652b30621138c6d5869665855a4783"/>
+                      <topic label="NOT_DEFINED_CONNECTION_DOMAIN_TYPE" href="a00124.html#af612abcc90f7ae823a68b5b6c1d273b1"/>
+                      <topic label="UNIX" href="a00124.html#ae21a51ef898367468cafa338e8e5dfa2"/>
+                    </topic>
+                  </topic>
+                  <topic label="CONNECTION_DOMAIN_TYPEHolder.java" href="a00221.html">
+                    <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html">
+                      <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html#a1ae2856bbd33fbfef99426d3727ce403"/>
+                      <topic label="CONNECTION_DOMAIN_TYPEHolder" href="a00125.html#af1b837d32c2ec3033e4985fa2e1975b0"/>
+                      <topic label="value" href="a00125.html#af1a909e1b9443633fb0a682fbe538180"/>
+                    </topic>
+                  </topic>
+                  <topic label="CONNECTION_TYPE.java" href="a00222.html">
+                    <topic label="CONNECTION_TYPE" href="a00126.html">
+                      <topic label="CONNECTION_TYPE" href="a00126.html#ae9243f7498055ec2452161fd1a58d07f"/>
+                      <topic label="from_int" href="a00126.html#ab7cfd3f5b419c34d83caf4744d28603d"/>
+                      <topic label="value" href="a00126.html#a2279ffe90e0675f0703d3b6678c0e0ce"/>
+                      <topic label="_CORBA" href="a00126.html#a8c2f265078cf51df3413d3d116da27cc"/>
+                      <topic label="_DDS" href="a00126.html#a716d581fc2f8464fc1e35d191a61bd05"/>
+                      <topic label="_MQ" href="a00126.html#a49706eb33f664433439938ecd17344f7"/>
+                      <topic label="_QUEUING_PORT" href="a00126.html#a3ba73a52372594436d5ce78b03ef8336"/>
+                      <topic label="_SAMPLING_PORT" href="a00126.html#a723795d034f1e6ec86e16ec4c8b0cee1"/>
+                      <topic label="_SHM" href="a00126.html#a510bcefa619321d8542e3616c27b0093"/>
+                      <topic label="_SOCKET" href="a00126.html#ac39a28bdf40ad0f913ea012a20226015"/>
+                      <topic label="CORBA" href="a00126.html#a30b0826fea7ce425bb0fa643c654405c"/>
+                      <topic label="DDS" href="a00126.html#ad86ee074305205f262247ece42140b13"/>
+                      <topic label="MQ" href="a00126.html#a6a570e5c33ca8392d503c03f7eccd11b"/>
+                      <topic label="QUEUING_PORT" href="a00126.html#abb536a52b321994f29442e60864aa67b"/>
+                      <topic label="SAMPLING_PORT" href="a00126.html#a98c7d29f79eb15a56fb49c7dbad59091"/>
+                      <topic label="SHM" href="a00126.html#a27a874cd1cb5a86b7bb0eabb4f766a9e"/>
+                      <topic label="SOCKET" href="a00126.html#a5f3301427d0b6c189a29530783af573f"/>
+                    </topic>
+                  </topic>
+                  <topic label="CONNECTION_TYPEHolder.java" href="a00223.html">
+                    <topic label="CONNECTION_TYPEHolder" href="a00127.html">
+                      <topic label="CONNECTION_TYPEHolder" href="a00127.html#ac4f880f9e726facfcd400f4a692a0e89"/>
+                      <topic label="CONNECTION_TYPEHolder" href="a00127.html#ae63aaab41d7653a0fa46748ac3e2551a"/>
+                      <topic label="value" href="a00127.html#acfb73531f66b34c29f087624ab57b0e6"/>
+                    </topic>
+                  </topic>
+                  <topic label="INF_TIME_VALUE.java" href="a00224.html">
+                    <topic label="INF_TIME_VALUE" href="a00132.html">
+                      <topic label="value" href="a00132.html#a92b37256edaa48f49900863813c8f907"/>
+                    </topic>
+                  </topic>
+                  <topic label="MESSAGING_PATTERN_TYPE.java" href="a00225.html">
+                    <topic label="MESSAGING_PATTERN_TYPE" href="a00134.html">
+                      <topic label="MESSAGING_PATTERN_TYPE" href="a00134.html#ad55aaa3f4b8b5e53ef6052ce73f6d9a3"/>
+                      <topic label="from_int" href="a00134.html#ac250fb6971ffe2056388d08e9a1e2cf1"/>
+                      <topic label="value" href="a00134.html#a341319e1f13bfa5bd3542fddef680ee1"/>
+                      <topic label="_CLIENT" href="a00134.html#ac044361840db61df3cb7b66e529739bf"/>
+                      <topic label="_PUB_SUB" href="a00134.html#a18e83dd6b3cdb57a599c7e1dfd08a203"/>
+                      <topic label="_SERVER" href="a00134.html#ae91a44000769d7d5703697234f2306db"/>
+                      <topic label="CLIENT" href="a00134.html#a97b596a1272e36310e2f8e6cb607a83e"/>
+                      <topic label="PUB_SUB" href="a00134.html#ab523a450240b25fbc8f7e20f144e45f3"/>
+                      <topic label="SERVER" href="a00134.html#a75bd5407d451a02dc3778c70fa0e2fdf"/>
+                    </topic>
+                  </topic>
+                  <topic label="MESSAGING_PATTERN_TYPEHolder.java" href="a00226.html">
+                    <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html">
+                      <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html#a1bb08bda36c2d8a0e2143705f92da7eb"/>
+                      <topic label="MESSAGING_PATTERN_TYPEHolder" href="a00135.html#a9126c1f5ea67ad7387dab2507ee68468"/>
+                      <topic label="value" href="a00135.html#a3462a6239ca9ad6893785c1ddac5e8d9"/>
+                    </topic>
+                  </topic>
+                  <topic label="QUEUING_DISCIPLINE_TYPE.java" href="a00227.html">
+                    <topic label="QUEUING_DISCIPLINE_TYPE" href="a00137.html">
+                      <topic label="QUEUING_DISCIPLINE_TYPE" href="a00137.html#a0dedcaab547bd0808c032e3e60220799"/>
+                      <topic label="from_int" href="a00137.html#afb67e500d2bcd8e421e244e9ffbe8539"/>
+                      <topic label="value" href="a00137.html#adc175562595b358a67394f51918f6abc"/>
+                      <topic label="_FIFO" href="a00137.html#a1892a12bbd355387d9728430a6f2ecd1"/>
+                      <topic label="_NOT_DEFINED_QUEUING_DISCIPLINE_TYPE" href="a00137.html#a7fb252ca1617fd0cca11e3dded161a60"/>
+                      <topic label="_PRIORITY" href="a00137.html#ad751c1a764ac605dc3e0b6a8882602ff"/>
+                      <topic label="FIFO" href="a00137.html#a9ad75c716a68073fbeb652011080cd14"/>
+                      <topic label="NOT_DEFINED_QUEUING_DISCIPLINE_TYPE" href="a00137.html#a4b8e92bf92df8aa86c997615f8cf0416"/>
+                      <topic label="PRIORITY" href="a00137.html#acd4004884a241cd2beb36ee6dacae3c2"/>
+                    </topic>
+                  </topic>
+                  <topic label="QUEUING_DISCIPLINE_TYPEHolder.java" href="a00228.html">
+                    <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html">
+                      <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html#a2e6fa02f41a1d49339703531efdcea37"/>
+                      <topic label="QUEUING_DISCIPLINE_TYPEHolder" href="a00138.html#a29f27c9f54388eb584da2ec14db26e8a"/>
+                      <topic label="value" href="a00138.html#ae430e793de66fef07c4012242f2e0805"/>
+                    </topic>
+                  </topic>
+                  <topic label="RECEIVE_FLAG_TYPE.java" href="a00229.html">
+                    <topic label="RECEIVE_FLAG_TYPE" href="a00142.html">
+                      <topic label="RECEIVE_FLAG_TYPE" href="a00142.html#aff42ff8d4a106dd7c0bd6ac9ef638303"/>
+                      <topic label="from_int" href="a00142.html#af061493d57a213701a7c721395ff5079"/>
+                      <topic label="value" href="a00142.html#af9b43e34787922a9d3c8d1c896fbb419"/>
+                      <topic label="_NOT_DEFINED_RECEIVE_FLAG_TYPE" href="a00142.html#ac02c18ee69876187ffe007279df9e53f"/>
+                      <topic label="_OOB_RECEIVE_FLAG_TYPE" href="a00142.html#a8627032b3cc51a428ab3e941f28f2326"/>
+                      <topic label="_PEEK" href="a00142.html#a568ac803fc5763aa6909247032555fa4"/>
+                      <topic label="_WAITALL" href="a00142.html#a3ea5f7e7b79107ef79b4ddc3d63744b1"/>
+                      <topic label="NOT_DEFINED_RECEIVE_FLAG_TYPE" href="a00142.html#a76693e1255c56af7177a0cb6e4379662"/>
+                      <topic label="OOB_RECEIVE_FLAG_TYPE" href="a00142.html#aa1c72a7ea9e083844021757c7d24aa27"/>
+                      <topic label="PEEK" href="a00142.html#ad9843b81ec285ad51ad22604c2188489"/>
+                      <topic label="WAITALL" href="a00142.html#adf78894222ccf066cbb5067118449d7f"/>
+                    </topic>
+                  </topic>
+                  <topic label="RECEIVE_FLAG_TYPEHolder.java" href="a00230.html">
+                    <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html">
+                      <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html#a9d5f6a5bd4a7f822685f0ba8251967ca"/>
+                      <topic label="RECEIVE_FLAG_TYPEHolder" href="a00143.html#a652f8583ee60fba76e92f3eae6fb0fe2"/>
+                      <topic label="value" href="a00143.html#a8c97032e4d25570d45735d356d61a551"/>
+                    </topic>
+                  </topic>
+                  <topic label="RETURN_CODE_TYPE.java" href="a00231.html">
+                    <topic label="RETURN_CODE_TYPE" href="a00144.html">
+                      <topic label="RETURN_CODE_TYPE" href="a00144.html#a2e062c260dc9c792fb89a085f64662b0"/>
+                      <topic label="from_int" href="a00144.html#aaddac78c03bb1165c9d438f40b6d3466"/>
+                      <topic label="value" href="a00144.html#ad17a7b0f92b472e344be4d8309f198f8"/>
+                      <topic label="_ADDR_IN_USE" href="a00144.html#a42dc271a0188dab5b5517993b6d0c2b2"/>
+                      <topic label="_CONNECTION_CLOSED" href="a00144.html#aaf017226eb6bab8854deaa1b7c3fb4d3"/>
+                      <topic label="_CONNECTION_IN_PROGRESS" href="a00144.html#a135a83ec0076acfb7b71ce2d48aa916d"/>
+                      <topic label="_DATA_BUFFER_TOO_SMALL" href="a00144.html#a9f0b12bfdc21b1bb0fc39c7a0b416875"/>
+                      <topic label="_INVALID_CONFIG" href="a00144.html#a7661edccfb42c8a2e7f3d12ed0c34a42"/>
+                      <topic label="_INVALID_MODE" href="a00144.html#a6a59e58aba04dc7c6bb314b6bbd414c0"/>
+                      <topic label="_INVALID_PARAM" href="a00144.html#a7c8181b8de70d2831215da40efadab47"/>
+                      <topic label="_MESSAGE_STALE" href="a00144.html#a93f01e011b1525ec95f25a063d2e634c"/>
+                      <topic label="_NO_ACTION" href="a00144.html#a285385c5cf3baada91c1078b9bd976f5"/>
+                      <topic label="_NO_ERROR" href="a00144.html#a13a4b67fc656ddac48099ddc1c4b8bae"/>
+                      <topic label="_NOT_AVAILABLE" href="a00144.html#a3e1db956a6253da32df64e720b98a104"/>
+                      <topic label="_PERMISSION_DENIED" href="a00144.html#afd1b22197d5d6d75efed1c37489d4d6e"/>
+                      <topic label="_TIMED_OUT" href="a00144.html#a6a20716d188ad86aa39c35a1dcc0b95a"/>
+                      <topic label="ADDR_IN_USE" href="a00144.html#a97c425cf4ae8ef91874c2c8daecadd02"/>
+                      <topic label="CONNECTION_CLOSED" href="a00144.html#a28f02a9fe7d308ec29242f1265056a02"/>
+                      <topic label="CONNECTION_IN_PROGRESS" href="a00144.html#aa0ffcd6fedfa62a8c1598f5c36c734c8"/>
+                      <topic label="DATA_BUFFER_TOO_SMALL" href="a00144.html#a5e5856685a65cc23dbfd04d0b3d7fe77"/>
+                      <topic label="INVALID_CONFIG" href="a00144.html#a39cb8f91db49a6ae0329f58f2f59e2c6"/>
+                      <topic label="INVALID_MODE" href="a00144.html#aa8add87a438693b28ad408afbdf90dbf"/>
+                      <topic label="INVALID_PARAM" href="a00144.html#a69e69f68e6b8c61999410da576457f55"/>
+                      <topic label="MESSAGE_STALE" href="a00144.html#af362d4459494371e03ecbc32d3a791df"/>
+                      <topic label="NO_ACTION" href="a00144.html#ac462bff967510332aaace9f97a6e794b"/>
+                      <topic label="NO_ERROR" href="a00144.html#a4d1597c2eaa7a39d0e57a20a69f1e8a6"/>
+                      <topic label="NOT_AVAILABLE" href="a00144.html#a54ad74a93ec930db182766dcdb764af2"/>
+                      <topic label="PERMISSION_DENIED" href="a00144.html#aa43c87a696f2044e3544d3a6ba249579"/>
+                      <topic label="TIMED_OUT" href="a00144.html#a0485560b9a364f7641839b83d6bda5a3"/>
+                    </topic>
+                  </topic>
+                  <topic label="RETURN_CODE_TYPEHolder.java" href="a00232.html">
+                    <topic label="RETURN_CODE_TYPEHolder" href="a00145.html">
+                      <topic label="RETURN_CODE_TYPEHolder" href="a00145.html#acc6bbfd46b32c97487b28a92c7376533"/>
+                      <topic label="RETURN_CODE_TYPEHolder" href="a00145.html#a7d8686f709385c9b131e8b738c318def"/>
+                      <topic label="value" href="a00145.html#ab53b4272b2e667d44372bf60490da9da"/>
+                    </topic>
+                  </topic>
+                  <topic label="SEND_FLAG_TYPE.java" href="a00233.html">
+                    <topic label="SEND_FLAG_TYPE" href="a00146.html">
+                      <topic label="SEND_FLAG_TYPE" href="a00146.html#af8c945fa7d9fe871f111fdedc03fa280"/>
+                      <topic label="from_int" href="a00146.html#a81aeab5f5f905b85bec1cb5f15efe6e2"/>
+                      <topic label="value" href="a00146.html#a3b8e5893a213831555bb0b178eaa892a"/>
+                      <topic label="_EOR" href="a00146.html#a31e2020685a69eee0fb31be18677c13f"/>
+                      <topic label="_NOSIGNAL" href="a00146.html#ae649f93b89ee3c01a38f5ff7e36b0e82"/>
+                      <topic label="_NOT_DEFINED_SEND_FLAG_TYPE" href="a00146.html#a5517cfa8962d6b52718c7380adf059f4"/>
+                      <topic label="_OOB_SEND_FLAG_TYPE" href="a00146.html#ad04962bbb11275372dc9d5f978f71534"/>
+                      <topic label="EOR" href="a00146.html#a2f97c50bba62508273c584baa9fb6c3e"/>
+                      <topic label="NOSIGNAL" href="a00146.html#a11f15e0857d0e04b526bd2593d3effa4"/>
+                      <topic label="NOT_DEFINED_SEND_FLAG_TYPE" href="a00146.html#a660e1e004bd50a313b2dd796ea3a0416"/>
+                      <topic label="OOB_SEND_FLAG_TYPE" href="a00146.html#ae92226731bb8b0e20be4f2f2b60f5dda"/>
+                    </topic>
+                  </topic>
+                  <topic label="SEND_FLAG_TYPEHolder.java" href="a00234.html">
+                    <topic label="SEND_FLAG_TYPEHolder" href="a00147.html">
+                      <topic label="SEND_FLAG_TYPEHolder" href="a00147.html#a00dc61757b0d143c829de7013a740388"/>
+                      <topic label="SEND_FLAG_TYPEHolder" href="a00147.html#a54630d3dec68256e1af8f9d3aaa4bced"/>
+                      <topic label="value" href="a00147.html#aaf69b7e0669e4e814595bab5e0893292"/>
+                    </topic>
+                  </topic>
+                  <topic label="SOCKET_TYPE.java" href="a00235.html">
+                    <topic label="SOCKET_TYPE" href="a00148.html">
+                      <topic label="SOCKET_TYPE" href="a00148.html#ab9799004e9b108119c38574538ab2830"/>
+                      <topic label="from_int" href="a00148.html#aea32fe6f8da51b32538fea198b3a4310"/>
+                      <topic label="value" href="a00148.html#a72da927755cb0dbc34c3bb235d45706f"/>
+                      <topic label="_DGRAM" href="a00148.html#ad720d07e7ec148fee8089b6664b91f67"/>
+                      <topic label="_NOT_DEFINED_SOCKET_TYPE" href="a00148.html#a17497dfc45bab2bb3330afc8ded18d32"/>
+                      <topic label="_SEQPACKET" href="a00148.html#a4d0d7e147e64c5c67532804c3f8700a9"/>
+                      <topic label="_STREAM" href="a00148.html#a3a908d9406c6ef30be38ac2ccc2da947"/>
+                      <topic label="DGRAM" href="a00148.html#af0579129a1d3e91685c948858a4ceb6d"/>
+                      <topic label="NOT_DEFINED_SOCKET_TYPE" href="a00148.html#a52e06f779a5634af93c055e7528d83f9"/>
+                      <topic label="SEQPACKET" href="a00148.html#a9e6c4428fb6994ab1c35d3360aef99d0"/>
+                      <topic label="STREAM" href="a00148.html#a1d8776fa294ac559359ed8120583c85d"/>
+                    </topic>
+                  </topic>
+                  <topic label="SOCKET_TYPEHolder.java" href="a00236.html">
+                    <topic label="SOCKET_TYPEHolder" href="a00149.html">
+                      <topic label="SOCKET_TYPEHolder" href="a00149.html#a2c8c8a05f9fd69e2076ea5d0e8c1934d"/>
+                      <topic label="SOCKET_TYPEHolder" href="a00149.html#afdcecc72623156d33a35412f44522e2e"/>
+                      <topic label="value" href="a00149.html#a4739bec5079c121049f383ed2122e682"/>
+                    </topic>
+                  </topic>
+                  <topic label="TRANSPORT_CONNECTION_STATUS_TYPE.java" href="a00237.html">
+                    <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html">
+                      <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html#ac646052e91df4441292aaf51afe6b008"/>
+                      <topic label="TRANSPORT_CONNECTION_STATUS_TYPE" href="a00151.html#a1c5869cb17061fcc999c829c832fc35f"/>
+                      <topic label="CONNECTION_DIRECTION" href="a00151.html#a65d446774aa1d88a026045e57d8b4ffc"/>
+                      <topic label="LAST_MSG_VALIDITY" href="a00151.html#a308781d14ca3c7dfcdedcda0a65addd6"/>
+                      <topic label="MAX_MESSAGE" href="a00151.html#aeafd84405e8bc2c1a29629f072b908e6"/>
+                      <topic label="MAX_MESSAGE_SIZE" href="a00151.html#a94ca42efbf2eaa9e082a16fe48e7dea7"/>
+                      <topic label="MESSAGE" href="a00151.html#a50574dc8ebc5d06518525cd67a077bc6"/>
+                      <topic label="REFRESH_PERIOD" href="a00151.html#a45d0d54bc9d42f945ceef273728053ae"/>
+                      <topic label="WAITING_PROCESSES_OR_MESSAGES" href="a00151.html#abf721fdff65d95c41a6e9541509ad6dd"/>
+                    </topic>
+                  </topic>
+                  <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder.java" href="a00238.html">
+                    <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html">
+                      <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html#ad74e9b8192c50066eca5f8f3108dcec5"/>
+                      <topic label="TRANSPORT_CONNECTION_STATUS_TYPEHolder" href="a00152.html#a2f29b22722336514f6045d2d980617e7"/>
+                      <topic label="value" href="a00152.html#a66c9fae7c8a24519e8e192bec08322d7"/>
+                    </topic>
+                  </topic>
+                  <topic label="VALIDITY_TYPE.java" href="a00239.html">
+                    <topic label="VALIDITY_TYPE" href="a00157.html">
+                      <topic label="VALIDITY_TYPE" href="a00157.html#a2b209b488575dff609cc29cdfaddb40d"/>
+                      <topic label="from_int" href="a00157.html#aefc5cbbd407c5dd023dc59e7408b3911"/>
+                      <topic label="value" href="a00157.html#a6f539cb95c54fe509e9eab619a28e1bf"/>
+                      <topic label="_INVALID" href="a00157.html#a4ccaebc7837c27f33f4505b7558af13a"/>
+                      <topic label="_VALID" href="a00157.html#a4a7777f13f211980f38be1ec3e529bda"/>
+                      <topic label="INVALID" href="a00157.html#abd1a3d26d48b6a5c1696a0308a588f65"/>
+                      <topic label="VALID" href="a00157.html#ad3e0987a848af4c7bf71654ffd6a745a"/>
+                    </topic>
+                  </topic>
+                  <topic label="VALIDITY_TYPEHolder.java" href="a00240.html">
+                    <topic label="VALIDITY_TYPEHolder" href="a00158.html">
+                      <topic label="VALIDITY_TYPEHolder" href="a00158.html#a23b760a61ac67c2e49a9c78459dff89c"/>
+                      <topic label="VALIDITY_TYPEHolder" href="a00158.html#a9cea9fea676995e84d8aabae27ed2b45"/>
+                      <topic label="value" href="a00158.html#a42b664b8d5efa081752c2feebf1c747c"/>
+                    </topic>
+                  </topic>
+                  <topic label="WAITSET_TYPEHolder.java" href="a00241.html">
+                    <topic label="WAITSET_TYPEHolder" href="a00159.html">
+                      <topic label="WAITSET_TYPEHolder" href="a00159.html#a10862582459eda9f9bb350d485731ddb"/>
+                      <topic label="WAITSET_TYPEHolder" href="a00159.html#a75080e05cafcdd7cb103756e3e957c57"/>
+                      <topic label="value" href="a00159.html#adb466f5daaf5d4bf81566c7a6aa2f48e"/>
+                    </topic>
+                  </topic>
+                </topic>
+              </topic>
+            </topic>
+          </topic>
+          <topic label="code" href="dir_b3b592c562eac74116577fe4d8b0d6a5.html">
+            <topic label="org" href="dir_9b60db427bfea0721704877ef9878e95.html">
+              <topic label="vortex" href="dir_f6f808edb9421a9e5ce6af4194a56a16.html">
+                <topic label="FACE" href="dir_569ba3e4fa1399db9f7f51e48765bf76.html">
+                  <topic label="ConfigurationException.java" href="a00242.html">
+                    <topic label="ConfigurationException" href="a00120.html">
+                      <topic label="ConfigurationException" href="a00120.html#ace6e90b4f886f019719a25b335d4e0a0"/>
+                    </topic>
+                  </topic>
+                  <topic label="Connection.java" href="a00243.html">
+                    <topic label="Connection&lt; TYPE &gt;" href="a00121.html">
+                      <topic label="Connection" href="a00121.html#a5fb72be8b002b2e3c4e6fe23c2f03a46"/>
+                      <topic label="asDestination" href="a00121.html#a6a7030d51807c159ccc61f632991b587"/>
+                      <topic label="asSource" href="a00121.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+                      <topic label="close" href="a00121.html#a8d1a097e3affee2cdb97b09d607f09c6"/>
+                      <topic label="getConnection" href="a00121.html#af1e766e6f401bb9940f3997945c90300"/>
+                      <topic label="getDescription" href="a00121.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+                      <topic label="getDirection" href="a00121.html#a987815ff3534694d0ce61b84078b8cbc"/>
+                      <topic label="getParticipant" href="a00121.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+                      <topic label="getStatus" href="a00121.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+                      <topic label="getTopic" href="a00121.html#a71d86944d0867375b624f2f1d3628af6"/>
+                      <topic label="readLock" href="a00121.html#a72dfb058e07f07c1ba568265fab57f45"/>
+                      <topic label="readUnlock" href="a00121.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+                      <topic label="setLastMessageValidity" href="a00121.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+                      <topic label="writeLock" href="a00121.html#a3df1ac024107f7194474b76ca1d05508"/>
+                      <topic label="writeUnlock" href="a00121.html#a150be1eae155bf0fcce61026da193ae3"/>
+                    </topic>
+                  </topic>
+                  <topic label="ConnectionDescription.java" href="a00244.html">
+                    <topic label="ConnectionDescription" href="a00128.html">
+                      <topic label="QosConfiguration" href="a00136.html">
+                        <topic label="QosConfiguration" href="a00136.html#a2b0da88bccd8e35756e7ce0b02bee50e"/>
+                        <topic label="equals" href="a00136.html#aa8e110fc7b672eff1afa16e4237df102"/>
+                        <topic label="getDatareader_qos_id" href="a00136.html#aa4cdee424ad07b1943dbd1fe7812e09c"/>
+                        <topic label="getDatawriter_qos_id" href="a00136.html#a2b01b4e58a4e6fbd149343e89e287045"/>
+                        <topic label="getDomainparticipant_qos_id" href="a00136.html#a803ba25d1373af3e8b88b2370c076f4a"/>
+                        <topic label="getProfile" href="a00136.html#a384f23c9f0a1382cac783f43ba6bbcb2"/>
+                        <topic label="getPublisher_qos_id" href="a00136.html#af7c700ed77845eff28fe91978fe20a4c"/>
+                        <topic label="getQP" href="a00136.html#a4be393a5dd8b7c36471c59d94b47fbbb"/>
+                        <topic label="getSubscriber_qos_id" href="a00136.html#aa9fc122283c25cc2126a0d351002aca6"/>
+                        <topic label="getTopic_qos_id" href="a00136.html#a54eec8a061779faf9dfd3c97b63a1b32"/>
+                        <topic label="getUri" href="a00136.html#a828f4b1991b69bb08fda3c7dcd0de92e"/>
+                        <topic label="hashCode" href="a00136.html#a2fa2910dca42e76ff035d31269ac6372"/>
+                        <topic label="setDatareader_qos_id" href="a00136.html#a2bb0eec4f098740db792a099b30cbbf0"/>
+                        <topic label="setDatawriter_qos_id" href="a00136.html#a9715330e2cd7dca826b0638a23b2d263"/>
+                        <topic label="setDomainparticipant_qos_id" href="a00136.html#a7bc2e405439e0af026a32b377f7bb16a"/>
+                        <topic label="setProfile" href="a00136.html#a1358e26c8bad5c03a6e2592e1cb73e7c"/>
+                        <topic label="setPublisher_qos_id" href="a00136.html#a10989e1361e194c7376bf9f200ddac0d"/>
+                        <topic label="setSubscriber_qos_id" href="a00136.html#a7f70e6fcb0ad80c5364b2b93700f4b50"/>
+                        <topic label="setTopic_qos_id" href="a00136.html#a91f046fa4394ef9a6f0bb9cbce911255"/>
+                        <topic label="setUri" href="a00136.html#a0259e8e7c9c2bf1dd5416594c7a11520"/>
+                        <topic label="toString" href="a00136.html#a54def30d9dd05e210dfe80a8308269ae"/>
+                      </topic>
+                      <topic label="ConnectionDescription" href="a00128.html#a484b36094b47dbc9beae953e8df4ce66"/>
+                      <topic label="ConnectionDescription" href="a00128.html#ab086dc3dde0e84ad028b642c4a03716f"/>
+                      <topic label="equals" href="a00128.html#a52551964155dcc70c79617e20cab07e8"/>
+                      <topic label="getConfigurations" href="a00128.html#a0af9fe5bf69831801f7c825e6b68246e"/>
+                      <topic label="getDataReaderQos" href="a00128.html#ae7c22017b0c7e4d58232a92e1dc6a6e3"/>
+                      <topic label="getDataWriterQos" href="a00128.html#a3bcc832c8f1338e23f0fb47e89895df0"/>
+                      <topic label="getDirection" href="a00128.html#a25a56254b8591d1d2938802a2a0255f1"/>
+                      <topic label="getDomainId" href="a00128.html#ab6172124a96fc320a00ca0e6c8a6b7e4"/>
+                      <topic label="getDomainParticipantQos" href="a00128.html#a1e3b96a7bb0870c4f38e46a27ba6e4bf"/>
+                      <topic label="getEnvironment" href="a00128.html#a68327513a14e7a588619934cd0abdf35"/>
+                      <topic label="getId" href="a00128.html#a195ed5469ca7cf9fb26c6ec2c5f0ce8e"/>
+                      <topic label="getName" href="a00128.html#ac3bec5cf90f81d72f2071d82b91acc89"/>
+                      <topic label="getPlatformViewGuid" href="a00128.html#ac9ac0a1ca960147040e3116fc23bceed"/>
+                      <topic label="getPublisherQos" href="a00128.html#a8e989ba862aee13fc6a6da4099715437"/>
+                      <topic label="getQos" href="a00128.html#a969fdd0e5b99b047f5faffe3d925de3f"/>
+                      <topic label="getRefreshPeriod" href="a00128.html#a220eff0b5b8abff7bcb9634bbcea7dad"/>
+                      <topic label="getSubscriberQos" href="a00128.html#a3224e943045022442d400a53c5d91e4d"/>
+                      <topic label="getTopicName" href="a00128.html#a890838a4151462b1ae4898ed85d51095"/>
+                      <topic label="getTopicQos" href="a00128.html#ab6e82d495c8724bac03b9f85141eb486"/>
+                      <topic label="getTypeName" href="a00128.html#a92fbd90c86bf9c134f18ea3e287d5086"/>
+                      <topic label="hashCode" href="a00128.html#a0804b8b8d3cdbbc8e306dd166748a42b"/>
+                      <topic label="setQos" href="a00128.html#aa30e38fe353b322a1e21397259934b4f"/>
+                    </topic>
+                    <topic label="QosConfiguration" href="a00136.html">
+                      <topic label="QosConfiguration" href="a00136.html#a2b0da88bccd8e35756e7ce0b02bee50e"/>
+                      <topic label="equals" href="a00136.html#aa8e110fc7b672eff1afa16e4237df102"/>
+                      <topic label="getDatareader_qos_id" href="a00136.html#aa4cdee424ad07b1943dbd1fe7812e09c"/>
+                      <topic label="getDatawriter_qos_id" href="a00136.html#a2b01b4e58a4e6fbd149343e89e287045"/>
+                      <topic label="getDomainparticipant_qos_id" href="a00136.html#a803ba25d1373af3e8b88b2370c076f4a"/>
+                      <topic label="getProfile" href="a00136.html#a384f23c9f0a1382cac783f43ba6bbcb2"/>
+                      <topic label="getPublisher_qos_id" href="a00136.html#af7c700ed77845eff28fe91978fe20a4c"/>
+                      <topic label="getQP" href="a00136.html#a4be393a5dd8b7c36471c59d94b47fbbb"/>
+                      <topic label="getSubscriber_qos_id" href="a00136.html#aa9fc122283c25cc2126a0d351002aca6"/>
+                      <topic label="getTopic_qos_id" href="a00136.html#a54eec8a061779faf9dfd3c97b63a1b32"/>
+                      <topic label="getUri" href="a00136.html#a828f4b1991b69bb08fda3c7dcd0de92e"/>
+                      <topic label="hashCode" href="a00136.html#a2fa2910dca42e76ff035d31269ac6372"/>
+                      <topic label="setDatareader_qos_id" href="a00136.html#a2bb0eec4f098740db792a099b30cbbf0"/>
+                      <topic label="setDatawriter_qos_id" href="a00136.html#a9715330e2cd7dca826b0638a23b2d263"/>
+                      <topic label="setDomainparticipant_qos_id" href="a00136.html#a7bc2e405439e0af026a32b377f7bb16a"/>
+                      <topic label="setProfile" href="a00136.html#a1358e26c8bad5c03a6e2592e1cb73e7c"/>
+                      <topic label="setPublisher_qos_id" href="a00136.html#a10989e1361e194c7376bf9f200ddac0d"/>
+                      <topic label="setSubscriber_qos_id" href="a00136.html#a7f70e6fcb0ad80c5364b2b93700f4b50"/>
+                      <topic label="setTopic_qos_id" href="a00136.html#a91f046fa4394ef9a6f0bb9cbce911255"/>
+                      <topic label="setUri" href="a00136.html#a0259e8e7c9c2bf1dd5416594c7a11520"/>
+                      <topic label="toString" href="a00136.html#a54def30d9dd05e210dfe80a8308269ae"/>
+                    </topic>
+                  </topic>
+                  <topic label="DestinationConnection.java" href="a00245.html">
+                    <topic label="DestinationConnection&lt; TYPE &gt;" href="a00130.html">
+                      <topic label="DestinationConnection" href="a00130.html#a8e45fdaa2128e2de76b8dc1a2dc5f5a4"/>
+                      <topic label="asDestination" href="a00130.html#a6a7030d51807c159ccc61f632991b587"/>
+                      <topic label="asSource" href="a00130.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+                      <topic label="close" href="a00130.html#a33eabb7abd6b8ee4b1b7969b87d8a74e"/>
+                      <topic label="getCallback" href="a00130.html#af6dde19acc96c27c9ecb660b9f75cc78"/>
+                      <topic label="getConnection" href="a00130.html#af1e766e6f401bb9940f3997945c90300"/>
+                      <topic label="getDescription" href="a00130.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+                      <topic label="getDirection" href="a00130.html#aede90e173a74bb7f239d0f37da9f5a14"/>
+                      <topic label="getParticipant" href="a00130.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+                      <topic label="getStatus" href="a00130.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+                      <topic label="getTopic" href="a00130.html#a71d86944d0867375b624f2f1d3628af6"/>
+                      <topic label="readLock" href="a00130.html#a72dfb058e07f07c1ba568265fab57f45"/>
+                      <topic label="readUnlock" href="a00130.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+                      <topic label="receiveMessage" href="a00130.html#a12e6db74af80e183ecb264cb086c91b4"/>
+                      <topic label="registerCallback" href="a00130.html#a84890cfe117a63fecd7db0963d52216a"/>
+                      <topic label="setLastMessageValidity" href="a00130.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+                      <topic label="unregisterCallback" href="a00130.html#a8783c691351166478fa65d5d8020bd5f"/>
+                      <topic label="writeLock" href="a00130.html#a3df1ac024107f7194474b76ca1d05508"/>
+                      <topic label="writeUnlock" href="a00130.html#a150be1eae155bf0fcce61026da193ae3"/>
+                    </topic>
+                  </topic>
+                  <topic label="Holder.java" href="a00246.html">
+                    <topic label="Holder&lt; TYPE &gt;" href="a00131.html">
+                      <topic label="Holder" href="a00131.html#a12382a289bbe7fc9d40e33628c57fbd5"/>
+                      <topic label="Holder" href="a00131.html#afbfb4d08723b47c674305a51df9f9fae"/>
+                      <topic label="value" href="a00131.html#a0d2836a915d93ee4afebcd939de21b00"/>
+                    </topic>
+                  </topic>
+                  <topic label="Logger.java" href="a00247.html">
+                    <topic label="Logger" href="a00133.html">
+                      <topic label="exception" href="a00133.html#a3fcb5ffcf3f5a85f69e6d7346d76ed62"/>
+                      <topic label="getInstance" href="a00133.html#a4cc2752c63c322d35930c9b5a526103b"/>
+                      <topic label="log" href="a00133.html#a13d49e930e91bb1e0d99d87311f6cb22"/>
+                    </topic>
+                  </topic>
+                  <topic label="Read_Callback.java" href="a00248.html">
+                    <topic label="Read_Callback&lt; TYPE &gt;" href="a00139.html">
+                      <topic label="send_event" href="a00139.html#ae4e67698c8742e407809052919dc9e47"/>
+                    </topic>
+                  </topic>
+                  <topic label="Read_CallbackHolder.java" href="a00249.html">
+                    <topic label="Read_CallbackHolder&lt; TYPE &gt;" href="a00140.html">
+                      <topic label="value" href="a00140.html#a699d263867f99707eed5accde43b1612"/>
+                    </topic>
+                  </topic>
+                  <topic label="Read_CallbackOperations.java" href="a00250.html">
+                    <topic label="Read_CallbackOperations&lt; TYPE &gt;" href="a00141.html">
+                      <topic label="send_event" href="a00141.html#ae4e67698c8742e407809052919dc9e47"/>
+                    </topic>
+                  </topic>
+                  <topic label="SourceConnection.java" href="a00251.html">
+                    <topic label="SourceConnection&lt; TYPE &gt;" href="a00150.html">
+                      <topic label="SourceConnection" href="a00150.html#ab78969d990360e02be3d121fdd991532"/>
+                      <topic label="asDestination" href="a00150.html#a6a7030d51807c159ccc61f632991b587"/>
+                      <topic label="asSource" href="a00150.html#a0a4e5592ac47b4dc83127cae5ba9b1d6"/>
+                      <topic label="close" href="a00150.html#a8d1a097e3affee2cdb97b09d607f09c6"/>
+                      <topic label="getConnection" href="a00150.html#af1e766e6f401bb9940f3997945c90300"/>
+                      <topic label="getDescription" href="a00150.html#adc9ff648c91b53cbd54ab9070e5c1335"/>
+                      <topic label="getDirection" href="a00150.html#a497ae42035f737685a0475006b3b7b4a"/>
+                      <topic label="getParticipant" href="a00150.html#ad5fcc7fe43471fa24b5df65baeb8c141"/>
+                      <topic label="getStatus" href="a00150.html#a47e373795ec1b01f8c2848bd42e40fa1"/>
+                      <topic label="getTopic" href="a00150.html#a71d86944d0867375b624f2f1d3628af6"/>
+                      <topic label="readLock" href="a00150.html#a72dfb058e07f07c1ba568265fab57f45"/>
+                      <topic label="readUnlock" href="a00150.html#afc28439b12d043d921dabde2b5f5f2a0"/>
+                      <topic label="sendMessage" href="a00150.html#a790a83353082111f7ddd75fbad091673"/>
+                      <topic label="setLastMessageValidity" href="a00150.html#af588a4fbcde28c378ac5d2dce9eb8fb0"/>
+                      <topic label="writeLock" href="a00150.html#a3df1ac024107f7194474b76ca1d05508"/>
+                      <topic label="writeUnlock" href="a00150.html#a150be1eae155bf0fcce61026da193ae3"/>
+                    </topic>
+                  </topic>
+                  <topic label="TransportServices.java" href="a00252.html">
+                    <topic label="TransportServices" href="a00153.html">
+                      <topic label="Create_Connection" href="a00153.html#a148355e7fb1742a2f07dfd589c74dd43"/>
+                      <topic label="Destroy_Connection" href="a00153.html#af268b85aee19f2c9db41ed405ca3d103"/>
+                      <topic label="Get_Connection_Parameters" href="a00153.html#af0cbc68081953efecfb06980f2678461"/>
+                      <topic label="Initialize" href="a00153.html#a5cdc771d3bd0ee54b7781c92d6a373a5"/>
+                    </topic>
+                  </topic>
+                  <topic label="TS.java" href="a00253.html">
+                    <topic label="TS" href="a00154.html">
+                      <topic label="TS" href="a00154.html#a755006b0744a56f569c1a332d4920017"/>
+                      <topic label="Create_Connection" href="a00154.html#a97ebba550a8d5f903fa56d1687ed4c30"/>
+                      <topic label="Destroy_Connection" href="a00154.html#a1fb26b69ead5b44d541547c64e1b1260"/>
+                      <topic label="Get_Connection_Parameters" href="a00154.html#a4d684f4318732bd62a466a1a3766ab56"/>
+                      <topic label="getImpl" href="a00154.html#ace73bc9ea8fe7170b9e9d524ce9479f6"/>
+                      <topic label="getInstance" href="a00154.html#af2b51c576bbacdd25abb653202e0e7bb"/>
+                      <topic label="Initialize" href="a00154.html#a11fa1405be29db9e93a6fa0ef89bb2ea"/>
+                      <topic label="Unregister_Callback" href="a00154.html#a2dedb619c5f6225b9aa0b4473bfc22ce"/>
+                    </topic>
+                  </topic>
+                  <topic label="TSFactory.java" href="a00254.html">
+                    <topic label="TSFactory" href="a00155.html">
+                      <topic label="getInstance" href="a00155.html#ae1e258f9688e096de1cf2466255da602"/>
+                      <topic label="getTS" href="a00155.html#aadfb1eaa74c5c83f9982fe00e9a4c8ab"/>
+                    </topic>
+                  </topic>
+                  <topic label="Util.java" href="a00255.html">
+                    <topic label="Util" href="a00156.html">
+                      <topic label="getenv" href="a00156.html#a99376fbc8684087fafbf04f1aeebef75"/>
+                    </topic>
+                  </topic>
+                </topic>
+              </topic>
+            </topic>
+          </topic>
+          <topic label="doc" href="dir_dc61db914a89f88b03c28d299f483080.html">
+            <topic label="DataTypeTS.java" href="a00256.html">
+              <topic label="DataTypeTS" href="a00129.html">
+                <topic label="Create_Connection" href="a00129.html#a97ebba550a8d5f903fa56d1687ed4c30"/>
+                <topic label="Destroy_Connection" href="a00129.html#a1fb26b69ead5b44d541547c64e1b1260"/>
+                <topic label="Get_Connection_Parameters" href="a00129.html#a4d684f4318732bd62a466a1a3766ab56"/>
+                <topic label="getImpl" href="a00129.html#ace73bc9ea8fe7170b9e9d524ce9479f6"/>
+                <topic label="getInstance" href="a00129.html#af2b51c576bbacdd25abb653202e0e7bb"/>
+                <topic label="Initialize" href="a00129.html#a11fa1405be29db9e93a6fa0ef89bb2ea"/>
+                <topic label="Receive_Message" href="a00129.html#ab1326ae4cbd73d75d2d550e147d1ab9b"/>
+                <topic label="Register_Callback" href="a00129.html#a19ea1f36b1ba68b9f57a4000c16c8873"/>
+                <topic label="Send_Message" href="a00129.html#aab3b0dd968f552f9b3850b1da367d383"/>
+                <topic label="Unregister_Callback" href="a00129.html#a2dedb619c5f6225b9aa0b4473bfc22ce"/>
+              </topic>
+            </topic>
+          </topic>
+        </topic>
+      </topic>
+    </topic>
+  </topic>
+</toc>
