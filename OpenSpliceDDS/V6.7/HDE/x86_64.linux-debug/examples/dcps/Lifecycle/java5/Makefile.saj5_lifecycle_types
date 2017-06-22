@@ -1,0 +1,82 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+JAVAC         = $(SPLICE_JAVAC)
+JAR           = jar
+JAVACFLAGS    = $(GENFLAGS)
+CLASSEXT      = .class
+CLASSDIR      = classes/
+OUTPUT_OPTION = -d $(CLASSDIR)
+COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
+JAVACCPATH    = "$(SPLICE_EXTRA_CP):$(CLASSDIR):../../../../jar/dcpssaj5.jar:"
+MAKEFILE      = Makefile.saj5_lifecycle_types
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ./
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+GENFLAGS      =  
+CLASSES       =  $(CLASSDIR)LifecycleData/*$(CLASSEXT) $(CLASSDIR)LifecycleDataSubscriber$(CLASSEXT) $(CLASSDIR)LifecycleDataPublisher$(CLASSEXT)
+JARCLASSES    =  LifecycleData/*$(CLASSEXT) LifecycleDataSubscriber$(CLASSEXT) LifecycleDataPublisher$(CLASSEXT)
+JAREXT        = .jar
+MAINCLASS     = LifecycleDataSubscriber
+JARFILE       = $(LTARGETDIR)$(LIBPREFIX)saj5_lifecycle_types$(LIBSUFFIX)$(JAREXT)
+MANIFEST      = saj5_lifecycle_types.manifest
+JARFLAGS      = cvfm
+SRC           = LifecycleData/*.java LifecycleDataSubscriber.java LifecycleDataPublisher.java
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES) $(CLASSDIR)$(MANIFEST)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	cd $(CLASSDIR) && $(JAR) $(JARFLAGS) $(JARFILE) $(MANIFEST) $(JARCLASSES) 
+	$(MV) $(CLASSDIR)/$(JARFILE) .
+
+$(CLASSDIR)$(MANIFEST):
+	echo Class-Path: ../../../../jar/dcpssaj5.jar > $(CLASSDIR)$(MANIFEST)
+	echo Main-Class: $(MAINCLASS) >> $(CLASSDIR)$(MANIFEST)
+
+GENERATED_DIRTY = LifecycleData
+
+LifecycleData: ../idl/LifecycleData.idl
+	"../../../../bin/idlpp" -I "../../../../etc/idl" -l java ../idl/LifecycleData.idl
+
+.PRECIOUS: $(GENERATED_DIRTY)
+$(CLASSES): $(GENERATED_DIRTY)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+$(CLASSDIR)LifecycleData/*$(CLASSEXT): LifecycleData
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) LifecycleData/*.java
+
+$(CLASSDIR)LifecycleDataSubscriber$(CLASSEXT): LifecycleDataSubscriber.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) LifecycleDataSubscriber.java
+
+$(CLASSDIR)LifecycleDataPublisher$(CLASSEXT): LifecycleDataPublisher.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) LifecycleDataPublisher.java
+
+clean:
+	-$(RM) $(CLASSES)
+
+realclean: clean
+	-$(RM) $(BIN)
+	-$(RM) $(GENERATED_DIRTY)
+	-$(RM) $(CLASSDIR)$(MANIFEST)
+
+check-syntax:
+	$(COMPILE.java) $(EXPORTFLAGS) $(CHK_SOURCES)
+

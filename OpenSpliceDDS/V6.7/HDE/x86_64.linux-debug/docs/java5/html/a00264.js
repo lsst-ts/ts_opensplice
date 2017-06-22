@@ -1,0 +1,6 @@
+var a00264 =
+[
+    [ "EXTENSIBLE_EXTENSIBILITY", "a00264.html#a951042d36aa78688eac94a595d94e557", null ],
+    [ "FINAL_EXTENSIBILITY", "a00264.html#a594d8afb12643863fd3c1210bbd024af", null ],
+    [ "MUTABLE_EXTENSIBILITY", "a00264.html#aa1364ef123351e3b8307cca04e1bb965", null ]
+];

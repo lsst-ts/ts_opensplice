@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['close',['close',['../a00121.html#a8d1a097e3affee2cdb97b09d607f09c6',1,'org.vortex.FACE.Connection&lt; TYPE &gt;.close()'],['../a00130.html#a33eabb7abd6b8ee4b1b7969b87d8a74e',1,'org.vortex.FACE.DestinationConnection&lt; TYPE &gt;.close()']]],
+  ['configurationexception',['ConfigurationException',['../a00120.html#ace6e90b4f886f019719a25b335d4e0a0',1,'org::vortex::FACE::ConfigurationException']]],
+  ['connection',['Connection',['../a00121.html#a5fb72be8b002b2e3c4e6fe23c2f03a46',1,'org::vortex::FACE::Connection&lt; TYPE &gt;']]],
+  ['connection_5fdirection_5ftype',['CONNECTION_DIRECTION_TYPE',['../a00122.html#a74772b906eea5cebd761f40865a6435e',1,'FACE::CONNECTION_DIRECTION_TYPE']]],
+  ['connection_5fdirection_5ftypeholder',['CONNECTION_DIRECTION_TYPEHolder',['../a00123.html#af10cc7bef8242252b3012fbfd831856b',1,'FACE.CONNECTION_DIRECTION_TYPEHolder.CONNECTION_DIRECTION_TYPEHolder()'],['../a00123.html#a2e721e5489cd728fdc68332254f4041e',1,'FACE.CONNECTION_DIRECTION_TYPEHolder.CONNECTION_DIRECTION_TYPEHolder(FACE.CONNECTION_DIRECTION_TYPE initialValue)']]],
+  ['connection_5fdomain_5ftype',['CONNECTION_DOMAIN_TYPE',['../a00124.html#aec491bea7dd84f37a7ff988eb86e3079',1,'FACE::CONNECTION_DOMAIN_TYPE']]],
+  ['connection_5fdomain_5ftypeholder',['CONNECTION_DOMAIN_TYPEHolder',['../a00125.html#a1ae2856bbd33fbfef99426d3727ce403',1,'FACE.CONNECTION_DOMAIN_TYPEHolder.CONNECTION_DOMAIN_TYPEHolder()'],['../a00125.html#af1b837d32c2ec3033e4985fa2e1975b0',1,'FACE.CONNECTION_DOMAIN_TYPEHolder.CONNECTION_DOMAIN_TYPEHolder(FACE.CONNECTION_DOMAIN_TYPE initialValue)']]],
+  ['connection_5ftype',['CONNECTION_TYPE',['../a00126.html#ae9243f7498055ec2452161fd1a58d07f',1,'FACE::CONNECTION_TYPE']]],
+  ['connection_5ftypeholder',['CONNECTION_TYPEHolder',['../a00127.html#ac4f880f9e726facfcd400f4a692a0e89',1,'FACE.CONNECTION_TYPEHolder.CONNECTION_TYPEHolder()'],['../a00127.html#ae63aaab41d7653a0fa46748ac3e2551a',1,'FACE.CONNECTION_TYPEHolder.CONNECTION_TYPEHolder(FACE.CONNECTION_TYPE initialValue)']]],
+  ['connectiondescription',['ConnectionDescription',['../a00128.html#a484b36094b47dbc9beae953e8df4ce66',1,'org.vortex.FACE.ConnectionDescription.ConnectionDescription(ServiceEnvironment env, String configurationUri)'],['../a00128.html#ab086dc3dde0e84ad028b642c4a03716f',1,'org.vortex.FACE.ConnectionDescription.ConnectionDescription(ServiceEnvironment env, String name, long id, int domainId, QosConfiguration qos, CONNECTION_DIRECTION_TYPE direction, long platformViewGuid, long refreshPeriod, String topicName, String typeName)']]],
+  ['create_5fconnection',['Create_Connection',['../a00153.html#a148355e7fb1742a2f07dfd589c74dd43',1,'org.vortex.FACE.TransportServices.Create_Connection()'],['../a00154.html#a97ebba550a8d5f903fa56d1687ed4c30',1,'org.vortex.FACE.TS.Create_Connection()']]]
+];
