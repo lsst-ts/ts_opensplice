@@ -1,0 +1,5 @@
+var a00296 =
+[
+    [ "BASE_TYPE_ANNOTATIONTYPE_MEMBER_ID", "a00296.html#a069d52eadd9a33fbf2f38ff4e89d4ec4", null ],
+    [ "MEMBER_ANNOTATIONTYPE_MEMBER_ID", "a00296.html#a2857a75c5d3cec2f62fc08596479921d", null ]
+];

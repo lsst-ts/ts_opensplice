@@ -1,0 +1,697 @@
+<toc label="C99 OpenSplice Data Distribution Service Data-Centric Publish-Subscribe API" topic="index.html">
+  <topic label="Reference" href="index.html"/>
+  <topic label="DCPS Concepts" href="a00004.html">
+    <topic label="DCPS Modules" href="a00006.html">
+      <topic label="Infrastructure Module" href="a00010.html">
+        <topic label="Entity      " href="a00010.html#DCPS_Modules_Entity"/>
+        <topic label="Listener" href="a00012.html"/>
+        <topic label="Status" href="a00014.html">
+          <topic label="Inconsistent Topic Status" href="a00092.html"/>
+          <topic label="Sample Rejected Status" href="a00110.html"/>
+          <topic label="Liveliness Changed Status" href="a00094.html"/>
+          <topic label="Requested Deadline Missed Status" href="a00104.html"/>
+          <topic label="Requested Incompatible QoS Status" href="a00106.html"/>
+          <topic label="Sample Lost Status" href="a00108.html"/>
+          <topic label="Subscription Matched Status" href="a00112.html"/>
+          <topic label="Liveliness Lost Status" href="a00096.html"/>
+          <topic label="Offered Deadline Missed" href="a00098.html"/>
+          <topic label="Offered Incompatible QoS Status" href="a00100.html"/>
+          <topic label="Publication Matched Status" href="a00102.html"/>
+        </topic>
+        <topic label="Waitset" href="a00016.html"/>
+      </topic>
+      <topic label="Domain Module" href="a00008.html">
+        <topic label="The Domain Participant     " href="a00008.html#DCPS_Modules_DomainParticipant"/>
+      </topic>
+      <topic label="Topic-Definition Module" href="a00032.html">
+        <topic label="Topic                    " href="a00032.html#DCPS_Modules_Topic"/>
+      </topic>
+      <topic label="Publication Module" href="a00018.html">
+        <topic label="The Publisher  " href="a00018.html#DCPS_Modules_Publisher"/>
+        <topic label="The DataWriter" href="a00020.html"/>
+        <topic label="Listener" href="a00012.html"/>
+      </topic>
+      <topic label="Subscription Module" href="a00024.html">
+        <topic label="The Subscriber  " href="a00024.html#DCPS_Modules_Subscriber"/>
+        <topic label="The DataReader" href="a00026.html"/>
+        <topic label="The DataSample" href="a00028.html"/>
+        <topic label="The SampleInfo" href="a00030.html"/>
+        <topic label="Listener" href="a00012.html"/>
+      </topic>
+    </topic>
+    <topic label="Supported Quality of Service (QoS)" href="a00034.html">
+      <topic label="User Data QoS" href="a00084.html"/>
+      <topic label="Topic Data QoS" href="a00080.html"/>
+      <topic label="Group Data QoS" href="a00046.html"/>
+      <topic label="Durability QoS" href="a00040.html"/>
+      <topic label="Durability Service QoS" href="a00042.html"/>
+      <topic label="Presentation QoS" href="a00062.html"/>
+      <topic label="Deadline QoS" href="a00036.html"/>
+      <topic label="Latency Budget QoS" href="a00050.html"/>
+      <topic label="Ownership QoS" href="a00056.html"/>
+      <topic label="Ownership Strength QoS" href="a00058.html"/>
+      <topic label="Liveliness QoS" href="a00054.html"/>
+      <topic label="Time Based Filter QoS" href="a00078.html"/>
+      <topic label="Partition QoS" href="a00060.html"/>
+      <topic label="Reliability QoS" href="a00068.html"/>
+      <topic label="Transport Priority QoS" href="a00082.html"/>
+      <topic label="Lifespan QoS" href="a00052.html"/>
+      <topic label="Destination Order QoS" href="a00038.html"/>
+      <topic label="History QoS" href="a00048.html"/>
+      <topic label="Resource Limits QoS" href="a00070.html"/>
+      <topic label="Entity Factory QoS" href="a00044.html"/>
+      <topic label="Writer Data Lifecycle QoS" href="a00088.html"/>
+      <topic label="Reader Data Lifecycle QoS" href="a00064.html"/>
+      <topic label="SubscriptionKey QoS" href="a00076.html"/>
+      <topic label="ReaderLifespan QoS" href="a00066.html"/>
+      <topic label="Share QoS" href="a00074.html"/>
+      <topic label="ViewKey QoS" href="a00086.html"/>
+      <topic label="Scheduling QoS" href="a00072.html"/>
+    </topic>
+    <topic label="Return Codes" href="a00022.html"/>
+    <topic label="Queries and Filters" href="a00090.html"/>
+    <topic label="Built-in Topics" href="a00002.html">
+      <topic label="Built-in Topics                                                                " href="a00002.html#DCPS_Builtin_Topics_Intro">
+        <topic label="ParticipantBuiltinTopicData                                                    " href="a00002.html#DCPS_Builtin_Topics_ParticipantData"/>
+        <topic label="TopicBuiltinTopicData                                                          " href="a00002.html#DCPS_Builtin_Topics_TopicData"/>
+        <topic label="PublicationBuiltinTopicData                                                    " href="a00002.html#DCPS_Builtin_Topics_PublicationData"/>
+        <topic label="SubscriptionBuiltinTopicData                                                   " href="a00002.html#DCPS_Builtin_Topics_SubscriptionData"/>
+        <topic label="Other built-in topics                                                          " href="a00002.html#DCPS_Builtin_Topics_Others"/>
+      </topic>
+    </topic>
+  </topic>
+  <topic label="Classes">
+    <topic label="Class List" href="annotated.html">
+      <topic label="dds_condition_seq" href="a00114.html">
+        <topic label="_buffer" href="a00114.html#a205719e35f78484ab9a418d850095b20"/>
+        <topic label="_length" href="a00114.html#aedee35619559fc326af40ef15a1d44d9"/>
+        <topic label="_release" href="a00114.html#aae6bbf5d16c524ad38f9ea3db888f3fc"/>
+      </topic>
+      <topic label="dds_history_qospolicy_t" href="a00115.html">
+        <topic label="depth" href="a00115.html#a69c0478389057b2b3230995aa4562a45"/>
+        <topic label="kind" href="a00115.html#af290a32ffd081db7a54662bc4fc8bafc"/>
+      </topic>
+      <topic label="dds_inconsistent_topic_status_t" href="a00116.html">
+        <topic label="total_count" href="a00116.html#afbb45290fbeb9c1ce6b3f201aba2dd62"/>
+        <topic label="total_count_change" href="a00116.html#a359a9561d70acb9d7accdad81208539a"/>
+      </topic>
+      <topic label="dds_liveliness_changed_status_t" href="a00117.html">
+        <topic label="alive_count" href="a00117.html#a693451286d70e6f882f85e88b0dd3dc1"/>
+        <topic label="alive_count_change" href="a00117.html#a0d47910b366d0f3b4812e7db6a49639a"/>
+        <topic label="last_publication_handle" href="a00117.html#acddcf7a22ecdc8d4c2d33b858bd7b2ab"/>
+        <topic label="not_alive_count" href="a00117.html#a1ba86a65626263a8bbcf2ec83aaf809e"/>
+        <topic label="not_alive_count_change" href="a00117.html#a1259f99b0f427be467174ce46b78cdb0"/>
+      </topic>
+      <topic label="dds_liveliness_lost_status_t" href="a00118.html">
+        <topic label="total_count" href="a00118.html#ac866e963d635e54d1743e74dec8d7b41"/>
+        <topic label="total_count_change" href="a00118.html#acc9a937f013c24d2adf869d1a3daaf2f"/>
+      </topic>
+      <topic label="dds_offered_deadline_missed_status_t" href="a00119.html">
+        <topic label="last_instance_handle" href="a00119.html#ae56a6c4e81526499ca23de50bdc1e179"/>
+        <topic label="total_count" href="a00119.html#a7828e989bb1e82a33cb2b1b6d3b79279"/>
+        <topic label="total_count_change" href="a00119.html#a8e6b2f6f773ee18b4fe3eb01863c964c"/>
+      </topic>
+      <topic label="dds_offered_incompatible_qos_status_t" href="a00120.html">
+        <topic label="last_policy_id" href="a00120.html#a4faf091dbc19c0c90f99b23dccc0f30f"/>
+        <topic label="total_count" href="a00120.html#ab1793f91e8adc526fa2a16dd9342c9a1"/>
+        <topic label="total_count_change" href="a00120.html#a33ee94e0c2c8362be8583a8567de263a"/>
+      </topic>
+      <topic label="dds_participantlistener_t" href="a00121.html">
+        <topic label="publisherlistener" href="a00121.html#a81e2a26e18c31c2d2ffffdc8200a5ac8"/>
+        <topic label="subscriberlistener" href="a00121.html#a5daee319b7b2b5c366290b222751ec27"/>
+        <topic label="topiclistener" href="a00121.html#af75f6c18d3e2f0b6ed918eceb7919743"/>
+      </topic>
+      <topic label="dds_publication_matched_status_t" href="a00122.html">
+        <topic label="current_count" href="a00122.html#a3dd0e6d56480846f4b54e66965f22e1d"/>
+        <topic label="current_count_change" href="a00122.html#ae921f139d43d0164682f987ced889a0e"/>
+        <topic label="last_subscription_handle" href="a00122.html#a4ec55eb6d1790b9acfeb8f195b4655b4"/>
+        <topic label="total_count" href="a00122.html#ae0949124fcbe67602fbe6ebcd1132635"/>
+        <topic label="total_count_change" href="a00122.html#a7fc4ea6adc37c56de634365ced798cc7"/>
+      </topic>
+      <topic label="dds_publisherlistener_t" href="a00123.html">
+        <topic label="writerlistener" href="a00123.html#a584f1e3dd34f459477e45cf34d2c5d82"/>
+      </topic>
+      <topic label="dds_readerlistener_t" href="a00124.html">
+        <topic label="on_data_available" href="a00124.html#a9c6a19f29aca0700d741d76b2a5e5689"/>
+        <topic label="on_liveliness_changed" href="a00124.html#a5f4c6bfd96574d6599fdfd351928e982"/>
+        <topic label="on_requested_deadline_missed" href="a00124.html#a2dcb225a3dbcda8967de9f837bfe3b99"/>
+        <topic label="on_requested_incompatible_qos" href="a00124.html#abd8fc8760c27801bf04f316c100d02c0"/>
+        <topic label="on_sample_lost" href="a00124.html#a8741e51886fbde4eb1566ba044ecb761"/>
+        <topic label="on_sample_rejected" href="a00124.html#af6c811def5ed2b8933768de8b9045c18"/>
+        <topic label="on_subscription_matched" href="a00124.html#a238466d667222dd1c99ff59fd756d722"/>
+      </topic>
+      <topic label="dds_requested_deadline_missed_status_t" href="a00125.html">
+        <topic label="last_instance_handle" href="a00125.html#a8d1937e085c3b7dbb264aa10432d5002"/>
+        <topic label="total_count" href="a00125.html#aaba530f74db36fa2ee637c5b92903b0f"/>
+        <topic label="total_count_change" href="a00125.html#ad7fd846d0b70470dc4fa13ed179a99ab"/>
+      </topic>
+      <topic label="dds_requested_incompatible_qos_status_t" href="a00126.html">
+        <topic label="last_policy_id" href="a00126.html#ae855470c554da8f99b6445c1fb09aa95"/>
+        <topic label="total_count" href="a00126.html#a35f58e6d9ac2f7bad212f48899a3b08e"/>
+        <topic label="total_count_change" href="a00126.html#af926811d3ce49ffa7f02a8b5e1f0b16a"/>
+      </topic>
+      <topic label="dds_resource_limits_qospolicy_t" href="a00127.html">
+        <topic label="max_instances" href="a00127.html#a2def7e6f23d89b61e5752d1bc44ec3cf"/>
+        <topic label="max_samples" href="a00127.html#a2c6e8658a275f8d075cd18df0ffc617e"/>
+        <topic label="max_samples_per_instance" href="a00127.html#ae204de69ba76fa16907f353f57dde8e4"/>
+      </topic>
+      <topic label="dds_sample_info_t" href="a00128.html">
+        <topic label="absolute_generation_rank" href="a00128.html#a1292d619bcb719801642c61924160c3c"/>
+        <topic label="disposed_generation_count" href="a00128.html#ab9d1cf3e9d6dc24b8d97c479ec98988a"/>
+        <topic label="generation_rank" href="a00128.html#aa976b7f6c8c1f20f3dda3ffa1b86a56b"/>
+        <topic label="instance_handle" href="a00128.html#a6b088eb465831c946366a8c09ca568f5"/>
+        <topic label="instance_state" href="a00128.html#aaf591903dc992734152ea2649eeb7cc9"/>
+        <topic label="no_writers_generation_count" href="a00128.html#ac219ca34314f6101d168bae4836ee43d"/>
+        <topic label="publication_handle" href="a00128.html#a1e15dfc7aea9b40c00676ab44579d86a"/>
+        <topic label="reception_timestamp" href="a00128.html#abb80c5f0e2a499bc01a7cd95845f0153"/>
+        <topic label="sample_rank" href="a00128.html#a05a9e2119aabf544b148a92c46d236e9"/>
+        <topic label="sample_state" href="a00128.html#ac52d632b0cb77c52eb9fdcf01601bc5b"/>
+        <topic label="source_timestamp" href="a00128.html#a75e5ec68cc99a06fb91c963d8350c21f"/>
+        <topic label="valid_data" href="a00128.html#ac08c4c70375047d6c1a571e19f261fa6"/>
+        <topic label="view_state" href="a00128.html#a785449182f7f3d830903ab53c1c8980c"/>
+      </topic>
+      <topic label="dds_sample_lost_status_t" href="a00129.html">
+        <topic label="total_count" href="a00129.html#a6ccf69578e08486b00f3b309524d1426"/>
+        <topic label="total_count_change" href="a00129.html#ac48868c307809e81eb1657348c453978"/>
+      </topic>
+      <topic label="dds_sample_rejected_status_t" href="a00130.html">
+        <topic label="last_instance_handle" href="a00130.html#aaa512496ebe0769d0f2e85bb63cbed7d"/>
+        <topic label="last_reason" href="a00130.html#a7dedfbf579439ef0eb7f06c8abd570f1"/>
+        <topic label="total_count" href="a00130.html#af80e6f1a24a5235a806307a444f9113f"/>
+        <topic label="total_count_change" href="a00130.html#a89a73306a6711ea2fd5a6c36d1e37eb5"/>
+      </topic>
+      <topic label="dds_subscriberlistener_t" href="a00131.html">
+        <topic label="on_data_readers" href="a00131.html#a97d9ffc454a04e77995416e05bb9db0a"/>
+        <topic label="readerlistener" href="a00131.html#aea6f3b9178014d3578dbd897e85eb1f7"/>
+      </topic>
+      <topic label="dds_subscription_matched_status_t" href="a00132.html">
+        <topic label="current_count" href="a00132.html#afc7fcbeec286c66bf550ffff0cf1a9dc"/>
+        <topic label="current_count_change" href="a00132.html#a9b1d2b6a868d1e16b140817fac39687f"/>
+        <topic label="last_publication_handle" href="a00132.html#a35953b28b4ffc126625e8ff01a42b3a2"/>
+        <topic label="total_count" href="a00132.html#a16f53d323f2df509f52a58de53bd6b70"/>
+        <topic label="total_count_change" href="a00132.html#a870e64da229418935fbe0405c47f1757"/>
+      </topic>
+      <topic label="dds_topic_descriptor_t" href="a00133.html">
+        <topic label="arg" href="a00133.html#a26491c74104f406e82264e729d423454"/>
+        <topic label="destructor" href="a00133.html#a799e550f94ad13b730f0bcecfab9e522"/>
+        <topic label="register_type" href="a00133.html#a4360582bb4c2351e907f68f5e3411093"/>
+        <topic label="size" href="a00133.html#a6e4cebb5a1fb5783f1e83dfff4154a5e"/>
+        <topic label="type_name" href="a00133.html#a5f6b89e56f8e4536f4f8353d26f24997"/>
+      </topic>
+      <topic label="dds_topiclistener_t" href="a00134.html">
+        <topic label="on_inconsistent_topic" href="a00134.html#ae9e40dc2e16c927afca597e973cc4b8a"/>
+      </topic>
+      <topic label="dds_writerlistener_t" href="a00135.html">
+        <topic label="on_liveliness_lost" href="a00135.html#ac5987edd591fef59c5f3a06b1cb7324e"/>
+        <topic label="on_offered_deadline_missed" href="a00135.html#a0a64b045d207cc2b7d7c4039f4eabb15"/>
+        <topic label="on_offered_incompatible_qos" href="a00135.html#addd893b1a20753501c9aa6322c1a3fd5"/>
+        <topic label="on_publication_matched" href="a00135.html#a40c6a0ac4c21fffd24012ea280700d61"/>
+      </topic>
+    </topic>
+    <topic label="Class Index" href="classes.html"/>
+    <topic label="Class Members" href="functions.html">
+      <topic label="All" href="functions.html"/>
+      <topic label="Variables" href="functions_vars.html"/>
+    </topic>
+  </topic>
+  <topic label="Files">
+    <topic label="File List" href="files.html">
+      <topic label="dcps" href="dir_74caceee44ba7599549cca8a359d60c3.html">
+        <topic label="c99" href="dir_87cf6a1ec5cf0eeb4c9d9d5b18db9896.html">
+          <topic label="include" href="dir_1bec736334b737813d3881963bc640c2.html">
+            <topic label="dds" href="dir_94a3c48fa9c80d1cb9946fe14e86b3a7.html">
+              <topic label="alloc.h" href="a00138.html">
+                <topic label="DDS_EXPORT" href="a00138.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+                <topic label="DDS_FREE_ALL_BIT" href="a00138.html#a698fa9d29f15b9e0ca1f081d05a1f151"/>
+                <topic label="DDS_FREE_CONTENTS_BIT" href="a00138.html#a5c7a2d1b955fd438f51c95c463ba6943"/>
+                <topic label="DDS_FREE_KEY_BIT" href="a00138.html#a0cd64765e07cf214749f3f7630dcf7bb"/>
+                <topic label="dds_free_op_t" href="a00138.html#a491b266494b1ac9e6a406a227e00cb08">
+                  <topic label="DDS_FREE_ALL" href="a00138.html#a491b266494b1ac9e6a406a227e00cb08a9d869f5fd30e41263628023633cebf8e"/>
+                  <topic label="DDS_FREE_CONTENTS" href="a00138.html#a491b266494b1ac9e6a406a227e00cb08a99f3eab23d97edd975c2727e56282623"/>
+                  <topic label="DDS_FREE_KEY" href="a00138.html#a491b266494b1ac9e6a406a227e00cb08ad2c83eefc763fe3eae68950fbf6b9945"/>
+                </topic>
+                <topic label="dds_free" href="a00138.html#a18e094dcda0b9ef0ff3393d8bd905240"/>
+                <topic label="dds_sample_free" href="a00138.html#a42fd38eb9b3daf0c405f49835c4ef35a"/>
+                <topic label="dds_string_alloc" href="a00138.html#abf7aaf0f0e05e402b3dbcaae4a872705"/>
+                <topic label="dds_string_dup" href="a00138.html#a46700fc22382073becf7884691b3435e"/>
+                <topic label="dds_string_free" href="a00138.html#a006042ea27e350d40ad28b1ff99aebcb"/>
+              </topic>
+              <topic label="error.h" href="a00139.html">
+                <topic label="DDS_CHECK_EXIT" href="a00139.html#a0f599fb8f3b5f1089a9927e8b1f6ccb0"/>
+                <topic label="DDS_CHECK_FAIL" href="a00139.html#abe0099fece0e17dff91f46d55930bd09"/>
+                <topic label="DDS_CHECK_REPORT" href="a00139.html#a6e7559136189aca379c443460f671307"/>
+                <topic label="DDS_ERR_CHECK" href="a00139.html#aff0bfcdacb703941a2eb7980f7ad8912"/>
+                <topic label="dds_err_minor" href="a00139.html#afa7cfcec566201f9594353f7604c962c"/>
+                <topic label="DDS_ERR_MINOR_MASK" href="a00139.html#a4c6df8b9c257c445f2a1a331b91f6216"/>
+                <topic label="DDS_ERR_MOD_MASK" href="a00139.html#a41cc24febf85af981cd26f69c7f08d69"/>
+                <topic label="dds_err_no" href="a00139.html#a97b61dbb481841fcb951c9749a6a5d8d"/>
+                <topic label="DDS_ERR_NO_MASK" href="a00139.html#a67ff1a1770289a992320c6cee3eb2886"/>
+                <topic label="DDS_EXPORT" href="a00139.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+                <topic label="DDS_FAIL" href="a00139.html#aea66f3f4b7d564328fdcd7117d3faea0"/>
+                <topic label="DDS_INT_TO_STRING" href="a00139.html#a71861504a1f23bedcfc2463f8abd0279"/>
+                <topic label="DDS_RETCODE_ALREADY_DELETED" href="a00139.html#a624f993b4a809761fab05dc02afcb394"/>
+                <topic label="DDS_RETCODE_BAD_PARAMETER" href="a00139.html#a2689172101d347dba50eb8ecf4821247"/>
+                <topic label="DDS_RETCODE_ERROR" href="a00139.html#ab8a0b950e6ed0199a4f8a45da9925fbf"/>
+                <topic label="DDS_RETCODE_ILLEGAL_OPERATION" href="a00139.html#a19bc287812e8631f97ccc2acdd4087be"/>
+                <topic label="DDS_RETCODE_IMMUTABLE_POLICY" href="a00139.html#a97605fd5f2e6f6b6e8a063a6dc2ebb7c"/>
+                <topic label="DDS_RETCODE_INCONSISTENT_POLICY" href="a00139.html#a5828ddf306fbe01e5054fe77066ba28e"/>
+                <topic label="DDS_RETCODE_NO_DATA" href="a00139.html#a4c2e9c61f28d043e6226ebd6022a76b9"/>
+                <topic label="DDS_RETCODE_NOT_ENABLED" href="a00139.html#ae81328f326c4367655fd88ac16ab20f5"/>
+                <topic label="DDS_RETCODE_OK" href="a00139.html#ab2d36bd90a788695468288329986e30c"/>
+                <topic label="DDS_RETCODE_OUT_OF_RESOURCES" href="a00139.html#a1490662cf1c462a79190747ba0ae0e4a"/>
+                <topic label="DDS_RETCODE_PRECONDITION_NOT_MET" href="a00139.html#a9f01b0f24722f0787c39442563531629"/>
+                <topic label="DDS_RETCODE_TIMEOUT" href="a00139.html#aae7fd57c05d4b884ce24a8d3197264b0"/>
+                <topic label="DDS_RETCODE_UNSUPPORTED" href="a00139.html#aff391b4aa37fb3f3872fb6349daccfb4"/>
+                <topic label="DDS_SUCCESS" href="a00139.html#aca8994010d23258376d8196828a502f2"/>
+                <topic label="DDS_TO_STRING" href="a00139.html#a4dc0171263f34853f10c84b4c16e3dc3"/>
+                <topic label="dds_fail_fn" href="a00139.html#a3475d5cc13e4533fd3447628f3db524b"/>
+                <topic label="dds_err_check" href="a00139.html#a9f8056368e19c0ed3a6b13cfa9a864b6"/>
+                <topic label="dds_err_mod_str" href="a00139.html#aaf3b30f7b732a8dc2d45846fda2f8af1"/>
+                <topic label="dds_err_str" href="a00139.html#a4d6434f523f7286114afb75ea78c8b38"/>
+                <topic label="dds_fail" href="a00139.html#afd94011218b98fa4e67bcca8eb273df5"/>
+                <topic label="dds_fail_get" href="a00139.html#ada49aae150e5dd7e1e287d7383000588"/>
+                <topic label="dds_fail_set" href="a00139.html#a31b47db4d4e354cecbfadc62ec9cc53e"/>
+              </topic>
+              <topic label="impl.h" href="a00140.html">
+                <topic label="dds_condition_seq" href="a00114.html">
+                  <topic label="_buffer" href="a00114.html#a205719e35f78484ab9a418d850095b20"/>
+                  <topic label="_length" href="a00114.html#aedee35619559fc326af40ef15a1d44d9"/>
+                  <topic label="_release" href="a00114.html#aae6bbf5d16c524ad38f9ea3db888f3fc"/>
+                </topic>
+                <topic label="dds_topic_descriptor_t" href="a00133.html">
+                  <topic label="arg" href="a00133.html#a26491c74104f406e82264e729d423454"/>
+                  <topic label="destructor" href="a00133.html#a799e550f94ad13b730f0bcecfab9e522"/>
+                  <topic label="register_type" href="a00133.html#a4360582bb4c2351e907f68f5e3411093"/>
+                  <topic label="size" href="a00133.html#a6e4cebb5a1fb5783f1e83dfff4154a5e"/>
+                  <topic label="type_name" href="a00133.html#a5f6b89e56f8e4536f4f8353d26f24997"/>
+                </topic>
+                <topic label="DDS_ALIVE_INSTANCE_STATE" href="a00140.html#a49ffb616400230ddec0977634861eea2"/>
+                <topic label="DDS_ANY_INSTANCE_STATE" href="a00140.html#a300c5bf2a8d288b7cc5813b97e097693"/>
+                <topic label="DDS_ANY_SAMPLE_STATE" href="a00140.html#a5e04489490ba7af47777a324003d7b1e"/>
+                <topic label="DDS_ANY_STATE" href="a00140.html#ae8c120921e70d808d411246131cd8596"/>
+                <topic label="DDS_ANY_VIEW_STATE" href="a00140.html#a5c19adef721389d74f6871d43849e588"/>
+                <topic label="DDS_DOMAIN_DEFAULT" href="a00140.html#a8939c3899588c99806b7bd7cf62181e5"/>
+                <topic label="DDS_HANDLE_NIL" href="a00140.html#a9170b472f7ae56323bf23dbcda606716"/>
+                <topic label="DDS_LENGTH_UNLIMITED" href="a00140.html#a1acaf7769af1917359471d007594328c"/>
+                <topic label="DDS_NEW_VIEW_STATE" href="a00140.html#ae340e1814d006f40b2ca474dcddb7f20"/>
+                <topic label="DDS_NOT_ALIVE_DISPOSED_INSTANCE_STATE" href="a00140.html#a8c03ae9985cae84d2dfdec294895fac7"/>
+                <topic label="DDS_NOT_ALIVE_NO_WRITERS_INSTANCE_STATE" href="a00140.html#aee526d254d9d80a7d24ab99a19f8ece9"/>
+                <topic label="DDS_NOT_NEW_VIEW_STATE" href="a00140.html#add16f326b18a0c7cf4e0b094c4fcf886"/>
+                <topic label="DDS_NOT_READ_SAMPLE_STATE" href="a00140.html#ab9bb2277cce867964e06c119e87dda03"/>
+                <topic label="DDS_NOT_REJECTED" href="a00140.html#a17e8263e49baeb57793bd18bf4dd2101"/>
+                <topic label="DDS_READ_SAMPLE_STATE" href="a00140.html#a8bcc3b3be2b17f0d7f19a61fb5b82cfe"/>
+                <topic label="DDS_REJECTED_BY_INSTANCES_LIMIT" href="a00140.html#a2b93e04471498773d733b78fc9657739"/>
+                <topic label="DDS_REJECTED_BY_SAMPLES_LIMIT" href="a00140.html#ae5075f711af8ab6dc3d270727a58aedf"/>
+                <topic label="DDS_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT" href="a00140.html#ab68929769a3178783e26727e26fae438"/>
+                <topic label="dds_condition_t" href="a00140.html#a2e9d4c395e8d0f2f77965277c28661b1"/>
+                <topic label="dds_domainid_t" href="a00140.html#aa5d96fb7c69c5503252549cd415d4582"/>
+                <topic label="dds_entity_t" href="a00140.html#a094d41ef43bc4d07533c6200f6353937"/>
+                <topic label="dds_instance_handle_t" href="a00140.html#a004163125a23f123c14cedbe5a237906"/>
+                <topic label="dds_listener_t" href="a00140.html#a7396f0b326560c36d1dcdeb30c54ea42"/>
+                <topic label="dds_topic_type_destructor" href="a00140.html#a40e3530ea87a6dcae1459c745ec8ec31"/>
+                <topic label="dds_topic_type_registration" href="a00140.html#abe506cd6915a78cba6ccb44b8c42e2cb"/>
+                <topic label="dds_waitset_t" href="a00140.html#ae4e84c480243f54d38e7e6d820e1f83e"/>
+              </topic>
+              <topic label="qos.h" href="a00141.html">
+                <topic label="dds_history_qospolicy_t" href="a00115.html">
+                  <topic label="depth" href="a00115.html#a69c0478389057b2b3230995aa4562a45"/>
+                  <topic label="kind" href="a00115.html#af290a32ffd081db7a54662bc4fc8bafc"/>
+                </topic>
+                <topic label="dds_resource_limits_qospolicy_t" href="a00127.html">
+                  <topic label="max_instances" href="a00127.html#a2def7e6f23d89b61e5752d1bc44ec3cf"/>
+                  <topic label="max_samples" href="a00127.html#a2c6e8658a275f8d075cd18df0ffc617e"/>
+                  <topic label="max_samples_per_instance" href="a00127.html#ae204de69ba76fa16907f353f57dde8e4"/>
+                </topic>
+                <topic label="DDS_DEADLINE_QOS_POLICY_ID" href="a00141.html#ade3cb632ec0d1b4fddca19c802c93f96"/>
+                <topic label="DDS_DESTINATIONORDER_QOS_POLICY_ID" href="a00141.html#a9cbdee30fbd9b3f6940ea256faa2a394"/>
+                <topic label="DDS_DURABILITY_QOS_POLICY_ID" href="a00141.html#ab977b7fe5f35cabd9319c734c75b714a"/>
+                <topic label="DDS_DURABILITYSERVICE_QOS_POLICY_ID" href="a00141.html#abf27e495a8a5b80619070c27af6e4a3a"/>
+                <topic label="DDS_ENTITYFACTORY_QOS_POLICY_ID" href="a00141.html#a4b60cc0b953251ed0b0be92368596edb"/>
+                <topic label="DDS_EXPORT" href="a00141.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+                <topic label="DDS_GROUPDATA_QOS_POLICY_ID" href="a00141.html#afd0d47fbcd51baee2cdb365efe207ded"/>
+                <topic label="DDS_HISTORY_QOS_POLICY_ID" href="a00141.html#a94956602f3e26bb4dd37113cf4f44af1"/>
+                <topic label="DDS_INVALID_QOS_POLICY_ID" href="a00141.html#aea87ff7c1d35b16684630ba062b9fb03"/>
+                <topic label="DDS_LATENCYBUDGET_QOS_POLICY_ID" href="a00141.html#a6beb2a2258c00e5d7e67fbedcb5e4a39"/>
+                <topic label="DDS_LIFESPAN_QOS_POLICY_ID" href="a00141.html#a82331b1d8a41f2afd8c5353a6e965a0f"/>
+                <topic label="DDS_LIVELINESS_QOS_POLICY_ID" href="a00141.html#a067b11bc4e56255732317fbd8d55c850"/>
+                <topic label="DDS_OWNERSHIP_QOS_POLICY_ID" href="a00141.html#a1d2a0241ffc6ebc0405434621cb74e37"/>
+                <topic label="DDS_OWNERSHIPSTRENGTH_QOS_POLICY_ID" href="a00141.html#a61634dd293b2b90277c9f787851f668b"/>
+                <topic label="DDS_PARTITION_QOS_POLICY_ID" href="a00141.html#ac6c9d993f82387c76d8c711e2c68a158"/>
+                <topic label="DDS_PRESENTATION_QOS_POLICY_ID" href="a00141.html#a9c0ad441468212f279cc49cfa898e38a"/>
+                <topic label="DDS_READERDATALIFECYCLE_QOS_POLICY_ID" href="a00141.html#a1a764eb7672a0e25babd2804a709d44e"/>
+                <topic label="DDS_RELIABILITY_QOS_POLICY_ID" href="a00141.html#abadb45b92bed1a3ec42f9bd5642c96a3"/>
+                <topic label="DDS_RESOURCELIMITS_QOS_POLICY_ID" href="a00141.html#a26643d387c75a64f73e4687022fa6b55"/>
+                <topic label="DDS_TIMEBASEDFILTER_QOS_POLICY_ID" href="a00141.html#a100707fe99c438aaa2096fe02cf2df2e"/>
+                <topic label="DDS_TOPICDATA_QOS_POLICY_ID" href="a00141.html#a401e10afee6d3d65b86226d43fcabd8e"/>
+                <topic label="DDS_TRANSPORTPRIORITY_QOS_POLICY_ID" href="a00141.html#a3efb456686f5cb00e5b2e49d3ca6de4c"/>
+                <topic label="DDS_USERDATA_QOS_POLICY_ID" href="a00141.html#acd08acd00815f2d789bd0bb346c5f251"/>
+                <topic label="DDS_WRITERDATALIFECYCLE_QOS_POLICY_ID" href="a00141.html#a23d94f9a45647a34bfbbb14639c75d07"/>
+                <topic label="dds_qos_t" href="a00141.html#afbe7f1c1e67fb6c01c85611ca5090340"/>
+                <topic label="dds_destination_order_kind_t" href="a00141.html#a14153745c26392cca8ffa9bea684bfee">
+                  <topic label="DDS_DESTINATIONORDER_BY_RECEPTION_TIMESTAMP" href="a00141.html#a14153745c26392cca8ffa9bea684bfeea6369a7acd43706b090a026ebc842bb58"/>
+                  <topic label="DDS_DESTINATIONORDER_BY_SOURCE_TIMESTAMP" href="a00141.html#a14153745c26392cca8ffa9bea684bfeea01e556545289f3f3657b0f9f08e65427"/>
+                </topic>
+                <topic label="dds_durability_kind_t" href="a00141.html#a91a33a11d0ec7275d19b42d513f55002">
+                  <topic label="DDS_DURABILITY_VOLATILE" href="a00141.html#a91a33a11d0ec7275d19b42d513f55002a3dbe2904846b3b0fe3d91666a7d68734"/>
+                  <topic label="DDS_DURABILITY_TRANSIENT_LOCAL" href="a00141.html#a91a33a11d0ec7275d19b42d513f55002af8707c032253e97b131505bbd5754638"/>
+                  <topic label="DDS_DURABILITY_TRANSIENT" href="a00141.html#a91a33a11d0ec7275d19b42d513f55002a7b058634864e4e817d904760610e106f"/>
+                  <topic label="DDS_DURABILITY_PERSISTENT" href="a00141.html#a91a33a11d0ec7275d19b42d513f55002aa338e3c5e5b840c19e6c08c6068a2e9e"/>
+                </topic>
+                <topic label="dds_history_kind_t" href="a00141.html#a82527c200d78f04906c1bf512ca3e753">
+                  <topic label="DDS_HISTORY_KEEP_LAST" href="a00141.html#a82527c200d78f04906c1bf512ca3e753a27e1440a886825de67d881ee92384b7b"/>
+                  <topic label="DDS_HISTORY_KEEP_ALL" href="a00141.html#a82527c200d78f04906c1bf512ca3e753af39a22d946fe19894b4df289fe4bc36c"/>
+                </topic>
+                <topic label="dds_liveliness_kind_t" href="a00141.html#a83a05450dcaf33317f8136a1877a9802">
+                  <topic label="DDS_LIVELINESS_AUTOMATIC" href="a00141.html#a83a05450dcaf33317f8136a1877a9802aedaddb1d2490fcce61b77e4110316808"/>
+                  <topic label="DDS_LIVELINESS_MANUAL_BY_PARTICIPANT" href="a00141.html#a83a05450dcaf33317f8136a1877a9802a0fc35c8840f4059df59e10df643d6938"/>
+                  <topic label="DDS_LIVELINESS_MANUAL_BY_TOPIC" href="a00141.html#a83a05450dcaf33317f8136a1877a9802a9bb2073222dacfe262ea5a90a3b2d3b0"/>
+                </topic>
+                <topic label="dds_ownership_kind_t" href="a00141.html#a9bbec53bf05cdd758bbde32e5cfbb196">
+                  <topic label="DDS_OWNERSHIP_SHARED" href="a00141.html#a9bbec53bf05cdd758bbde32e5cfbb196aa46a6cc0efe2ea2925bb78692b86fcab"/>
+                  <topic label="DDS_OWNERSHIP_EXCLUSIVE" href="a00141.html#a9bbec53bf05cdd758bbde32e5cfbb196adfe663be4cca7c5030760df5a30284c7"/>
+                </topic>
+                <topic label="dds_presentation_access_scope_kind_t" href="a00141.html#a20c97bbee288b66c95ca2835e647c8a8">
+                  <topic label="DDS_PRESENTATION_INSTANCE" href="a00141.html#a20c97bbee288b66c95ca2835e647c8a8ad2d70d31c797f3f1a59cc5a5c56e2ae5"/>
+                  <topic label="DDS_PRESENTATION_TOPIC" href="a00141.html#a20c97bbee288b66c95ca2835e647c8a8a486a06ccf47fae69c9347767e0036507"/>
+                  <topic label="DDS_PRESENTATION_GROUP" href="a00141.html#a20c97bbee288b66c95ca2835e647c8a8af67f594f8b8a2afa18523416d8250971"/>
+                </topic>
+                <topic label="dds_reliability_kind_t" href="a00141.html#ae9adf4448571078106650bbf775a99aa">
+                  <topic label="DDS_RELIABILITY_BEST_EFFORT" href="a00141.html#ae9adf4448571078106650bbf775a99aaad96b79bf383d04944ea71ea396811f43"/>
+                  <topic label="DDS_RELIABILITY_RELIABLE" href="a00141.html#ae9adf4448571078106650bbf775a99aaaf5eb376832afbdb96dff1b6c11aa9495"/>
+                </topic>
+                <topic label="dds_get_default_participant_qos" href="a00141.html#a98ae8d0a70045d3cfd7ccb12fccd09e2"/>
+                <topic label="dds_get_default_publisher_qos" href="a00141.html#a8e0caf18297c4d283953f35e14762b84"/>
+                <topic label="dds_get_default_reader_qos" href="a00141.html#a4848088c6c574d25ca8705cdbbf2cf54"/>
+                <topic label="dds_get_default_subscriber_qos" href="a00141.html#a11d93fa4375ebb385d35779a6ea17add"/>
+                <topic label="dds_get_default_topic_qos" href="a00141.html#adff08ea4613527194781b8afc676f29e"/>
+                <topic label="dds_get_default_writer_qos" href="a00141.html#aaaec867c97024d2568154a6fce173ff6"/>
+                <topic label="dds_qget_deadline" href="a00141.html#a8f923447272d536a6ca9ffa81cb40db6"/>
+                <topic label="dds_qget_destination_order" href="a00141.html#a2911f7e3b12b0041b22effacdd0934f7"/>
+                <topic label="dds_qget_durability" href="a00141.html#ab2980b46e108c896e4dbb577c24acc8b"/>
+                <topic label="dds_qget_durability_service" href="a00141.html#ac81eb20b7800290cce566d7bb08a738b"/>
+                <topic label="dds_qget_groupdata" href="a00141.html#a38d969f8552426b3ec0fd4f341db983d"/>
+                <topic label="dds_qget_history" href="a00141.html#a2c1436d88bbb0cc3115c18d845d51802"/>
+                <topic label="dds_qget_latency_budget" href="a00141.html#a7244bfbe8eed7b9e5cc244a3610031c7"/>
+                <topic label="dds_qget_lifespan" href="a00141.html#a2876b6b63b51efccc625327aa4848efe"/>
+                <topic label="dds_qget_liveliness" href="a00141.html#a7bc2ad524e79498d75a193bab57f3832"/>
+                <topic label="dds_qget_ownership" href="a00141.html#a324d1243ac00614461aeec12586ddcf9"/>
+                <topic label="dds_qget_ownership_strength" href="a00141.html#a032a09ecc9562032396721574e9582aa"/>
+                <topic label="dds_qget_partition" href="a00141.html#af5c1624b761e8b7c174381e569c9d5f8"/>
+                <topic label="dds_qget_presentation" href="a00141.html#a629604561140d6e1aba571a339dbd374"/>
+                <topic label="dds_qget_reader_data_lifecycle" href="a00141.html#a9e06539283277f4e7732337a7a494db5"/>
+                <topic label="dds_qget_reliability" href="a00141.html#a7658f5a3bc78d496f8fb4ade8ec0b780"/>
+                <topic label="dds_qget_resource_limits" href="a00141.html#aa1eac95a990d5ac79d7e40e186490401"/>
+                <topic label="dds_qget_time_based_filter" href="a00141.html#a11fb9bb689c63530b5e7dcdb2b0fc3a7"/>
+                <topic label="dds_qget_topicdata" href="a00141.html#acd81efaf7db00bae05e82becc6da6495"/>
+                <topic label="dds_qget_transport_priority" href="a00141.html#ad6d46706533bc8229ae12b43060d5156"/>
+                <topic label="dds_qget_userdata" href="a00141.html#a0efabbba65a19d560e8c8fe5bba413a6"/>
+                <topic label="dds_qget_writer_data_lifecycle" href="a00141.html#a927ef2e9a8e68b879a11f548dfba33d7"/>
+                <topic label="dds_qos_copy" href="a00141.html#a54a33ea1c62a4f779f80609fa2d9ea2b"/>
+                <topic label="dds_qos_create" href="a00141.html#a9b543c6388913df1ab2392930a38b1f6"/>
+                <topic label="dds_qos_delete" href="a00141.html#a48b5ae6a6c0ebc2c6d7d83916f7ef5ce"/>
+                <topic label="dds_qos_merge" href="a00141.html#a30ec2bc5b36a45584fa9955eae610c27"/>
+                <topic label="dds_qos_reset" href="a00141.html#a25b67fcfc65929bb041b0aef4272740f"/>
+                <topic label="dds_qset_deadline" href="a00141.html#a13ae57563153f42972c22062cf8279af"/>
+                <topic label="dds_qset_destination_order" href="a00141.html#a66dee9461be94f33619bd8fa8ef25be4"/>
+                <topic label="dds_qset_durability" href="a00141.html#a755cb2b99059cc3802af89cb43dfb703"/>
+                <topic label="dds_qset_durability_service" href="a00141.html#ae825d253d4afe1191b17abd9245e2ff0"/>
+                <topic label="dds_qset_groupdata" href="a00141.html#a95c3a4a903adf80d05c16b356113e9f6"/>
+                <topic label="dds_qset_history" href="a00141.html#a0ce69204ec53cd4553d3d6fa445aa485"/>
+                <topic label="dds_qset_latency_budget" href="a00141.html#aa352a1a781ea7f3d6e870c4bda6775c8"/>
+                <topic label="dds_qset_lifespan" href="a00141.html#a5685d8c1877dbce47bad9abdaf41acce"/>
+                <topic label="dds_qset_liveliness" href="a00141.html#a008cb00fc9f7d877d169979882ea21c8"/>
+                <topic label="dds_qset_ownership" href="a00141.html#a2168221825cb6ff7a5c34a0476a42dbb"/>
+                <topic label="dds_qset_ownership_strength" href="a00141.html#a2b0e8df38c6786cba2a87ac10772fe6d"/>
+                <topic label="dds_qset_partition" href="a00141.html#a4de2c8a9fab864cf8fb487fcdaac9041"/>
+                <topic label="dds_qset_presentation" href="a00141.html#a4bef1fa523dc84b53da7091afa9dc5a3"/>
+                <topic label="dds_qset_reader_data_lifecycle" href="a00141.html#af2cefa974cfcbbec7727268ab4cf8095"/>
+                <topic label="dds_qset_reliability" href="a00141.html#a57a87b5a9d7f0ae5397160251184643d"/>
+                <topic label="dds_qset_resource_limits" href="a00141.html#a174803ad379e8c6d6aa03389c83bb645"/>
+                <topic label="dds_qset_time_based_filter" href="a00141.html#a8e9a927512d610b8e72f32c4d3b9177b"/>
+                <topic label="dds_qset_topicdata" href="a00141.html#aa4657a902acb79ef076824329a245dff"/>
+                <topic label="dds_qset_transport_priority" href="a00141.html#a31fb726dd59544f3a372183e22256960"/>
+                <topic label="dds_qset_userdata" href="a00141.html#aa4ffba8522ed5ee0662336c233d95193"/>
+                <topic label="dds_qset_writer_data_lifecycle" href="a00141.html#a9d9ef2bbbf1e9dbc89a60feba2b75bbf"/>
+              </topic>
+              <topic label="restrict.h" href="a00142.html">
+                <topic label="restrict" href="a00142.html#a080abdcb9c02438f1cd2bb707af25af8"/>
+              </topic>
+              <topic label="status.h" href="a00143.html">
+                <topic label="dds_inconsistent_topic_status_t" href="a00116.html">
+                  <topic label="total_count" href="a00116.html#afbb45290fbeb9c1ce6b3f201aba2dd62"/>
+                  <topic label="total_count_change" href="a00116.html#a359a9561d70acb9d7accdad81208539a"/>
+                </topic>
+                <topic label="dds_liveliness_changed_status_t" href="a00117.html">
+                  <topic label="alive_count" href="a00117.html#a693451286d70e6f882f85e88b0dd3dc1"/>
+                  <topic label="alive_count_change" href="a00117.html#a0d47910b366d0f3b4812e7db6a49639a"/>
+                  <topic label="last_publication_handle" href="a00117.html#acddcf7a22ecdc8d4c2d33b858bd7b2ab"/>
+                  <topic label="not_alive_count" href="a00117.html#a1ba86a65626263a8bbcf2ec83aaf809e"/>
+                  <topic label="not_alive_count_change" href="a00117.html#a1259f99b0f427be467174ce46b78cdb0"/>
+                </topic>
+                <topic label="dds_liveliness_lost_status_t" href="a00118.html">
+                  <topic label="total_count" href="a00118.html#ac866e963d635e54d1743e74dec8d7b41"/>
+                  <topic label="total_count_change" href="a00118.html#acc9a937f013c24d2adf869d1a3daaf2f"/>
+                </topic>
+                <topic label="dds_offered_deadline_missed_status_t" href="a00119.html">
+                  <topic label="last_instance_handle" href="a00119.html#ae56a6c4e81526499ca23de50bdc1e179"/>
+                  <topic label="total_count" href="a00119.html#a7828e989bb1e82a33cb2b1b6d3b79279"/>
+                  <topic label="total_count_change" href="a00119.html#a8e6b2f6f773ee18b4fe3eb01863c964c"/>
+                </topic>
+                <topic label="dds_offered_incompatible_qos_status_t" href="a00120.html">
+                  <topic label="last_policy_id" href="a00120.html#a4faf091dbc19c0c90f99b23dccc0f30f"/>
+                  <topic label="total_count" href="a00120.html#ab1793f91e8adc526fa2a16dd9342c9a1"/>
+                  <topic label="total_count_change" href="a00120.html#a33ee94e0c2c8362be8583a8567de263a"/>
+                </topic>
+                <topic label="dds_participantlistener_t" href="a00121.html">
+                  <topic label="publisherlistener" href="a00121.html#a81e2a26e18c31c2d2ffffdc8200a5ac8"/>
+                  <topic label="subscriberlistener" href="a00121.html#a5daee319b7b2b5c366290b222751ec27"/>
+                  <topic label="topiclistener" href="a00121.html#af75f6c18d3e2f0b6ed918eceb7919743"/>
+                </topic>
+                <topic label="dds_publication_matched_status_t" href="a00122.html">
+                  <topic label="current_count" href="a00122.html#a3dd0e6d56480846f4b54e66965f22e1d"/>
+                  <topic label="current_count_change" href="a00122.html#ae921f139d43d0164682f987ced889a0e"/>
+                  <topic label="last_subscription_handle" href="a00122.html#a4ec55eb6d1790b9acfeb8f195b4655b4"/>
+                  <topic label="total_count" href="a00122.html#ae0949124fcbe67602fbe6ebcd1132635"/>
+                  <topic label="total_count_change" href="a00122.html#a7fc4ea6adc37c56de634365ced798cc7"/>
+                </topic>
+                <topic label="dds_publisherlistener_t" href="a00123.html">
+                  <topic label="writerlistener" href="a00123.html#a584f1e3dd34f459477e45cf34d2c5d82"/>
+                </topic>
+                <topic label="dds_readerlistener_t" href="a00124.html">
+                  <topic label="on_data_available" href="a00124.html#a9c6a19f29aca0700d741d76b2a5e5689"/>
+                  <topic label="on_liveliness_changed" href="a00124.html#a5f4c6bfd96574d6599fdfd351928e982"/>
+                  <topic label="on_requested_deadline_missed" href="a00124.html#a2dcb225a3dbcda8967de9f837bfe3b99"/>
+                  <topic label="on_requested_incompatible_qos" href="a00124.html#abd8fc8760c27801bf04f316c100d02c0"/>
+                  <topic label="on_sample_lost" href="a00124.html#a8741e51886fbde4eb1566ba044ecb761"/>
+                  <topic label="on_sample_rejected" href="a00124.html#af6c811def5ed2b8933768de8b9045c18"/>
+                  <topic label="on_subscription_matched" href="a00124.html#a238466d667222dd1c99ff59fd756d722"/>
+                </topic>
+                <topic label="dds_requested_deadline_missed_status_t" href="a00125.html">
+                  <topic label="last_instance_handle" href="a00125.html#a8d1937e085c3b7dbb264aa10432d5002"/>
+                  <topic label="total_count" href="a00125.html#aaba530f74db36fa2ee637c5b92903b0f"/>
+                  <topic label="total_count_change" href="a00125.html#ad7fd846d0b70470dc4fa13ed179a99ab"/>
+                </topic>
+                <topic label="dds_requested_incompatible_qos_status_t" href="a00126.html">
+                  <topic label="last_policy_id" href="a00126.html#ae855470c554da8f99b6445c1fb09aa95"/>
+                  <topic label="total_count" href="a00126.html#a35f58e6d9ac2f7bad212f48899a3b08e"/>
+                  <topic label="total_count_change" href="a00126.html#af926811d3ce49ffa7f02a8b5e1f0b16a"/>
+                </topic>
+                <topic label="dds_sample_lost_status_t" href="a00129.html">
+                  <topic label="total_count" href="a00129.html#a6ccf69578e08486b00f3b309524d1426"/>
+                  <topic label="total_count_change" href="a00129.html#ac48868c307809e81eb1657348c453978"/>
+                </topic>
+                <topic label="dds_sample_rejected_status_t" href="a00130.html">
+                  <topic label="last_instance_handle" href="a00130.html#aaa512496ebe0769d0f2e85bb63cbed7d"/>
+                  <topic label="last_reason" href="a00130.html#a7dedfbf579439ef0eb7f06c8abd570f1"/>
+                  <topic label="total_count" href="a00130.html#af80e6f1a24a5235a806307a444f9113f"/>
+                  <topic label="total_count_change" href="a00130.html#a89a73306a6711ea2fd5a6c36d1e37eb5"/>
+                </topic>
+                <topic label="dds_subscriberlistener_t" href="a00131.html">
+                  <topic label="on_data_readers" href="a00131.html#a97d9ffc454a04e77995416e05bb9db0a"/>
+                  <topic label="readerlistener" href="a00131.html#aea6f3b9178014d3578dbd897e85eb1f7"/>
+                </topic>
+                <topic label="dds_subscription_matched_status_t" href="a00132.html">
+                  <topic label="current_count" href="a00132.html#afc7fcbeec286c66bf550ffff0cf1a9dc"/>
+                  <topic label="current_count_change" href="a00132.html#a9b1d2b6a868d1e16b140817fac39687f"/>
+                  <topic label="last_publication_handle" href="a00132.html#a35953b28b4ffc126625e8ff01a42b3a2"/>
+                  <topic label="total_count" href="a00132.html#a16f53d323f2df509f52a58de53bd6b70"/>
+                  <topic label="total_count_change" href="a00132.html#a870e64da229418935fbe0405c47f1757"/>
+                </topic>
+                <topic label="dds_topiclistener_t" href="a00134.html">
+                  <topic label="on_inconsistent_topic" href="a00134.html#ae9e40dc2e16c927afca597e973cc4b8a"/>
+                </topic>
+                <topic label="dds_writerlistener_t" href="a00135.html">
+                  <topic label="on_liveliness_lost" href="a00135.html#ac5987edd591fef59c5f3a06b1cb7324e"/>
+                  <topic label="on_offered_deadline_missed" href="a00135.html#a0a64b045d207cc2b7d7c4039f4eabb15"/>
+                  <topic label="on_offered_incompatible_qos" href="a00135.html#addd893b1a20753501c9aa6322c1a3fd5"/>
+                  <topic label="on_publication_matched" href="a00135.html#a40c6a0ac4c21fffd24012ea280700d61"/>
+                </topic>
+                <topic label="DDS_EXPORT" href="a00143.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+                <topic label="dds_sample_rejected_status_kind" href="a00143.html#af0b69a9cb68027e5b84a509b8809c5ed">
+                  <topic label="DDS_SRST_READ" href="a00143.html#af0b69a9cb68027e5b84a509b8809c5eda83c6e4ae84658fcf4f669a5b9304328d"/>
+                  <topic label="DDS_SRST_REJECTED_BY_INSTANCES_LIMIT" href="a00143.html#af0b69a9cb68027e5b84a509b8809c5eda6687eb610baed28d4e42e0104faf827b"/>
+                  <topic label="DDS_SRST_REJECTED_BY_SAMPLES_LIMIT" href="a00143.html#af0b69a9cb68027e5b84a509b8809c5edaba3c1284c056a78dbe3af87c56700396"/>
+                  <topic label="DDS_SRST_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT" href="a00143.html#af0b69a9cb68027e5b84a509b8809c5eda95e4e2fab9076251c3bc917718e9487f"/>
+                </topic>
+                <topic label="dds_get_inconsistent_topic_status" href="a00143.html#a142da90aa52e32ad0a8f958db0934f94"/>
+                <topic label="dds_get_liveliness_changed_status" href="a00143.html#a5ddccdca3a19e096b20225827d9c92fb"/>
+                <topic label="dds_get_liveliness_lost_status" href="a00143.html#a594ce608604a546f77d93ee90e2fedb0"/>
+                <topic label="dds_get_offered_deadline_missed_status" href="a00143.html#a5a5ae646734ae6c92863e004d613afd4"/>
+                <topic label="dds_get_offered_incompatible_qos_status" href="a00143.html#a87b988f5d59901fe1e5fa96ec651c4ec"/>
+                <topic label="dds_get_publication_matched_status" href="a00143.html#a96123ea8b2c139fc39f0724e8c34a021"/>
+                <topic label="dds_get_requested_deadline_missed_status" href="a00143.html#a4b379929ffc02a99bab1e7b00c152d97"/>
+                <topic label="dds_get_requested_incompatible_qos_status" href="a00143.html#a8d74ea1f239e63bb57eccc5297a3344c"/>
+                <topic label="dds_get_sample_lost_status" href="a00143.html#ac8be746b2b43441054cf0a24b8d7cc63"/>
+                <topic label="dds_get_sample_rejected_status" href="a00143.html#a97222603b5cefeeebdb225714e09b80a"/>
+                <topic label="dds_get_subscription_matched_status" href="a00143.html#ae10e3940aa68d0b0e8a2663e11e170d6"/>
+              </topic>
+              <topic label="time.h" href="a00144.html">
+                <topic label="DDS_EXPORT" href="a00144.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+                <topic label="DDS_INFINITY" href="a00144.html#abf4562ae6cca0e7436a2040533a0e445"/>
+                <topic label="DDS_MSECS" href="a00144.html#aadfeb7174ec95b099ab511b5782abd48"/>
+                <topic label="DDS_NEVER" href="a00144.html#ac9d672d316869193c917a861a6785ac1"/>
+                <topic label="DDS_NSECS_IN_MSEC" href="a00144.html#a1840bf46b54628bac61a5d64ddc7b0c9"/>
+                <topic label="DDS_NSECS_IN_SEC" href="a00144.html#a7c6b2c9e9cf3afa7784058ce6c4e649a"/>
+                <topic label="DDS_NSECS_IN_USEC" href="a00144.html#ae061f54b1d50fd8b37f889b53f44e7bc"/>
+                <topic label="DDS_SECS" href="a00144.html#a0f147fc2bfb578380352309ad3020047"/>
+                <topic label="DDS_USECS" href="a00144.html#aec3ad31be1951d6dd0219081197a4dfa"/>
+                <topic label="dds_duration_t" href="a00144.html#ad39969a6a9b20a12fd4f333d88507d17"/>
+                <topic label="dds_time_t" href="a00144.html#a36be97dbbc6ca456acc79ce5a688fbe4"/>
+                <topic label="dds_sleepfor" href="a00144.html#a59eec2cd9ea0b497be5c9de3f7095084"/>
+                <topic label="dds_sleepuntil" href="a00144.html#a5aeddffe1a30dc38358db461d8983799"/>
+                <topic label="dds_time" href="a00144.html#a9aa475345968cf2e0a91f0d87b9aa981"/>
+              </topic>
+            </topic>
+            <topic label="dds.h" href="a00137.html">
+              <topic label="dds_sample_info_t" href="a00128.html">
+                <topic label="absolute_generation_rank" href="a00128.html#a1292d619bcb719801642c61924160c3c"/>
+                <topic label="disposed_generation_count" href="a00128.html#ab9d1cf3e9d6dc24b8d97c479ec98988a"/>
+                <topic label="generation_rank" href="a00128.html#aa976b7f6c8c1f20f3dda3ffa1b86a56b"/>
+                <topic label="instance_handle" href="a00128.html#a6b088eb465831c946366a8c09ca568f5"/>
+                <topic label="instance_state" href="a00128.html#aaf591903dc992734152ea2649eeb7cc9"/>
+                <topic label="no_writers_generation_count" href="a00128.html#ac219ca34314f6101d168bae4836ee43d"/>
+                <topic label="publication_handle" href="a00128.html#a1e15dfc7aea9b40c00676ab44579d86a"/>
+                <topic label="reception_timestamp" href="a00128.html#abb80c5f0e2a499bc01a7cd95845f0153"/>
+                <topic label="sample_rank" href="a00128.html#a05a9e2119aabf544b148a92c46d236e9"/>
+                <topic label="sample_state" href="a00128.html#ac52d632b0cb77c52eb9fdcf01601bc5b"/>
+                <topic label="source_timestamp" href="a00128.html#a75e5ec68cc99a06fb91c963d8350c21f"/>
+                <topic label="valid_data" href="a00128.html#ac08c4c70375047d6c1a571e19f261fa6"/>
+                <topic label="view_state" href="a00128.html#a785449182f7f3d830903ab53c1c8980c"/>
+              </topic>
+              <topic label="DDS_DATA_AVAILABLE_STATUS" href="a00137.html#a3dbf0808cdf4e2d8c2f8a38cac6e4e79"/>
+              <topic label="DDS_DATA_ON_READERS_STATUS" href="a00137.html#a9d1ca1ac4c5bc82ca39437b3b618e519"/>
+              <topic label="DDS_EXPORT" href="a00137.html#ade1779b7a325b3c53ca2a529a667c1d8"/>
+              <topic label="DDS_INCONSISTENT_TOPIC_STATUS" href="a00137.html#a6be14672910936e1e2650d604a582485"/>
+              <topic label="DDS_LIVELINESS_CHANGED_STATUS" href="a00137.html#a09b20d7750ee291c4bc926423569c2bb"/>
+              <topic label="DDS_LIVELINESS_LOST_STATUS" href="a00137.html#af64301bcc010208fb860aab2309fddd1"/>
+              <topic label="DDS_OFFERED_DEADLINE_MISSED_STATUS" href="a00137.html#af1e4323428b6e4a2669d60850d1a8b32"/>
+              <topic label="DDS_OFFERED_INCOMPATIBLE_QOS_STATUS" href="a00137.html#a5687ef28e046ac80615b85db2f5ba0fd"/>
+              <topic label="DDS_PUBLICATION_MATCHED_STATUS" href="a00137.html#aafc02e17526d8f4af1bc44d979dc88ca"/>
+              <topic label="DDS_REQUESTED_DEADLINE_MISSED_STATUS" href="a00137.html#a2e88c8cf1fac5098d67e05244f69fbfa"/>
+              <topic label="DDS_REQUESTED_INCOMPATIBLE_QOS_STATUS" href="a00137.html#a47aab4cc1f4c074de5c6943e483d95b5"/>
+              <topic label="DDS_SAMPLE_LOST_STATUS" href="a00137.html#af9cc2ffe6edaa8b5948750a958cf9235"/>
+              <topic label="DDS_SAMPLE_REJECTED_STATUS" href="a00137.html#aeb3807755b63517ac681f253a9179a1a"/>
+              <topic label="DDS_SUBSCRIPTION_MATCHED_STATUS" href="a00137.html#a30f700d35561acfa168b34e9919f774a"/>
+              <topic label="dds_attach_t" href="a00137.html#ab6e4443470f6a9ab8652342a893864c1"/>
+              <topic label="dds_querycondition_filter_fn" href="a00137.html#a156a0daf8df2b69e85adce30b0f7659c"/>
+              <topic label="dds_topic_filter_fn" href="a00137.html#a2de8c4cf624d21c03f06394deb80a8d7"/>
+              <topic label="dds_instance_state_t" href="a00137.html#ae3aea17ec096531eceb52403990b5dd3">
+                <topic label="DDS_IST_ALIVE" href="a00137.html#ae3aea17ec096531eceb52403990b5dd3aadc7b190db146c71b994ce906b623471"/>
+                <topic label="DDS_IST_NOT_ALIVE_DISPOSED" href="a00137.html#ae3aea17ec096531eceb52403990b5dd3ad34a82be0a75aa0da2c82a6a0d646a05"/>
+                <topic label="DDS_IST_NOT_ALIVE_NO_WRITERS" href="a00137.html#ae3aea17ec096531eceb52403990b5dd3a391fdc1ea2db385bef4cac74d7fdecff"/>
+              </topic>
+              <topic label="dds_sample_state_t" href="a00137.html#a03dab24ebb5ce0633a97c951a21cc4e1">
+                <topic label="DDS_SST_READ" href="a00137.html#a03dab24ebb5ce0633a97c951a21cc4e1adffe47d879f8a20257b8bdd4cae8dbbe"/>
+                <topic label="DDS_SST_NOT_READ" href="a00137.html#a03dab24ebb5ce0633a97c951a21cc4e1a438a6c282821bfa81167341593a6b2d1"/>
+              </topic>
+              <topic label="dds_view_state_t" href="a00137.html#ae4610d2a5a7cdff16c622d3399ea4bcb">
+                <topic label="DDS_VST_NEW" href="a00137.html#ae4610d2a5a7cdff16c622d3399ea4bcba053e7b1e3721e3126290590d146e0e79"/>
+                <topic label="DDS_VST_OLD" href="a00137.html#ae4610d2a5a7cdff16c622d3399ea4bcba6461295960c54e98367f742e0c5f8b6b"/>
+              </topic>
+              <topic label="dds_condition_delete" href="a00137.html#aca909f2b48bc54622e30dc15bf481750"/>
+              <topic label="dds_condition_triggered" href="a00137.html#a3cddab189f371adefe624e788e068a5b"/>
+              <topic label="dds_domain_default" href="a00137.html#a29d414915b33bd15c70bcc1cd7e06ad1"/>
+              <topic label="dds_entity_delete" href="a00137.html#aa190e5df62680affdeba0d5cd95dcbdc"/>
+              <topic label="dds_fini" href="a00137.html#aaa580e068dac53f8758fb1865cd2dde2"/>
+              <topic label="dds_guard_reset" href="a00137.html#a82c4c1608ade3c001edc61ffe9089dec"/>
+              <topic label="dds_guard_trigger" href="a00137.html#a3e464d082499adbd6f7e5cbbe1d038f6"/>
+              <topic label="dds_guardcondition_create" href="a00137.html#a55db682654d82f1dee0a19de7084a0df"/>
+              <topic label="dds_init" href="a00137.html#a34647e8768389e5af040b4ebe054809c"/>
+              <topic label="dds_instance_dispose" href="a00137.html#af6554e5fffdc40e1136b85fbbea76133"/>
+              <topic label="dds_instance_dispose_ts" href="a00137.html#a96aabb97bdd986db5f8e0f30b689f4f3"/>
+              <topic label="dds_instance_get_key" href="a00137.html#ad4171b3d93f510c49258cf1549d71708"/>
+              <topic label="dds_instance_lookup" href="a00137.html#a4103c0c19fc75966ab4942c44a87663a"/>
+              <topic label="dds_instance_register" href="a00137.html#ac688e0fc94b83e043494fbeac9ce7ca7"/>
+              <topic label="dds_instance_unregister" href="a00137.html#af96b545e11e91c6b8fd2a4266f1adf93"/>
+              <topic label="dds_instance_unregister_ts" href="a00137.html#a103d26933eddeb56daf5c188ffe7b145"/>
+              <topic label="dds_instance_writedispose" href="a00137.html#a1fe0dcd7e6ff7797046bcfc05ecb1aa1"/>
+              <topic label="dds_instance_writedispose_ts" href="a00137.html#ae6d16cef68caaf348c7b18bb034fe48d"/>
+              <topic label="dds_listener_get" href="a00137.html#a453d478c97d2e305a454c9a47c1c99b8"/>
+              <topic label="dds_listener_set" href="a00137.html#a43957a997925ca3542eb6b12c293d513"/>
+              <topic label="dds_participant_create" href="a00137.html#a2f6797525b970cf8880424cec5ae67ad"/>
+              <topic label="dds_participant_get" href="a00137.html#a5588013811eed959607bb73be055b418"/>
+              <topic label="dds_participant_get_domain_id" href="a00137.html#aeee232fbed71a183d397d91b18952f1d"/>
+              <topic label="dds_participant_lookup" href="a00137.html#aa1894a2bc8cc7ad1955f0f1c0bf12769"/>
+              <topic label="dds_publisher_create" href="a00137.html#a6ad946910cb21467777931ae417215c7"/>
+              <topic label="dds_qos_get" href="a00137.html#a5145acb4d4796de27891a2dcfc1a3820"/>
+              <topic label="dds_qos_set" href="a00137.html#a670725e049c4a9247dcc5e8d1f29b8e6"/>
+              <topic label="dds_querycondition_create" href="a00137.html#a36b28891417b35f2dce6993ea5a8b047"/>
+              <topic label="dds_querycondition_create_sql" href="a00137.html#a8410e8f31372dfd47d509e6b9dcc5980"/>
+              <topic label="dds_read" href="a00137.html#ad7520b2e17333c38912f60a81ab29d87"/>
+              <topic label="dds_read_cond" href="a00137.html#a6638821ca34c4d291170df78ef8620ab"/>
+              <topic label="dds_read_instance" href="a00137.html#ae1dd21b3c4702a6eb21dcfe083ce56d9"/>
+              <topic label="dds_read_next" href="a00137.html#a9ea98d2e17c285ec1f5b817a6dd99dab"/>
+              <topic label="dds_readcondition_create" href="a00137.html#a09a2f554de4d501ebfae2cd310300c08"/>
+              <topic label="dds_reader_create" href="a00137.html#afc1265d2d5e6df398c7bc36187984a82"/>
+              <topic label="dds_reader_wait_for_historical_data" href="a00137.html#a4dcf8bbb669b2316dd33ec591f6ac63e"/>
+              <topic label="dds_return_loan" href="a00137.html#ade28ee55dcdc571ad93ddd6721f6e44b"/>
+              <topic label="dds_status_changes" href="a00137.html#aadc42a6b96d410c6fe75eff822da619c"/>
+              <topic label="dds_status_get_enabled" href="a00137.html#a8d77ebaca8233a0fbd8755c8903b86f7"/>
+              <topic label="dds_status_read" href="a00137.html#ad47c9d4ffd67422d5980ee6573f791a8"/>
+              <topic label="dds_status_set_enabled" href="a00137.html#a72baf0c51fc36554143fc450ec23f215"/>
+              <topic label="dds_status_take" href="a00137.html#ab20cdd0cb8fca1dc70419ff854a3de82"/>
+              <topic label="dds_statuscondition_get" href="a00137.html#a27feb088258926f534c56d3a00cbbcb3"/>
+              <topic label="dds_subscriber_create" href="a00137.html#ab0716221d90b51f1fb15ff654c874908"/>
+              <topic label="dds_take" href="a00137.html#ad5b59b25fd974aedb1dbf17cbeb3ef98"/>
+              <topic label="dds_take_cond" href="a00137.html#aaa4485e84e359cd1013949a6c7fe4d1c"/>
+              <topic label="dds_take_instance" href="a00137.html#af415e6377b84925651d7a3932a94822f"/>
+              <topic label="dds_take_next" href="a00137.html#a6a6070dfa28e50477d5241df7df97d40"/>
+              <topic label="dds_thread_fini" href="a00137.html#a3fd0156696da0d2f6201bf28056801aa"/>
+              <topic label="dds_thread_init" href="a00137.html#a78cebe4ebdc19045ec0343aef1619691"/>
+              <topic label="dds_topic_create" href="a00137.html#a5727423d09c80a74a05f74801a06ea3c"/>
+              <topic label="dds_topic_descriptor_create" href="a00137.html#acce21d9b3dd9cc6b3e271764dc63c44b"/>
+              <topic label="dds_topic_descriptor_delete" href="a00137.html#afb9e923bd81eb8b172b80e787a24a117"/>
+              <topic label="dds_topic_find" href="a00137.html#a48e1dae612c0f873902dda76f0d0f96d"/>
+              <topic label="dds_topic_get_filter" href="a00137.html#ab7bf490e1bda9b6e27e0c5db7c46fc75"/>
+              <topic label="dds_topic_get_name" href="a00137.html#aa72e1b9e8974ea8e9ee67220b4f9f0b9"/>
+              <topic label="dds_topic_get_type_name" href="a00137.html#a0dc045a9689669b7f2288402284321bf"/>
+              <topic label="dds_topic_set_filter" href="a00137.html#a30e99add47e3b045c8c9f2420861f398"/>
+              <topic label="dds_waitset_attach" href="a00137.html#a6e7d0e5f80442b1168729dac93760254"/>
+              <topic label="dds_waitset_create" href="a00137.html#af109659c9a7ab9694c5114d6564c8413"/>
+              <topic label="dds_waitset_delete" href="a00137.html#ae152b535e7da582a69b2e304c2e310fa"/>
+              <topic label="dds_waitset_detach" href="a00137.html#ae76d7c7a945ca48e1598ce405c4717f9"/>
+              <topic label="dds_waitset_get_conditions" href="a00137.html#a5a862e907fccd8e870df562c06b92aad"/>
+              <topic label="dds_waitset_wait" href="a00137.html#acd75e8713dac74e30fa3b96fff2323f6"/>
+              <topic label="dds_waitset_wait_until" href="a00137.html#a7ba46f6b242e4eb690e210a05c7ca91b"/>
+              <topic label="dds_write" href="a00137.html#a7403df96cad49fb506618d82c913fad5"/>
+              <topic label="dds_write_flush" href="a00137.html#a7dd414a0ce100cf4d9eb97418e1d260c"/>
+              <topic label="dds_write_ts" href="a00137.html#a2dffc9e6f7fe382d88d6917847595176"/>
+              <topic label="dds_writer_create" href="a00137.html#af9b80e5c159bf9d0f69f018e9ee3e71b"/>
+            </topic>
+          </topic>
+        </topic>
+      </topic>
+    </topic>
+    <topic label="File Members" href="globals.html">
+      <topic label="All" href="globals.html">
+        <topic label="d" href="globals.html"/>
+        <topic label="r" href="globals_0x72.html"/>
+      </topic>
+      <topic label="Functions" href="globals_func.html"/>
+      <topic label="Typedefs" href="globals_type.html"/>
+      <topic label="Enumerations" href="globals_enum.html"/>
+      <topic label="Enumerator" href="globals_eval.html"/>
+      <topic label="Macros" href="globals_defs.html"/>
+    </topic>
+  </topic>
+</toc>
