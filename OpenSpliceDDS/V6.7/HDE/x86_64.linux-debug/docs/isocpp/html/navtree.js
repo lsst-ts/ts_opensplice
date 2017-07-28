@@ -2,54 +2,109 @@ var NAVTREE =
 [
   [ "OpenSplice ISO C++ DCPS", "index.html", [
     [ "ISO/IEC C++ DCPS API", "index.html", "index" ],
-    [ "Release Notes", "a00004.html", [
-      [ "Available in 6.5.1                                                                              ", "a00004.html#release_notes_10", null ],
-      [ "Available in 6.4.3p1                                                                            ", "a00004.html#release_notes_9", null ],
-      [ "Available in 6.4.2p1                                                                            ", "a00004.html#release_notes_8", null ],
-      [ "Available in 6.4.1p1                                                                            ", "a00004.html#release_notes_7", null ],
-      [ "Available in 6.4.0p4                                                                            ", "a00004.html#release_notes_6", [
-        [ "QoS Provider                                                                      ", "a00004.html#release_notes_qosprovider640p4", null ],
-        [ "Shared Samples                                                                     ", "a00004.html#release_notes_sharedsamples640p4", null ]
+    [ "Release Notes", "release_notes.html", [
+      [ "Available in 6.4.0                                                                            ", "release_notes.html#release_notes_5", [
+        [ "New IDL type mapping                                                 ", "release_notes.html#release_notes_newtypes640", null ],
+        [ "Find functions, Built-in topics                                                 ", "release_notes.html#release_notes_findandlookups640", null ],
+        [ "Entity operations                                                                      ", "release_notes.html#release_notes_entity640", null ]
       ] ],
-      [ "Available in 6.4.0                                                                            ", "a00004.html#release_notes_5", [
-        [ "New IDL type mapping                                                 ", "a00004.html#release_notes_newtypes640", null ],
-        [ "Find functions, Built-in topics                                                 ", "a00004.html#release_notes_findandlookups640", null ],
-        [ "Entity operations                                                                      ", "a00004.html#release_notes_entity640", null ]
+      [ "Available in 6.3.2                                                                            ", "release_notes.html#release_notes_4", [
+        [ "Performance enhancements                                                                      ", "release_notes.html#release_notes_performance632", null ],
+        [ "Support for Sun studio                                                                      ", "release_notes.html#release_notes_sunstudio632", null ],
+        [ "Entity operations                                                                      ", "release_notes.html#release_notes_entity632", null ]
       ] ],
-      [ "Available in 6.3.2                                                                            ", "a00004.html#release_notes_4", [
-        [ "Performance enhancements                                                                      ", "a00004.html#release_notes_performance632", null ],
-        [ "Support for Sun studio                                                                      ", "a00004.html#release_notes_sunstudio632", null ],
-        [ "Entity operations                                                                      ", "a00004.html#release_notes_entity632", null ]
+      [ "Available in 6.3.1                                                                            ", "release_notes.html#release_notes_3", [
+        [ "Available Listeners                                                                ", "release_notes.html#release_notes_supported_listeners", null ],
+        [ "Available WaitSet Conditions                                                      ", "release_notes.html#release_notes_supported_waitsets", null ],
+        [ "Filters and Queries                                                              ", "release_notes.html#release_notes_filters_and_queries", null ],
+        [ "DataReader                                                                      ", "release_notes.html#release_notes_datareader631", null ],
+        [ "DataWriter                                                                      ", "release_notes.html#release_notes_datawriter631", null ]
       ] ],
-      [ "Available in 6.3.1                                                                            ", "a00004.html#release_notes_3", [
-        [ "Available Listeners                                                                ", "a00004.html#release_notes_supported_listeners", null ],
-        [ "Available WaitSet Conditions                                                      ", "a00004.html#release_notes_supported_waitsets", null ],
-        [ "Filters and Queries                                                              ", "a00004.html#release_notes_filters_and_queries", null ],
-        [ "DataReader                                                                      ", "a00004.html#release_notes_datareader631", null ],
-        [ "DataWriter                                                                      ", "a00004.html#release_notes_datawriter631", null ]
+      [ "Available in 6.3.0                                                                    ", "release_notes.html#release_notes_2", [
+        [ "Available QoS                                             ", "release_notes.html#release_notes_supported_qos", null ],
+        [ "Provided types                                                                  ", "release_notes.html#release_notes_new_types", null ],
+        [ "Fluent accessors                                                                ", "release_notes.html#release_notes_new_accessors", null ],
+        [ "DataReader                                                                      ", "release_notes.html#release_notes_datareader", null ],
+        [ "DataWriter                                                                      ", "release_notes.html#release_notes_datawriter", null ]
       ] ],
-      [ "Available in 6.3.0                                                                    ", "a00004.html#release_notes_2", [
-        [ "Available QoS                                             ", "a00004.html#release_notes_supported_qos", null ],
-        [ "Provided types                                                                  ", "a00004.html#release_notes_new_types", null ],
-        [ "Fluent accessors                                                                ", "a00004.html#release_notes_new_accessors", null ],
-        [ "DataReader                                                                      ", "a00004.html#release_notes_datareader", null ],
-        [ "DataWriter                                                                      ", "a00004.html#release_notes_datawriter", null ]
-      ] ],
-      [ "Known Issues and Currently Unsupported Features                                                                    ", "a00004.html#release_notes_known_issues", [
-        [ "Unsupported Listeners                                                                   ", "a00004.html#release_notes_us_listeners", null ],
-        [ "Find and Discovery functions                                                ", "a00004.html#release_notes_us_find_discovery", null ],
-        [ "New IDL type mapping for built-in topics                                                             ", "a00004.html#release_notes_us_IDLtypemapping", null ],
-        [ "OpenSplice API extensions                                                                        ", "a00004.html#release_notes_us_extensions", null ],
-        [ "Other Known Issues                                                                        ", "a00004.html#release_notes_other_known_issues", null ]
+      [ "Known Issues and Currently Unsupported Features                                                                    ", "release_notes.html#release_notes_6", [
+        [ "Unsupported Listeners                                                                   ", "release_notes.html#release_notes_us_listeners", null ],
+        [ "Find and Discovery functions                                                ", "release_notes.html#release_notes_us_find_discovery", null ],
+        [ "New IDL type mapping for built-in topics                                                             ", "release_notes.html#release_notes_us_IDLtypemapping", null ],
+        [ "OpenSplice API extensions                                                                        ", "release_notes.html#release_notes_us_extensions", null ],
+        [ "Other Known Issues                                                                        ", "release_notes.html#release_notes_other_known_issues", null ]
       ] ]
     ] ],
-    [ "ISO/IEC C++ Streams DCPS API", "a00010.html", "a00010" ]
+    [ "iShapes Demonstrator Application", "ishapes_readme.html", [
+      [ "What is it?                                                                     ", "ishapes_readme.html#ishapeswhat", null ],
+      [ "Building on Linux with make                                                     ", "ishapes_readme.html#ishapeslinuxbuild", null ],
+      [ "Building on Windows with Visual Studio                                          ", "ishapes_readme.html#ishapeswinbuild", null ],
+      [ "Running iShapes                                                                 ", "ishapes_readme.html#ishapesrunning", null ]
+    ] ],
+    [ "Modules", "modules.html", "modules" ],
+    [ "Namespaces", null, [
+      [ "Namespace List", "namespaces.html", "namespaces" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
+        [ "Functions", "namespacemembers_func.html", "namespacemembers_func" ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ]
+      ] ]
+    ] ],
+    [ "Classes", null, [
+      [ "Class List", "annotated.html", "annotated" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
+      ] ]
+    ] ],
+    [ "Files", null, [
+      [ "File List", "files.html", "files" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"a00002.html"
+"_any_data_reader_listener_8hpp.html",
+"_message_board__impl_8cpp_source.html",
+"_t_rank_8hpp_source.html",
+"class_shape_type_data_reader_view__impl.html#a3f7a418d5b9ae904e7fb19d47a5398f6",
+"class_ui_1_1_writer_qo_s.html#a436ed855d4e70ea0f5c7dc0c7bcbcd5b",
+"classdds_1_1core_1_1_not_enabled_error.html#a7f9aaaa39822e3923d684d560cfbea77",
+"classdds_1_1core_1_1cond_1_1_t_wait_set.html#a143ff92a64407d381e5a712d70d2bd88",
+"classdds_1_1core_1_1policy_1_1_t_partition.html#a948a6f4576c26fe7e44c551a56f4d038",
+"classdds_1_1core_1_1policy_1_1policy__name_3_01_ownership_strength_01_4.html#a10eec69b3ff86cc5a1fee039b6733a78",
+"classdds_1_1domain_1_1_no_op_domain_participant_listener.html#a3f8193f2d85d29df34d82fef42f63279",
+"classdds_1_1pub_1_1detail_1_1_d_w_holder.html#a9eb22d4bcf21cce6153c42bb116278d3",
+"classdds_1_1sub_1_1_sample.html#a7160203c356f1d82fe28f5d9a6e19c0b",
+"classdds_1_1sub_1_1cond_1_1detail_1_1_query_condition.html#aedc597392e6e12afa6121eb3bbbd5fcc",
+"classdds_1_1sub_1_1status_1_1_view_state.html#a45591bb5dd3d1041d09448c4f5e558a4",
+"classdds_1_1topic_1_1_topic_description.html#ab3a71f25696efba22cf3744cf5826839",
+"classdemo_1_1ishapes_1_1_square.html#a83db5adc2a1c86a6b806f4b43acad819",
+"classorg_1_1opensplice_1_1core_1_1_requested_deadline_missed_status_impl.html#af45d0362c5a739ca6876cd6dff03ad3f",
+"classorg_1_1opensplice_1_1core_1_1policy_1_1_resource_limits.html#a101f6f509b3267dc94f3a9fd5d6c5ed7",
+"classorg_1_1opensplice_1_1sub_1_1_subscriber_event_forwarder.html#abc7ddf5adbde3c219a72cd2ed0177e3c",
+"dds_2core_2policy_2detail_2_core_policy_8hpp_source.html",
+"exception__helper_8hpp.html#a90438b46eb2ffb6b51827f27e679639d",
+"group__examplesdcps_wait_setisocpp.html#gae980817d7ad7ff3ee09c99b2b47892ad",
+"namespacemembers_0x70.html",
+"spec_2dds_2domain_2find_8hpp.html#adcaa25d1bdfacd00ea345a6164660387",
+"sub_2qos_2_qos_converter_8hpp.html#ae07026fc6b7c3f16053a998415ef38ca"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

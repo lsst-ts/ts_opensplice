@@ -1,20 +1,12 @@
 /*
 *                         OpenSplice DDS
 *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+*   This software and documentation are Copyright 2006 to 2012 PrismTech
+*   Limited and its licensees. All rights reserved. See file:
+*
+*                     $OSPL_HOME/LICENSE
+*
+*   for full copyright notice and license terms.
 *
 */
 
@@ -60,7 +52,14 @@ namespace core
 * @see org::opensplice::core::exception_helper
 * @see org::opensplice::core::validate<T>
 */
-#define OSPL_CONTEXT_LITERAL(foo) foo " at " __FILE__ ":" OSPL_INT_TO_STRING(__LINE__) " in ",  OS_PRETTY_FUNCTION
+/* Allegedly __FUNCTION__ has been in VS since 2005 */
+#if defined (_MSC_VER)
+#   define OSPL_CONTEXT_LITERAL(foo) foo " at " __FILE__ ":" OSPL_INT_TO_STRING(__LINE__) " in ",  __FUNCTION__ "()"
+#elif defined(__GNUC__)
+#   define OSPL_CONTEXT_LITERAL(foo) foo " at " __FILE__ ":" OSPL_INT_TO_STRING(__LINE__) " in ",  __PRETTY_FUNCTION__
+#else
+#   define OSPL_CONTEXT_LITERAL(foo) foo " at " __FILE__ ":" OSPL_INT_TO_STRING(__LINE__), ""
+#endif
 
 /**
 * Produce a string suitable for populating an exception 'what' field.

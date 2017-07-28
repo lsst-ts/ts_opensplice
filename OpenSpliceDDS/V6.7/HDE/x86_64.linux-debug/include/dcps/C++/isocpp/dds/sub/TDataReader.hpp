@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2012 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef OSPL_DDS_SUB_TDATAREADER_HPP_
@@ -394,7 +386,7 @@ private:
                const dds::core::status::StatusMask& mask)
 #                                       else
                dds::sub::DataReaderListener<T>* listener = NULL,
-               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::none())
+               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::all())
 #                                       endif
         :
 #ifndef OSPL_2893_COMPILER_BUG
@@ -453,7 +445,7 @@ private:
                const dds::core::status::StatusMask& mask)
 #else
                dds::sub::DataReaderListener<T>* listener = NULL,
-               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::none())
+               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::all())
 #endif
         :
 #ifndef OSPL_2893_COMPILER_BUG
@@ -510,7 +502,7 @@ private:
                const dds::core::status::StatusMask& mask)
 #                                       else
                dds::sub::DataReaderListener<T>* listener = NULL,
-               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::none())
+               const dds::core::status::StatusMask& mask = ::dds::core::status::StatusMask::all())
 #                                       endif
         :
 #                                       ifndef OSPL_2893_COMPILER_BUG
@@ -929,8 +921,14 @@ private:
         return this->delegate()->subscription_matched_status();
     }
 
-#ifdef OSPL_2893_COMPILER_BUG
-    void close()
+#ifndef OSPL_2893_COMPILER_BUG
+    template <typename T, template <typename Q> class DELEGATE>
+#endif
+    void
+#ifndef OSPL_2893_COMPILER_BUG
+    DataReader<T, DELEGATE>::
+#endif
+    close()
     {
         try
         {
@@ -943,14 +941,20 @@ private:
             (void)i;
         }
     }
-    void retain()
+
+#ifndef OSPL_2893_COMPILER_BUG
+    template <typename T, template <typename Q> class DELEGATE>
+#endif
+    void
+#ifndef OSPL_2893_COMPILER_BUG
+    DataReader<T, DELEGATE>::
+#endif
+    retain()
     {
         this->delegate()->retain();
         dds::sub::AnyDataReader adr(*this);
         org::opensplice::core::retain_add<dds::sub::AnyDataReader>(adr);
     }
-#endif
-
 #ifdef OSPL_2893_COMPILER_BUG
 public:
     OMG_DDS_REF_TYPE(DataReader, dds::core::TEntity, dds::sub::detail::DataReader<T>)

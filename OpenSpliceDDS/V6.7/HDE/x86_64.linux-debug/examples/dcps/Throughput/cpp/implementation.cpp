@@ -2,20 +2,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 
@@ -27,7 +19,6 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
-#include <string>
 
 namespace examples {
 #ifdef GENERATING_EXAMPLE_DOXYGEN
@@ -101,7 +92,7 @@ int publisher(int argc, char *argv[])
          * Get the program parameters
          * Parameters: publisher [payloadSize] [burstInterval] [burstSize] [timeOut] [partitionName]
          */
-        unsigned long payloadSize = 4096;
+        unsigned long payloadSize = 8192;
         unsigned long burstInterval = 0;
         unsigned long timeOut = 0;
         int burstSize = 1;
@@ -112,7 +103,7 @@ int publisher(int argc, char *argv[])
                 "Usage (parameters must be supplied in order):\n"
                 "./publisher [payloadSize (bytes)] [burstInterval (ms)] [burstSize (samples)] [timeOut (seconds)] [partitionName]\n"
                 "Defaults: \n"
-                "./publisher 4096 0 1 0 \"Throughput example\"");
+                "./publisher 8192 0 1 0 \"Throughput example\"");
             throw exception;
         }
         if(argc > 1)
@@ -144,7 +135,7 @@ int publisher(int argc, char *argv[])
         PubEntities e(partitionName.c_str());
 
         /** Fill the sample payload with data */
-        ThroughputModule::DataType sample;
+        ThroughputModule::Sample sample;
         sample.count = 0;
         sample.payload.length(payloadSize);
         for(unsigned long i = 0; i < payloadSize; i++)
@@ -179,7 +170,7 @@ int publisher(int argc, char *argv[])
                 {
                     exampleSleepMilliseconds(burstInterval - deltaTime);
                 }
-                burstStart = exampleGetTime();
+                burstStart = time + exampleMicrosecondsToTimeval((burstInterval - deltaTime) * US_IN_ONE_MS);
                 burstCount = 0;
             }
             else
@@ -222,8 +213,8 @@ int publisher(int argc, char *argv[])
 /**
  * This function calculates the number of samples received
  *
- * @param count1 the map tracking sample count values
- * @param count2 the map tracking sample count start or previous values
+ * @param count the map tracking sample count values
+ * @param startCount the map tracking sample count start or previous values
  * @param prevCount if set to true, count2's value should be set to count1 after adding to total
  * @return the number of samples received
  */
@@ -265,7 +256,7 @@ int subscriber(int argc, char *argv[])
     {
         /**
          * Get the program parameters
-         * Parameters: subscriber [maxCycles] [pollingDelay] [partitionName]
+         * Parameters: publisher [maxCycles] [pollingDelay] [partitionName]
          */
         unsigned long long maxCycles = 0;
         unsigned long pollingDelay = 0;
@@ -308,7 +299,7 @@ int subscriber(int argc, char *argv[])
         timeval startTime = {0, 0};
         timeval prevTime = {0, 0};
         DDS::ConditionSeq conditions;
-        ThroughputModule::DataTypeSeq samples;
+        ThroughputModule::SampleSeq samples;
         DDS::SampleInfoSeq info;
         unsigned long payloadSize = 0;
 
@@ -381,12 +372,12 @@ int subscriber(int argc, char *argv[])
                                 << "Transfer rate: " << (double)samplesReceived(count, prevCount, true) / deltaTime << " samples/s, "
                                 << ((double)deltaReceived / BYTES_PER_SEC_TO_MEGABITS_PER_SEC) / deltaTime << " Mbit/s"
                                 << std::endl;
+
                     cycles++;
                 }
                 else
                 {
                     /** Set the start time if it is the first iteration */
-                    prevCount = startCount;
                     startTime = time;
                 }
                 /** Update the previous values for next iteration */
@@ -428,5 +419,5 @@ int subscriber(int argc, char *argv[])
 }
 }
 
-EXAMPLE_ENTRYPOINT(DCPS_SACPP_Throughput_publisher, examples::dcps::Throughput::sacpp::publisher)
-EXAMPLE_ENTRYPOINT(DCPS_SACPP_Throughput_subscriber, examples::dcps::Throughput::sacpp::subscriber)
+EXAMPLE_ENTRYPOINT(DCPS_ISOCPP_Throughput_publisher, examples::dcps::Throughput::sacpp::publisher)
+EXAMPLE_ENTRYPOINT(DCPS_ISOCPP_Throughput_subscriber, examples::dcps::Throughput::sacpp::subscriber)

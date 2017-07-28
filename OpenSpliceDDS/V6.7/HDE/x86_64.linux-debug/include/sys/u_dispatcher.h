@@ -1,30 +1,22 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef U_DISPATCHER_H
 #define U_DISPATCHER_H
 
-#include "u_types.h"
-
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "u_types.h"
 #include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
@@ -35,41 +27,49 @@ extern "C" {
 /* !!!!!!!!NOTE From here no more includes are allowed!!!!!!! */
 
 /* Returns mask of events that have been handled by the listener. */
-typedef u_eventMask (*u_dispatcherListener)(u_dispatcher o, u_eventMask event, void *usrData);
-typedef void (*u_dispatcherThreadAction)(u_dispatcher o, void *usrData);
+typedef c_ulong (*u_dispatcherListener)(u_dispatcher o, c_ulong event, c_voidp usrData);
+typedef void (*u_dispatcherThreadAction)(u_dispatcher o, c_voidp usrData);
 
-#define  u_dispatcher(o) ((u_dispatcher)(o))
+#define  u_dispatcher(o)            ((u_dispatcher)(o))
 
-OS_API u_result
+OS_API u_result 
 u_dispatcherInsertListener(
-    const u_dispatcher o,
-    const u_observableListener l,
-    void *userData);
-
-OS_API u_result
+    u_dispatcher o,
+    u_dispatcherListener l,
+    c_voidp userData);
+    
+OS_API u_result 
 u_dispatcherAppendListener(
-    const u_dispatcher o,
-    const u_observableListener l,
-    void *userData);
-
-OS_API u_result
+    u_dispatcher o,
+    u_dispatcherListener l, 
+    c_voidp userData);
+    
+OS_API u_result 
 u_dispatcherRemoveListener(
-     const u_dispatcher o,
-     const u_observableListener l);
+     u_dispatcher o,
+     u_dispatcherListener l);
 
-OS_API u_result
+OS_API u_result 
 u_dispatcherNotify(
-    const u_dispatcher o);
-
-OS_API u_result
+    u_dispatcher o);
+    
+OS_API u_result 
 u_dispatcherSetEventMask(
-    const u_dispatcher o,
-    u_eventMask eventMask);
-
-OS_API u_result
+    u_dispatcher o, 
+    c_ulong eventMask);
+    
+OS_API u_result 
 u_dispatcherGetEventMask(
-    const u_dispatcher o,
-    u_eventMask *eventMask);
+    u_dispatcher o, 
+    c_ulong *eventMask);
+
+/* Sets two callback functions, which are called on start and stop of the dispatcher thread */
+OS_API u_result 
+u_dispatcherSetThreadAction(
+    u_dispatcher o, 
+    u_dispatcherThreadAction startAction,
+    u_dispatcherThreadAction stopAction, 
+    c_voidp actionData);
 
 #undef OS_API
 

@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 /****************************************************************
@@ -28,10 +20,12 @@
 #ifndef OS_MUTEX_H
 #define OS_MUTEX_H
 
+
 #include "os_defs.h"
 
+/* include OS specific header file				*/
+#include "include/os_mutex.h"
 #include "os_if.h"
-#include "os_stdlib.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -53,7 +47,7 @@ extern "C" {
  */
 typedef os_os_mutex os_mutex;
 
-/** \brief Definition of the mutex attributes
+/** \brief Definition of the mutex attributes 
  */
 typedef struct os_mutexAttr {
     /**
@@ -63,14 +57,10 @@ typedef struct os_mutexAttr {
      *   is process wide
      */
     os_scopeAttr	scopeAttr;
-
-    /* - OS_ERRORCHECKING_DISABLED The mutex operations aren't checked
-     * - OS_ERRORCHECKING_ENABLED The mutex operations are checked */
-    os_errorCheckingAttr errorCheckingAttr;
 } os_mutexAttr;
 
 /** \brief Sets the priority inheritance mode for mutexes
- *   that are created after this call. (only effective on
+ *   that are created after this call. (only effective on 
  *   platforms that support priority inheritance)
  *
  * Possible Results:
@@ -80,7 +70,7 @@ typedef struct os_mutexAttr {
  */
 OS_API os_result
 os_mutexSetPriorityInheritanceMode(
-        os_boolean enabled);
+    os_boolean enabled);
 
 /** \brief Initialize the mutex taking the mutex attributes
  *         into account
@@ -92,37 +82,27 @@ os_mutexSetPriorityInheritanceMode(
  * - returns os_resultFail if
  *     mutex is not initialized because of a failure
  */
-_Check_return_
 OS_API os_result
 os_mutexInit(
-        _Out_ _When_(return != os_resultSuccess, _Post_invalid_) os_mutex *mutex,
-        _In_opt_ const os_mutexAttr *mutexAttr)
-    __nonnull((1));
+    os_mutex *mutex,
+    const os_mutexAttr *mutexAttr);
 
 /** \brief Destroy the mutex
  *
- * Never returns on failure
+ * Possible Results:
+ * - assertion failure: mutex = NULL
+ * - returns os_resultSuccess if
+ *     mutex is successfuly destroyed
+ * - returns os_resultBusy if
+ *     mutex is not destroyed because it is still claimed or referenced by a thread
+ * - returns os_resultFail if
+ *     mutex is not destroyed because of a failure
  */
-OS_API void
+OS_API os_result
 os_mutexDestroy(
-        _Inout_ _Post_invalid_ os_mutex *mutex)
-    __nonnull_all__;
+    os_mutex *mutex);
 
-/** \brief Acquire the mutex.
- *
- * If you need to detect an error, use os_mutexLock_s instead.
- *
- * @see os_mutexLock_s
- */
-_Acquires_nonreentrant_lock_(&mutex->lock)
-OS_API void
-os_mutexLock(
-        _Inout_ os_mutex *mutex)
-    __nonnull_all__;
-
-/**
- * \brief Acquire the mutex. Returns whether the call succeeeded or an error
- * occurred.
+/** \brief Acquire the mutex
  *
  * Precondition:
  * - mutex is not yet acquired by the calling thread
@@ -134,13 +114,9 @@ os_mutexLock(
  * - returns os_resultFail if
  *     mutex is not acquired because of a failure
  */
-_Check_return_
-_When_(return == os_resultSuccess, _Acquires_nonreentrant_lock_(&mutex->lock))
 OS_API os_result
-os_mutexLock_s(
-        _Inout_ os_mutex *mutex)
-    __nonnull_all__
-    __attribute_warn_unused_result__;
+os_mutexLock(
+    os_mutex *mutex);
 
 /** \brief Try to acquire the mutex, immediately return if the mutex
  *         is already acquired by another thread
@@ -158,37 +134,38 @@ os_mutexLock_s(
  * - returns os_resultFail if
  *      mutex is not acquired because of a failure
  */
-_Check_return_
-_When_(return == os_resultSuccess, _Acquires_nonreentrant_lock_(&mutex->lock))
 OS_API os_result
-os_mutexTryLock (
-        _Inout_ os_mutex *mutex)
-    __nonnull_all__
-    __attribute_warn_unused_result__;
+os_mutexTryLock(
+    os_mutex *mutex);
 
 /** \brief Release the acquired mutex
+ *
+ * Precondition:
+ * - mutex is already acquired by the calling thread
+ *
+ * Possible Results:
+ * - assertion failure: mutex = NULL
+ * - returns os_resultSuccess if
+ *     mutex is released
+ * - returns os_resultFail if
+ *     mutex is not released because of a failure
  */
-_Releases_nonreentrant_lock_(&mutex->lock)
-OS_API void
-os_mutexUnlock (
-        _Inout_ os_mutex *mutex)
-    __nonnull_all__;
+OS_API os_result
+os_mutexUnlock(
+    os_mutex *mutex);
 
 /** \brief Set the default mutex attributes
  *
  * Postcondition:
- * - mutex scope attribute is OS_SCOPE_PRIVATE
- * - mutex errorChecking attribute is OS_ERRORCHECKING_DISABLED
+ * - mutex scope attribute is OS_SCOPE_SHARED
  *
- * Precondition:
- * - mutexAttr is a valid object
+ * Possible Results:
+ * - assertion failure: mutexAttr = NULL
+ * - returns os_resultSuccess
  */
-_Post_satisfies_(mutexAttr->scopeAttr == OS_SCOPE_PRIVATE)
-_Post_satisfies_(mutexAttr->errorCheckingAttr == OS_ERRORCHECKING_DISABLED)
-OS_API void
+OS_API os_result
 os_mutexAttrInit(
-        _Out_ os_mutexAttr *mutexAttr)
-    __nonnull_all__;
+    os_mutexAttr *mutexAttr);
 
 #undef OS_API
 

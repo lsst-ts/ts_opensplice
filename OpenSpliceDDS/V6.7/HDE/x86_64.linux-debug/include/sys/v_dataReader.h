@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef V_DATAREADER_H
@@ -74,17 +66,8 @@ v_dataReaderNew(
     v_subscriber subscriber,
     const c_char *name,
     q_expr OQLexpr,
-    const c_value params[],
+    c_value params[],
     v_readerQos qos,
-    c_bool enable);
-
-OS_API v_dataReader
-v_dataReaderNewBySQL (
-    v_subscriber subscriber,
-    const os_char *name,
-    const os_char *expr,
-    const c_value params[],
-    v_readerQos qos, 
     c_bool enable);
 
 OS_API void
@@ -117,65 +100,59 @@ v_dataReaderContainsInstance (
     v_dataReader _this,
     v_dataReaderInstance instance);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderRead(
     v_dataReader _this,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderTake(
     v_dataReader _this,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderReadInstance(
     v_dataReader _this,
     v_dataReaderInstance instance,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderTakeInstance(
     v_dataReader _this,
     v_dataReaderInstance instance,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderReadNextInstance(
     v_dataReader _this,
     v_dataReaderInstance instance,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataReaderTakeNextInstance(
     v_dataReader _this,
     v_dataReaderInstance instance,
-    v_sampleMask mask,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
 OS_API c_long
 v_dataReaderNotReadCount(
     v_dataReader _this);
 
-OS_API c_ulong
-v_dataReaderGetNumberOpenTransactions(
-    v_dataReader _this);
+OS_API v_result
+v_dataReaderSetNotReadThreshold(
+    v_dataReader _this,
+    c_long threshold);
+
+OS_API c_bool
+v_dataReaderUpdateSampleLost(
+    v_reader _this,
+    c_ulong missedSamples);
 
 #undef OS_API
 

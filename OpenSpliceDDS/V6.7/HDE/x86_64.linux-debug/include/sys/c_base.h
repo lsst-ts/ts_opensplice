@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef C_BASE_H
@@ -164,48 +156,16 @@ c_resolve (
  * \param type is a reference to a database specific meta type description.
  *
  * \return A successful operation returns the created object.
- *         otherwise if an illegal type is specified this operation
- *         will fail and return NULL.
- */
-OS_API c_object
-c_new (
-    c_type type) __nonnull_all__;
-
-/**
- * \brief This operation creates an object of the specified type.
- *
- * This operation creates an object of the specified type.
- * The type itself, as all objects, has a reference to the database that
- * is used by the operation to determine the database in which the object
- * shall be created.
- * The operation respects the memory threshold and returns NULL when the
- * memory threshold has been reached.
- * The memory of the created object is initialized with zeroes.
- *
- * \param type is a reference to a database specific meta type description.
- *
- * \return A successful operation returns the created object.
  *         otherwise if an illegal type is specified or there are not enough
  *         resources this operation will fail and return NULL.
  */
 OS_API c_object
-c_new_s (
-    c_type type) __nonnull_all__;
+c_new (
+    c_type type);
 
 OS_API c_memoryThreshold
 c_baseGetMemThresholdStatus(
-    c_base _this) __nonnull_all__;
-
-OS_API c_bool
-c_baseMakeMemReservation(
-    c_base _this,
-    os_address amount) __nonnull_all__;
-
-OS_API void
-c_baseReleaseMemReservation(
-    c_base _this,
-    os_address amount) __nonnull_all__;
-
+    c_base _this);
 
 /* c_new() method specificly for arrays and sequences (only).
  *
@@ -221,48 +181,16 @@ c_baseReleaseMemReservation(
  * \size the size of the array or sequence
  *
  * \return A successful operation returns the created object.
- *         otherwise if an illegal type is specified and return NULL.
+ *         otherwise if an illegal type is specified or there are not enough
+ *         resources this operation will fail and return NULL.
  */
 OS_API c_object
 c_newBaseArrayObject (
     c_collectionType arrayType,
-    c_ulong size) __nonnull_all__;
+    c_long size);
 
-#define c_newArray(t,s) \
-        (assert(c_collectionTypeKind(t) == OSPL_C_ARRAY), c_newBaseArrayObject(c_collectionType(t),s))
-
-#define c_newSequence(t,s) \
-        (assert(c_collectionTypeKind(t) == OSPL_C_SEQUENCE), c_newBaseArrayObject(c_collectionType(t),s))
-
-/* c_new() method specificly for arrays and sequences (only) which repect the memory
- * threshold.
- *
- * Use the macro definitions c_newArray_s and c_newSequence_s instead, respectively
- * for creating an array or a sequence for legibility.
- *
- * This operation either creates an array or a sequence object of the specified
- * type. The type itself, as all objects, has a reference to the database that
- * is used by the operation to determine the database in which the object
- * shall be created.
- * The memory of the created object is initialized with zeroes.
- * \param type is a reference to a database specific meta type description.
- * \size the size of the array or sequence
- *
- * \return A successful operation returns the created object.
- *         otherwise if an illegal type is specified or there are not enough
- *         resources this operation will fail and return NULL.
- */
-
-OS_API c_object
-c_newBaseArrayObject_s (
-    c_collectionType arrayType,
-    c_ulong size) __nonnull_all__;
-
-#define c_newArray_s(t,s) \
-        (assert(c_collectionTypeKind(t) == OSPL_C_ARRAY), c_newBaseArrayObject_s(c_collectionType(t),s))
-
-#define c_newSequence_s(t,s) \
-        (assert(c_collectionTypeKind(t) == OSPL_C_SEQUENCE), c_newBaseArrayObject_s(c_collectionType(t),s))
+#define c_newArray(t,s)         c_newBaseArrayObject(t,s); assert(c_collectionTypeKind(t) == C_ARRAY)
+#define c_newSequence(t,s)      c_newBaseArrayObject(t,s); assert(c_collectionTypeKind(t) == C_SEQUENCE)
 
 /**
  * \brief This operation notifies the database that the application will no
@@ -277,7 +205,7 @@ c_newBaseArrayObject_s (
 OS_API c_long
 c___free (
     c_object object);
-#define c_free(o) (o?((pa_dec32_nv(&c_header(o)->refCount) == 0)?c___free(o):0):0)
+#define c_free(o) (o?((pa_decrement(&c_header(o)->refCount) == 0)?c___free(o):0):0)
 #else
 OS_API void
 c_free (
@@ -302,30 +230,7 @@ c_free (
  */
 OS_API c_object
 c_keep (
-     c_object object);
-
-/**
- * \brief This operation requests that all free/keep operations on this object
- *        be traced by the allocator.
-*
- * \param object The object to be traced.
- */
-OS_API void
-c_baseTraceObject (
     c_object object);
-
-/**
- * \brief This operation will request that all free/keep operations on object of
- *        the specified type be traced by the allocator.
- *
- *        Will only track objects of type that are created after this operation
- *        is invoked.
-*
- * \param type The type for which the objects must be traced.
- */
-OS_API void
-c_baseTraceObjectsOfType (
-    c_type type);
 
 /**
  * \brief This operation will return the metadata that describes the type of
@@ -409,7 +314,7 @@ c_refCount (
 OS_API c_object
 ospl_c_bind (
     c_object object,
-    const c_char *name) __nonnull_all__;
+    const c_char *name);
 
 /**
  * \brief This operation requests the database to stop maintaining the
@@ -427,7 +332,7 @@ ospl_c_bind (
 OS_API c_object
 c_unbind (
     c_base _this,
-    const c_char *name) __nonnull_all__;
+    const c_char *name);
 
 /**
  * \brief This operation will search the database for a named object.
@@ -447,7 +352,7 @@ c_unbind (
 OS_API c_object
 c_lookup (
     c_base _this,
-    const c_char *name) __nonnull_all__;
+    const c_char *name);
 
 /**
  * \brief This operation will create a new database string object and copy
@@ -473,35 +378,7 @@ c_lookup (
 OS_API c_string
 c_stringNew (
     c_base base,
-    const c_char *str) __nonnull((1));
-
-/**
- * \brief This operation will create a new database string object and copy
- *        the value of the given string.
- *
- * This operation will create a new database string object and copy the value
- * of the given string. When str is the empty string "", a database intern of the
- * empty string may be returned. Since any modification to the empty string will
- * yield an invalid string, the memory returned when str == "" should be
- * considered immutable and hence never be written to.
- * The operation respects the memory threshold and returns NULL when the
- * memory threshold has been reached.
- *
- * \param base  The database in which the new string object must reside.
- * \param str   The string value that must be assigned to the created string
- *              object.
- * \pre base is a valid database
- * \pre str is either NULL or a '\0'-terminated string
- * \post returned c_string is either NULL or a '\0'-terminated string
- *
- * \return A reference to the allocated string object is returned. If str == NULL
- * or if str != NULL and not enough resources are available for a copy of string
- * str, NULL is returned.
- */
-OS_API c_string
-c_stringNew_s (
-    c_base base,
-    const c_char *str) __nonnull((1));
+    const c_char *str);
 
 /**
  * \brief This operation will create a new database string object of the
@@ -528,37 +405,7 @@ c_stringNew_s (
 OS_API c_string
 c_stringMalloc(
     c_base base,
-    c_size length) __nonnull_all__;
-
-
-/**
- * \brief This operation will create a new database string object of the
- *        specified length.
- *
- * This operation will allocate a new database string with enough room to
- * accomodate a string of the specified length (including the '\0'-terminator).
- * The returned string will be '\0'-terminated (truncated at length 0). The
- * content of the memory past the '\0'-terminator is undefined. When length == 1,
- * an intern of the empty string may be returned. Since any modification to the
- * empty string will yield an invalid string, the memory returned when
- * length == 1 should be considered immutable and hence never be written to.
- * The operation respects the memory threshold and returns NULL when the
- * memory threshold has been reached.
- *
- * \param base The database in which the new string object must reside.
- * \param length The string length that must be allocated.
- * \pre base is a valid database
- * \pre length >= 1
- * \post result == NULL || strlen(result) == 0
- *
- * \return A reference to the allocated string object is returned. Iff not
- * enough resources are available for a string of length 'length', NULL is
- * returned.
- */
-OS_API c_string
-c_stringMalloc_s(
-    c_base base,
-    c_size length) __nonnull_all__;
+    c_size length);
 
 /**
  * \brief This operation will create a new database wstring object of the
@@ -585,15 +432,32 @@ c_stringMalloc_s(
 c_wstring
 c_wstringMalloc(
     c_base base,
-    c_size length) __nonnull_all__;
+    c_size length);
 
+/**
+ * \brief       This operation behaves the same as c_arrayNew, with the exception that
+ *                      it will always return an object with valid header.
+ *
+ * This operation is provided by the database primarily to be able to serialize
+ * sequences\arrays with a zero length, where c_arrayNew would return a NULL object.
+ *
+ * \param subType The element type of the array that must be created.
+ * \param size The number of elements of the array that must be created.
+ *
+ * \return On a successful operation a reference to the created array is
+ *         returned. Otherwise NULL is returned.
+ */
+OS_API c_array
+c_arrayNew_w_header(
+    c_collectionType arrayType,
+    c_long length);
 
 /**
  * \brief: this operations destroy the database
  */
 OS_API void
 c_destroy (
-    c_base _this) __nonnull_all__;
+    c_base _this);
 
 /**
  * \brief: this operations detaches from the database without
@@ -601,7 +465,7 @@ c_destroy (
  */
 OS_API void
 c_detach (
-    c_base _this) __nonnull_all__;
+    c_base _this);
 
 OS_API c_type c_voidp_t     (c_base _this);
 OS_API c_type c_address_t   (c_base _this);
@@ -618,6 +482,7 @@ OS_API c_type c_ulong_t     (c_base _this);
 OS_API c_type c_ulonglong_t (c_base _this);
 OS_API c_type c_float_t     (c_base _this);
 OS_API c_type c_double_t    (c_base _this);
+OS_API c_type c_array_t     (c_base _this);
 OS_API c_type c_string_t    (c_base _this);
 OS_API c_type c_wchar_t     (c_base _this);
 OS_API c_type c_wstring_t   (c_base _this);
@@ -641,24 +506,7 @@ OS_API c_object c_baseCheckPtr (c_base _this, void *ptr);
  * #define OBJECT_WALK
  */
 
-OS_API c_mm
-c_baseMM(
-    c_base base);
-
-OS_API void
-c_baseSetMaintainObjectCount (
-    c_base base,
-    c_bool enable);
-
-OS_API void
-c_baseSetY2038Ready (
-    c_base base,
-    c_bool enable);
-
-OS_API c_bool
-c_baseGetY2038Ready (
-    c_base base);
-
+OS_API c_mm     c_baseMM      (c_base base);
 
 #ifndef NDEBUG
 #ifdef OBJECT_WALK

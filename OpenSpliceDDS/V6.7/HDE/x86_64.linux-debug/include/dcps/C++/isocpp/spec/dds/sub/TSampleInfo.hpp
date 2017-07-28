@@ -35,9 +35,8 @@ class TSampleInfo;
 }
 
 /**
-* The SampleInfo contains information pertaining to the associated Data value
-* See \ref DCPS_Modules_Subscription_SampleInfo "SampleInfo" for more information
-*/
+ * The SampleInfo contains information pertaining to the associated Data value
+ */
 template <typename DELEGATE>
 class dds::sub::TSampleInfo : public dds::core::Value<DELEGATE>
 {

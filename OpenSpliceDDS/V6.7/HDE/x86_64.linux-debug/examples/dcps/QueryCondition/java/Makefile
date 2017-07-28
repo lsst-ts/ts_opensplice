@@ -8,7 +8,7 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/sal/OpenSpliceDDS/VortexOpenSplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type ospljavamake HDE/x86_64.linux-debug/examples/JustJavaScripts.mwc
+# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type ospljavamake HDE/x86_64.linux-debug/examples/JustJavaScripts.mwc
 #
 #----------------------------------------------------------------------------
 

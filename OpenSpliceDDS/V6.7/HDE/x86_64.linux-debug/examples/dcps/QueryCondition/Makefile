@@ -8,12 +8,12 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/sal/OpenSpliceDDS/VortexOpenSplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/examples/examples_simple.mwc
+# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/examples/examples_simple.mwc
 #
 #----------------------------------------------------------------------------
 
 
-all: sac_querycondition_types sac_querycondition_pub sac_querycondition_sub sacpp_querycondition_types sacpp_querycondition_pub sacpp_querycondition_sub ISO_Cxx_QueryCondition_Types ISO_Cxx_QueryCondition_Impl ISO_Cxx_QueryCondition_Pub ISO_Cxx_QueryCondition_Sub ISO_Cxx_V2_QueryCondition_Types ISO_Cxx_V2_QueryCondition_Impl ISO_Cxx_V2_QueryCondition_Pub ISO_Cxx_V2_QueryCondition_Sub
+all: sac_querycondition_types sac_querycondition_pub sac_querycondition_sub sacpp_querycondition_types sacpp_querycondition_pub sacpp_querycondition_sub ISO_Cxx_QueryCondition_Types ISO_Cxx_QueryCondition_Impl ISO_Cxx_QueryCondition_Pub ISO_Cxx_QueryCondition_Sub
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd c/standalone && $(MAKE) -f Makefile.sac_querycondition_types $(@)
@@ -26,10 +26,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Impl $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Pub $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Sub $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Types $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Impl $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Pub $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Sub $(@)
 
 .PHONY: sac_querycondition_types
 sac_querycondition_types:
@@ -71,22 +67,6 @@ ISO_Cxx_QueryCondition_Pub: ISO_Cxx_QueryCondition_Impl
 ISO_Cxx_QueryCondition_Sub: ISO_Cxx_QueryCondition_Impl
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Sub all
 
-.PHONY: ISO_Cxx_V2_QueryCondition_Types
-ISO_Cxx_V2_QueryCondition_Types:
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Types all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Impl
-ISO_Cxx_V2_QueryCondition_Impl: ISO_Cxx_V2_QueryCondition_Types
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Impl all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Pub
-ISO_Cxx_V2_QueryCondition_Pub: ISO_Cxx_V2_QueryCondition_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Pub all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Sub
-ISO_Cxx_V2_QueryCondition_Sub: ISO_Cxx_V2_QueryCondition_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Sub all
-
 project_name_list:
 	@echo sac_querycondition_pub
 	@echo sac_querycondition_sub
@@ -98,7 +78,3 @@ project_name_list:
 	@echo ISO_Cxx_QueryCondition_Pub
 	@echo ISO_Cxx_QueryCondition_Sub
 	@echo ISO_Cxx_QueryCondition_Types
-	@echo ISO_Cxx_V2_QueryCondition_Impl
-	@echo ISO_Cxx_V2_QueryCondition_Pub
-	@echo ISO_Cxx_V2_QueryCondition_Sub
-	@echo ISO_Cxx_V2_QueryCondition_Types

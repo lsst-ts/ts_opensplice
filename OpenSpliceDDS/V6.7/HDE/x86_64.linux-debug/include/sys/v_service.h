@@ -1,26 +1,18 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef V_SERVICE_H
 #define V_SERVICE_H
 
-#include "kernelModuleI.h"
+#include "kernelModule.h"
 #include "v_participantQos.h"
 
 #if defined (__cplusplus)
@@ -59,7 +51,7 @@ extern "C" {
  * will keep all resources. When the lease/contract is not renewed, all
  * resources used by the service are removed from the kernel.
  *
- * \param kernel      The kernel
+ * \param manager     The serviceManager
  * \param name        The name of the service.
  * \param extSateName The name of a subclass of <code>v_serviceState</code>
  * \param leasePeriod The duration of the validity of this service.
@@ -69,12 +61,11 @@ extern "C" {
  */
 OS_API v_service
 v_serviceNew(
-    v_kernel kernel,
+    v_serviceManager manager,
     const c_char *name,
     const c_char *extStateName,
-    v_serviceType serviceType,
     v_participantQos qos,
-    c_bool enable);
+    v_statistics s);
 
 /**
  * \brief The initialisation function, which can be used by classes that
@@ -85,11 +76,11 @@ v_serviceNew(
 OS_API void
 v_serviceInit(
     v_service service,
+    v_serviceManager manager,
     const c_char *name,
     const c_char *extStateName,
-    v_serviceType serviceType,
     v_participantQos qos,
-    c_bool enable);
+    v_statistics s);
 
 /**
  * \brief The <code>v_service</code> destructor.
@@ -222,7 +213,7 @@ v_serviceTakeNewGroups(
 OS_API void
 v_serviceRenewLease(
     v_service service,
-    os_duration leasePeriod);
+    v_duration leasePeriod);
 
 #undef OS_API
 

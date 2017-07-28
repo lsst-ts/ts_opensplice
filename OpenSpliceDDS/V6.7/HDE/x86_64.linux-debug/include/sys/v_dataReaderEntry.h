@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef V_DATAREADERENTRY_H
@@ -40,6 +32,22 @@ extern "C" {
 #endif
 /* !!!!!!!!NOTE From here no more includes are allowed!!!!!!! */
 
+typedef enum {
+    V_DATAREADER_INSERTED,
+    V_DATAREADER_OUTDATED,
+    V_DATAREADER_NOT_OWNER,
+    V_DATAREADER_MAX_SAMPLES,
+    V_DATAREADER_MAX_INSTANCES,
+    V_DATAREADER_INSTANCE_FULL,
+    V_DATAREADER_SAMPLE_LOST,
+    V_DATAREADER_DUPLICATE_SAMPLE,
+    V_DATAREADER_OUT_OF_MEMORY,
+    V_DATAREADER_INTERNAL_ERROR,
+    V_DATAREADER_UNDETERMINED,
+    V_DATAREADER_FILTERED_OUT,
+    V_DATAREADER_COUNT
+} v_dataReaderResult;
+
 /**
  * \brief The <code>v_dataReaderEntry</code> cast method.
  *
@@ -56,10 +64,9 @@ extern "C" {
 OS_API v_dataReaderEntry
 v_dataReaderEntryNew(
     v_dataReader dataReader,
-    v_index index,
     v_topic topic,
-    q_expr _where,
-    const c_value *params[]);
+    c_array filterInstance,
+    c_array filterData);
 
 OS_API void
 v_dataReaderEntryFree(
@@ -69,13 +76,7 @@ OS_API v_writeResult
 v_dataReaderEntryWrite(
     v_dataReaderEntry _this,
     v_message o,
-    v_instance *instance,
-    v_messageContext context);
-
-OS_API v_writeResult
-v_dataReaderEntryWriteEOT(
-    v_dataReaderEntry _this,
-    v_message message);
+    v_instance *instance);
 
 OS_API void
 v_dataReaderEntryAddIncompatibleWriter(
@@ -90,6 +91,22 @@ v_dataReaderEntryRemoveIncompatibleWriter(
 OS_API void
 v_dataReaderEntryUpdatePurgeLists(
     v_dataReaderEntry _this);
+
+OS_API void
+v_dataReaderEntryAbortTransaction(
+    v_dataReaderEntry _this,
+    v_gid writerGID);
+
+OS_API v_writeResult
+v_dataReaderEntryDisposeAll (
+    v_dataReaderEntry _this,
+    v_message disposeMsg);
+
+OS_API v_dataReaderResult
+v_dataReaderEntryApplyUnregisterMessageToInstanceList (
+    v_dataReaderEntry _this,
+    v_message unregisterMsg,
+    c_iter instanceList);
 
 #undef OS_API
 

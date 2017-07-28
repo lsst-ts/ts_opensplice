@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef V_ENTITY_H
@@ -49,16 +41,18 @@
  *    void           v_entityDeinit      (v_entity _this);
  *    v_handle       v_entityHandle      (v_entity _this);
  *    void           v_entityFree        (v_entity _this);
- *
+ * 
  *    v_status       v_entityStatus      (v_entity _this);
- *
+ * 
  *    c_voidp        v_entityGetUserData (v_entity _this);
  *    c_voidp        v_entitySetUserData (v_entity _this, c_voidp userData);
- *
+ * 
+ *    c_bool         v_entityWalkEntities(v_entity _this,
+ *                                        v_entityAction action,
+ *                                        c_voidp arg);
  */
 
 #include "v_kernel.h"
-#include "v_event.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -96,38 +90,11 @@ typedef c_bool (*v_entityAction)(v_entity e, c_voidp arg);
  *
  * \param _this The entity object where this method will operate on.
  * \return The entity's status object.
- *         The caller is responsible to free the returned status object
+ *         The caller is resposible to free the returned status object
  *         when it is no longer required.
  */
 OS_API v_status
 v_entityStatus(
-    v_entity _this);
-
-/**
- * \brief Resets the status bits set in mask on this entities status.
- *
- * This method invokes v_statusReset(_this->status, mask).
- *
- * \see v_statusReset
- * \param _this The entity object where this method will operate on.
- * \param mask The mask of bits to be reset.
- */
-OS_API void
-v_entityStatusReset(
-    v_entity _this,
-    c_ulong mask);
-
-/**
- * \brief Retrieves the status mask of this entity.
- *
- * This method returns v_statusGetMask(_this->status).
- *
- * \see v_statusGetMask
- * \param _this The entity object where this method will operate on.
- * \return The entity's status mask.
- */
-OS_API c_ulong
-v_entityStatusGetMask(
     v_entity _this);
 
 /**
@@ -190,25 +157,31 @@ v_entitySetUserData (
  *        associated entities are visited otherwise the walk is terminated
  *        by the action routine.
  *        The walk will terminate as soon as the action routine returns FALSE.
- *
- * \note This function is DEPRECATED. It is currently still used by the C&M
- *       API, but should be removed in the future.
  */
 OS_API c_bool
 v_entityWalkEntities (
     v_entity _this,
     v_entityAction action,
     c_voidp arg);
-
-/*
- * Like v_entityWalkEntities, this function is also DEPRECATED. It is
- * currently still used by the C&M API, but should be removed in the future.
- */
+                            
 OS_API c_bool
 v_entityWalkDependantEntities(
     v_entity _this,
     v_entityAction action,
     c_voidp arg);
+
+OS_API v_qos
+v_entityGetQos(
+    v_entity _this);
+
+OS_API v_result
+v_entitySetQos(
+    v_entity _this,
+    v_qos qos);
+
+OS_API v_statistics
+v_entityStatistics(
+    v_entity _this);
 
 OS_API v_result
 v_entityEnable (
@@ -231,51 +204,6 @@ v_entityEnabled (
  */
 OS_API c_char *
 v_entityGetName(
-    v_entity _this);
-
-OS_API v_result
-v_entitySetListener(
-    v_entity _this,
-    v_listener listener,
-    void *listenerData,
-    v_eventMask interest);
-
-OS_API c_bool
-v_entityNotifyListener(
-    v_entity _this,
-    v_event event);
-
-#define v_entityGetListenerInterest(_this) (v_entity(_this)->listenerInterest)
-
-OS_API c_char *
-v_entityGetXMLQos(
-    v_entity e);
-
-OS_API v_result
-v_entitySetXMLQos(
-    v_entity e,
-    const c_char *xml);
-
-OS_API v_objectLoan
-v_entityLoan(
-    v_entity _this,
-    c_bool subLoan);
-
-OS_API void
-v_entityReleaseLoan(
-    v_entity _this);
-
-OS_API c_bool
-v_entityDisableCallbacks(
-    v_entity _this);
-
-OS_API v_entity
-v_entityOwner (
-    v_entity _this);
-
-OS_API
-c_longlong
-v_entityGetProcessId(
     v_entity _this);
 
 #undef OS_API

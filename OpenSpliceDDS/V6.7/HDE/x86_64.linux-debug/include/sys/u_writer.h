@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef U_WRITER_H
@@ -31,13 +23,33 @@
  * which will publish it in an asynchronous manner (this optimisation
  * is not supported yet and will be controlled via QoS).
  *
+ * The following methods are provided:
+ *
+ *    u_writer u_writerNew              (u_publisher p, const c_char *name,
+ *                                       u_topic t, u_writerCopy copy,
+ *                                       v_writerQos qos);
+ *
+ *    u_result u_writerFree             (u_writer _this);
+ *
+ *    u_result u_writerWrite            (u_writer _this, void *data,
+ *                                       c_time timestamp, u_instanceHandle h);
+ *
+ *    u_result u_writerDispose          (u_writer _this, void *data,
+ *                                       c_time timestamp, u_instanceHandle h);
+ *
+ *    u_result u_writerWriteDispose     (u_writer _this, void *data,
+ *                                       c_time timestamp, u_instanceHandle h);
+ *
+ *    u_result u_writerAssertLiveliness (u_writer _this);
+ *
+ *    c_bool   u_writerDefaultCopy      (c_type type, void *data, void *to);
  */
-
-#include "u_types.h"
 
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "u_types.h"
 
 /**
  * brief The writers copy method prototype.
@@ -46,11 +58,12 @@ extern "C" {
  * to transform application data into kernel data.
  * This method is provided by the application.
  */
-typedef v_copyin_result (*u_writerCopy)(c_type type, const void *data, void *to);
-typedef u_bool          (*u_writerAction)(u_writer writer, void *arg);
-typedef void            (*u_writerCopyKeyAction)(const void *data, void *to);
+typedef c_bool (*u_writerCopy)(c_type type, void *data, void *to);
+typedef c_bool (*u_writerAction)(u_writer writer, c_voidp arg);
 
 #include "u_instanceHandle.h"
+#include "v_status.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -60,9 +73,7 @@ typedef void            (*u_writerCopyKeyAction)(const void *data, void *to);
 /* !!!!!!!!NOTE From here no more includes are allowed!!!!!!! */
 
 #define u_writer(w) \
-        ((u_writer)u_objectCheckType(u_object(w), U_WRITER))
-
-#define u_writerEnable(_this) u_entityEnable(u_entity(u_writer(_this)))
+        ((u_writer)u_entityCheckType(u_entity(w), U_WRITER))
 
 /**
  * \brief The User Layer Writer constructor.
@@ -91,136 +102,145 @@ typedef void            (*u_writerCopyKeyAction)(const void *data, void *to);
 
 OS_API u_writer
 u_writerNew (
-    const u_publisher publisher,
-    const os_char *name,
-    const u_topic topic,
-    const u_writerQos qos);
+    u_publisher publisher,
+    const c_char *name,
+    u_topic topic,
+    u_writerCopy copy,
+    v_writerQos qos,
+    c_bool enable);
+
+OS_API u_result
+u_writerInit(
+    u_writer _this,
+    u_publisher publisher,
+    const c_char *name,
+    u_writerCopy copy);
+
+OS_API u_result
+u_writerFree (
+    u_writer _this);
+
+OS_API u_publisher
+u_writerPublisher(
+    u_writer _this);
 
 OS_API u_result
 u_writerWrite (
-    const u_writer _this,
-    u_writerCopy copy,
+    u_writer _this,
     void *data,
-    os_timeW timestamp,
+    c_time timestamp,
     u_instanceHandle handle);
 
 OS_API u_result
 u_writerDispose (
-    const u_writer _this,
-    u_writerCopy copy,
+    u_writer _this,
     void *data,
-    os_timeW timestamp,
+    c_time timestamp,
     u_instanceHandle handle);
 
 OS_API u_result
 u_writerWriteDispose (
-    const u_writer _this,
-    u_writerCopy copy,
+    u_writer _this,
     void *data,
-    os_timeW timestamp,
+    c_time timestamp,
     u_instanceHandle handle);
 
 OS_API u_result
 u_writerRegisterInstance (
-    const u_writer _this,
-    u_writerCopy copy,
+    u_writer _this,
     void *data,
-    os_timeW timestamp,
+    c_time timestamp,
     u_instanceHandle *handle);
 
 OS_API u_result
-u_writerUnregisterInstance(
-    const u_writer _this,
-    u_writerCopy copy,
+u_writerRegisterInstanceTMP(
+    u_writer _this,
     void *data,
-    os_timeW timestamp,
+    c_time timestamp,
+    u_instanceHandle *handle,
+    u_writerCopy copy);
+
+OS_API u_result
+u_writerUnregisterInstance(
+    u_writer _this,
+    void *data,
+    c_time timestamp,
     u_instanceHandle handle);
 
 OS_API u_result
 u_writerAssertLiveliness (
-    const u_writer _this);
+    u_writer _this);
 
 OS_API u_result
 u_writerCopyKeysFromInstanceHandle (
-    const u_writer _this,
+    u_writer _this,
     u_instanceHandle handle,
-    u_writerCopyKeyAction action,
+    u_writerAction action,
     void *copyArg);
 
 /* The default copy method is only used for DBT test purposes. */
 
-OS_API v_copyin_result
+OS_API c_bool
 u_writerDefaultCopy (
     c_type type,
-    const void *data,
+    void *data,
     void *to);
 
 OS_API u_result
 u_writerLookupInstance (
-    const u_writer _this,
-    u_writerCopy copy,
+    u_writer _this,
     void *keyTemplate,
     u_instanceHandle *handle);
 
 OS_API u_result
 u_writerGetLivelinessLostStatus (
-    const u_writer _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_writer _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerGetDeadlineMissedStatus (
-    const u_writer _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_writer _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerGetIncompatibleQosStatus (
-    const u_writer _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_writer _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerGetPublicationMatchStatus (
-    const u_writer _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_writer _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerGetMatchedSubscriptions (
-    const u_writer _this,
-    u_subscriptionInfo_action action,
-    void *arg);
+    u_writer _this,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerGetMatchedSubscriptionData (
-    const u_writer _this,
+    u_writer _this,
     u_instanceHandle subscription_handle,
-    u_subscriptionInfo_action action,
-    void *arg);
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_writerWaitForAcknowledgments(
-    const u_writer _this,
-    os_duration timeout);
+    u_writer _this,
+    c_time timeout);
 
-OS_API u_result
-u_writerGetQos (
-    const u_writer _this,
-    u_writerQos *qos);
-
-OS_API u_result
-u_writerSetQos (
-    const u_writer _this,
-    const u_writerQos qos);
-
-OS_API u_result
-u_resultFromKernelWriteResult (
-    v_writeResult vr);
+OS_API c_char *
+u_writerTopicName (
+    u_writer _this);
 
 #undef OS_API
 

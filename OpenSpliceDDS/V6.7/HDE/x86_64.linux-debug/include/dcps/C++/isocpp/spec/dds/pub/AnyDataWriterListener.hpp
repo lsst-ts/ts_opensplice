@@ -30,7 +30,7 @@ class NoOpAnyDataWriterListener;
 }
 }
 
-class OMG_DDS_API dds::pub::AnyDataWriterListener
+class dds::pub::AnyDataWriterListener
 {
 public:
     virtual ~AnyDataWriterListener();
@@ -182,7 +182,7 @@ public:
 
 };
 
-class OMG_DDS_API dds::pub::NoOpAnyDataWriterListener : public virtual dds::pub::AnyDataWriterListener
+class dds::pub::NoOpAnyDataWriterListener : public virtual dds::pub::AnyDataWriterListener
 {
 public:
     virtual ~NoOpAnyDataWriterListener();

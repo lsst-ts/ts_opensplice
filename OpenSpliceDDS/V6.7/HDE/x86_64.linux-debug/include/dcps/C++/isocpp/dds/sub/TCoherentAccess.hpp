@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2012 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef OSPL_DDS_SUB_TCOHERENTACCESS_HPP_
@@ -34,20 +26,25 @@ namespace dds
 {
 namespace sub
 {
+/** @internal @bug OSPL-2476 No implementation
+* @todo Implementation required - see OSPL-2476
+* @see http://jira.prismtech.com:8080/browse/OSPL-2476 */
 
 template <typename D>
-TCoherentAccess<D>::~TCoherentAccess(void)
+TCoherentAccess<D>::~TCoherentAccess(void) {}
+
+template <typename D>
+TCoherentAccess<D>::TCoherentAccess(const dds::sub::Subscriber& sub)
 {
-    this->delegate().end();
+    throw dds::core::UnsupportedError(org::opensplice::core::exception_helper(
+                                          OSPL_CONTEXT_LITERAL("dds::core::UnsupportedError : Function not currently supported")));
 }
-
-template <typename D>
-TCoherentAccess<D>::TCoherentAccess(const dds::sub::Subscriber& sub) : dds::core::Value<D>(sub) { }
 
 template <typename D>
 void TCoherentAccess<D>::end()
 {
-    this->delegate().end();
+    throw dds::core::UnsupportedError(org::opensplice::core::exception_helper(
+                                          OSPL_CONTEXT_LITERAL("dds::core::UnsupportedError : Function not currently supported")));
 }
 }
 }

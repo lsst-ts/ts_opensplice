@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2012 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef OSPL_DDS_SUB_DETAIL_DATAREADER_HPP_
@@ -314,87 +306,72 @@ template <typename DR, typename T>
 class EventHandler : public dds::sub::detail::DataReaderEventHandler<T>
 {
 public:
-    EventHandler(const DR &dr,
+    EventHandler(const DR& dr,
                  dds::sub::DataReaderListener<T>* l)
-        : listener_(l)
-    {
-        dr_ = dds::core::WeakReference<DR>(dr);
-    }
+        : dr_(dr),
+          listener_(l)
+    { }
 public:
     virtual void
     on_requested_deadline_missed(const dds::core::status::RequestedDeadlineMissedStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_requested_deadline_missed(reader, status);
+            listener_->on_requested_deadline_missed(dr_, status);
         }
     }
 
     virtual void
     on_requested_incompatible_qos(const dds::core::status::RequestedIncompatibleQosStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_requested_incompatible_qos(reader, status);
+            listener_->on_requested_incompatible_qos(dr_, status);
         }
     }
 
     virtual void
     on_sample_rejected(const dds::core::status::SampleRejectedStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_sample_rejected(reader, status);
+            listener_->on_sample_rejected(dr_, status);
         }
     }
 
     virtual void
     on_liveliness_changed(const dds::core::status::LivelinessChangedStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_liveliness_changed(reader, status);
+            listener_->on_liveliness_changed(dr_, status);
         }
     }
 
     virtual void
     on_data_available()
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_data_available(reader);
+            listener_->on_data_available(dr_);
         }
     }
 
     virtual void
     on_subscription_matched(const dds::core::status::SubscriptionMatchedStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_subscription_matched(reader, status);
+            listener_->on_subscription_matched(dr_, status);
         }
     }
 
     virtual void
     on_sample_lost(const dds::core::status::SampleLostStatus& status)
     {
-        DR reader = dr_.lock();
-
-        if(listener_ != 0 && !dr_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_sample_lost(reader, status);
+            listener_->on_sample_lost(dr_, status);
         }
     }
 
@@ -411,7 +388,7 @@ public:
 
 
 private:
-    dds::core::WeakReference<DR> dr_;
+    DR dr_;
     dds::sub::DataReaderListener<T>* listener_;
 };
 
@@ -434,8 +411,10 @@ public:
                const ::dds::topic::Topic<T>& topic) :
         sub_(sub), topic_(topic), topic_description_(topic_), cf_topic_(dds::core::null), event_forwarder_(0)
     {
+        DDS::DataReaderQos drqos =
+            *(DDS::DomainParticipantFactory::datareader_qos_default());
         DDS::DataReader_var r = sub_->sub_->create_datareader(topic_->t_,
-                                DATAREADER_QOS_DEFAULT,
+                                drqos,
                                 0,
                                 DDS::STATUS_MASK_NONE);
 
@@ -521,7 +500,8 @@ public:
           raw_reader_(0),
           event_forwarder_(0)
     {
-        DDS::DataReader_var r = sub_->sub_->create_datareader(cftopic->idl_cftopic_.in(), DATAREADER_QOS_DEFAULT,
+        DDS::DataReaderQos drqos = *(DDS::DomainParticipantFactory::datareader_qos_default());
+        DDS::DataReader_var r = sub_->sub_->create_datareader(cftopic->idl_cftopic_.in(), drqos,
                                 event_forwarder_, DDS::STATUS_MASK_NONE);
         if(DDS::is_nil(r.in()))
         {
@@ -611,7 +591,8 @@ public:
 #ifdef _WIN32
 #pragma warning ( pop ) //re-enable warning to prevent leaking to user code, remove later
 #endif
-        DDS::DataReader_var r = sub_->sub_->create_datareader(topic->t_, DATAREADER_QOS_DEFAULT,
+        DDS::DataReaderQos drqos = *(DDS::DomainParticipantFactory::datareader_qos_default());
+        DDS::DataReader_var r = sub_->sub_->create_datareader(topic->t_, drqos,
                                 event_forwarder_, DDS::STATUS_MASK_NONE);
 
         if(r == 0)
@@ -668,9 +649,10 @@ public:
     // -- Dtor
     ~DataReader()
     {
-        if (event_forwarder_ != 0)
+        if(event_forwarder_ != 0)
         {
-            (void)raw_reader_->set_listener(0, DDS::STATUS_MASK_NONE);
+            DDS::ReturnCode_t result = raw_reader_->set_listener(0, DDS::STATUS_MASK_NONE);
+            org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::set_listener"));
             DDS::release(event_forwarder_);
         }
     }
@@ -678,8 +660,6 @@ public:
     class Selector
     {
     public:
-        Selector() {}
-
         Selector(DataReader<T>* dr) :
             dr_(dr), status_(dr_->default_status_filter()), next_instance_(
                 false), handle_(dds::core::null), has_query_(false), query_(
@@ -870,7 +850,7 @@ public:
         org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::take"));
 
         ls.delegate()->resize(ls.delegate()->data_.length());
-        typename dds::sub::detail::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
+        typename dds::sub::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
         for(unsigned int i = 0; i < ls.delegate()->data_.length(); ++i)
         {
             it->delegate().data(dynamic_cast<T*>(&ls.delegate()->data_.get_buffer()[i]));
@@ -893,7 +873,7 @@ public:
         org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::read"));
 
         ls.delegate()->resize(ls.delegate()->data_.length());
-        typename dds::sub::detail::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
+        typename dds::sub::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
         for(unsigned int i = 0; i < ls.delegate()->data_.length(); ++i)
         {
             it->delegate().data(dynamic_cast<T*>(&ls.delegate()->data_.get_buffer()[i]));
@@ -1173,24 +1153,14 @@ public:
         return raw_reader_;
     }
 
-    org::opensplice::core::DDS_DR_REF reader_ref()
-    {
-        return reader_;
-    }
-
     dds::sub::DataReaderListener<T>*
     listener()
     {
-        if (event_forwarder_ != 0) {
-            return event_forwarder_->handler()->listener();
-        } else {
-            return NULL;
-        }
+        return event_forwarder_->handler()->listener();
     }
 
     void listener(dds::sub::DataReaderListener<T>* l)
     {
-        assert(event_forwarder_ != 0);
         event_forwarder_->handler()->listener(l);
     }
 
@@ -1277,7 +1247,7 @@ private:
             org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::delete_readcondition"));
         }
         ls.delegate()->resize(ls.delegate()->data_.length());
-        typename dds::sub::detail::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
+        typename dds::sub::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
         for(unsigned int i = 0; i < ls.delegate()->data_.length(); ++i)
         {
             it->delegate().data(dynamic_cast<T*>(&ls.delegate()->data_.get_buffer()[i]));
@@ -1357,7 +1327,7 @@ private:
             org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::delete_readcondition"));
         }
         ls.delegate()->resize(ls.delegate()->data_.length());
-        typename dds::sub::detail::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
+        typename dds::sub::LoanedSamples<T>::iterator it = ls.delegate()->mbegin();
         for(unsigned int i = 0; i < ls.delegate()->data_.length(); ++i)
         {
             it->delegate().data(dynamic_cast<T*>(&ls.delegate()->data_.get_buffer()[i]));

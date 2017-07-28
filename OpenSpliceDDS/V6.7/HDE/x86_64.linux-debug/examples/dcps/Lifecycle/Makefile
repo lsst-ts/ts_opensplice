@@ -8,12 +8,12 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/sal/OpenSpliceDDS/VortexOpenSplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/examples/examples_simple.mwc
+# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/examples/examples_simple.mwc
 #
 #----------------------------------------------------------------------------
 
 
-all: sac_lifecycle_types sac_lifecycle_pub sac_lifecycle_sub sacpp_lifecycle_types sacpp_lifecycle_pub sacpp_lifecycle_sub ISO_Cxx_Lifecycle_Types ISO_Cxx_Lifecycle_Impl ISO_Cxx_Lifecycle_Pub ISO_Cxx_Lifecycle_Sub ISO_Cxx_V2_Lifecycle_Types ISO_Cxx_V2_Lifecycle_Impl ISO_Cxx_V2_Lifecycle_Pub ISO_Cxx_V2_Lifecycle_Sub
+all: sac_lifecycle_types sac_lifecycle_pub sac_lifecycle_sub sacpp_lifecycle_types sacpp_lifecycle_pub sacpp_lifecycle_sub ISO_Cxx_Lifecycle_Types ISO_Cxx_Lifecycle_Impl ISO_Cxx_Lifecycle_Pub ISO_Cxx_Lifecycle_Sub
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd c/standalone && $(MAKE) -f Makefile.sac_lifecycle_types $(@)
@@ -26,10 +26,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Impl $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Pub $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Sub $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Types $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Impl $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Pub $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Sub $(@)
 
 .PHONY: sac_lifecycle_types
 sac_lifecycle_types:
@@ -71,22 +67,6 @@ ISO_Cxx_Lifecycle_Pub: ISO_Cxx_Lifecycle_Impl
 ISO_Cxx_Lifecycle_Sub: ISO_Cxx_Lifecycle_Impl
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Sub all
 
-.PHONY: ISO_Cxx_V2_Lifecycle_Types
-ISO_Cxx_V2_Lifecycle_Types:
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Types all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Impl
-ISO_Cxx_V2_Lifecycle_Impl: ISO_Cxx_V2_Lifecycle_Types
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Impl all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Pub
-ISO_Cxx_V2_Lifecycle_Pub: ISO_Cxx_V2_Lifecycle_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Pub all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Sub
-ISO_Cxx_V2_Lifecycle_Sub: ISO_Cxx_V2_Lifecycle_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Sub all
-
 project_name_list:
 	@echo sac_lifecycle_pub
 	@echo sac_lifecycle_sub
@@ -98,7 +78,3 @@ project_name_list:
 	@echo ISO_Cxx_Lifecycle_Pub
 	@echo ISO_Cxx_Lifecycle_Sub
 	@echo ISO_Cxx_Lifecycle_Types
-	@echo ISO_Cxx_V2_Lifecycle_Impl
-	@echo ISO_Cxx_V2_Lifecycle_Pub
-	@echo ISO_Cxx_V2_Lifecycle_Sub
-	@echo ISO_Cxx_V2_Lifecycle_Types

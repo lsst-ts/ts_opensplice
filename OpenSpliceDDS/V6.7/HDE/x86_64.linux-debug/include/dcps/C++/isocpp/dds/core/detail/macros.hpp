@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2012 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef OSPL_DDS_CORE_DETAIL_MACROS_HPP_
@@ -132,7 +124,7 @@
 // Logging Macros
 #include <dds/core/detail/maplog.hpp>
 #define OMG_DDS_LOG_DETAIL(kind, msg) \
-    if (dds::core::detail::maplog(kind) >= os_reportVerbosity) os_report(dds::core::detail::maplog(kind),"isocpp-OMG_DDS_LOG",__FILE__,__LINE__,0,"%s",msg)
+    if (dds::core::detail::maplog(kind) >= os_reportVerbosity) os_report(dds::core::detail::maplog(kind),"isocpp-OMG_DDS_LOG",__FILE__,__LINE__,0,msg)
 //  std::cout << "[" << kind << "]: " << msg << std::endl;
 // ==========================================================================
 
@@ -177,7 +169,7 @@
 #endif
 
 #if defined(OSPL_DDS_CXX11)
-#  if defined (_MSC_VER) && (_MSC_VER <= 1800)
+#  if (_MSC_VER <= 1800)
 // See: http://msdn.microsoft.com/en-us/library/vstudio/hh567368.aspx
 // "These are now supported, but with this exception: For defaulted functions,
 // the use of = default to request member-wise move constructors and move

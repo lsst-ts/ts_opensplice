@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 
@@ -74,7 +66,8 @@ OS_API v_participant
 v_participantNew(
     v_kernel k,
     const c_char *name,
-    v_participantQos qos,
+    v_qos qos,
+    v_statistics s,
     c_bool enable);
 
 /** \fn void v_participantInit (v_participant _this, const c_char *name, v_qos qos);
@@ -91,6 +84,7 @@ v_participantInit(
     v_participant _this,
     const c_char *name,
     v_participantQos qos,
+    v_statistics s,
     c_bool enable);
 
 /** \fn void v_participantFree (v_participant _this)
@@ -114,19 +108,6 @@ OS_API void
 v_participantDeinit(
     v_participant _this);
 
-OS_API v_result
-v_participantEnable (
-    v_participant p);
-
-OS_API v_participantQos
-v_participantGetQos(
-    v_participant _this);
-
-OS_API v_result
-v_participantSetQos(
-    v_participant _this,
-    v_participantQos qos);
-
 /** \fn void v_participantAdd (v_participant _this, v_entity e)
  *  \brief This function will add the given entity to the participant, i.e. will
  *  add a reference from participant to the entity.
@@ -137,7 +118,7 @@ v_participantSetQos(
 OS_API void
 v_participantAdd(
     v_participant _this,
-    v_object e);
+    v_entity e);
 
 /** \fn void v_participantRemove (v_participant _this, v_entity e);
  *  \brief This function will remove the given entity from the participant.
@@ -150,7 +131,7 @@ v_participantAdd(
 OS_API void
 v_participantRemove(
     v_participant _this,
-    v_object e);
+    v_entity e);
 
 OS_API void
 v_participantNotify(
@@ -194,11 +175,6 @@ v_participantResendManagerMain(
 OS_API void
 v_participantResendManagerQuit(
     v_participant _this);
-
-OS_API v_typeRepresentation
-v_participantLookupTypeRepresentation (
-    v_participant p,
-    const os_char *typeName);
 
 #undef OS_API
 

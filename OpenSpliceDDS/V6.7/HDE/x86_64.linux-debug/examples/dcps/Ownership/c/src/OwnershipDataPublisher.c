@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 
@@ -58,7 +50,7 @@ int OSPL_MAIN (int argc, char *argv[])
    DDS_Publisher OwnershipDataPublisher;
    DDS_DataWriter OwnershipDataDataWriter;
    OwnershipData_Stock* OwnershipDataSample;
-   DDS_InstanceHandle_t userHandle = NULL;
+   DDS_InstanceHandle_t userHandle;
    const char ticker [] = "MSFT";
    DDS_unsigned_long stringLength = sizeof(ticker) - 1;
 
@@ -106,6 +98,8 @@ int OSPL_MAIN (int argc, char *argv[])
    OwnershipDataSample->publisher = DDS_string_dup(publisher_name);
    OwnershipDataSample->strength = ownership_strength;
 
+   userHandle = OwnershipData_StockDataWriter_register_instance(OwnershipDataDataWriter, OwnershipDataSample);
+
    //Publisher publishes the prices in dollars
    printf("\n=== [Publisher] Publisher %d with strength : ", ownership_strength);
    printf("\n / sending %d prices...", nb_iteration);
@@ -124,10 +118,11 @@ int OSPL_MAIN (int argc, char *argv[])
       OwnershipDataSample->price =  (DDS_float) -1.0f;
       writeStockSample(OwnershipDataDataWriter, userHandle, OwnershipDataSample);
    }
-   /* A short sleep ensures time is allowed for the sample to be written to the network.
-   If the example is running in *Single Process Mode* exiting immediately might
-   otherwise shutdown the domain services before this could occur */
+   // This to make sure the Subscriber will get all the Samples.
    os_nanoSleep(os_delay2000);
+
+   OwnershipData_StockDataWriter_unregister_instance (OwnershipDataDataWriter, OwnershipDataSample, userHandle);
+
 
    // Cleanup DDS from the created Entities.
    deleteDataWriter(OwnershipDataPublisher, OwnershipDataDataWriter);

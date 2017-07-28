@@ -1,0 +1,26 @@
+var class_shape_type_data_writer =
+[
+    [ "_ptr_type", "class_shape_type_data_writer.html#a4f17ecad2a5df6cb8bf1c570993bff6f", null ],
+    [ "_var_type", "class_shape_type_data_writer.html#a76fc265913091a1d5c4b5846d51075e6", null ],
+    [ "ShapeTypeDataWriter", "class_shape_type_data_writer.html#a89d00d2433c24c7fff88bf5309994e7c", null ],
+    [ "~ShapeTypeDataWriter", "class_shape_type_data_writer.html#a1f6c89042922241733cd687061f750ea", null ],
+    [ "_duplicate", "class_shape_type_data_writer.html#a67de883eb035d1a94048478c6357dc03", null ],
+    [ "_local_is_a", "class_shape_type_data_writer.html#a09b1ec33e7466e6db7a73ac2e45d0c2c", null ],
+    [ "_narrow", "class_shape_type_data_writer.html#adcf98d9745f74fbcdd1e3a3ad99298c0", null ],
+    [ "_nil", "class_shape_type_data_writer.html#a31bf9fff59b137caba6099f897747517", null ],
+    [ "_this", "class_shape_type_data_writer.html#ac7863e8db148a4a77dfa1954ef15ba0f", null ],
+    [ "_unchecked_narrow", "class_shape_type_data_writer.html#a7ce0b250c967900cded1ad74368be54a", null ],
+    [ "dispose", "class_shape_type_data_writer.html#a153216d2572f07560bc68e6bfb95646d", null ],
+    [ "dispose_w_timestamp", "class_shape_type_data_writer.html#a16d41031297c638348530ee075e664dc", null ],
+    [ "get_key_value", "class_shape_type_data_writer.html#a36250117e26c8dfe35791501f7c76db2", null ],
+    [ "lookup_instance", "class_shape_type_data_writer.html#ae4f784bd208b2841153751301ce2b6f2", null ],
+    [ "register_instance", "class_shape_type_data_writer.html#a9fca7ebffa66ac9a80b151a80aba999f", null ],
+    [ "register_instance_w_timestamp", "class_shape_type_data_writer.html#ac5d54183fedc7976b924abb3c43e37e2", null ],
+    [ "unregister_instance", "class_shape_type_data_writer.html#a3e698abe79d2a12d9eef9fea6b1c9be8", null ],
+    [ "unregister_instance_w_timestamp", "class_shape_type_data_writer.html#a3cb121ca2dac018432ca07989ca6e75c", null ],
+    [ "write", "class_shape_type_data_writer.html#ada42b639cda9f648d1966dcd414779aa", null ],
+    [ "write_w_timestamp", "class_shape_type_data_writer.html#a622c98544b6f9e0ed82ef2569f307474", null ],
+    [ "writedispose", "class_shape_type_data_writer.html#a01a934d85bf4e393115a773d08825a2d", null ],
+    [ "writedispose_w_timestamp", "class_shape_type_data_writer.html#ae04c307d2be6613c49ea366cc6563e48", null ],
+    [ "_local_id", "class_shape_type_data_writer.html#a65ebdf1a9dd2c913d71b5ff1767e1f8b", null ]
+];

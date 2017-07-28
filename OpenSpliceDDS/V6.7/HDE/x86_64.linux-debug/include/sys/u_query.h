@@ -1,31 +1,24 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef U_QUERY_H
 #define U_QUERY_H
 
-#include "u_types.h"
-#include "u_reader.h"
-
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "u_types.h"
+#include "u_reader.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -36,74 +29,100 @@ extern "C" {
 
 #define u_query(o) ((u_query)(o))
 
-typedef u_bool (u_queryAction)(c_object o, void *arg);
+typedef c_bool (u_queryAction)(c_object o, c_voidp arg);
 
 OS_API u_query
 u_queryNew(
-    const u_reader reader,
-    const os_char *name,
-    const os_char *predicate,
-    const os_char *params[],
-    const os_uint32 nrOfParams,
-    const u_sampleMask sampleMask);
+    u_reader source,
+    const c_char *name,
+    q_expr predicate,
+    c_value params[]);
+
+OS_API u_result
+u_queryInit(
+    u_query _this);
+
+OS_API u_result
+u_queryFree(
+    u_query _this);
+
+OS_API u_result
+u_queryDeinit(
+    u_query _this);
 
 OS_API u_result
 u_queryRead(
-    const u_query _this,
+    u_query _this,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_queryTake(
-    const u_query _this,
+    u_query _this,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
+
+OS_API void *
+u_queryReadList(
+    u_query _this,
+    c_ulong max,
+    u_readerCopyList copy,
+    c_voidp copyArg);
+
+OS_API void *
+u_queryTakeList(
+    u_query _this,
+    c_ulong max,
+    u_readerCopyList copy,
+    c_voidp copyArg);
 
 OS_API u_result
 u_queryReadInstance(
-    const u_query _this,
+    u_query _this,
     u_instanceHandle h,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_queryTakeInstance(
-    const u_query _this,
+    u_query _this,
     u_instanceHandle h,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_queryReadNextInstance(
-    const u_query _this,
+    u_query _this,
     u_instanceHandle h,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_queryTakeNextInstance(
-    const u_query _this,
+    u_query _this,
     u_instanceHandle h,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
-OS_API u_bool
+
+OS_API c_bool
 u_queryTest(
-    const u_query _this,
+    u_query _this,
     u_queryAction action,
-    void *args);
+    c_voidp args);
+
+OS_API c_bool
+u_queryTriggerTest(
+    u_query _this);
 
 OS_API u_result
 u_querySet(
-    const u_query _this,
-    const os_char *params[],
-    const os_uint32 nrOfParams);
+    u_query _this,
+    c_value params[]);
+
+OS_API u_reader
+u_querySource(
+    u_query _this);
 
 #undef OS_API
 

@@ -1,29 +1,21 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef SACPP_MAPPING_STRING_H
 #define SACPP_MAPPING_STRING_H
 
+#include "sacpp_if.h"
 #include "mapping/Memory.h"
-#include "cpp_dcps_if.h"
 
-class OS_API DDS::String_var
+class SACPP_API DDS::String_var
 {
 public:
 
@@ -64,7 +56,7 @@ protected:
  * string.
  */
 
-class OS_API DDS::String_mgr : public DDS::String_var
+class SACPP_API DDS::String_mgr : public DDS::String_var
 {
 public:
 
@@ -82,7 +74,7 @@ public:
 };
 
 
-class OS_API DDS::String_out
+class SACPP_API DDS::String_out
 {
 public:
 
@@ -109,7 +101,7 @@ private:
 };
 
 
-class OS_API DDS::String_for_seq
+class SACPP_API DDS::String_for_seq
 {
 public:
 
@@ -323,7 +315,7 @@ inline char*& DDS::String_out::ptr ()
 
 // Unbounded string sequence
 
-class OS_API DDS_DCPSUStrSeq
+class SACPP_API DDS_DCPSUStrSeq
 {
 public:
 
@@ -505,45 +497,6 @@ inline const char * DDS_DCPSUStrSeq::operator [] (DDS::ULong index) const
 {
    assert (index < m_length);
    return m_buffer[index];
-}
-
-inline void DDS_DCPSUStrSeq::replace(DDS::ULong max, DDS::ULong len, char ** data, DDS::Boolean rel)
-{
-   // First, cleanup the buffer when needed.
-   if (m_release)
-   {
-      freebuf (m_buffer);
-   }
-
-   // Now, immitate the constructor that takes data.
-   m_max = max;
-   m_length = len;
-   m_buffer =  data;
-   m_release = rel;
-   assert (m_length <= m_max);
-}
-
-inline char ** DDS_DCPSUStrSeq::get_buffer (DDS::Boolean orphan)
-{
-   char ** ret = NULL;
-
-   if (orphan)
-   {
-      if (m_release)
-      {
-         m_max = 0;
-         m_length = 0;
-         m_release = 1;
-         ret = m_buffer;
-         m_buffer = NULL;
-      }
-   }
-   else
-   {
-      ret = m_buffer;
-   }
-
-   return ret;
 }
 
 inline char * const * DDS_DCPSUStrSeq::get_buffer () const
@@ -746,8 +699,7 @@ inline DDS_DCPSUStrSeq & DDS_DCPSUStrSeq::operator = (const DDS_DCPSUStrSeq & th
       m_max = that.m_max;
       m_length = that.m_length;
       m_release = TRUE;
-      m_buffer = m_max ? allocbuf (m_max) : NULL;
-      assert(m_max >= m_length);
+      m_buffer = allocbuf (m_max);
 
       while (i < m_length)
       {
@@ -875,5 +827,5 @@ inline DDS::String DDS::String_for_seq::_retn ()
    return result;
 }
 
-#undef OS_API
+#undef SACPP_API
 #endif /* SACPP_MAPPING_STRING_H */

@@ -1,31 +1,25 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef U_SERVICEMANAGER_H
 #define U_SERVICEMANAGER_H
 
-#include "u_types.h"
-
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "u_types.h"
+#include "u_dispatcher.h"
 #include "v_serviceManager.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -40,6 +34,16 @@ extern "C" {
 #define SERVICE_PERSISTENT_NAME "Persistent"
 
 /**
+ * \brief Listeners of the service manager are called when one or more of
+ *        the known services have changed their state.
+ *
+ * \param manager A proxy to the kernel service manager.
+ * \param usrData Is the same pointer as given with the addition of the
+ *                listener.
+ */
+typedef u_dispatcherListener u_serviceManagerListener;
+
+/**
  * \brief The <code>u_serviceManager</code> cast method.
  *
  * This method casts an object to a <code>u_serviceManager</code> object.
@@ -50,21 +54,37 @@ extern "C" {
 
 /**
  * \brief Creates a proxy to the service manager in the kernel.
- *
- * For creating a proxy object representing to the service manager, a
- * participant object has to be given. The participant defines a connection
+ * 
+ * For creating a proxy object representing to the service manager, a 
+ * participant object has to be given. The participant defines a connection 
  * to the kernel, which is used to create a proxy to the service manager
  * of that kernel.
- *
+ * 
  * \param participant the participant defining the kernel connection.
  *
  * \return the created proxy to the service manager if the creation succeeded,
  *         otherwise <code>NULL</code>
  */
-OS_API u_serviceManager
+OS_API u_serviceManager 
 u_serviceManagerNew(
-    const u_participant participant);
+    u_participant participant);
 
+
+OS_API u_result
+u_serviceManagerInit(
+    u_serviceManager sm);
+
+/** \brief The <code>u_serviceManager</code> destructor.
+ *
+ * The destructor frees the proxy to the kernel service manager.
+ *
+ * \param serviceManager The proxy to the kernel service manager.
+ * \return U_RESULT_OK on a succesful operation or <br>
+ *         U_RESULT_ILL_PARAM if the specified service manager is incorrect.
+ */
+OS_API u_result
+u_serviceManagerFree(
+    u_serviceManager serviceManager);
 
 /**
  * \brief Retrieves the state kind of a given service.
@@ -72,15 +92,15 @@ u_serviceManagerNew(
  * The state kind of the given service, identified by a name, is returned. When
  * the service is not known the state <code>STATE_NONE</code> is returned.
  *
- * \param _this        the proxy to the kernel service manager.
- * \param serviceName  the name of the service, which state kind is requested.
+ * \param serviceManager the proxy to the kernel service manager.
+ * \param serviceName    the name of the service, which state kind is requested.
  *
  * \return The service state kind of the given service.
  */
 OS_API v_serviceStateKind
 u_serviceManagerGetServiceStateKind(
-    const u_serviceManager _this,
-    const os_char *serviceName);
+    u_serviceManager serviceManager,
+    const c_char *serviceName);
 
 /**
  * \brief Retrieves all known services with the given state kind.
@@ -89,15 +109,15 @@ u_serviceManagerGetServiceStateKind(
  * When no services are found with the given state kind, an empty iterator is
  * returned.
  *
- * \param _this  the proxy to the kernel service manager.
- * \param kind   the state kind of interest.
+ * \param serviceManager the proxy to the kernel service manager.
+ * \param kind           the state kind of interest.
  *
  * \return An iterator object containing all services with the given state kind.
  */
 OS_API c_iter
 u_serviceManagerGetServices(
-    const u_serviceManager _this,
-    const v_serviceStateKind kind);
+    u_serviceManager serviceManager,
+    v_serviceStateKind kind);
 
 /**
  * \brief Removes the service with a given name from the servicemanager set.
@@ -105,14 +125,14 @@ u_serviceManagerGetServices(
  * A service with the given name will be removed from the serviceSet.
  * This function should be called when the service kind of the service is changed to STATE_DIED
  *
- * \param _this  a reference to the service manager.
- * \param name   the name of the service.
+ * \param serviceManager a reference to the service manager.
+ * \param name           the name of the service.
  *
  * \return a boolean with the value TRUE if the remove was successful and FALSE if not.
  */
 OS_API c_bool
 u_serviceManagerRemoveService(
-    const u_serviceManager _this,
+    u_serviceManager _this,
     const c_char *serviceName);
 
 #undef OS_API
@@ -121,4 +141,4 @@ u_serviceManagerRemoveService(
 }
 #endif
 
-#endif
+#endif /* U_SERVICE_H */

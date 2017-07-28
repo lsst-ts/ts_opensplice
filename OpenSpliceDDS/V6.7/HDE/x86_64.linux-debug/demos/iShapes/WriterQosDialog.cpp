@@ -60,16 +60,7 @@ WriterQosDialog::get_qos()
         qos_ << dds::core::policy::OwnershipStrength(qosForm_.strengthSpinBox->value());
     }
 
-    if (qosForm_.keepLastWButton->isChecked())
-    {
-        qos_ << dds::core::policy::History::KeepLast(qosForm_.depthSpinBoxW->value());
-    }
-    else
-    {
-        dds::core::policy::History h = dds::core::policy::History::KeepAll();
-        h.depth(-1);
-        qos_ << h;
-    }
+    qos_ << dds::core::policy::History::KeepLast(100);
     return qos_;
 }
 }}

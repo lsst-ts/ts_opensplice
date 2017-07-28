@@ -32,9 +32,6 @@ namespace core
 namespace status
 {
 
-/**
- * \copydoc DCPS_Status_InconsistentTopic
- */
 template <typename D>
 class TInconsistentTopicStatus : public dds::core::Value<D>
 {
@@ -46,9 +43,6 @@ public:
     int32_t total_count_change() const;
 };
 
-/**
- * \copydoc DCPS_Status_SampleLost
- */
 template <typename D>
 class TSampleLostStatus : public dds::core::Value<D>
 {
@@ -70,9 +64,6 @@ public:
 };
 
 
-/**
- * \copydoc DCPS_Status_SampleRejected
- */
 template <typename D>
 class TSampleRejectedStatus : public dds::core::Value<D>
 {
@@ -104,9 +95,6 @@ public:
     const dds::core::InstanceHandle last_instance_handle() const;
 };
 
-/**
- * \copydoc DCPS_Status_LivelinessLost
- */
 template <typename D>
 class TLivelinessLostStatus : public dds::core::Value<D>
 {
@@ -130,9 +118,6 @@ public:
     int32_t total_count_change() const;
 };
 
-/**
- * \copydoc DCPS_Status_LivelinessChanged
- */
 template <typename D>
 class TLivelinessChangedStatus : public dds::core::Value<D>
 {
@@ -180,9 +165,6 @@ public:
     const dds::core::InstanceHandle last_publication_handle() const;
 };
 
-/**
- * \copydoc DCPS_Status_OfferedDeadlineMissed
- */
 template <typename D>
 class TOfferedDeadlineMissedStatus : public dds::core::Value<D>
 {
@@ -211,9 +193,6 @@ public:
     const dds::core::InstanceHandle last_instance_handle() const;
 };
 
-/**
- * \copydoc DCPS_Status_RequestedDeadlineMissed
- */
 template <typename D>
 class TRequestedDeadlineMissedStatus : public dds::core::Value<D>
 {
@@ -243,9 +222,7 @@ public:
 };
 
 
-/**
- * \copydoc DCPS_Status_OfferedIncompatibleQoS
- */
+
 template <typename D>
 class TOfferedIncompatibleQosStatus : public dds::core::Value<D>
 {
@@ -292,9 +269,6 @@ public:
     policies(dds::core::policy::QosPolicyCountSeq& dst) const;
 };
 
-/**
- * \copydoc DCPS_Status_RequestedIncompatibleQoS
- */
 template <typename D>
 class TRequestedIncompatibleQosStatus : public dds::core::Value<D>
 {
@@ -341,9 +315,6 @@ public:
     policies(dds::core::policy::QosPolicyCountSeq& dst) const;
 };
 
-/**
- * \copydoc DCPS_Status_PublicationMatched
- */
 template <typename D>
 class TPublicationMatchedStatus : public dds::core::Value<D>
 {
@@ -384,9 +355,6 @@ public:
     const dds::core::InstanceHandle last_subscription_handle() const;
 };
 
-/**
- * \copydoc DCPS_Status_SubscriptionMatched
- */
 template <typename D>
 class TSubscriptionMatchedStatus : public dds::core::Value<D>
 {

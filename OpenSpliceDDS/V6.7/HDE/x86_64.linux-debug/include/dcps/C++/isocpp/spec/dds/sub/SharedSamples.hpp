@@ -16,7 +16,7 @@
 * limitations under the License.
 */
 #ifndef OMG_DDS_SUB_SHARED_SAMPLES_HPP_
-#define OMG_DDS_SUB_SHARED_SAMPLES_HPP_
+#define OMG_DDS_SUB_SHARED_SAMPLES_HPP__
 
 
 #include <dds/core/Reference.hpp>
@@ -42,20 +42,16 @@ class SharedSamples;
  */
 template <typename T,
           template <typename Q> class DELEGATE>
-class dds::sub::SharedSamples
+class dds::sub::SharedSamples : public dds::core::Reference< DELEGATE<T> >
 {
 public:
     typedef T                     DataType;
+    typedef typename DELEGATE<T>::iterator              iterator;
     typedef typename DELEGATE<T>::const_iterator        const_iterator;
 
     typedef typename dds::core::smart_ptr_traits< DELEGATE<T> >::ref_type DELEGATE_REF_T;
 
 public:
-    /**
-     * Constructs a SharedSamples instance.
-     */
-    SharedSamples();
-
     /**
      * Constructs an instance of SharedSamples and
      * removes the ownership of the loan from the LoanedSamples.
@@ -68,11 +64,6 @@ public:
      *
      */
     SharedSamples(dds::sub::LoanedSamples<T> ls);
-
-    /**
-     * Copies a SharedSamples instance.
-     */
-    SharedSamples(const SharedSamples& other);
 
     ~SharedSamples();
 
@@ -113,8 +104,6 @@ public:
      */
     uint32_t length() const;
 
-private:
-    DELEGATE_REF_T delegate_;
 };
 
 #endif /* OMG_DDS_SUB_SHARED_SAMPLES_HPP_ */

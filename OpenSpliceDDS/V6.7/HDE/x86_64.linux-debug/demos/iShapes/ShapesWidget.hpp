@@ -29,14 +29,6 @@ public:
 public:
     void addFilter(const QRect& filter);
     void displayFilter(const QRect& currentFilter);
-    bool paused()
-    {
-        return paused_;
-    }
-    void paused(const bool p)
-    {
-        paused_ = p;
-    }
 
 public slots:
     void nextAnimationFrame();
@@ -56,7 +48,6 @@ private:
     QPixmap logo_;
     QPixmap ptpcm_;
     QPixmap simd_;
-    bool paused_;
 };
 }
 }

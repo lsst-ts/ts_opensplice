@@ -1,14 +1,14 @@
 #----------------------------------------------------------------------------
 #       Macros
 #----------------------------------------------------------------------------
-JAVAC         = $(SPLICE_JAVAC)
+JAVAC         = javac
 JAR           = jar
 JAVACFLAGS    = $(GENFLAGS) -sourcepath ../src
 CLASSEXT      = .class
 CLASSDIR      = classes/
 OUTPUT_OPTION = -d $(CLASSDIR)
 COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
-JAVACCPATH    = "$(SPLICE_EXTRA_CP):saj_waitset_types.jar:$(CLASSDIR):../../../../../jar/dcpssaj.jar:"
+JAVACCPATH    = "saj_waitset_types.jar:$(CLASSDIR):../../../../../jar/dcpssaj.jar:"
 MAKEFILE      = Makefile.saj_waitset_sub
 DEPENDENCIES  = $(MAKEFILE)
 LTARGETDIR    = ./

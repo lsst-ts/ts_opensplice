@@ -1,49 +1,37 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef U_READER_H
 #define U_READER_H
 
-
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "v_status.h"
+#include "os_if.h"
 #include "v_readerSample.h"
 
-typedef v_actionResult u_actionResult;       /* unsigned long */
-typedef void *u_readerActionArg;
-
-typedef u_actionResult
+typedef v_actionResult
 (*u_readerAction)(
     c_object o,
-    u_readerActionArg copyArg);
+    c_voidp copyArg);
 
-/* Because of the include chain and the availability of u_readerAction;
- * we need to include u_entity here, after u_readerAction declaration.
- * To prevent [extern "C"] nesting, we do it outside that. */
-#if defined (__cplusplus)
-}
-#endif
+typedef c_voidp
+(*u_readerCopyList)(
+    v_collection c,
+    c_iter list,
+    c_voidp copyArg);
+
 #include "u_entity.h"
-#if defined (__cplusplus)
-extern "C" {
-#endif
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -55,134 +43,150 @@ extern "C" {
 #define u_reader(o) ((u_reader)(o))
 
 OS_API u_result
+u_readerInit (
+    u_reader _this);
+
+OS_API u_result
+u_readerDeinit (
+    u_reader _this);
+
+OS_API u_result
 u_readerGetDeadlineMissedStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetIncompatibleQosStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetSampleRejectedStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetLivelinessChangedStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetSampleLostStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetSubscriptionMatchStatus(
-    const u_reader _this,
-    u_bool reset,
-    u_statusAction action,
-    void *arg);
+    u_reader _this,
+    c_bool reset,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetMatchedPublications (
-    const u_reader _this,
-    u_publicationInfo_action action,
-    void *arg);
+	u_reader _this,
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerGetMatchedPublicationData (
-    const u_reader _this,
+    u_reader _this,
     u_instanceHandle publication_handle,
-    u_publicationInfo_action action,
-    void *arg);
+    v_statusAction action,
+    c_voidp arg);
 
 OS_API u_result
 u_readerRead (
-    const u_reader _this,
-    u_sampleMask mask,
+    u_reader _this,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_readerTake (
-    const u_reader _this,
-    u_sampleMask mask,
+    u_reader _this,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
+
+OS_API void *
+u_readerReadList (
+    u_reader _this,
+    c_ulong max,
+    u_readerCopyList copy,
+    c_voidp copyArg);
+
+OS_API void *
+u_readerTakeList (
+    u_reader _this,
+    c_ulong max,
+    u_readerCopyList copy,
+    c_voidp copyArg);
 
 OS_API u_result
 u_readerReadInstance (
-    const u_reader _this,
+    u_reader _this,
     u_instanceHandle handle,
-    u_sampleMask mask,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_readerTakeInstance (
-    const u_reader _this,
+    u_reader _this,
     u_instanceHandle handle,
-    u_sampleMask mask,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_readerReadNextInstance (
-    const u_reader _this,
+    u_reader _this,
     u_instanceHandle handle,
-    u_sampleMask mask,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
 OS_API u_result
 u_readerTakeNextInstance (
-    const u_reader _this,
+    u_reader _this,
     u_instanceHandle handle,
-    u_sampleMask mask,
     u_readerAction action,
-    void *actionArg,
-    const os_duration timeout);
+    c_voidp actionArg);
 
-/** \brief Protect against process termination during a copy-out operation.
- *
- * This method is used to suspend the termination request of the domain
- * during the copying of the data to protect the application for data
- * corruption. When the copy-out action is finished
- * u_readerProtectCopyOutExit must be called.
- *
- * Note that this call may only be used when reading from shared resources.
- */
 OS_API u_result
-u_readerProtectCopyOutEnter(
-    u_entity _this);
+u_readerAddQuery(
+    u_reader _this,
+    u_query query);
 
-/** \brief Unprotect against process termination after a copy-out operation.
- *
- * This method is used to release the protection of the domain when the
- * copy-out operation has finished which was set by a call to
- * u_readerProtectCopyOutEnter
- */
-OS_API void
-u_readerProtectCopyOutExit(
-    u_entity _this);
+OS_API u_result
+u_readerRemoveQuery(
+    u_reader _this,
+    u_query query);
+
+OS_API c_bool
+u_readerContainsQuery(
+    u_reader _this,
+    u_query query);
+
+OS_API c_long
+u_readerQueryCount(
+    u_reader _this);
+
+OS_API c_iter
+u_readerLookupQueries(
+    u_reader _this);
+
+OS_API c_bool
+u_readerWalkQueries(
+    u_reader _this,
+    u_readerAction action,
+    c_voidp actionArg);
 
 #undef OS_API
 

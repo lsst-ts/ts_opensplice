@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2012 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef OSPL_DDS_PUB_DETAIL_DATAWRITER_HPP_
@@ -150,32 +142,27 @@ template <typename DW, typename T>
 class EventHandler : public dds::pub::detail::DataWriterEventHandler<T>
 {
 public:
-    EventHandler(const DW &dw,
+    EventHandler(const DW& dw,
                  dds::pub::DataWriterListener<T>* l)
-        : listener_(l)
-    {
-        dw_ = dds::core::WeakReference<DW>(dw);
-    }
+        : dw_(dw),
+          listener_(l)
+    { }
 public:
     virtual void
     on_offered_deadline_missed(const dds::core::status::OfferedDeadlineMissedStatus& status)
     {
-        DW writer = dw_.lock();
-
-        if(listener_ != 0 && !dw_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_offered_deadline_missed(writer, status);
+            listener_->on_offered_deadline_missed(dw_, status);
         }
     }
 
     virtual void
     on_offered_incompatible_qos(const dds::core::status::OfferedIncompatibleQosStatus& status)
     {
-        DW writer = dw_.lock();
-
-        if(listener_ != 0 && !dw_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_offered_incompatible_qos(writer, status);
+            listener_->on_offered_incompatible_qos(dw_, status);
         }
     }
 
@@ -183,22 +170,18 @@ public:
     virtual void
     on_liveliness_lost(const dds::core::status::LivelinessLostStatus& status)
     {
-        DW writer = dw_.lock();
-
-        if(listener_ != 0 && !dw_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_liveliness_lost(writer, status);
+            listener_->on_liveliness_lost(dw_, status);
         }
     }
 
     virtual void
     on_publication_matched(const dds::core::status::PublicationMatchedStatus& status)
     {
-        DW writer = dw_.lock();
-
-        if(listener_ != 0 && !dw_.expired())
+        if(listener_ != 0)
         {
-            listener_->on_publication_matched(writer, status);
+            listener_->on_publication_matched(dw_, status);
         }
     }
 
@@ -215,7 +198,7 @@ public:
 
 
 private:
-    dds::core::WeakReference<DW> dw_;
+    DW dw_;
     dds::pub::DataWriterListener<T>* listener_;
 };
 
@@ -263,9 +246,10 @@ public:
 
     virtual ~DataWriter()
     {
-        if (event_forwarder_ != 0)
+        if(event_forwarder_ != 0)
         {
-            (void)raw_writer_->set_listener(0, DDS::STATUS_MASK_NONE);
+            DDS::ReturnCode_t result = raw_writer_->set_listener(0, DDS::STATUS_MASK_NONE);
+            org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::set_listener"));
             DDS::release(event_forwarder_);
         }
     }
@@ -348,8 +332,7 @@ public:
     void unregister_instance(const ::dds::core::InstanceHandle& i)
     {
         T sample;
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, i->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::unregister_instance"));
+        raw_writer_->get_key_value(sample, i->handle());
         raw_writer_->unregister_instance(sample, i->handle());
     }
 
@@ -362,16 +345,16 @@ public:
         ddsTime.nanosec = ts.nanosec();
 
         T sample;
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, i->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::unregister_instance"));
+        raw_writer_->get_key_value(sample, i->handle());
+
         raw_writer_->unregister_instance_w_timestamp(sample, i->handle(), ddsTime);
     }
 
     void dispose_instance(const ::dds::core::InstanceHandle& i)
     {
         T sample;
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, i->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::dispose_instance"));
+        raw_writer_->get_key_value(sample, i->handle());
+
         raw_writer_->dispose(sample, i->handle());
     }
 
@@ -384,125 +367,25 @@ public:
         ddsTime.nanosec = ts.nanosec();
 
         T sample;
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, i->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::dispose_instance"));
+        raw_writer_->get_key_value(sample, i->handle());
+
         raw_writer_->dispose_w_timestamp(sample, i->handle(), ddsTime);
-    }
-
-    void writedispose(const T& sample)
-    {
-        DDS::ReturnCode_t result = raw_writer_->writedispose(sample, DDS::HANDLE_NIL);
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::write"));
-    }
-
-    void writedispose(const T& sample, const dds::core::Time& timestamp)
-    {
-        DDS::Time_t ddsTime;
-        /** @internal @bug OSPL-2308 RTF Time-ish coercion issue
-            @see http://jira.prismtech.com:8080/browse/OSPL-2308 */
-        ddsTime.sec = static_cast<DDS::Long>(timestamp.sec());
-        ddsTime.nanosec = timestamp.nanosec();
-
-        DDS::ReturnCode_t result = raw_writer_->writedispose_w_timestamp(sample, DDS::HANDLE_NIL, ddsTime);
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::write_w_timestamp"));
-    }
-
-    void writedispose(const T& sample, const ::dds::core::InstanceHandle& instance)
-    {
-        DDS::ReturnCode_t result = raw_writer_->writedispose(sample, instance->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::write"));
-    }
-
-    void writedispose(const T& sample,
-               const ::dds::core::InstanceHandle& instance,
-               const dds::core::Time& timestamp)
-    {
-        DDS::Time_t ddsTime;
-        /** @internal @bug OSPL-2308 RTF Time-ish coercion issue
-            @see http://jira.prismtech.com:8080/browse/OSPL-2308 */
-        ddsTime.sec = static_cast<DDS::Long>(timestamp.sec());
-        ddsTime.nanosec = timestamp.nanosec();
-
-        DDS::ReturnCode_t result = raw_writer_->writedispose_w_timestamp(sample, instance->handle(), ddsTime);
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::write_w_timestamp"));
-    }
-
-    template <typename FWIterator>
-    void
-    writedispose(const FWIterator& begin, const FWIterator& end)
-    {
-        FWIterator b = begin;
-        while(b != end)
-        {
-            this->writedispose(*b);
-            ++b;
-        }
-    }
-
-    template <typename FWIterator>
-    void
-    writedispose(const FWIterator& begin, const FWIterator& end,
-          const dds::core::Time& timestamp)
-    {
-        FWIterator b = begin;
-        while(b != end)
-        {
-            this->writedispose(*b, timestamp);
-            ++b;
-        }
-    }
-
-    template <typename SamplesFWIterator, typename HandlesFWIterator>
-    void
-    writedispose(const SamplesFWIterator& data_begin,
-          const SamplesFWIterator& data_end,
-          const HandlesFWIterator& handle_begin,
-          const HandlesFWIterator& handle_end)
-    {
-        SamplesFWIterator data = data_begin;
-        HandlesFWIterator handle = handle_begin;
-
-        while(data != data_end && handle != handle_end)
-        {
-            this->writedispose(*data, *handle);
-            ++data;
-            ++handle;
-        }
-    }
-
-    template <typename SamplesFWIterator, typename HandlesFWIterator>
-    void
-    writedispose(const SamplesFWIterator& data_begin,
-          const SamplesFWIterator& data_end,
-          const HandlesFWIterator& handle_begin,
-          const HandlesFWIterator& handle_end,
-          const dds::core::Time& timestamp)
-    {
-        SamplesFWIterator data = data_begin;
-        HandlesFWIterator handle = handle_begin;
-
-        while(data != data_end && handle != handle_end)
-        {
-            this->writedispose(*data, *handle, timestamp);
-            ++data;
-            ++handle;
-        }
     }
 
     dds::topic::TopicInstance<T>& key_value(dds::topic::TopicInstance<T>& i, const ::dds::core::InstanceHandle& h)
     {
         T sample;
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, h->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::key_value"));
+        raw_writer_->get_key_value(sample, h->handle());
+
         i.handle(h);
         i.sample(sample);
+
         return i;
     }
 
     T& key_value(T& sample, const ::dds::core::InstanceHandle& h)
     {
-        DDS::ReturnCode_t result = raw_writer_->get_key_value(sample, h->handle());
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::key_value"));
+        raw_writer_->get_key_value(sample, h->handle());
         return sample;
     }
 
@@ -572,11 +455,7 @@ public:
 
     dds::pub::DataWriterListener<T>* listener()
     {
-        if (event_forwarder_ != 0) {
-            return event_forwarder_->handler()->listener();
-        } else {
-            return NULL;
-        }
+        return event_forwarder_->handler()->listener();
     }
 
     //========================================================================

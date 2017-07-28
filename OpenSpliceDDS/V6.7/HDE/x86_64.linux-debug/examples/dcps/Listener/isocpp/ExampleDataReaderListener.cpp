@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 
@@ -41,6 +33,26 @@ void ExampleDataReaderListener::on_requested_deadline_missed(
     deadline_expired_ = true;
 }
 
+void ExampleDataReaderListener::on_requested_incompatible_qos(
+    dds::sub::DataReader<ListenerData::Msg>& the_reader,
+    const dds::core::status::RequestedIncompatibleQosStatus& status)
+{
+    std::cout << "\n=== [ExampleDataReaderListener::on_requested_incompatible_qos] : triggered" << std::endl;
+}
+
+void ExampleDataReaderListener::on_sample_rejected(
+    dds::sub::DataReader<ListenerData::Msg>& the_reader,
+    const dds::core::status::SampleRejectedStatus& status)
+{
+    std::cout << "\n=== [ExampleDataReaderListener::on_sample_rejected] : triggered" << std::endl;
+}
+
+void ExampleDataReaderListener::on_liveliness_changed(
+    dds::sub::DataReader<ListenerData::Msg>& the_reader,
+    const dds::core::status::LivelinessChangedStatus& status)
+{
+    std::cout << "\n=== [ExampleDataReaderListener::on_liveliness_changed] : triggered" << std::endl;
+}
 
 void ExampleDataReaderListener::on_data_available(dds::sub::DataReader<ListenerData::Msg>& dr)
 {
@@ -58,6 +70,20 @@ void ExampleDataReaderListener::on_data_available(dds::sub::DataReader<ListenerD
                 std::cout << "    Message : \"" << sample->data().message() << "\"" << std::endl;
         }
     }
+}
+
+void ExampleDataReaderListener::on_subscription_matched(
+    dds::sub::DataReader<ListenerData::Msg>& the_reader,
+    const dds::core::status::SubscriptionMatchedStatus& status)
+{
+    std::cout << "\n=== [ExampleDataReaderListener::on_subscription_matched] : triggered" << std::endl;
+}
+
+void ExampleDataReaderListener::on_sample_lost(
+    dds::sub::DataReader<ListenerData::Msg>& the_reader,
+    const dds::core::status::SampleLostStatus& status)
+{
+    std::cout << "\n=== [ExampleDataReaderListener::on_sample_lost] : triggered" << std::endl;
 }
 
 }}}}

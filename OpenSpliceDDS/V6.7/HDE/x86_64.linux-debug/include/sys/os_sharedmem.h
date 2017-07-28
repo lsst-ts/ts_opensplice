@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 /****************************************************************
@@ -35,7 +27,6 @@ extern "C" {
 
 #include "os_defs.h"
 #include "os_if.h"
-#include "os_time.h"
 #include "os_process.h"
 #include "os_signal.h"
 #include "os_iterator.h"
@@ -79,17 +70,6 @@ typedef struct os_sharedAttr {
 #endif
 } os_sharedAttr;
 
-/** \brief Definition of states of os modules (like shared memory)
- */
-typedef enum os_state {
-    OS_STATE_NONE,
-    OS_STATE_INITIALIZING,
-    OS_STATE_OPERATIONAL,
-    OS_STATE_TERMINATING,
-    OS_STATE_TERMINATED
-} os_state;
-
-
 /** \brief Create a handle for shared memory operations
  *
  * The identified \b name and \b sharedAttr values
@@ -110,7 +90,7 @@ os_sharedCreateHandle(
 
 OS_API void
 os_sharedMemoryRegisterUserProcess(
-    const os_char* domainName,
+    os_char* domainName,
     os_procId pid);
 
 /** \brief Destroy a handle for shared memory operations
@@ -167,7 +147,7 @@ os_sharedSize(
  * - assertion failure: sharedHandle = NULL ||
  *     sharedHandle is inconsistent
  * - returns os_resultSuccess if
- *     The shared memory is created successfully
+ *     The shared memory is created successfuly
  * - returns os_resultFail if
  *     The shared memory is not created because of a failure
  */
@@ -175,37 +155,6 @@ OS_API os_result
 os_sharedMemoryCreate(
     os_sharedHandle sharedHandle,
     os_address size);
-
-
-typedef enum {
-    OS_SHM_PROC_ATTACHED,
-    OS_SHM_PROC_DETACHED,
-    OS_SHM_PROC_TERMINATED
-} os_shmProcState;
-
-OS_CLASS(os_shmClient);
-OS_STRUCT(os_shmClient){
-    os_procId procId;
-    os_shmProcState state;
-    os_shmClient next;
-};
-
-OS_API void
-os_shmClientFree(os_shmClient client);
-
-OS_API os_result
-os_sharedMemoryWaitForClientChanges(
-    os_sharedHandle sharedHandle,
-    os_duration maxBlockingTime,
-    os_shmClient* changedClients);
-
-typedef void (*os_onSharedMemoryManagerDiedCallback)(os_sharedHandle sharedHandle, void *args);
-
-OS_API os_result
-os_sharedMemoryRegisterServerDiedCallback(
-    os_sharedHandle sharedHandle,
-    os_onSharedMemoryManagerDiedCallback onServerDied,
-    void *args);
 
 /** \brief Destroy shared memory
  *
@@ -221,9 +170,9 @@ os_sharedMemoryRegisterServerDiedCallback(
  * - assertion failure: sharedHandle = NULL ||
  *     sharedHandle is inconsistent
  * - returns os_resultSuccess if
- *     The shared memory is destroyed successfully
+ *     The shared memory is destroyed successfuly
  * - returns os_resultFail if
- *     The shared memory is not destroyed because of a failure
+ *     The shared memory is not detroyed because of a failure
  */
 OS_API os_result
 os_sharedMemoryDestroy(
@@ -242,7 +191,7 @@ os_sharedMemoryDestroy(
  * - assertion failure: sharedHandle = NULL ||
  *     sharedHandle is inconsistent
  * - returns os_resultSuccess if
- *     The shared memory is successfully attached
+ *     The shared memory is successfuly attached
  * - returns os_resultFail if
  *     The shared memory is not attached because of a failure
  */
@@ -262,38 +211,12 @@ os_sharedMemoryAttach(
  * - assertion failure: sharedHandle = NULL ||
  *     sharedHandle is inconsistent
  * - returns os_resultSuccess if
- *     The shared memory is successfully detached
+ *     The shared memory is successfuly detached
  * - returns os_resultFail if
  *     The shared memory is not detached because of a failure
  */
 OS_API os_result
 os_sharedMemoryDetach(
-    os_sharedHandle sharedHandle);
-
-/** \brief Detach from the named shared memory without cleanup
- *
- * Detach from the identified shared memory referenced by name
- * and sharedAttr and address. This function is to be used when
- * the process has to detach from shared memory but did not
- * cleanup it's shared memory resources. In this case the
- * shared memory monitor is not signaled that the process has
- * detached from shared memory and at the moment the process
- * terminates the shared memory monitor will be signaled and
- * will try to cleanup these resources.
- *
- * Precondition:
- * - sharedHandle is previously created with \b os_sharedCreateHandle
- *
- * Possible Results:
- * - assertion failure: sharedHandle = NULL ||
- *     sharedHandle is inconsistent
- * - returns os_resultSuccess if
- *     The shared memory is successfully detached
- * - returns os_resultFail if
- *     The shared memory is not detached because of a failure
- */
-OS_API os_result
-os_sharedMemoryDetachUnclean(
     os_sharedHandle sharedHandle);
 
 /** \brief Set the default shared memory attributes
@@ -306,11 +229,11 @@ os_sharedMemoryDetachUnclean(
  *
  * Possible Results:
  * - assertion failure: sharedAttr = NULL
+ * - returns os_resultSuccess
  */
-OS_API void
+OS_API os_result
 os_sharedAttrInit(
-        os_sharedAttr *sharedAttr)
-    __nonnull_all__;
+    os_sharedAttr *sharedAttr);
 
 
 /** \brief retrieve the domain name belonging to a domain id
@@ -336,10 +259,6 @@ os_findKeyFile(
     const char * name);
 
 OS_API char *
-os_findKeyFileById(
-    os_int32 domainId);
-
-OS_API char *
 os_findKeyFileByNameAndId(
     const char *name,
     const os_int32 id);
@@ -361,14 +280,9 @@ OS_API os_int32
 os_sharedMemoryListDomainNames(
     os_iter nameList);
 
-OS_API void
+OS_API os_int32
 os_sharedMemoryListDomainNamesFree(
     os_iter nameList);
-
-OS_API os_int32
-os_sharedMemoryListDomainIds(
-    os_int32 **idList,
-    os_int32  *listSize);
 
 OS_API os_int32
 os_destroyKeyFile(
@@ -378,27 +292,6 @@ OS_API os_int32
 os_sharedMemorySegmentFree(
     const char * fname);
 
-OS_API os_state
-os_sharedMemoryGetState(
-    os_sharedHandle sharedHandle);
-
-OS_API os_result
-os_sharedMemorySetState(
-    os_sharedHandle sharedHandle,
-    os_state state);
-
-/*
- * Some platforms can have an race condition between creating and attaching the shared memory
- * There is implemented a lock file mechanism to make creation, attaching and filling the domain
- * in a locked action. (OSPL-9085)
- */
-OS_API os_result
-os_sharedMemoryLock(
-    os_sharedHandle sharedHandle);
-
-OS_API void
-os_sharedMemoryUnlock(
-    os_sharedHandle sharedHandle);
 
 #undef OS_API
 

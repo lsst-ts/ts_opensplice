@@ -8,20 +8,18 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/sal/OpenSpliceDDS/VortexOpenSplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/examples/examples_simple.mwc
+# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/examples/examples_simple.mwc
 #
 #----------------------------------------------------------------------------
 
 
-all: sac_builtintopics_sub sacpp_builtintopics_sub ISO_Cxx_BuiltinTopics_Impl ISO_Cxx_BuiltinTopics_Sub ISO_Cxx_V2_BuiltinTopics_Impl ISO_Cxx_V2_BuiltinTopics_Sub sac_contentfilteredtopic_types sac_contentfilteredtopic_pub sac_contentfilteredtopic_sub sacpp_contentfilteredtopic_types sacpp_contentfilteredtopic_pub sacpp_contentfilteredtopic_sub ISO_Cxx_ContentFiltering_Types ISO_Cxx_ContentFiltering_Impl ISO_Cxx_ContentFiltering_Pub ISO_Cxx_ContentFiltering_Sub ISO_Cxx_V2_ContentFiltering_Types ISO_Cxx_V2_ContentFiltering_Impl ISO_Cxx_V2_ContentFiltering_Pub ISO_Cxx_V2_ContentFiltering_Sub sac_helloworld_types sac_helloworld_pub sac_helloworld_sub sacpp_helloworld_types sacpp_helloworld_pub sacpp_helloworld_sub ISO_Cxx_HelloWorld_Types ISO_Cxx_HelloWorld_Impl ISO_Cxx_HelloWorld_Pub ISO_Cxx_HelloWorld_Sub ISO_Cxx_V2_HelloWorld_Types ISO_Cxx_V2_HelloWorld_Impl ISO_Cxx_V2_HelloWorld_Pub ISO_Cxx_V2_HelloWorld_Sub sac_lifecycle_types sac_lifecycle_pub sac_lifecycle_sub sacpp_lifecycle_types sacpp_lifecycle_pub sacpp_lifecycle_sub ISO_Cxx_Lifecycle_Types ISO_Cxx_Lifecycle_Impl ISO_Cxx_Lifecycle_Pub ISO_Cxx_Lifecycle_Sub ISO_Cxx_V2_Lifecycle_Types ISO_Cxx_V2_Lifecycle_Impl ISO_Cxx_V2_Lifecycle_Pub ISO_Cxx_V2_Lifecycle_Sub sac_listener_types sac_listener_pub sac_listener_sub sacpp_listener_types sacpp_listener_pub sacpp_listener_sub ISO_Cxx_Listener_Types ISO_Cxx_Listener_Impl ISO_Cxx_Listener_Pub ISO_Cxx_Listener_Sub ISO_Cxx_V2_Listener_Types ISO_Cxx_V2_Listener_Impl ISO_Cxx_V2_Listener_Pub ISO_Cxx_V2_Listener_Sub sac_ownership_types sac_ownership_pub sac_ownership_sub sacpp_ownership_types sacpp_ownership_pub sacpp_ownership_sub ISO_Cxx_Ownership_Types ISO_Cxx_Ownership_Impl ISO_Cxx_Ownership_Pub ISO_Cxx_Ownership_Sub ISO_Cxx_V2_Ownership_Types ISO_Cxx_V2_Ownership_Impl ISO_Cxx_V2_Ownership_Pub ISO_Cxx_V2_Ownership_Sub sac_pingpong_types sac_pingpong_ping sac_pingpong_pong sacpp_pingpong_types sacpp_pingpong_ping sacpp_pingpong_pong sac_querycondition_types sac_querycondition_pub sac_querycondition_sub sacpp_querycondition_types sacpp_querycondition_pub sacpp_querycondition_sub ISO_Cxx_QueryCondition_Types ISO_Cxx_QueryCondition_Impl ISO_Cxx_QueryCondition_Pub ISO_Cxx_QueryCondition_Sub ISO_Cxx_V2_QueryCondition_Types ISO_Cxx_V2_QueryCondition_Impl ISO_Cxx_V2_QueryCondition_Pub ISO_Cxx_V2_QueryCondition_Sub SA_C_RoundTrip_Types SA_C_RoundTrip_Impl SA_C_RoundTrip_Ping SA_C_RoundTrip_Pong SA_Cxx_RoundTrip_Types SA_Cxx_RoundTrip_Impl SA_Cxx_RoundTrip_Ping SA_Cxx_RoundTrip_Pong ISO_Cxx_RoundTrip_Types ISO_Cxx_RoundTrip_Impl ISO_Cxx_RoundTrip_Ping ISO_Cxx_RoundTrip_Pong ISO_Cxx_V2_RoundTrip_Types ISO_Cxx_V2_RoundTrip_Impl ISO_Cxx_V2_RoundTrip_Ping ISO_Cxx_V2_RoundTrip_Pong SA_C_Throughput_Types SA_C_Throughput_Impl SA_C_Throughput_Publisher SA_C_Throughput_Subscriber SA_Cxx_Throughput_Types SA_Cxx_Throughput_Impl SA_Cxx_Throughput_Publisher SA_Cxx_Throughput_Subscriber ISO_Cxx_Throughput_Types ISO_Cxx_Throughput_Impl ISO_Cxx_Throughput_Pub ISO_Cxx_Throughput_Sub ISO_Cxx_V2_Throughput_Types ISO_Cxx_V2_Throughput_Impl ISO_Cxx_V2_Throughput_Pub ISO_Cxx_V2_Throughput_Sub sac_tutorial_types sac_tutorial_chatter sac_tutorial_messageboard sac_tutorial_userload sacpp_tutorial_types sacpp_tutorial_chatter sacpp_tutorial_messageboard sacpp_tutorial_userload ISO_Cxx_Tutorial_Types ISO_Cxx_Tutorial_Impl ISO_Cxx_Tutorial_Chatter ISO_Cxx_Tutorial_MessageBoard ISO_Cxx_Tutorial_UserLoad ISO_Cxx_V2_Tutorial_Types ISO_Cxx_V2_Tutorial_Impl ISO_Cxx_V2_Tutorial_Chatter ISO_Cxx_V2_Tutorial_MessageBoard ISO_Cxx_V2_Tutorial_UserLoad sac_waitset_types sac_waitset_pub sac_waitset_sub sacpp_waitset_types sacpp_waitset_pub sacpp_waitset_sub ISO_Cxx_WaitSet_Types ISO_Cxx_WaitSet_Impl ISO_Cxx_WaitSet_Pub ISO_Cxx_WaitSet_Sub ISO_Cxx_V2_WaitSet_Types ISO_Cxx_V2_WaitSet_Impl ISO_Cxx_V2_WaitSet_Pub ISO_Cxx_V2_WaitSet_Sub Face_HelloWorld_Types Face_HelloWorld_Publisher Face_HelloWorld_Subscriber SA_Cxx_StreamsThroughput_Types SA_Cxx_StreamsThroughput_Impl SA_Cxx_StreamsThroughput_Publisher SA_Cxx_StreamsThroughput_Subscriber log4c log4cplugin_lib log4cplugin_exe
+all: sac_builtintopics_sub sacpp_builtintopics_sub ISO_Cxx_BuiltinTopics_Impl ISO_Cxx_BuiltinTopics_Sub sac_contentfilteredtopic_types sac_contentfilteredtopic_pub sac_contentfilteredtopic_sub sacpp_contentfilteredtopic_types sacpp_contentfilteredtopic_pub sacpp_contentfilteredtopic_sub ISO_Cxx_ContentFiltering_Types ISO_Cxx_ContentFiltering_Impl ISO_Cxx_ContentFiltering_Pub ISO_Cxx_ContentFiltering_Sub sac_durability_types sac_durability_pub sac_durability_sub sacpp_durability_types sacpp_durability_pub sacpp_durability_sub ISO_Cxx_Durability_Types ISO_Cxx_Durability_Impl ISO_Cxx_Durability_Pub ISO_Cxx_Durability_Sub sac_helloworld_types sac_helloworld_pub sac_helloworld_sub sacpp_helloworld_types sacpp_helloworld_pub sacpp_helloworld_sub ISO_Cxx_HelloWorld_Types ISO_Cxx_HelloWorld_Impl ISO_Cxx_HelloWorld_Pub ISO_Cxx_HelloWorld_Sub sac_lifecycle_types sac_lifecycle_pub sac_lifecycle_sub sacpp_lifecycle_types sacpp_lifecycle_pub sacpp_lifecycle_sub ISO_Cxx_Lifecycle_Types ISO_Cxx_Lifecycle_Impl ISO_Cxx_Lifecycle_Pub ISO_Cxx_Lifecycle_Sub sac_listener_types sac_listener_pub sac_listener_sub sacpp_listener_types sacpp_listener_pub sacpp_listener_sub ISO_Cxx_Listener_Types ISO_Cxx_Listener_Impl ISO_Cxx_Listener_Pub ISO_Cxx_Listener_Sub sacpp_networkpartitions_types sacpp_networkpartitions_chatter sacpp_networkpartitions_messageboard sac_ownership_types sac_ownership_pub sac_ownership_sub sacpp_ownership_types sacpp_ownership_pub sacpp_ownership_sub ISO_Cxx_Ownership_Types ISO_Cxx_Ownership_Impl ISO_Cxx_Ownership_Pub ISO_Cxx_Ownership_Sub sac_pingpong_types sac_pingpong_ping sac_pingpong_pong sacpp_pingpong_types sacpp_pingpong_ping sacpp_pingpong_pong sac_querycondition_types sac_querycondition_pub sac_querycondition_sub sacpp_querycondition_types sacpp_querycondition_pub sacpp_querycondition_sub ISO_Cxx_QueryCondition_Types ISO_Cxx_QueryCondition_Impl ISO_Cxx_QueryCondition_Pub ISO_Cxx_QueryCondition_Sub SA_C_RoundTrip_Types SA_C_RoundTrip_Impl SA_C_RoundTrip_Ping SA_C_RoundTrip_Pong SA_Cxx_RoundTrip_Types SA_Cxx_RoundTrip_Impl SA_Cxx_RoundTrip_Ping SA_Cxx_RoundTrip_Pong ISO_Cxx_RoundTrip_Types ISO_Cxx_RoundTrip_Impl ISO_Cxx_RoundTrip_Ping ISO_Cxx_RoundTrip_Pong SA_Cxx_Throughput_Types SA_Cxx_Throughput_Impl SA_Cxx_Throughput_Publisher SA_Cxx_Throughput_Subscriber ISO_Cxx_Throughput_Types ISO_Cxx_Throughput_Impl ISO_Cxx_Throughput_Pub ISO_Cxx_Throughput_Sub sac_tutorial_types sac_tutorial_chatter sac_tutorial_messageboard sac_tutorial_userload sacpp_tutorial_types sacpp_tutorial_chatter sacpp_tutorial_messageboard sacpp_tutorial_userload ISO_Cxx_Tutorial_Types ISO_Cxx_Tutorial_Impl ISO_Cxx_Tutorial_Chatter ISO_Cxx_Tutorial_MessageBoard ISO_Cxx_Tutorial_UserLoad sac_waitset_types sac_waitset_pub sac_waitset_sub sacpp_waitset_types sacpp_waitset_pub sacpp_waitset_sub ISO_Cxx_WaitSet_Types ISO_Cxx_WaitSet_Impl ISO_Cxx_WaitSet_Pub ISO_Cxx_WaitSet_Sub log4c log4cplugin_lib log4cplugin_exe
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/BuiltInTopics/c/standalone && $(MAKE) -f Makefile.sac_builtintopics_sub $(@)
 	@cd dcps/BuiltInTopics/cpp/standalone && $(MAKE) -f Makefile.sacpp_builtintopics_sub $(@)
 	@cd dcps/BuiltInTopics/isocpp && $(MAKE) -f Makefile.ISO_Cxx_BuiltinTopics_Impl $(@)
 	@cd dcps/BuiltInTopics/isocpp && $(MAKE) -f Makefile.ISO_Cxx_BuiltinTopics_Sub $(@)
-	@cd dcps/BuiltInTopics/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_BuiltinTopics_Impl $(@)
-	@cd dcps/BuiltInTopics/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_BuiltinTopics_Sub $(@)
 	@cd dcps/ContentFilteredTopic/c/standalone && $(MAKE) -f Makefile.sac_contentfilteredtopic_types $(@)
 	@cd dcps/ContentFilteredTopic/c/standalone && $(MAKE) -f Makefile.sac_contentfilteredtopic_pub $(@)
 	@cd dcps/ContentFilteredTopic/c/standalone && $(MAKE) -f Makefile.sac_contentfilteredtopic_sub $(@)
@@ -32,10 +30,16 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/ContentFilteredTopic/isocpp && $(MAKE) -f Makefile.ISO_Cxx_ContentFiltering_Impl $(@)
 	@cd dcps/ContentFilteredTopic/isocpp && $(MAKE) -f Makefile.ISO_Cxx_ContentFiltering_Pub $(@)
 	@cd dcps/ContentFilteredTopic/isocpp && $(MAKE) -f Makefile.ISO_Cxx_ContentFiltering_Sub $(@)
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Types $(@)
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Impl $(@)
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Pub $(@)
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Sub $(@)
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_types $(@)
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_pub $(@)
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_sub $(@)
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_types $(@)
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_pub $(@)
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_sub $(@)
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Types $(@)
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Impl $(@)
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Pub $(@)
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Sub $(@)
 	@cd dcps/HelloWorld/c/standalone && $(MAKE) -f Makefile.sac_helloworld_types $(@)
 	@cd dcps/HelloWorld/c/standalone && $(MAKE) -f Makefile.sac_helloworld_pub $(@)
 	@cd dcps/HelloWorld/c/standalone && $(MAKE) -f Makefile.sac_helloworld_sub $(@)
@@ -46,10 +50,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/HelloWorld/isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Impl $(@)
 	@cd dcps/HelloWorld/isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Pub $(@)
 	@cd dcps/HelloWorld/isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Sub $(@)
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Types $(@)
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Impl $(@)
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Pub $(@)
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Sub $(@)
 	@cd dcps/Lifecycle/c/standalone && $(MAKE) -f Makefile.sac_lifecycle_types $(@)
 	@cd dcps/Lifecycle/c/standalone && $(MAKE) -f Makefile.sac_lifecycle_pub $(@)
 	@cd dcps/Lifecycle/c/standalone && $(MAKE) -f Makefile.sac_lifecycle_sub $(@)
@@ -60,10 +60,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/Lifecycle/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Impl $(@)
 	@cd dcps/Lifecycle/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Pub $(@)
 	@cd dcps/Lifecycle/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Sub $(@)
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Types $(@)
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Impl $(@)
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Pub $(@)
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Sub $(@)
 	@cd dcps/Listener/c/standalone && $(MAKE) -f Makefile.sac_listener_types $(@)
 	@cd dcps/Listener/c/standalone && $(MAKE) -f Makefile.sac_listener_pub $(@)
 	@cd dcps/Listener/c/standalone && $(MAKE) -f Makefile.sac_listener_sub $(@)
@@ -74,10 +70,9 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/Listener/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Listener_Impl $(@)
 	@cd dcps/Listener/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Listener_Pub $(@)
 	@cd dcps/Listener/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Listener_Sub $(@)
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Types $(@)
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Impl $(@)
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Pub $(@)
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Sub $(@)
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_types $(@)
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_chatter $(@)
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_messageboard $(@)
 	@cd dcps/Ownership/c/standalone && $(MAKE) -f Makefile.sac_ownership_types $(@)
 	@cd dcps/Ownership/c/standalone && $(MAKE) -f Makefile.sac_ownership_pub $(@)
 	@cd dcps/Ownership/c/standalone && $(MAKE) -f Makefile.sac_ownership_sub $(@)
@@ -88,10 +83,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/Ownership/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Ownership_Impl $(@)
 	@cd dcps/Ownership/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Ownership_Pub $(@)
 	@cd dcps/Ownership/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Ownership_Sub $(@)
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Types $(@)
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Impl $(@)
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Pub $(@)
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Sub $(@)
 	@cd dcps/PingPong/c/standalone && $(MAKE) -f Makefile.sac_pingpong_types $(@)
 	@cd dcps/PingPong/c/standalone && $(MAKE) -f Makefile.sac_pingpong_ping $(@)
 	@cd dcps/PingPong/c/standalone && $(MAKE) -f Makefile.sac_pingpong_pong $(@)
@@ -108,10 +99,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/QueryCondition/isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Impl $(@)
 	@cd dcps/QueryCondition/isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Pub $(@)
 	@cd dcps/QueryCondition/isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Sub $(@)
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Types $(@)
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Impl $(@)
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Pub $(@)
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Sub $(@)
 	@cd dcps/RoundTrip/c && $(MAKE) -f Makefile.SA_C_RoundTrip_Types $(@)
 	@cd dcps/RoundTrip/c && $(MAKE) -f Makefile.SA_C_RoundTrip_Impl $(@)
 	@cd dcps/RoundTrip/c && $(MAKE) -f Makefile.SA_C_RoundTrip_Ping $(@)
@@ -124,14 +111,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/RoundTrip/isocpp && $(MAKE) -f Makefile.ISO_Cxx_RoundTrip_Impl $(@)
 	@cd dcps/RoundTrip/isocpp && $(MAKE) -f Makefile.ISO_Cxx_RoundTrip_Ping $(@)
 	@cd dcps/RoundTrip/isocpp && $(MAKE) -f Makefile.ISO_Cxx_RoundTrip_Pong $(@)
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Types $(@)
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Impl $(@)
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Ping $(@)
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Pong $(@)
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Types $(@)
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Impl $(@)
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Publisher $(@)
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Subscriber $(@)
 	@cd dcps/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_Throughput_Types $(@)
 	@cd dcps/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_Throughput_Impl $(@)
 	@cd dcps/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_Throughput_Publisher $(@)
@@ -140,10 +119,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/Throughput/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Throughput_Impl $(@)
 	@cd dcps/Throughput/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Throughput_Pub $(@)
 	@cd dcps/Throughput/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Throughput_Sub $(@)
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Types $(@)
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Impl $(@)
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Pub $(@)
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Sub $(@)
 	@cd dcps/Tutorial/c/standalone && $(MAKE) -f Makefile.sac_tutorial_types $(@)
 	@cd dcps/Tutorial/c/standalone && $(MAKE) -f Makefile.sac_tutorial_chatter $(@)
 	@cd dcps/Tutorial/c/standalone && $(MAKE) -f Makefile.sac_tutorial_messageboard $(@)
@@ -157,11 +132,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/Tutorial/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_Chatter $(@)
 	@cd dcps/Tutorial/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_MessageBoard $(@)
 	@cd dcps/Tutorial/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_UserLoad $(@)
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Types $(@)
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Impl $(@)
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Chatter $(@)
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_MessageBoard $(@)
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_UserLoad $(@)
 	@cd dcps/WaitSet/c/standalone && $(MAKE) -f Makefile.sac_waitset_types $(@)
 	@cd dcps/WaitSet/c/standalone && $(MAKE) -f Makefile.sac_waitset_pub $(@)
 	@cd dcps/WaitSet/c/standalone && $(MAKE) -f Makefile.sac_waitset_sub $(@)
@@ -172,17 +142,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd dcps/WaitSet/isocpp && $(MAKE) -f Makefile.ISO_Cxx_WaitSet_Impl $(@)
 	@cd dcps/WaitSet/isocpp && $(MAKE) -f Makefile.ISO_Cxx_WaitSet_Pub $(@)
 	@cd dcps/WaitSet/isocpp && $(MAKE) -f Makefile.ISO_Cxx_WaitSet_Sub $(@)
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Types $(@)
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Impl $(@)
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Pub $(@)
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Sub $(@)
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Types $(@)
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Publisher $(@)
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Subscriber $(@)
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Types $(@)
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Impl $(@)
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Publisher $(@)
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Subscriber $(@)
 	@cd utilities/logging && $(MAKE) -f Makefile.log4c $(@)
 	@cd utilities/logging/log4cplugin && $(MAKE) -f Makefile.log4cplugin_lib $(@)
 	@cd utilities/logging/log4cplugin && $(MAKE) -f Makefile.log4cplugin_exe $(@)
@@ -202,14 +161,6 @@ ISO_Cxx_BuiltinTopics_Impl:
 .PHONY: ISO_Cxx_BuiltinTopics_Sub
 ISO_Cxx_BuiltinTopics_Sub: ISO_Cxx_BuiltinTopics_Impl
 	@cd dcps/BuiltInTopics/isocpp && $(MAKE) -f Makefile.ISO_Cxx_BuiltinTopics_Sub all
-
-.PHONY: ISO_Cxx_V2_BuiltinTopics_Impl
-ISO_Cxx_V2_BuiltinTopics_Impl:
-	@cd dcps/BuiltInTopics/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_BuiltinTopics_Impl all
-
-.PHONY: ISO_Cxx_V2_BuiltinTopics_Sub
-ISO_Cxx_V2_BuiltinTopics_Sub: ISO_Cxx_V2_BuiltinTopics_Impl
-	@cd dcps/BuiltInTopics/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_BuiltinTopics_Sub all
 
 .PHONY: sac_contentfilteredtopic_types
 sac_contentfilteredtopic_types:
@@ -251,21 +202,45 @@ ISO_Cxx_ContentFiltering_Pub: ISO_Cxx_ContentFiltering_Impl
 ISO_Cxx_ContentFiltering_Sub: ISO_Cxx_ContentFiltering_Impl
 	@cd dcps/ContentFilteredTopic/isocpp && $(MAKE) -f Makefile.ISO_Cxx_ContentFiltering_Sub all
 
-.PHONY: ISO_Cxx_V2_ContentFiltering_Types
-ISO_Cxx_V2_ContentFiltering_Types:
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Types all
+.PHONY: sac_durability_types
+sac_durability_types:
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_types all
 
-.PHONY: ISO_Cxx_V2_ContentFiltering_Impl
-ISO_Cxx_V2_ContentFiltering_Impl: ISO_Cxx_V2_ContentFiltering_Types
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Impl all
+.PHONY: sac_durability_pub
+sac_durability_pub: sac_durability_types
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_pub all
 
-.PHONY: ISO_Cxx_V2_ContentFiltering_Pub
-ISO_Cxx_V2_ContentFiltering_Pub: ISO_Cxx_V2_ContentFiltering_Impl
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Pub all
+.PHONY: sac_durability_sub
+sac_durability_sub: sac_durability_types
+	@cd dcps/Durability/c/standalone && $(MAKE) -f Makefile.sac_durability_sub all
 
-.PHONY: ISO_Cxx_V2_ContentFiltering_Sub
-ISO_Cxx_V2_ContentFiltering_Sub: ISO_Cxx_V2_ContentFiltering_Impl
-	@cd dcps/ContentFilteredTopic/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_ContentFiltering_Sub all
+.PHONY: sacpp_durability_types
+sacpp_durability_types:
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_types all
+
+.PHONY: sacpp_durability_pub
+sacpp_durability_pub: sacpp_durability_types
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_pub all
+
+.PHONY: sacpp_durability_sub
+sacpp_durability_sub: sacpp_durability_types
+	@cd dcps/Durability/cpp/standalone && $(MAKE) -f Makefile.sacpp_durability_sub all
+
+.PHONY: ISO_Cxx_Durability_Types
+ISO_Cxx_Durability_Types:
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Types all
+
+.PHONY: ISO_Cxx_Durability_Impl
+ISO_Cxx_Durability_Impl: ISO_Cxx_Durability_Types
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Impl all
+
+.PHONY: ISO_Cxx_Durability_Pub
+ISO_Cxx_Durability_Pub: ISO_Cxx_Durability_Impl
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Pub all
+
+.PHONY: ISO_Cxx_Durability_Sub
+ISO_Cxx_Durability_Sub: ISO_Cxx_Durability_Impl
+	@cd dcps/Durability/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Durability_Sub all
 
 .PHONY: sac_helloworld_types
 sac_helloworld_types:
@@ -307,22 +282,6 @@ ISO_Cxx_HelloWorld_Pub: ISO_Cxx_HelloWorld_Impl
 ISO_Cxx_HelloWorld_Sub: ISO_Cxx_HelloWorld_Impl
 	@cd dcps/HelloWorld/isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Sub all
 
-.PHONY: ISO_Cxx_V2_HelloWorld_Types
-ISO_Cxx_V2_HelloWorld_Types:
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Types all
-
-.PHONY: ISO_Cxx_V2_HelloWorld_Impl
-ISO_Cxx_V2_HelloWorld_Impl: ISO_Cxx_V2_HelloWorld_Types
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Impl all
-
-.PHONY: ISO_Cxx_V2_HelloWorld_Pub
-ISO_Cxx_V2_HelloWorld_Pub: ISO_Cxx_V2_HelloWorld_Impl
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Pub all
-
-.PHONY: ISO_Cxx_V2_HelloWorld_Sub
-ISO_Cxx_V2_HelloWorld_Sub: ISO_Cxx_V2_HelloWorld_Impl
-	@cd dcps/HelloWorld/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Sub all
-
 .PHONY: sac_lifecycle_types
 sac_lifecycle_types:
 	@cd dcps/Lifecycle/c/standalone && $(MAKE) -f Makefile.sac_lifecycle_types all
@@ -362,22 +321,6 @@ ISO_Cxx_Lifecycle_Pub: ISO_Cxx_Lifecycle_Impl
 .PHONY: ISO_Cxx_Lifecycle_Sub
 ISO_Cxx_Lifecycle_Sub: ISO_Cxx_Lifecycle_Impl
 	@cd dcps/Lifecycle/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Lifecycle_Sub all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Types
-ISO_Cxx_V2_Lifecycle_Types:
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Types all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Impl
-ISO_Cxx_V2_Lifecycle_Impl: ISO_Cxx_V2_Lifecycle_Types
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Impl all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Pub
-ISO_Cxx_V2_Lifecycle_Pub: ISO_Cxx_V2_Lifecycle_Impl
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Pub all
-
-.PHONY: ISO_Cxx_V2_Lifecycle_Sub
-ISO_Cxx_V2_Lifecycle_Sub: ISO_Cxx_V2_Lifecycle_Impl
-	@cd dcps/Lifecycle/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Lifecycle_Sub all
 
 .PHONY: sac_listener_types
 sac_listener_types:
@@ -419,21 +362,17 @@ ISO_Cxx_Listener_Pub: ISO_Cxx_Listener_Impl
 ISO_Cxx_Listener_Sub: ISO_Cxx_Listener_Impl
 	@cd dcps/Listener/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Listener_Sub all
 
-.PHONY: ISO_Cxx_V2_Listener_Types
-ISO_Cxx_V2_Listener_Types:
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Types all
+.PHONY: sacpp_networkpartitions_types
+sacpp_networkpartitions_types:
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_types all
 
-.PHONY: ISO_Cxx_V2_Listener_Impl
-ISO_Cxx_V2_Listener_Impl: ISO_Cxx_V2_Listener_Types
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Impl all
+.PHONY: sacpp_networkpartitions_chatter
+sacpp_networkpartitions_chatter: sacpp_networkpartitions_types
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_chatter all
 
-.PHONY: ISO_Cxx_V2_Listener_Pub
-ISO_Cxx_V2_Listener_Pub: ISO_Cxx_V2_Listener_Impl
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Pub all
-
-.PHONY: ISO_Cxx_V2_Listener_Sub
-ISO_Cxx_V2_Listener_Sub: ISO_Cxx_V2_Listener_Impl
-	@cd dcps/Listener/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Listener_Sub all
+.PHONY: sacpp_networkpartitions_messageboard
+sacpp_networkpartitions_messageboard: sacpp_networkpartitions_types
+	@cd dcps/NetworkPartitions/cpp/standalone && $(MAKE) -f Makefile.sacpp_networkpartitions_messageboard all
 
 .PHONY: sac_ownership_types
 sac_ownership_types:
@@ -474,22 +413,6 @@ ISO_Cxx_Ownership_Pub: ISO_Cxx_Ownership_Impl
 .PHONY: ISO_Cxx_Ownership_Sub
 ISO_Cxx_Ownership_Sub: ISO_Cxx_Ownership_Impl
 	@cd dcps/Ownership/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Ownership_Sub all
-
-.PHONY: ISO_Cxx_V2_Ownership_Types
-ISO_Cxx_V2_Ownership_Types:
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Types all
-
-.PHONY: ISO_Cxx_V2_Ownership_Impl
-ISO_Cxx_V2_Ownership_Impl: ISO_Cxx_V2_Ownership_Types
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Impl all
-
-.PHONY: ISO_Cxx_V2_Ownership_Pub
-ISO_Cxx_V2_Ownership_Pub: ISO_Cxx_V2_Ownership_Impl
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Pub all
-
-.PHONY: ISO_Cxx_V2_Ownership_Sub
-ISO_Cxx_V2_Ownership_Sub: ISO_Cxx_V2_Ownership_Impl
-	@cd dcps/Ownership/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Ownership_Sub all
 
 .PHONY: sac_pingpong_types
 sac_pingpong_types:
@@ -555,22 +478,6 @@ ISO_Cxx_QueryCondition_Pub: ISO_Cxx_QueryCondition_Impl
 ISO_Cxx_QueryCondition_Sub: ISO_Cxx_QueryCondition_Impl
 	@cd dcps/QueryCondition/isocpp && $(MAKE) -f Makefile.ISO_Cxx_QueryCondition_Sub all
 
-.PHONY: ISO_Cxx_V2_QueryCondition_Types
-ISO_Cxx_V2_QueryCondition_Types:
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Types all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Impl
-ISO_Cxx_V2_QueryCondition_Impl: ISO_Cxx_V2_QueryCondition_Types
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Impl all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Pub
-ISO_Cxx_V2_QueryCondition_Pub: ISO_Cxx_V2_QueryCondition_Impl
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Pub all
-
-.PHONY: ISO_Cxx_V2_QueryCondition_Sub
-ISO_Cxx_V2_QueryCondition_Sub: ISO_Cxx_V2_QueryCondition_Impl
-	@cd dcps/QueryCondition/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_QueryCondition_Sub all
-
 .PHONY: SA_C_RoundTrip_Types
 SA_C_RoundTrip_Types:
 	@cd dcps/RoundTrip/c && $(MAKE) -f Makefile.SA_C_RoundTrip_Types all
@@ -619,38 +526,6 @@ ISO_Cxx_RoundTrip_Ping: ISO_Cxx_RoundTrip_Impl
 ISO_Cxx_RoundTrip_Pong: ISO_Cxx_RoundTrip_Impl
 	@cd dcps/RoundTrip/isocpp && $(MAKE) -f Makefile.ISO_Cxx_RoundTrip_Pong all
 
-.PHONY: ISO_Cxx_V2_RoundTrip_Types
-ISO_Cxx_V2_RoundTrip_Types:
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Types all
-
-.PHONY: ISO_Cxx_V2_RoundTrip_Impl
-ISO_Cxx_V2_RoundTrip_Impl: ISO_Cxx_V2_RoundTrip_Types
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Impl all
-
-.PHONY: ISO_Cxx_V2_RoundTrip_Ping
-ISO_Cxx_V2_RoundTrip_Ping: ISO_Cxx_V2_RoundTrip_Impl
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Ping all
-
-.PHONY: ISO_Cxx_V2_RoundTrip_Pong
-ISO_Cxx_V2_RoundTrip_Pong: ISO_Cxx_V2_RoundTrip_Impl
-	@cd dcps/RoundTrip/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_RoundTrip_Pong all
-
-.PHONY: SA_C_Throughput_Types
-SA_C_Throughput_Types:
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Types all
-
-.PHONY: SA_C_Throughput_Impl
-SA_C_Throughput_Impl: SA_C_Throughput_Types
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Impl all
-
-.PHONY: SA_C_Throughput_Publisher
-SA_C_Throughput_Publisher: SA_C_Throughput_Impl
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Publisher all
-
-.PHONY: SA_C_Throughput_Subscriber
-SA_C_Throughput_Subscriber: SA_C_Throughput_Impl
-	@cd dcps/Throughput/c && $(MAKE) -f Makefile.SA_C_Throughput_Subscriber all
-
 .PHONY: SA_Cxx_Throughput_Types
 SA_Cxx_Throughput_Types:
 	@cd dcps/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_Throughput_Types all
@@ -682,22 +557,6 @@ ISO_Cxx_Throughput_Pub: ISO_Cxx_Throughput_Impl
 .PHONY: ISO_Cxx_Throughput_Sub
 ISO_Cxx_Throughput_Sub: ISO_Cxx_Throughput_Impl
 	@cd dcps/Throughput/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Throughput_Sub all
-
-.PHONY: ISO_Cxx_V2_Throughput_Types
-ISO_Cxx_V2_Throughput_Types:
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Types all
-
-.PHONY: ISO_Cxx_V2_Throughput_Impl
-ISO_Cxx_V2_Throughput_Impl: ISO_Cxx_V2_Throughput_Types
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Impl all
-
-.PHONY: ISO_Cxx_V2_Throughput_Pub
-ISO_Cxx_V2_Throughput_Pub: ISO_Cxx_V2_Throughput_Impl
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Pub all
-
-.PHONY: ISO_Cxx_V2_Throughput_Sub
-ISO_Cxx_V2_Throughput_Sub: ISO_Cxx_V2_Throughput_Impl
-	@cd dcps/Throughput/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Throughput_Sub all
 
 .PHONY: sac_tutorial_types
 sac_tutorial_types:
@@ -751,26 +610,6 @@ ISO_Cxx_Tutorial_MessageBoard: ISO_Cxx_Tutorial_Impl
 ISO_Cxx_Tutorial_UserLoad: ISO_Cxx_Tutorial_Impl
 	@cd dcps/Tutorial/isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_UserLoad all
 
-.PHONY: ISO_Cxx_V2_Tutorial_Types
-ISO_Cxx_V2_Tutorial_Types:
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Types all
-
-.PHONY: ISO_Cxx_V2_Tutorial_Impl
-ISO_Cxx_V2_Tutorial_Impl: ISO_Cxx_V2_Tutorial_Types
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Impl all
-
-.PHONY: ISO_Cxx_V2_Tutorial_Chatter
-ISO_Cxx_V2_Tutorial_Chatter: ISO_Cxx_V2_Tutorial_Impl
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Chatter all
-
-.PHONY: ISO_Cxx_V2_Tutorial_MessageBoard
-ISO_Cxx_V2_Tutorial_MessageBoard: ISO_Cxx_V2_Tutorial_Impl
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_MessageBoard all
-
-.PHONY: ISO_Cxx_V2_Tutorial_UserLoad
-ISO_Cxx_V2_Tutorial_UserLoad: ISO_Cxx_V2_Tutorial_Impl
-	@cd dcps/Tutorial/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_UserLoad all
-
 .PHONY: sac_waitset_types
 sac_waitset_types:
 	@cd dcps/WaitSet/c/standalone && $(MAKE) -f Makefile.sac_waitset_types all
@@ -811,50 +650,6 @@ ISO_Cxx_WaitSet_Pub: ISO_Cxx_WaitSet_Impl
 ISO_Cxx_WaitSet_Sub: ISO_Cxx_WaitSet_Impl
 	@cd dcps/WaitSet/isocpp && $(MAKE) -f Makefile.ISO_Cxx_WaitSet_Sub all
 
-.PHONY: ISO_Cxx_V2_WaitSet_Types
-ISO_Cxx_V2_WaitSet_Types:
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Types all
-
-.PHONY: ISO_Cxx_V2_WaitSet_Impl
-ISO_Cxx_V2_WaitSet_Impl: ISO_Cxx_V2_WaitSet_Types
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Impl all
-
-.PHONY: ISO_Cxx_V2_WaitSet_Pub
-ISO_Cxx_V2_WaitSet_Pub: ISO_Cxx_V2_WaitSet_Impl
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Pub all
-
-.PHONY: ISO_Cxx_V2_WaitSet_Sub
-ISO_Cxx_V2_WaitSet_Sub: ISO_Cxx_V2_WaitSet_Impl
-	@cd dcps/WaitSet/isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_WaitSet_Sub all
-
-.PHONY: Face_HelloWorld_Types
-Face_HelloWorld_Types:
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Types all
-
-.PHONY: Face_HelloWorld_Publisher
-Face_HelloWorld_Publisher: Face_HelloWorld_Types
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Publisher all
-
-.PHONY: Face_HelloWorld_Subscriber
-Face_HelloWorld_Subscriber: Face_HelloWorld_Types
-	@cd face/HelloWorld/cpp && $(MAKE) -f Makefile.Face_HelloWorld_Subscriber all
-
-.PHONY: SA_Cxx_StreamsThroughput_Types
-SA_Cxx_StreamsThroughput_Types:
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Types all
-
-.PHONY: SA_Cxx_StreamsThroughput_Impl
-SA_Cxx_StreamsThroughput_Impl: SA_Cxx_StreamsThroughput_Types
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Impl all
-
-.PHONY: SA_Cxx_StreamsThroughput_Publisher
-SA_Cxx_StreamsThroughput_Publisher: SA_Cxx_StreamsThroughput_Impl
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Publisher all
-
-.PHONY: SA_Cxx_StreamsThroughput_Subscriber
-SA_Cxx_StreamsThroughput_Subscriber: SA_Cxx_StreamsThroughput_Impl
-	@cd streams/Throughput/cpp && $(MAKE) -f Makefile.SA_Cxx_StreamsThroughput_Subscriber all
-
 .PHONY: log4c
 log4c:
 	@cd utilities/logging && $(MAKE) -f Makefile.log4c all
@@ -872,8 +667,6 @@ project_name_list:
 	@echo sacpp_builtintopics_sub
 	@echo ISO_Cxx_BuiltinTopics_Impl
 	@echo ISO_Cxx_BuiltinTopics_Sub
-	@echo ISO_Cxx_V2_BuiltinTopics_Impl
-	@echo ISO_Cxx_V2_BuiltinTopics_Sub
 	@echo sac_contentfilteredtopic_pub
 	@echo sac_contentfilteredtopic_sub
 	@echo sac_contentfilteredtopic_types
@@ -884,10 +677,16 @@ project_name_list:
 	@echo ISO_Cxx_ContentFiltering_Pub
 	@echo ISO_Cxx_ContentFiltering_Sub
 	@echo ISO_Cxx_ContentFiltering_Types
-	@echo ISO_Cxx_V2_ContentFiltering_Impl
-	@echo ISO_Cxx_V2_ContentFiltering_Pub
-	@echo ISO_Cxx_V2_ContentFiltering_Sub
-	@echo ISO_Cxx_V2_ContentFiltering_Types
+	@echo sac_durability_pub
+	@echo sac_durability_sub
+	@echo sac_durability_types
+	@echo sacpp_durability_pub
+	@echo sacpp_durability_sub
+	@echo sacpp_durability_types
+	@echo ISO_Cxx_Durability_Impl
+	@echo ISO_Cxx_Durability_Pub
+	@echo ISO_Cxx_Durability_Sub
+	@echo ISO_Cxx_Durability_Types
 	@echo sac_helloworld_pub
 	@echo sac_helloworld_sub
 	@echo sac_helloworld_types
@@ -898,10 +697,6 @@ project_name_list:
 	@echo ISO_Cxx_HelloWorld_Pub
 	@echo ISO_Cxx_HelloWorld_Sub
 	@echo ISO_Cxx_HelloWorld_Types
-	@echo ISO_Cxx_V2_HelloWorld_Impl
-	@echo ISO_Cxx_V2_HelloWorld_Pub
-	@echo ISO_Cxx_V2_HelloWorld_Sub
-	@echo ISO_Cxx_V2_HelloWorld_Types
 	@echo sac_lifecycle_pub
 	@echo sac_lifecycle_sub
 	@echo sac_lifecycle_types
@@ -912,10 +707,6 @@ project_name_list:
 	@echo ISO_Cxx_Lifecycle_Pub
 	@echo ISO_Cxx_Lifecycle_Sub
 	@echo ISO_Cxx_Lifecycle_Types
-	@echo ISO_Cxx_V2_Lifecycle_Impl
-	@echo ISO_Cxx_V2_Lifecycle_Pub
-	@echo ISO_Cxx_V2_Lifecycle_Sub
-	@echo ISO_Cxx_V2_Lifecycle_Types
 	@echo sac_listener_pub
 	@echo sac_listener_sub
 	@echo sac_listener_types
@@ -926,10 +717,9 @@ project_name_list:
 	@echo ISO_Cxx_Listener_Pub
 	@echo ISO_Cxx_Listener_Sub
 	@echo ISO_Cxx_Listener_Types
-	@echo ISO_Cxx_V2_Listener_Impl
-	@echo ISO_Cxx_V2_Listener_Pub
-	@echo ISO_Cxx_V2_Listener_Sub
-	@echo ISO_Cxx_V2_Listener_Types
+	@echo sacpp_networkpartitions_chatter
+	@echo sacpp_networkpartitions_messageboard
+	@echo sacpp_networkpartitions_types
 	@echo sac_ownership_pub
 	@echo sac_ownership_sub
 	@echo sac_ownership_types
@@ -940,10 +730,6 @@ project_name_list:
 	@echo ISO_Cxx_Ownership_Pub
 	@echo ISO_Cxx_Ownership_Sub
 	@echo ISO_Cxx_Ownership_Types
-	@echo ISO_Cxx_V2_Ownership_Impl
-	@echo ISO_Cxx_V2_Ownership_Pub
-	@echo ISO_Cxx_V2_Ownership_Sub
-	@echo ISO_Cxx_V2_Ownership_Types
 	@echo sac_pingpong_ping
 	@echo sac_pingpong_pong
 	@echo sac_pingpong_types
@@ -960,10 +746,6 @@ project_name_list:
 	@echo ISO_Cxx_QueryCondition_Pub
 	@echo ISO_Cxx_QueryCondition_Sub
 	@echo ISO_Cxx_QueryCondition_Types
-	@echo ISO_Cxx_V2_QueryCondition_Impl
-	@echo ISO_Cxx_V2_QueryCondition_Pub
-	@echo ISO_Cxx_V2_QueryCondition_Sub
-	@echo ISO_Cxx_V2_QueryCondition_Types
 	@echo SA_C_RoundTrip_Impl
 	@echo SA_C_RoundTrip_Ping
 	@echo SA_C_RoundTrip_Pong
@@ -976,14 +758,6 @@ project_name_list:
 	@echo ISO_Cxx_RoundTrip_Ping
 	@echo ISO_Cxx_RoundTrip_Pong
 	@echo ISO_Cxx_RoundTrip_Types
-	@echo ISO_Cxx_V2_RoundTrip_Impl
-	@echo ISO_Cxx_V2_RoundTrip_Ping
-	@echo ISO_Cxx_V2_RoundTrip_Pong
-	@echo ISO_Cxx_V2_RoundTrip_Types
-	@echo SA_C_Throughput_Impl
-	@echo SA_C_Throughput_Publisher
-	@echo SA_C_Throughput_Subscriber
-	@echo SA_C_Throughput_Types
 	@echo SA_Cxx_Throughput_Impl
 	@echo SA_Cxx_Throughput_Publisher
 	@echo SA_Cxx_Throughput_Subscriber
@@ -992,10 +766,6 @@ project_name_list:
 	@echo ISO_Cxx_Throughput_Pub
 	@echo ISO_Cxx_Throughput_Sub
 	@echo ISO_Cxx_Throughput_Types
-	@echo ISO_Cxx_V2_Throughput_Impl
-	@echo ISO_Cxx_V2_Throughput_Pub
-	@echo ISO_Cxx_V2_Throughput_Sub
-	@echo ISO_Cxx_V2_Throughput_Types
 	@echo sac_tutorial_chatter
 	@echo sac_tutorial_messageboard
 	@echo sac_tutorial_types
@@ -1009,11 +779,6 @@ project_name_list:
 	@echo ISO_Cxx_Tutorial_MessageBoard
 	@echo ISO_Cxx_Tutorial_Types
 	@echo ISO_Cxx_Tutorial_UserLoad
-	@echo ISO_Cxx_V2_Tutorial_Chatter
-	@echo ISO_Cxx_V2_Tutorial_Impl
-	@echo ISO_Cxx_V2_Tutorial_MessageBoard
-	@echo ISO_Cxx_V2_Tutorial_Types
-	@echo ISO_Cxx_V2_Tutorial_UserLoad
 	@echo sac_waitset_pub
 	@echo sac_waitset_sub
 	@echo sac_waitset_types
@@ -1024,17 +789,6 @@ project_name_list:
 	@echo ISO_Cxx_WaitSet_Pub
 	@echo ISO_Cxx_WaitSet_Sub
 	@echo ISO_Cxx_WaitSet_Types
-	@echo ISO_Cxx_V2_WaitSet_Impl
-	@echo ISO_Cxx_V2_WaitSet_Pub
-	@echo ISO_Cxx_V2_WaitSet_Sub
-	@echo ISO_Cxx_V2_WaitSet_Types
-	@echo Face_HelloWorld_Publisher
-	@echo Face_HelloWorld_Subscriber
-	@echo Face_HelloWorld_Types
-	@echo SA_Cxx_StreamsThroughput_Impl
-	@echo SA_Cxx_StreamsThroughput_Publisher
-	@echo SA_Cxx_StreamsThroughput_Subscriber
-	@echo SA_Cxx_StreamsThroughput_Types
 	@echo log4c
 	@echo log4cplugin_exe
 	@echo log4cplugin_lib

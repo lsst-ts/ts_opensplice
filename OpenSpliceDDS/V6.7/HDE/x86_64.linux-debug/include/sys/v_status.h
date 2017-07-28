@@ -1,31 +1,18 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef V_STATUS_H
 #define V_STATUS_H
 
 #include "v_kernel.h"
-
-#if defined (__cplusplus)
-extern "C" {
-#endif
-
 #include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
@@ -45,11 +32,16 @@ extern "C" {
  */
 #define v_status(s)            (C_CAST(s,v_status))
 #define v_kernelStatus(s)      (C_CAST(s,v_kernelStatus))
-#define v_partitionStatus(s)   (C_CAST(s,v_partitionStatus))
+#define v_partitionStatus(s)      (C_CAST(s,v_partitionStatus))
 #define v_topicStatus(s)       (C_CAST(s,v_topicStatus))
 #define v_writerStatus(s)      (C_CAST(s,v_writerStatus))
 #define v_readerStatus(s)      (C_CAST(s,v_readerStatus))
 #define v_subscriberStatus(s)  (C_CAST(s,v_subscriberStatus))
+
+typedef enum v_statusResult {
+    STATUS_RESULT_SUCCESS,
+    STATUS_RESULT_FAIL
+} v_statusResult;
 
 typedef v_result
 (*v_statusAction) (
@@ -61,13 +53,9 @@ OS_API void           v_statusFree      (v_status s);
 OS_API void           v_statusInit      (v_status s, const c_char *name);
 OS_API void           v_statusDeinit    (v_status s);
 
-OS_API void           v_statusReset     (v_status s, c_ulong mask);
+OS_API v_statusResult v_statusReset     (v_status s, c_ulong mask);
 OS_API c_ulong        v_statusGetMask   (v_status s);
 
 #undef OS_API
-
-#if defined (__cplusplus)
-}
-#endif
 
 #endif

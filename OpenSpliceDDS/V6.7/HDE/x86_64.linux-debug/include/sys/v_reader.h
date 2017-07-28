@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef V_READER_H
@@ -46,18 +38,6 @@ extern "C" {
  * one of its subclasses.
  */
 #define v_reader(o) (C_CAST(o,v_reader))
-
-#define v_readerSubscriber(_this) \
-        v_subscriber(v_reader(_this)->subscriber)
-
-OS_API v_readerQos
-v_readerGetQos(
-    v_reader _this);
-
-OS_API v_result
-v_readerSetQos (
-    v_reader _this,
-    v_readerQos qos);
 
 OS_API v_result
 v_readerGetDeadlineMissedStatus(
@@ -95,34 +75,31 @@ v_readerGetLivelinessChangedStatus(
     c_voidp arg);
 
 OS_API v_result
-v_readerGetSubscriptionMatchedStatus(
+v_readerGetTopicMatchStatus(
     v_reader _this,
     c_bool reset,
     v_statusAction action,
     c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_readerWaitForHistoricalData(
     v_reader _this,
-    os_duration timeout);
+    c_time timeout);
 
-OS_API v_result
+OS_API v_historyResult
 v_readerWaitForHistoricalDataWithCondition(
     v_reader _this,
-    const c_char* filter,
-    const c_char* params[],
+    c_char* filter,
+    c_char* params[],
     c_ulong paramsLength,
-    os_timeW minSourceTime,
-    os_timeW maxSourceTime,
-    c_long max_samples,
-    c_long max_instances,
-    c_long max_samples_per_instance,
-    os_duration timeout);
+    c_time minSourceTime,
+    c_time maxSourceTime,
+    struct v_resourcePolicy *resourceLimits,
+    c_time timeout);
 
 OS_API void
-v_readerNotifyStateChange(
-    v_reader _this,
-    c_bool complete);
+v_readerNotifyHistoricalDataAvailable(
+    v_reader _this);
 
 OS_API c_bool
 v_readerWalkEntries(
@@ -133,10 +110,6 @@ v_readerWalkEntries(
 OS_API c_iter
 v_readerCollectEntries(
     v_reader r);
-
-OS_API c_iter
-v_readerGetPartitions(
-    v_reader _this);
 
 #undef OS_API
 

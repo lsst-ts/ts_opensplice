@@ -1,30 +1,25 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef U_GROUP_H
 #define U_GROUP_H
 
-#include "u_types.h"
-
 #if defined (__cplusplus)
 extern "C" {
 #endif
+
+#include "u_types.h"
+#include "v_kernel.h"
+#include "v_group.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -34,20 +29,30 @@ extern "C" {
 /* !!!!!!!!NOTE From here no more includes are allowed!!!!!!! */
 
 #define u_group(o) \
-        ((u_group)u_objectCheckType(u_object(o), U_GROUP))
+        ((u_group)u_entityCheckType(u_entity(o), U_GROUP))
+
+/* To be called from protected threads only */
+OS_API u_group
+u_groupCreate(
+    v_group group,
+    u_participant participant);
+
+/* Functions taking care of the protection themselves */
+
+OS_API u_result
+u_groupFree(
+    u_group _this);
 
 OS_API u_group
 u_groupNew(
-    const u_participant participant,
-    const os_char *partitionName,
-    const os_char *topicName,
-    os_duration timeout);
+    u_participant participant,
+    const c_char *partitionName,
+    const c_char *topicName,
+    v_duration timeout);
 
 OS_API u_result
-u_groupSetRoutingEnabled(
-    u_group group,
-    c_bool routingEnabled,
-    c_bool *oldRoutingEnabled);
+u_groupFlush(
+    u_group group);
 
 #undef OS_API
 

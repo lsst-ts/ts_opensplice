@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef V_QUERY_H
@@ -50,95 +42,86 @@ typedef c_bool (v_queryAction)(c_object o, c_voidp arg);
 OS_API v_query
 v_queryNew(
     v_collection source,
-    const os_char *name,
-    const os_char *predicate,
-    const os_char *params[],
-    const os_uint32 nrOfParams,
-    const os_uint32 sampleMask);
+    const c_char *name,
+    q_expr predicate,
+    c_value params[]);
 
 OS_API void
 v_queryFree(
-    v_query _this);
+    v_query q);
+
+OS_API void
+v_queryInit(
+    v_query q,
+    const c_char *name,
+    v_statistics qs,
+    v_collection src,
+    q_expr predicate,
+    c_value params[]);
 
 OS_API void
 v_queryDeinit(
-    v_query _this);
+    v_query q);
 
-void
-v_queryEnableStatistics(
-    v_query _this,
-    os_boolean enable);
-
-OS_API v_result
+OS_API c_bool
 v_queryRead(
-    v_query _this,
+    v_query q,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_queryTake(
-    v_query _this,
+    v_query q,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_queryReadInstance(
-    v_query _this,
+    v_query q,
     v_dataReaderInstance instance,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_queryTakeInstance(
-    v_query _this,
+    v_query q,
     v_dataReaderInstance instance,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_queryReadNextInstance(
-    v_query _this,
+    v_query q,
     v_dataReaderInstance instance,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_queryTakeNextInstance(
-    v_query _this,
+    v_query q,
     v_dataReaderInstance instance,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
 OS_API c_bool
 v_queryTest(
-    v_query _this,
+    v_query q,
     v_queryAction action,
     c_voidp args);
 
 OS_API c_bool
 v_queryTriggerTest(
-    v_query _this);
+    v_query q);
 
 OS_API v_collection
 v_querySource(
-    v_query _this);
+    v_query q);
 
 OS_API c_bool
 v_querySetParams(
-    v_query _this,
-    const os_char *params[],
-    const os_uint32 nrOfParams);
-
-OS_API c_bool
-v_queryTestSample(
-    v_query _this,
-    v_readerSample sample);
+    v_query q,
+    q_expr predicate,
+    c_value params[]);
 
 #undef OS_API
 

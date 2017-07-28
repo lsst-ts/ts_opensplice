@@ -8,12 +8,12 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/sal/OpenSpliceDDS/VortexOpenSplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/examples/examples_simple.mwc
+# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/examples/examples_simple.mwc
 #
 #----------------------------------------------------------------------------
 
 
-all: sac_tutorial_types sac_tutorial_chatter sac_tutorial_messageboard sac_tutorial_userload sacpp_tutorial_types sacpp_tutorial_chatter sacpp_tutorial_messageboard sacpp_tutorial_userload ISO_Cxx_Tutorial_Types ISO_Cxx_Tutorial_Impl ISO_Cxx_Tutorial_Chatter ISO_Cxx_Tutorial_MessageBoard ISO_Cxx_Tutorial_UserLoad ISO_Cxx_V2_Tutorial_Types ISO_Cxx_V2_Tutorial_Impl ISO_Cxx_V2_Tutorial_Chatter ISO_Cxx_V2_Tutorial_MessageBoard ISO_Cxx_V2_Tutorial_UserLoad
+all: sac_tutorial_types sac_tutorial_chatter sac_tutorial_messageboard sac_tutorial_userload sacpp_tutorial_types sacpp_tutorial_chatter sacpp_tutorial_messageboard sacpp_tutorial_userload ISO_Cxx_Tutorial_Types ISO_Cxx_Tutorial_Impl ISO_Cxx_Tutorial_Chatter ISO_Cxx_Tutorial_MessageBoard ISO_Cxx_Tutorial_UserLoad
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd c/standalone && $(MAKE) -f Makefile.sac_tutorial_types $(@)
@@ -29,11 +29,6 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_Chatter $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_MessageBoard $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_UserLoad $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Types $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Impl $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Chatter $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_MessageBoard $(@)
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_UserLoad $(@)
 
 .PHONY: sac_tutorial_types
 sac_tutorial_types:
@@ -87,26 +82,6 @@ ISO_Cxx_Tutorial_MessageBoard: ISO_Cxx_Tutorial_Impl
 ISO_Cxx_Tutorial_UserLoad: ISO_Cxx_Tutorial_Impl
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_Tutorial_UserLoad all
 
-.PHONY: ISO_Cxx_V2_Tutorial_Types
-ISO_Cxx_V2_Tutorial_Types:
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Types all
-
-.PHONY: ISO_Cxx_V2_Tutorial_Impl
-ISO_Cxx_V2_Tutorial_Impl: ISO_Cxx_V2_Tutorial_Types
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Impl all
-
-.PHONY: ISO_Cxx_V2_Tutorial_Chatter
-ISO_Cxx_V2_Tutorial_Chatter: ISO_Cxx_V2_Tutorial_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_Chatter all
-
-.PHONY: ISO_Cxx_V2_Tutorial_MessageBoard
-ISO_Cxx_V2_Tutorial_MessageBoard: ISO_Cxx_V2_Tutorial_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_MessageBoard all
-
-.PHONY: ISO_Cxx_V2_Tutorial_UserLoad
-ISO_Cxx_V2_Tutorial_UserLoad: ISO_Cxx_V2_Tutorial_Impl
-	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_Tutorial_UserLoad all
-
 project_name_list:
 	@echo sac_tutorial_chatter
 	@echo sac_tutorial_messageboard
@@ -121,8 +96,3 @@ project_name_list:
 	@echo ISO_Cxx_Tutorial_MessageBoard
 	@echo ISO_Cxx_Tutorial_Types
 	@echo ISO_Cxx_Tutorial_UserLoad
-	@echo ISO_Cxx_V2_Tutorial_Chatter
-	@echo ISO_Cxx_V2_Tutorial_Impl
-	@echo ISO_Cxx_V2_Tutorial_MessageBoard
-	@echo ISO_Cxx_V2_Tutorial_Types
-	@echo ISO_Cxx_V2_Tutorial_UserLoad

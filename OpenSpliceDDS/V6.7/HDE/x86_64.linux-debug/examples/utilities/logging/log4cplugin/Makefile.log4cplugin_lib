@@ -8,7 +8,7 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -I"../../../../include" -I"../../../../include/sys" -I"." -I"../../../../examples/include" -I"../../../../examples" -I"../log4c-1.2.1/src"
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"../../../../include" -I"../../../../include/sys" -I"." -I"../../../../examples/include" -I"../../../../examples" -I"../log4c-1.2.1/src"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c

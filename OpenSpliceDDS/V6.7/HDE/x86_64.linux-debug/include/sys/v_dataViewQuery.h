@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef V_DATAVIEWQUERY_H
@@ -56,11 +48,9 @@ extern "C" {
 OS_API v_dataViewQuery
 v_dataViewQueryNew(
     v_dataView view,
-    const os_char *name,
-    const os_char *expression,
-    const os_char *params[],
-    const os_uint32 nrOfParams,
-    const os_uint32 sampleMask);
+    const c_char *name,
+    q_expr predicate,
+    c_value params[]);
 
 OS_API void
 v_dataViewQueryFree(
@@ -72,51 +62,45 @@ v_dataViewQueryTest(
     v_queryAction action,
     c_voidp args);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryRead(
     v_dataViewQuery _this,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryTake(
     v_dataViewQuery _this,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+     c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryReadInstance(
     v_dataViewQuery _this,
     v_dataViewInstance i,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryTakeInstance(
     v_dataViewQuery _this,
     v_dataViewInstance i,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryReadNextInstance(
     v_dataViewQuery _this,
     v_dataViewInstance i,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
-OS_API v_result
+OS_API c_bool
 v_dataViewQueryTakeNextInstance(
     v_dataViewQuery _this,
     v_dataViewInstance i,
     v_readerSampleAction action,
-    c_voidp arg,
-    os_duration timeout);
+    c_voidp arg);
 
 OS_API void
 v_dataViewQueryDeinit(
@@ -130,13 +114,8 @@ v_dataViewQueryNotifyDataAvailable(
 OS_API c_bool
 v_dataViewQuerySetParams(
     v_dataViewQuery _this,
-    const os_char *params[],
-    const os_uint32 nrOfParams);
-
-OS_API c_bool
-v_dataViewQueryTestSample(
-    v_dataViewQuery _this,
-    v_dataViewSample sample);
+    q_expr predicate,
+    c_value params[]);
 
 #undef OS_API
 

@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 import DDS.*;
@@ -103,15 +95,13 @@ public class ponger {
         if (args.length != 0) {
             if (args.length != 2) {
                 System.out.println ("Invalid.....");
-        System.out.println ("Usage: java pong [READ_PARTITION WRITE_PARTITION]");
+		System.out.println ("Usage: java pong [READ_PARTITION WRITE_PARTITION]");
                 return;
             }
             read_partition  = args[0];
             write_partition = args[1];
         }
-
-        System.out.println ("Starting pong example");
-
+    
         /*
          * Create WaitSet
          */
@@ -294,7 +284,7 @@ public class ponger {
         assert(result == RETCODE_OK.value);
     
         while (!terminate) {
-            DDS.Duration_t wait_timeout = new DDS.Duration_t (DDS.DURATION_INFINITE_SEC.value, DDS.DURATION_INFINITE_NSEC.value);
+    	    DDS.Duration_t wait_timeout = new DDS.Duration_t (DDS.DURATION_INFINITE_SEC.value, DDS.DURATION_INFINITE_NSEC.value);
     
             /* System.out.println ("PONG: waiting for PING"); */
             result = w._wait (conditionList, wait_timeout);
@@ -303,10 +293,10 @@ public class ponger {
                 continue;
             }
             if (conditionList.value != null) {
-                imax = conditionList.value.length;
+    	        imax = conditionList.value.length;
                 for (i = 0; i < imax; i++) {
                     if (conditionList.value[i] == PP_min_sc) {
-                /* System.out.println ("PONG: PING_min arrived"); */
+        		/* System.out.println ("PONG: PING_min arrived"); */
                         result = PP_min_reader.take (PP_min_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_min_dataList.value.length;
@@ -321,7 +311,7 @@ public class ponger {
                             System.out.println ("PONG: PING_min triggered, but no data available");
                         }
                     } else if (conditionList.value[i] == PP_seq_sc) {
-                /* System.out.println ("PONG: PING_seq arrived"); */
+        		/* System.out.println ("PONG: PING_seq arrived"); */
                         result = PP_seq_reader.take (PP_seq_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_seq_dataList.value.length;
@@ -336,7 +326,7 @@ public class ponger {
                             System.out.println ("PONG: PING_seq triggered, but no data available");
                         }
                     } else if (conditionList.value[i] == PP_string_sc) {
-                /* System.out.println ("PONG: PING_string arrived"); */
+        		/* System.out.println ("PONG: PING_string arrived"); */
                         result = PP_string_reader.take (PP_string_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_string_dataList.value.length;
@@ -351,7 +341,7 @@ public class ponger {
                             System.out.println ("PONG: PING_string triggered, but no data available");
                         }
                     } else if (conditionList.value[i] == PP_fixed_sc) {
-                /* System.out.println ("PONG: PING_fixed arrived"); */
+        		/* System.out.println ("PONG: PING_fixed arrived"); */
                         result = PP_fixed_reader.take (PP_fixed_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_fixed_dataList.value.length;
@@ -366,7 +356,7 @@ public class ponger {
                             System.out.println ("PONG: PING_fixed triggered, but no data available");
                         }
                     } else if (conditionList.value[i] == PP_array_sc) {
-                /* System.out.println ("PONG: PING_array arrived"); */
+        		/* System.out.println ("PONG: PING_array arrived"); */
                         result = PP_array_reader.take (PP_array_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_array_dataList.value.length;
@@ -381,7 +371,7 @@ public class ponger {
                             System.out.println ("PONG: PING_array triggered, but no data available");
                         }
                     } else if (conditionList.value[i] == PP_quit_sc) {
-                /* System.out.println ("PONG: PING_quit arrived"); */
+        		/* System.out.println ("PONG: PING_quit arrived"); */
                         result = PP_quit_reader.take (PP_quit_dataList, infoList, DDS.LENGTH_UNLIMITED.value,
                                      DDS.ANY_SAMPLE_STATE.value, DDS.ANY_VIEW_STATE.value, DDS.ANY_INSTANCE_STATE.value);
                         jmax = PP_quit_dataList.value.length;
@@ -394,8 +384,8 @@ public class ponger {
                     } else {
                         System.out.println ("PONG: unknown condition triggered: " + conditionList.value[i]);
                     }
-                }
-            } else {
+    	        }
+    	    } else {
                 System.out.println ("PONG: unknown condition triggered");
             }
         }
@@ -431,8 +421,7 @@ public class ponger {
         tQos = null;
         dwQos = null;
         drQos = null;
-        System.out.println ("Completed pong example");
-
+    
         return;
     }
 }

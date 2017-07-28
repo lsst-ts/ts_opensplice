@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 /****************************************************************
@@ -28,8 +20,13 @@
 #ifndef OS_STDLIB_H
 #define OS_STDLIB_H
 
+
 #include "os_defs.h"
-#include "os_time.h"
+#include "os_time.h" /* needed for os_stat */
+
+/* include OS specific header file                              */
+#include "include/os_stdlib.h"
+#include "os_if.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -54,7 +51,7 @@ extern "C" {
 OS_API os_result
 os_gethostname(
     char *hostname,
-    size_t buffersize);
+    os_uint32 buffersize);
 
 /** \brief Get environment variable definition
  *
@@ -107,6 +104,7 @@ OS_API os_result
 os_setenv(
     const char *name, const char *value);
 
+
 /** \brief Get file seperator
  *
  * Possible Results:
@@ -127,7 +125,6 @@ os_pathSep(void);
 
 #define OS_PATHSEPCHAR OS_OS_PATHSEPCHAR
 #define OS_EXESUFFIX   OS_OS_EXESUFFIX
-#define OS_BATSUFFIX   OS_OS_BATSUFFIX
 #define OS_LIB_LOAD_PATH_VAR OS_OS_LIB_LOAD_PATH_VAR
 
 /** \brief Check user's permissions for a file
@@ -193,43 +190,6 @@ os_mkdir(
     const char *path,
     os_mode_t mode);
 
-/** \brief Create a path including parent dirs
- *
- * Alternative to os_mkdir that creates all path elements instead
- * of only the top-level directory
- *
- * Preconditions:
- *   None
- *
- * Possible results:
- * - return os_resultSuccess if
- *     requested path is created
- * - return os_resultFail if
- *     requested path could not be created
- *
- * When path creation fails an appropriate error message is reported
- */
-OS_API os_result
-os_mkpath(
-    const os_char *path,
-    os_mode_t mode);
-
-/** \brief dirname wrapper
- *
- * because not all operating systems have
- * interfaces to dirname a wrapper is made
- *
- * Precondition:
- *   None
- *
- * Possible results:
- * - return '.' if
- *     path is a null pointer
- * - return char *
- *     to a string that is the parent directory of path
- */
-OS_API char * os_dirname_r(char *path);
-
 /** \brief rindex wrapper
  *
  * because not all operating systems have
@@ -284,10 +244,7 @@ os_index(
  */
 OS_API char *
 os_strdup(
-    const char *s1) __nonnull_all__
-                    __attribute_malloc__
-                    __attribute_returns_nonnull__
-                    __attribute_warn_unused_result__;
+    const char *s1);
 
 /** \brief strcat wrapper
  *
@@ -381,8 +338,8 @@ os_strncpy(
  */
 OS_API size_t
 os_strnlen(
-    const char *ptr,
-    size_t maxlen);
+   const char *ptr,
+   size_t maxlen);
 
 /** \brief os_strsep wrapper
  *
@@ -392,7 +349,6 @@ OS_API char *
 os_strsep(
    char **stringp,
    const char *delim);
-
 
 /** \brief sprintf wrapper
  *
@@ -441,31 +397,6 @@ os_vsnprintf(
    size_t size,
    const char *format,
    va_list args);
-
-/** \brief fprintf wrapper with disabled broken pipe signals
- *
- * A fprintf can cause an broken pipe signal that can result in a deadlock
- * if the interrupted thread is holding recourses needed by for example the
- * signal handler thread.
- *
- * Precondition:
- *   None
- * Postcondition:
- *   None
- *
- * Possible results:
- * - return
- *   Upon successful completion will return the number of
- *   bytes written to file
- *   or a negative value if an error occured.
- *   errno will be set in such case
- * - Writes formatted output to file.
- */
-int
-os_vfprintfnosigpipe(
-    FILE *file,
-    const char *format,
-    va_list args);
 
 /** \brief strtoll wrapper
  *
@@ -551,12 +482,10 @@ os_atoull(
  * - return 0 and errno == EINVAL in case of conversion error
  * - return value(str)
  */
-OS_API os_char *
+OS_API char *
 os_lltostr(
-    long long num,
-    os_char *str,
-    os_size_t len,
-    os_char **endptr);
+    long long value,
+    char *endptr);
 
 /** \brief ulltostr wrapper
  *
@@ -570,98 +499,10 @@ os_lltostr(
  * - return 0 and errno == EINVAL in case of conversion error
  * - return value(str)
  */
-OS_API os_char *
+OS_API char *
 os_ulltostr(
-    unsigned long long num,
-    os_char *str,
-    os_size_t len,
-    os_char **endptr);
-
-/** \brief strtod wrapper
- *
- * Translate string to double value considering base 10.
- *
- * Normal strtod is locale dependent, meaning that if you
- * provide "2.2" and lc_numeric is ',', then the result
- * would be 2. This function makes sure that both "2.2"
- * (which is mostly used) and "2,2" (which could be provided
- * by applications) are translated to 2.2 when the locale
- * indicates that lc_numeric is ','.
- *
- * Precondition:
- *   none
- *
- * Possible results:
- * - return value(str)
- */
-OS_API double
-os_strtod(const char *nptr, char **endptr);
-
-/** \brief strtof wrapper
- *
- * Translate string to float value considering base 10.
- *
- * Normal strtof is locale dependent, meaning that if you
- * provide "2.2" and lc_numeric is ',', then the result
- * would be 2. This function makes sure that both "2.2"
- * (which is mostly used) and "2,2" (which could be provided
- * by applications) are translated to 2.2 when the locale
- * indicates that lc_numeric is ','.
- *
- * Precondition:
- *   none
- *
- * Possible results:
- * - return value(str)
- */
-OS_API float
-os_strtof(const char *nptr, char **endptr);
-
-/** \brief os_strtod mirror
- *
- * Translate double to string considering base 10.
- *
- * The function dtostr doesn't exists and can be done by
- *     snprintf((char*)dst, "%f", (double)src).
- * But like strtod, snprint is locale dependent, meaning
- * that if you provide 2.2 and lc_numeric is ',' then the
- * result would be "2,2". This comma can cause problems
- * when serializing data to other nodes with different
- * locales.
- * This function makes sure that 2.2 is translated into
- * "2.2", whatever lc_numeric is set ('.' or ',').
- *
- * Precondition:
- *   none
- *
- * Possible results:
- * - return value(str)
- */
-OS_API int
-os_dtostr(double src, char *str, size_t size);
-
-/** \brief os_strtof mirror
- *
- * Translate float to string considering base 10.
- *
- * The function ftostr doesn't exists and can be done by
- *     snprintf((char*)dst, "%f", (float)src).
- * But like strtof, snprint is locale dependent, meaning
- * that if you provide 2.2 and lc_numeric is ',' then the
- * result would be "2,2". This comma can cause problems
- * when serializing data to other nodes with different
- * locales.
- * This function makes sure that 2.2 is translated into
- * "2.2", whatever lc_numeric is set ('.' or ',').
- *
- * Precondition:
- *   none
- *
- * Possible results:
- * - return value(str)
- */
-OS_API int
-os_ftostr(float src, char *str, size_t size);
+    unsigned long long value,
+    char *endptr);
 
 /** \brief strcasecm wrapper
  *
@@ -696,7 +537,7 @@ OS_API int
 os_strncasecmp(
     const char *s1,
     const char *s2,
-    size_t n);
+    os_uint32 n);
 
 /** \brief strtok_r wrapper
  *
@@ -725,7 +566,7 @@ struct os_stat {
 */
   os_mode_t stat_mode;
   os_size_t stat_size;
-  os_timeW  stat_mtime;
+  os_time   stat_mtime;
 };
 
 OS_API os_result
@@ -846,8 +687,8 @@ os_fsync(
  * - char * of the absolute path of the temporary location.  This will return
  * always return a valid value, using a default if necessary
  */
-OS_API const char *
-os_getTempDir(void);
+OS_API char *
+os_getTempDir();
 
 /**
  * \brief writes up to count bytes from the buffer pointed buf to the file referred to by the file descriptor fd.

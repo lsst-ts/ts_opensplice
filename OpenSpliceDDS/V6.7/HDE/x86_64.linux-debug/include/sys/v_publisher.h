@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef V_PUBLISHER_H
@@ -48,9 +40,7 @@ extern "C" {
 #define v_publisherParticipant(_this) \
         v_participant(v_publisher(_this)->participant)
 
-typedef void (*v_writerAction)(v_writer _this, c_voidp arg);
-
-OS_API v_publisher
+OS_API v_publisher    
 v_publisherNew (
     v_participant p,
     const c_char *name,
@@ -64,16 +54,7 @@ v_publisherFree (
 OS_API void
 v_publisherDeinit (
     v_publisher _this);
-
-OS_API v_publisherQos
-v_publisherGetQos(
-    v_publisher _this);
-
-OS_API v_result
-v_publisherSetQos(
-    v_publisher _this,
-    v_publisherQos qos);
-
+ 
 OS_API v_result
 v_publisherEnable (
     v_publisher _this);
@@ -98,30 +79,20 @@ v_publisherCheckPartitionInterest (
     v_publisher _this,
     v_partition partition);
 
-OS_API v_result
+OS_API void
 v_publisherAddWriter (
     v_publisher _this,
     v_writer w);
 
-OS_API v_result
+OS_API void
 v_publisherRemoveWriter (
     v_publisher _this,
     v_writer w);
-
-OS_API c_long
-v_publisherWriterCount (
-    v_publisher _this);
 
 OS_API c_iter
 v_publisherLookupWriters (
     v_publisher _this,
     const c_char *topicExpr);
-
-OS_API void
-v_publisherWalkWriters(
-    v_publisher _this,
-    v_writerAction action,
-    c_voidp arg);
 
 OS_API void
 v_publisherSuspend (
@@ -131,11 +102,11 @@ OS_API c_bool
 v_publisherResume (
     v_publisher _this);
 
-OS_API v_result
+OS_API void
 v_publisherCoherentBegin (
     v_publisher _this);
 
-OS_API v_result
+OS_API void
 v_publisherCoherentEnd (
     v_publisher _this);
 
@@ -143,6 +114,10 @@ OS_API void
 v_publisherNotifyNewGroup (
     v_publisher _this,
     v_group group);
+
+OS_API v_publisherQos
+v_publisherGetQos (
+    v_publisher _this);
 
 #undef OS_API
 

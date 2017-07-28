@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef U_WRITERQOS_H
@@ -25,6 +17,8 @@ extern "C" {
 #endif
 
 #include "u_types.h"
+#include "v_kernel.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -33,25 +27,23 @@ extern "C" {
 #endif
 /* !!!!!!!!NOTE From here no more includes are allowed!!!!!!! */
 
-/** \brief This operation creates a Qos object.
- *
- * The Qos policy values are copied from the given template, if no template
- * is provided (i.e. NULL is passed as agrument) a Qos object with the default
- * values is created.
- * The Qos object including any containing referenced policy objects are allocated
- * on heap, it is the respocibility of the user to free any containing referenced
- * policy objects when overriding them by assignment of new policy objects.
- * The whole Qos object is freed by the following Free operation.
- */
-OS_API u_writerQos u_writerQosNew (u_writerQos _template);
+typedef v_writerQos u_writerQos;
 
-/** \brief This operation frees the emory resources claimed by the Qos object.
- *
- * The Qos policy resources including all contained referenced policy objects
- * are freed. Be aware that for this reason all contained policy objects MUST
- * be allocated on heap!
- */
-OS_API void u_writerQosFree (u_writerQos _this);
+OS_API u_writerQos
+u_writerQosNew (
+    u_writerQos _template);
+
+OS_API u_result
+u_writerQosInit (
+    u_writerQos _this);
+
+OS_API void
+u_writerQosDeinit (
+    u_writerQos _this);
+
+OS_API void
+u_writerQosFree (
+    u_writerQos _this);
 
 #undef OS_API
 
@@ -59,4 +51,4 @@ OS_API void u_writerQosFree (u_writerQos _this);
 }
 #endif
 
-#endif
+#endif /* U_WRITERQOS_H */

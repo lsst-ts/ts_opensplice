@@ -8,7 +8,7 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -I"." -I"../../../../examples/include" -I"../../../../examples" -I"../../../../include" -I"../../../../include/sys" -I"../../../../include/dcps/C++/SACPP"
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"." -I"../../../../examples/include" -I"../../../../examples" -I"../../../../include" -I"../../../../include/sys" -I"../../../../include/dcps/C++/SACPP"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c

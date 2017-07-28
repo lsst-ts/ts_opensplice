@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 /****************************************************************
@@ -28,15 +20,18 @@
 #ifndef OS_COND_H
 #define OS_COND_H
 
+#if defined (__cplusplus)
+extern "C" {
+#endif
+
 /* Define all types used in this interface			*/
 #include "os_defs.h"
 #include "os_mutex.h"
 #include "os_time.h"
-#include "os_if.h"
 
-#if defined (__cplusplus)
-extern "C" {
-#endif
+/* Include OS specific header file				*/
+#include "include/os_cond.h"
+#include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
 #define OS_API OS_API_EXPORT
@@ -60,39 +55,42 @@ typedef struct os_condAttr {
     /**
      * - OS_SCOPE_SHARED The scope of the condition variable
      *   is system wide
-     * - OS_SCOPE_PRIVATE The scope of the condition variable
+     * - OS_SCOPE_PRIVATE The scope of the condition vaiable
      *   is process wide
      */
-    os_scopeAttr    scopeAttr;
+    os_scopeAttr	scopeAttr;
 } os_condAttr;
 
 /** \brief Initialize the condition variable taking the conition
  *         attributes into account
- * If condAttr == NULL, result is as if os_condInit was invoked
- * with the default os_condAttr as after os_condAttrInit.
- *
+ * 
  * Possible Results:
+ * - assertion failure: cond = NULL || condAttr = NULL
  * - returns os_resultSuccess if
  *     cond is successfuly initialized
  * - returns os_resultFail if
  *     cond is not initialized and can not be used
  */
-_Check_return_
-_When_(condAttr == NULL, _Pre_satisfies_(mutex->scope == OS_SCOPE_PRIVATE))
-_When_(condAttr != NULL, _Pre_satisfies_(mutex->scope == condAttr->scopeAttr))
 OS_API os_result
 os_condInit(
-        _Out_ _When_(return != os_resultSuccess, _Post_invalid_) os_cond *cond,
-        _In_ os_mutex *mutex,
-        _In_opt_ const os_condAttr *condAttr)
-    __nonnull((1,2));
+    os_cond *cond, 
+    os_mutex *mutex,
+    const os_condAttr *condAttr);
 
-/** \brief Destroy the condition variable
+/** \brief Destory the condition variable
+ *
+ * Possible Results:
+ * - assertion failure: cond = NULL
+ * - returns os_resultSuccess if
+ *     cond is successfuly destroyed
+ * - returns os_reultBusy if
+ *     cond is not destroyed because it is still referenced by a thread
+ * - returns os_resultFail if
+ *     cond is not destroyed
  */
-OS_API void
+OS_API os_result
 os_condDestroy(
-        _Inout_ _Post_invalid_ os_cond *cond)
-    __nonnull_all__;
+    os_cond *cond);
 
 /** \brief Wait for the condition
  *
@@ -103,12 +101,19 @@ os_condDestroy(
  * Postcondition:
  * - mutex is still acquired by the calling thread and should
  *   be released by it
+ *
+ * Possible Results:
+ * - assertion failure: cond = NULL || mutex = NULL
+ * - returns os_resultSuccess if
+ *     cond is triggered
+ * - returns os_resultFail
+ *     cond is not triggered but os_condWait has returned
+ *     because of a failure
  */
-OS_API void
+OS_API os_result
 os_condWait(
-        os_cond *cond,
-        os_mutex *mutex)
-    __nonnull_all__;
+    os_cond *cond,
+    os_mutex *mutex);
 
 /** \brief Wait for the condition but return when the specified
  *         time has expired before the condition is triggered
@@ -134,10 +139,9 @@ os_condWait(
  */
 OS_API os_result
 os_condTimedWait(
-        os_cond *cond,
-        os_mutex *mutex,
-        os_duration time)
-    __nonnull_all__;
+    os_cond *cond,
+    os_mutex *mutex,
+    const os_time *time);
 
 /** \brief Signal the condition and wakeup one thread waiting
  *         for the condition
@@ -146,11 +150,20 @@ os_condTimedWait(
  * - the mutex used with the condition in general should be
  *   acquired by the calling thread before setting the
  *   condition state and signalling
+ *
+ * Postcondition:
+ * - the mutex used with the condition must be released
+ *
+ * Possible Results:
+ * - assertion failure: cond = NULL
+ * - returns os_resultSuccess if
+ *     cond is signalled
+ * - returns os_resultFail if
+ *     cond is not signalled because of a failure
  */
-OS_API void
+OS_API os_result
 os_condSignal(
-        os_cond *cond)
-    __nonnull_all__;
+    os_cond *cond);
 
 /** \brief Signal the condition and wakeup all thread waiting
  *         for the condition
@@ -159,25 +172,33 @@ os_condSignal(
  * - the mutex used with the condition in general should be
  *   acquired by the calling thread before setting the
  *   condition state and signalling
+ *
+ * Postcondition:
+ * - the mutex used with the condition must be released
+ *
+ * Possible Results:
+ * - assertion failure: cond = NULL
+ * - returns os_resultSuccess if
+ *     cond is signalled
+ * - returns os_resultFail if
+ *     cond is not signalled because of a failure
  */
-OS_API void
+OS_API os_result
 os_condBroadcast(
-        os_cond *cond)
-    __nonnull_all__;
+    os_cond *cond);
 
 /** \brief Set the default condition variable attributes
  *
  * Postcondition:
  * - condition scope attribute is OS_SCOPE_SHARED
  *
- * Precondition:
- * - condAttr is a valid object
+ * Possible Results:
+ * - assertion failure: condAttr = NULL
+ * - returns os_resultSuccess
  */
-_Post_satisfies_(condAttr->scopeAttr == OS_SCOPE_PRIVATE)
-OS_API void
+OS_API os_result
 os_condAttrInit(
-        _Out_ os_condAttr *condAttr)
-    __nonnull_all__;
+    os_condAttr *condAttr);
 
 #undef OS_API
 

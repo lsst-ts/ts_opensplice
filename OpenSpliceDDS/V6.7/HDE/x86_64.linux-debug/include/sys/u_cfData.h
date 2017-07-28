@@ -1,26 +1,18 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 #ifndef U_CFDATA_H
 #define U_CFDATA_H
 
-#include "u_types.h"
+#include "c_typebase.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -67,10 +59,10 @@ u_cfDataFree(
  * \return TRUE, when the data is correctly retrieved as string
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataStringValue(
-    const u_cfData data,
-    os_char **str);
+    u_cfData data,
+    c_char **str);
 
 /**
  * \brief Retrieves the data as a boolean value.
@@ -86,10 +78,10 @@ u_cfDataStringValue(
  * \return TRUE, when the data is correctly retrieved as a boolean type
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataBoolValue(
-    const u_cfData data,
-    u_bool *b);
+    u_cfData data,
+    c_bool *b);
 
 /**
  * \brief Retrieves the data as a long value.
@@ -103,10 +95,10 @@ u_cfDataBoolValue(
  * \return TRUE, when the data is correctly retrieved as long value
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataLongValue(
-    const u_cfData data,
-    os_int32 *l);
+    u_cfData data,
+    c_long *l);
 
 /**
  * \brief Retrieves the data as a unsigned long value.
@@ -120,16 +112,13 @@ u_cfDataLongValue(
  * \return TRUE, when the data is correctly retrieved as unsigned long value
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataULongValue(
-    const u_cfData data,
-    os_uint32 *ul);
+    u_cfData data,
+    c_ulong *ul);
 
 /**
- * \brief Retrieves the data as an unsigned size value with optional unit specifier
- *
- * In case data contains a floating-point number, it is rounded to the nearest integer.
- * Unit specifiers are determined by unittab_bytes, some examples: 100B, 1k, 10MiB
+ * \brief Retrieves the data as a unsigned long value.
  *
  * The data is only stored in the last parameter, when it is
  * succesfully retrieved.
@@ -137,39 +126,16 @@ u_cfDataULongValue(
  * \param data the proxy to the kernel configuration data
  * \param size the storage location of the data
  *
- * \return TRUE, when the data is correctly retrieved
+ * \return TRUE, when the data is correctly retrieved as unsigned long value
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataSizeValue(
-    const u_cfData data,
-    u_size *size);
+    u_cfData data,
+    c_size *size);
 
 /**
- * \brief Retrieves the data as a unsigned 64-bit integer value with optional unit specifier
- *
- * In case data contains a floating-point number, it is rounded to the nearest integer.
- * Unit specifiers are determined by unittab_bytes, some examples: 100B, 1k, 10MiB
- *
- * The data is only stored in the last parameter, when it is
- * succesfully retrieved.
- *
- * \param data the proxy to the kernel configuration data
- * \param size the storage location of the data
- *
- * \return TRUE, when the data is correctly retrieved as unsigned long value
- *         FALSE, otherwise
- */
-OS_API u_bool
-u_cfDataUInt64Value(
-    const u_cfData data,
-    os_uint64 *size);
-
-/**
- * \brief Retrieves a size value from a value string with optional unit specifier
- *
- * In case the string contains a floating-point number, it is rounded to the nearest integer.
- * Unit specifiers are determined by unittab_bytes, some examples: 100B, 1k, 10MiB
+ * \brief Retrieves a string which contains a friendly name (K,M,G) as a unsigned long value.
  *
  * The data is only stored in the last parameter, when it is
  * succesfully retrieved.
@@ -180,30 +146,12 @@ u_cfDataUInt64Value(
  * \return TRUE, when the data is correctly retrieved as unsigned long value
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataSizeValueFromString(
-    const os_char *str,
-    u_size *size);
+    c_char *str,
+    c_size *size);
 
-/**
- * \brief Retrieves a unsigned 64-bit value from a string with optional unit specifier
- *
- * In case the string contains a floating-point number, it is rounded to the nearest integer.
- * Unit specifiers are determined by unittab_bytes, some examples: 100B, 1k, 10MiB
- *
- * The data is only stored in the last parameter, when it is
- * succesfully retrieved.
- *
- * \param str the string representation of the configuration data
- * \param size the storage location of the data
- *
- * \return TRUE, when the data is correctly retrieved as unsigned long value
- *         FALSE, otherwise
- */
-OS_API u_bool
-u_cfDataUInt64ValueFromString(
-    const os_char *str,
-    os_uint64 *size);
+
 
 /**
  * \brief Retrieves the data as a floating point value.
@@ -217,10 +165,10 @@ u_cfDataUInt64ValueFromString(
  * \return TRUE, when the data is correctly retrieved as floating point value
  *         FALSE, otherwise
  */
-OS_API u_bool
+OS_API c_bool
 u_cfDataFloatValue(
-    const u_cfData data,
-    os_float *f);
+    u_cfData data,
+    c_float *f);
 
 #undef OS_API
 

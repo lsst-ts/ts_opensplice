@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE 
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms. 
  *
  */
 #ifndef V_SUBSCRIBER_H
@@ -30,7 +22,6 @@ extern "C" {
 #include "v_reader.h"
 #include "v_participant.h"
 #include "v_subscriberQos.h"
-#include "v_dataReader.h"
 #include "os_if.h"
 
 #ifdef OSPL_BUILD_CORE
@@ -50,9 +41,6 @@ extern "C" {
  */
 #define v_subscriber(o) (C_CAST(o,v_subscriber))
 
-#define v_subscriberParticipant(_this) \
-        v_participant(_this->participant)
-
 OS_API v_subscriber
 v_subscriberNew(
     v_participant participant,
@@ -63,15 +51,6 @@ v_subscriberNew(
 OS_API void
 v_subscriberFree(
     v_subscriber _this);
-
-OS_API v_subscriberQos
-v_subscriberGetQos(
-    v_subscriber _this);
-
-OS_API v_result
-v_subscriberSetQos(
-    v_subscriber _this,
-    v_subscriberQos qos);
 
 OS_API v_result
 v_subscriberEnable(
@@ -86,6 +65,11 @@ v_subscriberSubscribe(
     v_subscriber _this,
     const c_char *partitionExpr);
 
+OS_API void
+v_subscriberUnSubscribe(
+    v_subscriber _this,
+    const c_char *partitionExpr);
+
 OS_API c_iter
 v_subscriberLookupPartitions(
     v_subscriber _this,
@@ -96,7 +80,7 @@ v_subscriberCheckPartitionInterest(
     v_subscriber _this,
     v_partition partition);
 
-OS_API v_result
+OS_API void
 v_subscriberAddReader(
     v_subscriber _this,
     v_reader reader);
@@ -107,30 +91,17 @@ v_subscriberRemoveReader(
     v_reader reader);
 
 OS_API c_iter
+v_subscriberLookupReaders(
+    v_subscriber _this);
+
+OS_API c_iter
 v_subscriberLookupReadersByTopic(
     v_subscriber _this,
     const c_char *topicName);
 
-OS_API v_presentationKind
-v_subscriberAccessScope(
+OS_API v_subscriberQos
+v_subscriberGetQos(
     v_subscriber _this);
-
-OS_API v_result
-v_subscriberBeginAccess(
-    v_subscriber _this);
-
-OS_API v_result
-v_subscriberEndAccess(
-    v_subscriber _this);
-
-typedef c_bool (*v_dataReaderAction)(v_dataReader reader, c_voidp arg);
-
-OS_API v_result
-v_subscriberGetDataReaders(
-    v_subscriber _this,
-    v_sampleMask mask,
-    v_dataReaderAction action,
-    c_voidp actionArg);
 
 #undef OS_API
 

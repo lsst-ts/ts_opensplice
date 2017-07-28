@@ -1,20 +1,12 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
+ *   This software and documentation are Copyright 2006 to 2013 PrismTech
+ *   Limited and its licensees. All rights reserved. See file:
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ *                     $OSPL_HOME/LICENSE
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ *   for full copyright notice and license terms.
  *
  */
 /**@file api/cm/xml/include/cmx_factory.h
@@ -25,7 +17,6 @@
 #define CMX_FACTORY_H
 
 #include "c_typebase.h"
-#include "u_entity.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -68,7 +59,7 @@ OS_API const c_char*   cmx_detach();
  *
  * @return TRUE if initialized, FALSE otherwise.
  */
-OS_API os_boolean      cmx_isInitialized(void);
+OS_API c_bool          cmx_isInitialized(void);
 
 /**
  * Internal routine that deregisters and frees all registered entities. This
@@ -82,7 +73,6 @@ OS_API void            cmx_deregisterAllEntities(void);
  * @return the version of the CM API:
  */
 OS_API  c_char*        cmx_getVersion();
-
 #undef OS_API
 
 #if defined (__cplusplus)

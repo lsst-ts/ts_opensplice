@@ -1,20 +1,12 @@
 /*
 *                         OpenSplice DDS
 *
- *   This software and documentation are Copyright 2006 to  PrismTech
- *   Limited, its affiliated companies and licensors. All rights reserved.
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+*   This software and documentation are Copyright 2006 to 2012 PrismTech
+*   Limited and its licensees. All rights reserved. See file:
+*
+*                     $OSPL_HOME/LICENSE
+*
+*   for full copyright notice and license terms.
 *
 */
 
@@ -40,40 +32,68 @@ class CoherentSetImpl;
 }
 }
 
+/** @internal @bug OSPL-1741 This class is not implememted
+ * @see http://jira.prismtech.com:8080/browse/OSPL-1741 */
+
 class org::opensplice::pub::CoherentSetImpl
 {
 public:
-	CoherentSetImpl() : pub(dds::core::null), ended(true) {}
-
-    CoherentSetImpl(const dds::pub::Publisher& pub) : pub(pub), ended(false)
+    CoherentSetImpl() : t_(dds::core::null), ended_(false)
     {
-        DDS::ReturnCode_t result = pub->pub_->begin_coherent_changes();
-        org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::begin_coherent_changes"));
+        throw dds::core::UnsupportedError(org::opensplice::core::exception_helper(
+                                              OSPL_CONTEXT_LITERAL("dds::core::UnsupportedError : Function not currently supported")));
+    }
+
+    CoherentSetImpl(const dds::pub::Publisher& t) : t_(t), ended_(false)
+    {
+#ifdef _WIN32
+#pragma warning( push )
+#pragma warning( disable : 4702 ) //disable warning caused by temporary exception, remove later
+#endif
+        throw dds::core::UnsupportedError(org::opensplice::core::exception_helper(
+                                              OSPL_CONTEXT_LITERAL("dds::core::UnsupportedError : Function not currently supported")));
+#ifdef _WIN32
+#pragma warning ( pop ) //re-enable warning to prevent leaking to user code, remove later
+#endif
+
+        std::cout << "=== begin coherent changes ===" << std::endl;
     }
 
     void end()
     {
-        if(!ended)
+#ifdef _WIN32
+#pragma warning( push )
+#pragma warning( disable : 4702 ) //disable warning caused by temporary exception, remove later
+#endif
+        throw dds::core::UnsupportedError(org::opensplice::core::exception_helper(
+                                              OSPL_CONTEXT_LITERAL("dds::core::UnsupportedError : Function not currently supported")));
+#ifdef _WIN32
+#pragma warning ( pop ) //re-enable warning to prevent leaking to user code, remove later
+#endif
+
+        if(!ended_)
         {
-            DDS::ReturnCode_t result = pub->pub_->end_coherent_changes();
-            org::opensplice::core::check_and_throw(result, OSPL_CONTEXT_LITERAL("Calling ::end_coherent_changes"));
-            ended = true;
+            std::cout << "=== end coherent changes ===" << std::endl;
+            ended_ = true;
         }
     }
 
     ~CoherentSetImpl()
     {
-        this->end();
+        if(!ended_)
+        {
+            this->end();
+        }
     }
 
     bool operator ==(const CoherentSetImpl& other) const
     {
-        return pub == other.pub && ended == other.ended;
+        return t_ == other.t_ && ended_ == other.ended_;
     }
 
 private:
-    dds::pub::Publisher pub;
-    bool ended;
+    dds::pub::Publisher t_;
+    bool ended_;
 };
 
 #endif /* OMG_IDDS_PUB_COHERENT_SET_IMPL_HPP_ */

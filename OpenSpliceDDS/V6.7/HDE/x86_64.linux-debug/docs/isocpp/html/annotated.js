@@ -1,0 +1,27 @@
+var annotated =
+[
+    [ "anonymous_namespace{implementation.cpp}", "namespaceanonymous__namespace_02implementation_8cpp_03.html", null ],
+    [ "dds", "namespacedds.html", "namespacedds" ],
+    [ "demo", "namespacedemo.html", "namespacedemo" ],
+    [ "examples", "namespaceexamples.html", "namespaceexamples" ],
+    [ "org", "namespaceorg.html", "namespaceorg" ],
+    [ "Ui", "namespace_ui.html", "namespace_ui" ],
+    [ "_ShapeType", "struct___shape_type.html", "struct___shape_type" ],
+    [ "OSPL_DDS_FINAL", "class_o_s_p_l___d_d_s___f_i_n_a_l.html", "class_o_s_p_l___d_d_s___f_i_n_a_l" ],
+    [ "ShapeType", "struct_shape_type.html", "struct_shape_type" ],
+    [ "ShapeTypeDataReader", "class_shape_type_data_reader.html", "class_shape_type_data_reader" ],
+    [ "ShapeTypeDataReader_impl", "class_shape_type_data_reader__impl.html", "class_shape_type_data_reader__impl" ],
+    [ "ShapeTypeDataReaderView", "class_shape_type_data_reader_view.html", "class_shape_type_data_reader_view" ],
+    [ "ShapeTypeDataReaderView_impl", "class_shape_type_data_reader_view__impl.html", "class_shape_type_data_reader_view__impl" ],
+    [ "ShapeTypeDataWriter", "class_shape_type_data_writer.html", "class_shape_type_data_writer" ],
+    [ "ShapeTypeDataWriter_impl", "class_shape_type_data_writer__impl.html", "class_shape_type_data_writer__impl" ],
+    [ "ShapeTypeSeq_uniq_", "struct_shape_type_seq__uniq__.html", null ],
+    [ "ShapeTypeTypeSupport", "class_shape_type_type_support.html", "class_shape_type_type_support" ],
+    [ "ShapeTypeTypeSupportFactory", "class_shape_type_type_support_factory.html", "class_shape_type_type_support_factory" ],
+    [ "ShapeTypeTypeSupportInterface", "class_shape_type_type_support_interface.html", "class_shape_type_type_support_interface" ],
+    [ "Ui_Dialog", "class_ui___dialog.html", "class_ui___dialog" ],
+    [ "Ui_FilterDialog", "class_ui___filter_dialog.html", "class_ui___filter_dialog" ],
+    [ "Ui_ReaderQos", "class_ui___reader_qos.html", "class_ui___reader_qos" ],
+    [ "Ui_ShapesDialog", "class_ui___shapes_dialog.html", "class_ui___shapes_dialog" ],
+    [ "Ui_WriterQoS", "class_ui___writer_qo_s.html", "class_ui___writer_qo_s" ]
+];
