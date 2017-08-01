@@ -10,7 +10,7 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"sacpp/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp"
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"sacpp/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
@@ -34,16 +34,16 @@ LIBPREFIX     = lib
 LIBSUFFIX     = 
 GENFLAGS      = -O3 -DNDEBUG
 LDLIBS        = -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = .objisocpp/sacpp/generated/dds_builtinTopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypes$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/DataReaderQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/SubscriberQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/DataWriterQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/PublisherQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/TopicQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/Retain$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/PolicyConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/StatusConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/InstanceHandleImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityRegistry$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/exception_helper$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/FunctorHolder$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/memory$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/ConditionImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/RegisterBuiltinTopics$(OBJEXT) .objisocpp/isocpp/dds/sub/Query$(OBJEXT) .objisocpp/isocpp/dds/sub/discovery$(OBJEXT) .objisocpp/isocpp/dds/sub/status/DataState$(OBJEXT) .objisocpp/isocpp/dds/sub/cond/QueryCondition$(OBJEXT) .objisocpp/isocpp/dds/sub/find$(OBJEXT) .objisocpp/isocpp/dds/sub/AnyDataReaderListener$(OBJEXT) .objisocpp/isocpp/dds/sub/SubscriberListener$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipant$(OBJEXT) .objisocpp/isocpp/dds/domain/find$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipantListener$(OBJEXT) .objisocpp/isocpp/dds/pub/discovery$(OBJEXT) .objisocpp/isocpp/dds/pub/PublisherListener$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriter$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriterListener$(OBJEXT) .objisocpp/isocpp/dds/topic/TopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/discovery$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicDescription$(OBJEXT) .objisocpp/isocpp/dds/core/Reference$(OBJEXT) .objisocpp/isocpp/dds/core/detail/maplog$(OBJEXT) .objisocpp/isocpp/dds/core/Duration$(OBJEXT) .objisocpp/isocpp/dds/core/status/status$(OBJEXT) .objisocpp/isocpp/dds/core/status/State$(OBJEXT) .objisocpp/isocpp/dds/core/cond/GuardCondition$(OBJEXT) .objisocpp/isocpp/dds/core/cond/WaitSet$(OBJEXT) .objisocpp/isocpp/dds/core/Time$(OBJEXT) .objisocpp/isocpp/dds/core/Exception$(OBJEXT) .objisocpp/isocpp/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp/sacpp/ccpp_WaitSet$(OBJEXT) .objisocpp/sacpp/ccpp_ErrorInfo$(OBJEXT) .objisocpp/sacpp/ccpp_DataReaderView_impl$(OBJEXT) .objisocpp/sacpp/sacpp_ValueBase$(OBJEXT) .objisocpp/sacpp/ccpp_ContentFilteredTopic_impl$(OBJEXT) .objisocpp/sacpp/sacpp_DefaultValueRefCountBase$(OBJEXT) .objisocpp/sacpp/ccpp_TopicDescription_impl$(OBJEXT) .objisocpp/sacpp/ccpp_TypeSupport_impl$(OBJEXT) .objisocpp/sacpp/ccpp_MultiTopic_impl$(OBJEXT) .objisocpp/sacpp/ccpp_GuardCondition$(OBJEXT) .objisocpp/sacpp/ccpp_DataReader_impl$(OBJEXT) .objisocpp/sacpp/ccpp_ListenerUtils$(OBJEXT) .objisocpp/sacpp/ccpp_Entity_impl$(OBJEXT) .objisocpp/sacpp/sacpp_Exception$(OBJEXT) .objisocpp/sacpp/ccpp_Condition_impl$(OBJEXT) .objisocpp/sacpp/ccpp_Utils$(OBJEXT) .objisocpp/sacpp/ccpp_Topic_impl$(OBJEXT) .objisocpp/sacpp/ccpp_QueryCondition_impl$(OBJEXT) .objisocpp/sacpp/ccpp_DomainParticipant_impl$(OBJEXT) .objisocpp/sacpp/dds_dcps$(OBJEXT) .objisocpp/sacpp/ccpp_Subscriber_impl$(OBJEXT) .objisocpp/sacpp/sacpp_ExceptionInitializer$(OBJEXT) .objisocpp/sacpp/sacpp_LocalObject$(OBJEXT) .objisocpp/sacpp/ccpp_DomainParticipantFactory$(OBJEXT) .objisocpp/sacpp/ccpp_Domain_impl$(OBJEXT) .objisocpp/sacpp/ccpp_DataWriter_impl$(OBJEXT) .objisocpp/sacpp/ccpp_QosUtils$(OBJEXT) .objisocpp/sacpp/sacpp_UserException$(OBJEXT) .objisocpp/sacpp/ccpp_QosProvider$(OBJEXT) .objisocpp/sacpp/ccpp_StatusCondition_impl$(OBJEXT) .objisocpp/sacpp/sacpp_Object$(OBJEXT) .objisocpp/sacpp/ccpp_ReadCondition_impl$(OBJEXT) .objisocpp/sacpp/sacpp_SystemException$(OBJEXT) .objisocpp/sacpp/ccpp_Publisher_impl$(OBJEXT)
+OBJS          = .objisocpp/sacpp/generated/dds_builtinTopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypes$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/DataReaderQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/SubscriberQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/DataWriterQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/PublisherQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/TopicQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/Retain$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/QosProvider$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/PolicyConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/StatusConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/InstanceHandleImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityRegistry$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/exception_helper$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/FunctorHolder$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/memory$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/ConditionImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/RegisterBuiltinTopics$(OBJEXT) .objisocpp/isocpp/dds/sub/Query$(OBJEXT) .objisocpp/isocpp/dds/sub/discovery$(OBJEXT) .objisocpp/isocpp/dds/sub/status/DataState$(OBJEXT) .objisocpp/isocpp/dds/sub/cond/QueryCondition$(OBJEXT) .objisocpp/isocpp/dds/sub/find$(OBJEXT) .objisocpp/isocpp/dds/sub/AnyDataReaderListener$(OBJEXT) .objisocpp/isocpp/dds/sub/SubscriberListener$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipant$(OBJEXT) .objisocpp/isocpp/dds/domain/find$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipantListener$(OBJEXT) .objisocpp/isocpp/dds/pub/discovery$(OBJEXT) .objisocpp/isocpp/dds/pub/PublisherListener$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriter$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriterListener$(OBJEXT) .objisocpp/isocpp/dds/topic/TopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/discovery$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicDescription$(OBJEXT) .objisocpp/isocpp/dds/core/Reference$(OBJEXT) .objisocpp/isocpp/dds/core/detail/maplog$(OBJEXT) .objisocpp/isocpp/dds/core/Duration$(OBJEXT) .objisocpp/isocpp/dds/core/status/status$(OBJEXT) .objisocpp/isocpp/dds/core/status/State$(OBJEXT) .objisocpp/isocpp/dds/core/cond/GuardCondition$(OBJEXT) .objisocpp/isocpp/dds/core/cond/WaitSet$(OBJEXT) .objisocpp/isocpp/dds/core/Time$(OBJEXT) .objisocpp/isocpp/dds/core/Exception$(OBJEXT) .objisocpp/isocpp/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp/sacpp/sacpp_ValueBase$(OBJEXT) .objisocpp/sacpp/GuardCondition$(OBJEXT) .objisocpp/sacpp/QueryCondition$(OBJEXT) .objisocpp/sacpp/DomainParticipant$(OBJEXT) .objisocpp/sacpp/ListenerDispatcher$(OBJEXT) .objisocpp/sacpp/sacpp_DefaultValueRefCountBase$(OBJEXT) .objisocpp/sacpp/Topic$(OBJEXT) .objisocpp/sacpp/DataReader$(OBJEXT) .objisocpp/sacpp/Subscriber$(OBJEXT) .objisocpp/sacpp/SequenceUtils$(OBJEXT) .objisocpp/sacpp/Publisher$(OBJEXT) .objisocpp/sacpp/StatusCondition$(OBJEXT) .objisocpp/sacpp/ReportUtils$(OBJEXT) .objisocpp/sacpp/QosProvider$(OBJEXT) .objisocpp/sacpp/FooDataReaderView_impl$(OBJEXT) .objisocpp/sacpp/Entity$(OBJEXT) .objisocpp/sacpp/sacpp_Exception$(OBJEXT) .objisocpp/sacpp/Domain$(OBJEXT) .objisocpp/sacpp/ContentFilteredTopic$(OBJEXT) .objisocpp/sacpp/WaitSet$(OBJEXT) .objisocpp/sacpp/TypeSupportMetaHolder$(OBJEXT) .objisocpp/sacpp/FooDataWriter_impl$(OBJEXT) .objisocpp/sacpp/LoanRegistry$(OBJEXT) .objisocpp/sacpp/TopicDescription$(OBJEXT) .objisocpp/sacpp/MultiTopic$(OBJEXT) .objisocpp/sacpp/DataReaderView$(OBJEXT) .objisocpp/sacpp/CppSuperClass$(OBJEXT) .objisocpp/sacpp/dds_dcps$(OBJEXT) .objisocpp/sacpp/ErrorInfo$(OBJEXT) .objisocpp/sacpp/Condition$(OBJEXT) .objisocpp/sacpp/Constants$(OBJEXT) .objisocpp/sacpp/sacpp_ExceptionInitializer$(OBJEXT) .objisocpp/sacpp/sacpp_LocalObject$(OBJEXT) .objisocpp/sacpp/QosUtils$(OBJEXT) .objisocpp/sacpp/TypeSupport$(OBJEXT) .objisocpp/sacpp/StatusUtils$(OBJEXT) .objisocpp/sacpp/PolicyUtils$(OBJEXT) .objisocpp/sacpp/ObjSet$(OBJEXT) .objisocpp/sacpp/sacpp_UserException$(OBJEXT) .objisocpp/sacpp/DataWriter$(OBJEXT) .objisocpp/sacpp/ReadCondition$(OBJEXT) .objisocpp/sacpp/DomainParticipantFactory$(OBJEXT) .objisocpp/sacpp/sacpp_Object$(OBJEXT) .objisocpp/sacpp/MiscUtils$(OBJEXT) .objisocpp/sacpp/sacpp_SystemException$(OBJEXT) .objisocpp/sacpp/FooDataReader_impl$(OBJEXT) .objisocpp/sacpp/StrObjMap$(OBJEXT)
 AREXT         = .a
 LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsisocpp$(LIBSUFFIX)$(AREXT)
 SOEXT         = .so
 SHTARGETDIR   = ../lib/
 SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsisocpp$(LIBSUFFIX)$(SOEXT)
 SHFLAGS       = -shared
-SRC           = sacpp/generated/dds_builtinTopicsDcps.cpp sacpp/generated/dds_builtinTopicsSplDcps.cpp sacpp/generated/dds_builtinTopicsDcps_impl.cpp sacpp/generated/dds_builtinTopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps_impl.cpp sacpp/generated/dds_dcps_builtintopicsSplDcps.cpp sacpp/generated/dds_dcps_builtintopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps.cpp sacpp/generated/dds_namedQosTypesDcps.cpp sacpp/generated/dds_namedQosTypes.cpp sacpp/generated/dds_namedQosTypesDcps_impl.cpp sacpp/generated/dds_namedQosTypesSplDcps.cpp isocpp/org/opensplice/sub/qos/DataReaderQosImpl.cpp isocpp/org/opensplice/sub/qos/QosConverter.cpp isocpp/org/opensplice/sub/qos/SubscriberQosImpl.cpp isocpp/org/opensplice/sub/SubscriberEventForwarder.cpp isocpp/org/opensplice/sub/SubscriberDelegate.cpp isocpp/org/opensplice/domain/DomainEventForwarder.cpp isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl.cpp isocpp/org/opensplice/domain/qos/QosConverter.cpp isocpp/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp/org/opensplice/pub/PublisherEventForwarder.cpp isocpp/org/opensplice/pub/qos/DataWriterQosImpl.cpp isocpp/org/opensplice/pub/qos/QosConverter.cpp isocpp/org/opensplice/pub/qos/PublisherQosImpl.cpp isocpp/org/opensplice/pub/PublisherDelegate.cpp isocpp/org/opensplice/topic/qos/TopicQosImpl.cpp isocpp/org/opensplice/topic/qos/QosConverter.cpp isocpp/org/opensplice/core/Retain.cpp isocpp/org/opensplice/core/PolicyConverter.cpp isocpp/org/opensplice/core/StatusConverter.cpp isocpp/org/opensplice/core/InstanceHandleImpl.cpp isocpp/org/opensplice/core/EntityDelegate.cpp isocpp/org/opensplice/core/EntityRegistry.cpp isocpp/org/opensplice/core/exception_helper.cpp isocpp/org/opensplice/core/FunctorHolder.cpp isocpp/org/opensplice/core/memory.cpp isocpp/org/opensplice/core/ConditionImpl.cpp isocpp/org/opensplice/core/RegisterBuiltinTopics.cpp isocpp/dds/sub/Query.cpp isocpp/dds/sub/discovery.cpp isocpp/dds/sub/status/DataState.cpp isocpp/dds/sub/cond/QueryCondition.cpp isocpp/dds/sub/find.cpp isocpp/dds/sub/AnyDataReaderListener.cpp isocpp/dds/sub/SubscriberListener.cpp isocpp/dds/domain/DomainParticipant.cpp isocpp/dds/domain/find.cpp isocpp/dds/domain/DomainParticipantListener.cpp isocpp/dds/pub/discovery.cpp isocpp/dds/pub/PublisherListener.cpp isocpp/dds/pub/AnyDataWriter.cpp isocpp/dds/pub/AnyDataWriterListener.cpp isocpp/dds/topic/TopicListener.cpp isocpp/dds/topic/discovery.cpp isocpp/dds/topic/AnyTopicListener.cpp isocpp/dds/topic/AnyTopicDescription.cpp isocpp/dds/core/Reference.cpp isocpp/dds/core/detail/maplog.cpp isocpp/dds/core/Duration.cpp isocpp/dds/core/status/status.cpp isocpp/dds/core/status/State.cpp isocpp/dds/core/cond/GuardCondition.cpp isocpp/dds/core/cond/WaitSet.cpp isocpp/dds/core/Time.cpp isocpp/dds/core/Exception.cpp isocpp/dds/core/policy/CorePolicy.cpp sacpp/ccpp_WaitSet.cpp sacpp/ccpp_ErrorInfo.cpp sacpp/ccpp_DataReaderView_impl.cpp sacpp/sacpp_ValueBase.cpp sacpp/ccpp_ContentFilteredTopic_impl.cpp sacpp/sacpp_DefaultValueRefCountBase.cpp sacpp/ccpp_TopicDescription_impl.cpp sacpp/ccpp_TypeSupport_impl.cpp sacpp/ccpp_MultiTopic_impl.cpp sacpp/ccpp_GuardCondition.cpp sacpp/ccpp_DataReader_impl.cpp sacpp/ccpp_ListenerUtils.cpp sacpp/ccpp_Entity_impl.cpp sacpp/sacpp_Exception.cpp sacpp/ccpp_Condition_impl.cpp sacpp/ccpp_Utils.cpp sacpp/ccpp_Topic_impl.cpp sacpp/ccpp_QueryCondition_impl.cpp sacpp/ccpp_DomainParticipant_impl.cpp sacpp/dds_dcps.cpp sacpp/ccpp_Subscriber_impl.cpp sacpp/sacpp_ExceptionInitializer.cpp sacpp/sacpp_LocalObject.cpp sacpp/ccpp_DomainParticipantFactory.cpp sacpp/ccpp_Domain_impl.cpp sacpp/ccpp_DataWriter_impl.cpp sacpp/ccpp_QosUtils.cpp sacpp/sacpp_UserException.cpp sacpp/ccpp_QosProvider.cpp sacpp/ccpp_StatusCondition_impl.cpp sacpp/sacpp_Object.cpp sacpp/ccpp_ReadCondition_impl.cpp sacpp/sacpp_SystemException.cpp sacpp/ccpp_Publisher_impl.cpp
+SRC           = sacpp/generated/dds_builtinTopicsDcps.cpp sacpp/generated/dds_builtinTopicsSplDcps.cpp sacpp/generated/dds_builtinTopicsDcps_impl.cpp sacpp/generated/dds_builtinTopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps_impl.cpp sacpp/generated/dds_dcps_builtintopicsSplDcps.cpp sacpp/generated/dds_dcps_builtintopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps.cpp sacpp/generated/dds_namedQosTypesDcps.cpp sacpp/generated/dds_namedQosTypes.cpp sacpp/generated/dds_namedQosTypesDcps_impl.cpp sacpp/generated/dds_namedQosTypesSplDcps.cpp isocpp/org/opensplice/sub/qos/DataReaderQosImpl.cpp isocpp/org/opensplice/sub/qos/QosConverter.cpp isocpp/org/opensplice/sub/qos/SubscriberQosImpl.cpp isocpp/org/opensplice/sub/SubscriberEventForwarder.cpp isocpp/org/opensplice/sub/SubscriberDelegate.cpp isocpp/org/opensplice/domain/DomainEventForwarder.cpp isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl.cpp isocpp/org/opensplice/domain/qos/QosConverter.cpp isocpp/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp/org/opensplice/pub/PublisherEventForwarder.cpp isocpp/org/opensplice/pub/qos/DataWriterQosImpl.cpp isocpp/org/opensplice/pub/qos/QosConverter.cpp isocpp/org/opensplice/pub/qos/PublisherQosImpl.cpp isocpp/org/opensplice/pub/PublisherDelegate.cpp isocpp/org/opensplice/topic/qos/TopicQosImpl.cpp isocpp/org/opensplice/topic/qos/QosConverter.cpp isocpp/org/opensplice/core/Retain.cpp isocpp/org/opensplice/core/QosProvider.cpp isocpp/org/opensplice/core/PolicyConverter.cpp isocpp/org/opensplice/core/StatusConverter.cpp isocpp/org/opensplice/core/InstanceHandleImpl.cpp isocpp/org/opensplice/core/EntityDelegate.cpp isocpp/org/opensplice/core/EntityRegistry.cpp isocpp/org/opensplice/core/exception_helper.cpp isocpp/org/opensplice/core/FunctorHolder.cpp isocpp/org/opensplice/core/memory.cpp isocpp/org/opensplice/core/ConditionImpl.cpp isocpp/org/opensplice/core/RegisterBuiltinTopics.cpp isocpp/dds/sub/Query.cpp isocpp/dds/sub/discovery.cpp isocpp/dds/sub/status/DataState.cpp isocpp/dds/sub/cond/QueryCondition.cpp isocpp/dds/sub/find.cpp isocpp/dds/sub/AnyDataReaderListener.cpp isocpp/dds/sub/SubscriberListener.cpp isocpp/dds/domain/DomainParticipant.cpp isocpp/dds/domain/find.cpp isocpp/dds/domain/DomainParticipantListener.cpp isocpp/dds/pub/discovery.cpp isocpp/dds/pub/PublisherListener.cpp isocpp/dds/pub/AnyDataWriter.cpp isocpp/dds/pub/AnyDataWriterListener.cpp isocpp/dds/topic/TopicListener.cpp isocpp/dds/topic/discovery.cpp isocpp/dds/topic/AnyTopicListener.cpp isocpp/dds/topic/AnyTopicDescription.cpp isocpp/dds/core/Reference.cpp isocpp/dds/core/detail/maplog.cpp isocpp/dds/core/Duration.cpp isocpp/dds/core/status/status.cpp isocpp/dds/core/status/State.cpp isocpp/dds/core/cond/GuardCondition.cpp isocpp/dds/core/cond/WaitSet.cpp isocpp/dds/core/Time.cpp isocpp/dds/core/Exception.cpp isocpp/dds/core/policy/CorePolicy.cpp sacpp/sacpp_ValueBase.cpp sacpp/GuardCondition.cpp sacpp/QueryCondition.cpp sacpp/DomainParticipant.cpp sacpp/ListenerDispatcher.cpp sacpp/sacpp_DefaultValueRefCountBase.cpp sacpp/Topic.cpp sacpp/DataReader.cpp sacpp/Subscriber.cpp sacpp/SequenceUtils.cpp sacpp/Publisher.cpp sacpp/StatusCondition.cpp sacpp/ReportUtils.cpp sacpp/QosProvider.cpp sacpp/FooDataReaderView_impl.cpp sacpp/Entity.cpp sacpp/sacpp_Exception.cpp sacpp/Domain.cpp sacpp/ContentFilteredTopic.cpp sacpp/WaitSet.cpp sacpp/TypeSupportMetaHolder.cpp sacpp/FooDataWriter_impl.cpp sacpp/LoanRegistry.cpp sacpp/TopicDescription.cpp sacpp/MultiTopic.cpp sacpp/DataReaderView.cpp sacpp/CppSuperClass.cpp sacpp/dds_dcps.cpp sacpp/ErrorInfo.cpp sacpp/Condition.cpp sacpp/Constants.cpp sacpp/sacpp_ExceptionInitializer.cpp sacpp/sacpp_LocalObject.cpp sacpp/QosUtils.cpp sacpp/TypeSupport.cpp sacpp/StatusUtils.cpp sacpp/PolicyUtils.cpp sacpp/ObjSet.cpp sacpp/sacpp_UserException.cpp sacpp/DataWriter.cpp sacpp/ReadCondition.cpp sacpp/DomainParticipantFactory.cpp sacpp/sacpp_Object.cpp sacpp/MiscUtils.cpp sacpp/sacpp_SystemException.cpp sacpp/FooDataReader_impl.cpp sacpp/StrObjMap.cpp
 LINK.cc       = $(LD) $(LDFLAGS)
-DYNAMICFLAGS  = -DBUILD_OMG_DDS_API -DOPENSPLICE_ISOCXX_PSM -DOSPL_BUILD_DCPSCCPP
+DYNAMICFLAGS  = -DBUILD_OMG_DDS_API -DOPENSPLICE_ISOCXX_PSM -DOSPL_BUILD_DCPSCPP
 EXPORTFLAGS   = $(DYNAMICFLAGS)
 endif
 ifeq ($(CFG), Debug)
@@ -52,7 +52,7 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"sacpp/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp"
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"sacpp/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
@@ -76,16 +76,16 @@ LIBPREFIX     = lib
 LIBSUFFIX     = 
 GENFLAGS      = -g
 LDLIBS        = -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = .objisocpp/sacpp/generated/dds_builtinTopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypes$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/DataReaderQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/SubscriberQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/DataWriterQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/PublisherQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/TopicQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/Retain$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/PolicyConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/StatusConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/InstanceHandleImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityRegistry$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/exception_helper$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/FunctorHolder$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/memory$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/ConditionImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/RegisterBuiltinTopics$(OBJEXT) .objisocpp/isocpp/dds/sub/Query$(OBJEXT) .objisocpp/isocpp/dds/sub/discovery$(OBJEXT) .objisocpp/isocpp/dds/sub/status/DataState$(OBJEXT) .objisocpp/isocpp/dds/sub/cond/QueryCondition$(OBJEXT) .objisocpp/isocpp/dds/sub/find$(OBJEXT) .objisocpp/isocpp/dds/sub/AnyDataReaderListener$(OBJEXT) .objisocpp/isocpp/dds/sub/SubscriberListener$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipant$(OBJEXT) .objisocpp/isocpp/dds/domain/find$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipantListener$(OBJEXT) .objisocpp/isocpp/dds/pub/discovery$(OBJEXT) .objisocpp/isocpp/dds/pub/PublisherListener$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriter$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriterListener$(OBJEXT) .objisocpp/isocpp/dds/topic/TopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/discovery$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicDescription$(OBJEXT) .objisocpp/isocpp/dds/core/Reference$(OBJEXT) .objisocpp/isocpp/dds/core/detail/maplog$(OBJEXT) .objisocpp/isocpp/dds/core/Duration$(OBJEXT) .objisocpp/isocpp/dds/core/status/status$(OBJEXT) .objisocpp/isocpp/dds/core/status/State$(OBJEXT) .objisocpp/isocpp/dds/core/cond/GuardCondition$(OBJEXT) .objisocpp/isocpp/dds/core/cond/WaitSet$(OBJEXT) .objisocpp/isocpp/dds/core/Time$(OBJEXT) .objisocpp/isocpp/dds/core/Exception$(OBJEXT) .objisocpp/isocpp/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp/sacpp/ccpp_WaitSet$(OBJEXT) .objisocpp/sacpp/ccpp_ErrorInfo$(OBJEXT) .objisocpp/sacpp/ccpp_DataReaderView_impl$(OBJEXT) .objisocpp/sacpp/sacpp_ValueBase$(OBJEXT) .objisocpp/sacpp/ccpp_ContentFilteredTopic_impl$(OBJEXT) .objisocpp/sacpp/sacpp_DefaultValueRefCountBase$(OBJEXT) .objisocpp/sacpp/ccpp_TopicDescription_impl$(OBJEXT) .objisocpp/sacpp/ccpp_TypeSupport_impl$(OBJEXT) .objisocpp/sacpp/ccpp_MultiTopic_impl$(OBJEXT) .objisocpp/sacpp/ccpp_GuardCondition$(OBJEXT) .objisocpp/sacpp/ccpp_DataReader_impl$(OBJEXT) .objisocpp/sacpp/ccpp_ListenerUtils$(OBJEXT) .objisocpp/sacpp/ccpp_Entity_impl$(OBJEXT) .objisocpp/sacpp/sacpp_Exception$(OBJEXT) .objisocpp/sacpp/ccpp_Condition_impl$(OBJEXT) .objisocpp/sacpp/ccpp_Utils$(OBJEXT) .objisocpp/sacpp/ccpp_Topic_impl$(OBJEXT) .objisocpp/sacpp/ccpp_QueryCondition_impl$(OBJEXT) .objisocpp/sacpp/ccpp_DomainParticipant_impl$(OBJEXT) .objisocpp/sacpp/dds_dcps$(OBJEXT) .objisocpp/sacpp/ccpp_Subscriber_impl$(OBJEXT) .objisocpp/sacpp/sacpp_ExceptionInitializer$(OBJEXT) .objisocpp/sacpp/sacpp_LocalObject$(OBJEXT) .objisocpp/sacpp/ccpp_DomainParticipantFactory$(OBJEXT) .objisocpp/sacpp/ccpp_Domain_impl$(OBJEXT) .objisocpp/sacpp/ccpp_DataWriter_impl$(OBJEXT) .objisocpp/sacpp/ccpp_QosUtils$(OBJEXT) .objisocpp/sacpp/sacpp_UserException$(OBJEXT) .objisocpp/sacpp/ccpp_QosProvider$(OBJEXT) .objisocpp/sacpp/ccpp_StatusCondition_impl$(OBJEXT) .objisocpp/sacpp/sacpp_Object$(OBJEXT) .objisocpp/sacpp/ccpp_ReadCondition_impl$(OBJEXT) .objisocpp/sacpp/sacpp_SystemException$(OBJEXT) .objisocpp/sacpp/ccpp_Publisher_impl$(OBJEXT)
+OBJS          = .objisocpp/sacpp/generated/dds_builtinTopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_builtinTopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopics$(OBJEXT) .objisocpp/sacpp/generated/dds_dcps_builtintopicsDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypes$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) .objisocpp/sacpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/DataReaderQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/qos/SubscriberQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherEventForwarder$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/DataWriterQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/qos/PublisherQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/TopicQosImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/topic/qos/QosConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/Retain$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/QosProvider$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/PolicyConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/StatusConverter$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/InstanceHandleImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/EntityRegistry$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/exception_helper$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/FunctorHolder$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/memory$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/ConditionImpl$(OBJEXT) .objisocpp/isocpp/org/opensplice/core/RegisterBuiltinTopics$(OBJEXT) .objisocpp/isocpp/dds/sub/Query$(OBJEXT) .objisocpp/isocpp/dds/sub/discovery$(OBJEXT) .objisocpp/isocpp/dds/sub/status/DataState$(OBJEXT) .objisocpp/isocpp/dds/sub/cond/QueryCondition$(OBJEXT) .objisocpp/isocpp/dds/sub/find$(OBJEXT) .objisocpp/isocpp/dds/sub/AnyDataReaderListener$(OBJEXT) .objisocpp/isocpp/dds/sub/SubscriberListener$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipant$(OBJEXT) .objisocpp/isocpp/dds/domain/find$(OBJEXT) .objisocpp/isocpp/dds/domain/DomainParticipantListener$(OBJEXT) .objisocpp/isocpp/dds/pub/discovery$(OBJEXT) .objisocpp/isocpp/dds/pub/PublisherListener$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriter$(OBJEXT) .objisocpp/isocpp/dds/pub/AnyDataWriterListener$(OBJEXT) .objisocpp/isocpp/dds/topic/TopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/discovery$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicListener$(OBJEXT) .objisocpp/isocpp/dds/topic/AnyTopicDescription$(OBJEXT) .objisocpp/isocpp/dds/core/Reference$(OBJEXT) .objisocpp/isocpp/dds/core/detail/maplog$(OBJEXT) .objisocpp/isocpp/dds/core/Duration$(OBJEXT) .objisocpp/isocpp/dds/core/status/status$(OBJEXT) .objisocpp/isocpp/dds/core/status/State$(OBJEXT) .objisocpp/isocpp/dds/core/cond/GuardCondition$(OBJEXT) .objisocpp/isocpp/dds/core/cond/WaitSet$(OBJEXT) .objisocpp/isocpp/dds/core/Time$(OBJEXT) .objisocpp/isocpp/dds/core/Exception$(OBJEXT) .objisocpp/isocpp/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp/sacpp/sacpp_ValueBase$(OBJEXT) .objisocpp/sacpp/GuardCondition$(OBJEXT) .objisocpp/sacpp/QueryCondition$(OBJEXT) .objisocpp/sacpp/DomainParticipant$(OBJEXT) .objisocpp/sacpp/ListenerDispatcher$(OBJEXT) .objisocpp/sacpp/sacpp_DefaultValueRefCountBase$(OBJEXT) .objisocpp/sacpp/Topic$(OBJEXT) .objisocpp/sacpp/DataReader$(OBJEXT) .objisocpp/sacpp/Subscriber$(OBJEXT) .objisocpp/sacpp/SequenceUtils$(OBJEXT) .objisocpp/sacpp/Publisher$(OBJEXT) .objisocpp/sacpp/StatusCondition$(OBJEXT) .objisocpp/sacpp/ReportUtils$(OBJEXT) .objisocpp/sacpp/QosProvider$(OBJEXT) .objisocpp/sacpp/FooDataReaderView_impl$(OBJEXT) .objisocpp/sacpp/Entity$(OBJEXT) .objisocpp/sacpp/sacpp_Exception$(OBJEXT) .objisocpp/sacpp/Domain$(OBJEXT) .objisocpp/sacpp/ContentFilteredTopic$(OBJEXT) .objisocpp/sacpp/WaitSet$(OBJEXT) .objisocpp/sacpp/TypeSupportMetaHolder$(OBJEXT) .objisocpp/sacpp/FooDataWriter_impl$(OBJEXT) .objisocpp/sacpp/LoanRegistry$(OBJEXT) .objisocpp/sacpp/TopicDescription$(OBJEXT) .objisocpp/sacpp/MultiTopic$(OBJEXT) .objisocpp/sacpp/DataReaderView$(OBJEXT) .objisocpp/sacpp/CppSuperClass$(OBJEXT) .objisocpp/sacpp/dds_dcps$(OBJEXT) .objisocpp/sacpp/ErrorInfo$(OBJEXT) .objisocpp/sacpp/Condition$(OBJEXT) .objisocpp/sacpp/Constants$(OBJEXT) .objisocpp/sacpp/sacpp_ExceptionInitializer$(OBJEXT) .objisocpp/sacpp/sacpp_LocalObject$(OBJEXT) .objisocpp/sacpp/QosUtils$(OBJEXT) .objisocpp/sacpp/TypeSupport$(OBJEXT) .objisocpp/sacpp/StatusUtils$(OBJEXT) .objisocpp/sacpp/PolicyUtils$(OBJEXT) .objisocpp/sacpp/ObjSet$(OBJEXT) .objisocpp/sacpp/sacpp_UserException$(OBJEXT) .objisocpp/sacpp/DataWriter$(OBJEXT) .objisocpp/sacpp/ReadCondition$(OBJEXT) .objisocpp/sacpp/DomainParticipantFactory$(OBJEXT) .objisocpp/sacpp/sacpp_Object$(OBJEXT) .objisocpp/sacpp/MiscUtils$(OBJEXT) .objisocpp/sacpp/sacpp_SystemException$(OBJEXT) .objisocpp/sacpp/FooDataReader_impl$(OBJEXT) .objisocpp/sacpp/StrObjMap$(OBJEXT)
 AREXT         = .a
 LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsisocpp$(LIBSUFFIX)$(AREXT)
 SOEXT         = .so
 SHTARGETDIR   = ../lib/
 SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsisocpp$(LIBSUFFIX)$(SOEXT)
 SHFLAGS       = -shared
-SRC           = sacpp/generated/dds_builtinTopicsDcps.cpp sacpp/generated/dds_builtinTopicsSplDcps.cpp sacpp/generated/dds_builtinTopicsDcps_impl.cpp sacpp/generated/dds_builtinTopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps_impl.cpp sacpp/generated/dds_dcps_builtintopicsSplDcps.cpp sacpp/generated/dds_dcps_builtintopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps.cpp sacpp/generated/dds_namedQosTypesDcps.cpp sacpp/generated/dds_namedQosTypes.cpp sacpp/generated/dds_namedQosTypesDcps_impl.cpp sacpp/generated/dds_namedQosTypesSplDcps.cpp isocpp/org/opensplice/sub/qos/DataReaderQosImpl.cpp isocpp/org/opensplice/sub/qos/QosConverter.cpp isocpp/org/opensplice/sub/qos/SubscriberQosImpl.cpp isocpp/org/opensplice/sub/SubscriberEventForwarder.cpp isocpp/org/opensplice/sub/SubscriberDelegate.cpp isocpp/org/opensplice/domain/DomainEventForwarder.cpp isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl.cpp isocpp/org/opensplice/domain/qos/QosConverter.cpp isocpp/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp/org/opensplice/pub/PublisherEventForwarder.cpp isocpp/org/opensplice/pub/qos/DataWriterQosImpl.cpp isocpp/org/opensplice/pub/qos/QosConverter.cpp isocpp/org/opensplice/pub/qos/PublisherQosImpl.cpp isocpp/org/opensplice/pub/PublisherDelegate.cpp isocpp/org/opensplice/topic/qos/TopicQosImpl.cpp isocpp/org/opensplice/topic/qos/QosConverter.cpp isocpp/org/opensplice/core/Retain.cpp isocpp/org/opensplice/core/PolicyConverter.cpp isocpp/org/opensplice/core/StatusConverter.cpp isocpp/org/opensplice/core/InstanceHandleImpl.cpp isocpp/org/opensplice/core/EntityDelegate.cpp isocpp/org/opensplice/core/EntityRegistry.cpp isocpp/org/opensplice/core/exception_helper.cpp isocpp/org/opensplice/core/FunctorHolder.cpp isocpp/org/opensplice/core/memory.cpp isocpp/org/opensplice/core/ConditionImpl.cpp isocpp/org/opensplice/core/RegisterBuiltinTopics.cpp isocpp/dds/sub/Query.cpp isocpp/dds/sub/discovery.cpp isocpp/dds/sub/status/DataState.cpp isocpp/dds/sub/cond/QueryCondition.cpp isocpp/dds/sub/find.cpp isocpp/dds/sub/AnyDataReaderListener.cpp isocpp/dds/sub/SubscriberListener.cpp isocpp/dds/domain/DomainParticipant.cpp isocpp/dds/domain/find.cpp isocpp/dds/domain/DomainParticipantListener.cpp isocpp/dds/pub/discovery.cpp isocpp/dds/pub/PublisherListener.cpp isocpp/dds/pub/AnyDataWriter.cpp isocpp/dds/pub/AnyDataWriterListener.cpp isocpp/dds/topic/TopicListener.cpp isocpp/dds/topic/discovery.cpp isocpp/dds/topic/AnyTopicListener.cpp isocpp/dds/topic/AnyTopicDescription.cpp isocpp/dds/core/Reference.cpp isocpp/dds/core/detail/maplog.cpp isocpp/dds/core/Duration.cpp isocpp/dds/core/status/status.cpp isocpp/dds/core/status/State.cpp isocpp/dds/core/cond/GuardCondition.cpp isocpp/dds/core/cond/WaitSet.cpp isocpp/dds/core/Time.cpp isocpp/dds/core/Exception.cpp isocpp/dds/core/policy/CorePolicy.cpp sacpp/ccpp_WaitSet.cpp sacpp/ccpp_ErrorInfo.cpp sacpp/ccpp_DataReaderView_impl.cpp sacpp/sacpp_ValueBase.cpp sacpp/ccpp_ContentFilteredTopic_impl.cpp sacpp/sacpp_DefaultValueRefCountBase.cpp sacpp/ccpp_TopicDescription_impl.cpp sacpp/ccpp_TypeSupport_impl.cpp sacpp/ccpp_MultiTopic_impl.cpp sacpp/ccpp_GuardCondition.cpp sacpp/ccpp_DataReader_impl.cpp sacpp/ccpp_ListenerUtils.cpp sacpp/ccpp_Entity_impl.cpp sacpp/sacpp_Exception.cpp sacpp/ccpp_Condition_impl.cpp sacpp/ccpp_Utils.cpp sacpp/ccpp_Topic_impl.cpp sacpp/ccpp_QueryCondition_impl.cpp sacpp/ccpp_DomainParticipant_impl.cpp sacpp/dds_dcps.cpp sacpp/ccpp_Subscriber_impl.cpp sacpp/sacpp_ExceptionInitializer.cpp sacpp/sacpp_LocalObject.cpp sacpp/ccpp_DomainParticipantFactory.cpp sacpp/ccpp_Domain_impl.cpp sacpp/ccpp_DataWriter_impl.cpp sacpp/ccpp_QosUtils.cpp sacpp/sacpp_UserException.cpp sacpp/ccpp_QosProvider.cpp sacpp/ccpp_StatusCondition_impl.cpp sacpp/sacpp_Object.cpp sacpp/ccpp_ReadCondition_impl.cpp sacpp/sacpp_SystemException.cpp sacpp/ccpp_Publisher_impl.cpp
+SRC           = sacpp/generated/dds_builtinTopicsDcps.cpp sacpp/generated/dds_builtinTopicsSplDcps.cpp sacpp/generated/dds_builtinTopicsDcps_impl.cpp sacpp/generated/dds_builtinTopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps_impl.cpp sacpp/generated/dds_dcps_builtintopicsSplDcps.cpp sacpp/generated/dds_dcps_builtintopics.cpp sacpp/generated/dds_dcps_builtintopicsDcps.cpp sacpp/generated/dds_namedQosTypesDcps.cpp sacpp/generated/dds_namedQosTypes.cpp sacpp/generated/dds_namedQosTypesDcps_impl.cpp sacpp/generated/dds_namedQosTypesSplDcps.cpp isocpp/org/opensplice/sub/qos/DataReaderQosImpl.cpp isocpp/org/opensplice/sub/qos/QosConverter.cpp isocpp/org/opensplice/sub/qos/SubscriberQosImpl.cpp isocpp/org/opensplice/sub/SubscriberEventForwarder.cpp isocpp/org/opensplice/sub/SubscriberDelegate.cpp isocpp/org/opensplice/domain/DomainEventForwarder.cpp isocpp/org/opensplice/domain/qos/DomainParticipantQosImpl.cpp isocpp/org/opensplice/domain/qos/QosConverter.cpp isocpp/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp/org/opensplice/pub/PublisherEventForwarder.cpp isocpp/org/opensplice/pub/qos/DataWriterQosImpl.cpp isocpp/org/opensplice/pub/qos/QosConverter.cpp isocpp/org/opensplice/pub/qos/PublisherQosImpl.cpp isocpp/org/opensplice/pub/PublisherDelegate.cpp isocpp/org/opensplice/topic/qos/TopicQosImpl.cpp isocpp/org/opensplice/topic/qos/QosConverter.cpp isocpp/org/opensplice/core/Retain.cpp isocpp/org/opensplice/core/QosProvider.cpp isocpp/org/opensplice/core/PolicyConverter.cpp isocpp/org/opensplice/core/StatusConverter.cpp isocpp/org/opensplice/core/InstanceHandleImpl.cpp isocpp/org/opensplice/core/EntityDelegate.cpp isocpp/org/opensplice/core/EntityRegistry.cpp isocpp/org/opensplice/core/exception_helper.cpp isocpp/org/opensplice/core/FunctorHolder.cpp isocpp/org/opensplice/core/memory.cpp isocpp/org/opensplice/core/ConditionImpl.cpp isocpp/org/opensplice/core/RegisterBuiltinTopics.cpp isocpp/dds/sub/Query.cpp isocpp/dds/sub/discovery.cpp isocpp/dds/sub/status/DataState.cpp isocpp/dds/sub/cond/QueryCondition.cpp isocpp/dds/sub/find.cpp isocpp/dds/sub/AnyDataReaderListener.cpp isocpp/dds/sub/SubscriberListener.cpp isocpp/dds/domain/DomainParticipant.cpp isocpp/dds/domain/find.cpp isocpp/dds/domain/DomainParticipantListener.cpp isocpp/dds/pub/discovery.cpp isocpp/dds/pub/PublisherListener.cpp isocpp/dds/pub/AnyDataWriter.cpp isocpp/dds/pub/AnyDataWriterListener.cpp isocpp/dds/topic/TopicListener.cpp isocpp/dds/topic/discovery.cpp isocpp/dds/topic/AnyTopicListener.cpp isocpp/dds/topic/AnyTopicDescription.cpp isocpp/dds/core/Reference.cpp isocpp/dds/core/detail/maplog.cpp isocpp/dds/core/Duration.cpp isocpp/dds/core/status/status.cpp isocpp/dds/core/status/State.cpp isocpp/dds/core/cond/GuardCondition.cpp isocpp/dds/core/cond/WaitSet.cpp isocpp/dds/core/Time.cpp isocpp/dds/core/Exception.cpp isocpp/dds/core/policy/CorePolicy.cpp sacpp/sacpp_ValueBase.cpp sacpp/GuardCondition.cpp sacpp/QueryCondition.cpp sacpp/DomainParticipant.cpp sacpp/ListenerDispatcher.cpp sacpp/sacpp_DefaultValueRefCountBase.cpp sacpp/Topic.cpp sacpp/DataReader.cpp sacpp/Subscriber.cpp sacpp/SequenceUtils.cpp sacpp/Publisher.cpp sacpp/StatusCondition.cpp sacpp/ReportUtils.cpp sacpp/QosProvider.cpp sacpp/FooDataReaderView_impl.cpp sacpp/Entity.cpp sacpp/sacpp_Exception.cpp sacpp/Domain.cpp sacpp/ContentFilteredTopic.cpp sacpp/WaitSet.cpp sacpp/TypeSupportMetaHolder.cpp sacpp/FooDataWriter_impl.cpp sacpp/LoanRegistry.cpp sacpp/TopicDescription.cpp sacpp/MultiTopic.cpp sacpp/DataReaderView.cpp sacpp/CppSuperClass.cpp sacpp/dds_dcps.cpp sacpp/ErrorInfo.cpp sacpp/Condition.cpp sacpp/Constants.cpp sacpp/sacpp_ExceptionInitializer.cpp sacpp/sacpp_LocalObject.cpp sacpp/QosUtils.cpp sacpp/TypeSupport.cpp sacpp/StatusUtils.cpp sacpp/PolicyUtils.cpp sacpp/ObjSet.cpp sacpp/sacpp_UserException.cpp sacpp/DataWriter.cpp sacpp/ReadCondition.cpp sacpp/DomainParticipantFactory.cpp sacpp/sacpp_Object.cpp sacpp/MiscUtils.cpp sacpp/sacpp_SystemException.cpp sacpp/FooDataReader_impl.cpp sacpp/StrObjMap.cpp
 LINK.cc       = $(LD) $(LDFLAGS)
-DYNAMICFLAGS  = -DBUILD_OMG_DDS_API -DOPENSPLICE_ISOCXX_PSM -DOSPL_BUILD_DCPSCCPP
+DYNAMICFLAGS  = -DBUILD_OMG_DDS_API -DOPENSPLICE_ISOCXX_PSM -DOSPL_BUILD_DCPSCPP
 EXPORTFLAGS   = $(DYNAMICFLAGS)
 endif
 
@@ -247,6 +247,10 @@ generated: $(GENERATED_DIRTY)
 	@$(TESTDIRSTART) ".objisocpp/isocpp/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp/isocpp/org/opensplice/core"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp/org/opensplice/core/Retain.cpp
 
+.objisocpp/isocpp/org/opensplice/core/QosProvider$(OBJEXT): isocpp/org/opensplice/core/QosProvider.cpp
+	@$(TESTDIRSTART) ".objisocpp/isocpp/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp/isocpp/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp/org/opensplice/core/QosProvider.cpp
+
 .objisocpp/isocpp/org/opensplice/core/PolicyConverter$(OBJEXT): isocpp/org/opensplice/core/PolicyConverter.cpp
 	@$(TESTDIRSTART) ".objisocpp/isocpp/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp/isocpp/org/opensplice/core"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp/org/opensplice/core/PolicyConverter.cpp
@@ -399,89 +403,129 @@ generated: $(GENERATED_DIRTY)
 	@$(TESTDIRSTART) ".objisocpp/isocpp/dds/core/policy" $(TESTDIREND) $(MKDIR) ".objisocpp/isocpp/dds/core/policy"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp/dds/core/policy/CorePolicy.cpp
 
-.objisocpp/sacpp/ccpp_WaitSet$(OBJEXT): sacpp/ccpp_WaitSet.cpp
-	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_WaitSet.cpp
-
-.objisocpp/sacpp/ccpp_ErrorInfo$(OBJEXT): sacpp/ccpp_ErrorInfo.cpp
-	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_ErrorInfo.cpp
-
-.objisocpp/sacpp/ccpp_DataReaderView_impl$(OBJEXT): sacpp/ccpp_DataReaderView_impl.cpp
-	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_DataReaderView_impl.cpp
-
 .objisocpp/sacpp/sacpp_ValueBase$(OBJEXT): sacpp/sacpp_ValueBase.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_ValueBase.cpp
 
-.objisocpp/sacpp/ccpp_ContentFilteredTopic_impl$(OBJEXT): sacpp/ccpp_ContentFilteredTopic_impl.cpp
+.objisocpp/sacpp/GuardCondition$(OBJEXT): sacpp/GuardCondition.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_ContentFilteredTopic_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/GuardCondition.cpp
+
+.objisocpp/sacpp/QueryCondition$(OBJEXT): sacpp/QueryCondition.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/QueryCondition.cpp
+
+.objisocpp/sacpp/DomainParticipant$(OBJEXT): sacpp/DomainParticipant.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/DomainParticipant.cpp
+
+.objisocpp/sacpp/ListenerDispatcher$(OBJEXT): sacpp/ListenerDispatcher.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ListenerDispatcher.cpp
 
 .objisocpp/sacpp/sacpp_DefaultValueRefCountBase$(OBJEXT): sacpp/sacpp_DefaultValueRefCountBase.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_DefaultValueRefCountBase.cpp
 
-.objisocpp/sacpp/ccpp_TopicDescription_impl$(OBJEXT): sacpp/ccpp_TopicDescription_impl.cpp
+.objisocpp/sacpp/Topic$(OBJEXT): sacpp/Topic.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_TopicDescription_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Topic.cpp
 
-.objisocpp/sacpp/ccpp_TypeSupport_impl$(OBJEXT): sacpp/ccpp_TypeSupport_impl.cpp
+.objisocpp/sacpp/DataReader$(OBJEXT): sacpp/DataReader.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_TypeSupport_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/DataReader.cpp
 
-.objisocpp/sacpp/ccpp_MultiTopic_impl$(OBJEXT): sacpp/ccpp_MultiTopic_impl.cpp
+.objisocpp/sacpp/Subscriber$(OBJEXT): sacpp/Subscriber.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_MultiTopic_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Subscriber.cpp
 
-.objisocpp/sacpp/ccpp_GuardCondition$(OBJEXT): sacpp/ccpp_GuardCondition.cpp
+.objisocpp/sacpp/SequenceUtils$(OBJEXT): sacpp/SequenceUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_GuardCondition.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/SequenceUtils.cpp
 
-.objisocpp/sacpp/ccpp_DataReader_impl$(OBJEXT): sacpp/ccpp_DataReader_impl.cpp
+.objisocpp/sacpp/Publisher$(OBJEXT): sacpp/Publisher.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_DataReader_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Publisher.cpp
 
-.objisocpp/sacpp/ccpp_ListenerUtils$(OBJEXT): sacpp/ccpp_ListenerUtils.cpp
+.objisocpp/sacpp/StatusCondition$(OBJEXT): sacpp/StatusCondition.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_ListenerUtils.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/StatusCondition.cpp
 
-.objisocpp/sacpp/ccpp_Entity_impl$(OBJEXT): sacpp/ccpp_Entity_impl.cpp
+.objisocpp/sacpp/ReportUtils$(OBJEXT): sacpp/ReportUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Entity_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ReportUtils.cpp
+
+.objisocpp/sacpp/QosProvider$(OBJEXT): sacpp/QosProvider.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/QosProvider.cpp
+
+.objisocpp/sacpp/FooDataReaderView_impl$(OBJEXT): sacpp/FooDataReaderView_impl.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/FooDataReaderView_impl.cpp
+
+.objisocpp/sacpp/Entity$(OBJEXT): sacpp/Entity.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Entity.cpp
 
 .objisocpp/sacpp/sacpp_Exception$(OBJEXT): sacpp/sacpp_Exception.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_Exception.cpp
 
-.objisocpp/sacpp/ccpp_Condition_impl$(OBJEXT): sacpp/ccpp_Condition_impl.cpp
+.objisocpp/sacpp/Domain$(OBJEXT): sacpp/Domain.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Condition_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Domain.cpp
 
-.objisocpp/sacpp/ccpp_Utils$(OBJEXT): sacpp/ccpp_Utils.cpp
+.objisocpp/sacpp/ContentFilteredTopic$(OBJEXT): sacpp/ContentFilteredTopic.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Utils.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ContentFilteredTopic.cpp
 
-.objisocpp/sacpp/ccpp_Topic_impl$(OBJEXT): sacpp/ccpp_Topic_impl.cpp
+.objisocpp/sacpp/WaitSet$(OBJEXT): sacpp/WaitSet.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Topic_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/WaitSet.cpp
 
-.objisocpp/sacpp/ccpp_QueryCondition_impl$(OBJEXT): sacpp/ccpp_QueryCondition_impl.cpp
+.objisocpp/sacpp/TypeSupportMetaHolder$(OBJEXT): sacpp/TypeSupportMetaHolder.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_QueryCondition_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/TypeSupportMetaHolder.cpp
 
-.objisocpp/sacpp/ccpp_DomainParticipant_impl$(OBJEXT): sacpp/ccpp_DomainParticipant_impl.cpp
+.objisocpp/sacpp/FooDataWriter_impl$(OBJEXT): sacpp/FooDataWriter_impl.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_DomainParticipant_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/FooDataWriter_impl.cpp
+
+.objisocpp/sacpp/LoanRegistry$(OBJEXT): sacpp/LoanRegistry.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/LoanRegistry.cpp
+
+.objisocpp/sacpp/TopicDescription$(OBJEXT): sacpp/TopicDescription.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/TopicDescription.cpp
+
+.objisocpp/sacpp/MultiTopic$(OBJEXT): sacpp/MultiTopic.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/MultiTopic.cpp
+
+.objisocpp/sacpp/DataReaderView$(OBJEXT): sacpp/DataReaderView.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/DataReaderView.cpp
+
+.objisocpp/sacpp/CppSuperClass$(OBJEXT): sacpp/CppSuperClass.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/CppSuperClass.cpp
 
 .objisocpp/sacpp/dds_dcps$(OBJEXT): sacpp/dds_dcps.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/dds_dcps.cpp
 
-.objisocpp/sacpp/ccpp_Subscriber_impl$(OBJEXT): sacpp/ccpp_Subscriber_impl.cpp
+.objisocpp/sacpp/ErrorInfo$(OBJEXT): sacpp/ErrorInfo.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Subscriber_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ErrorInfo.cpp
+
+.objisocpp/sacpp/Condition$(OBJEXT): sacpp/Condition.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Condition.cpp
+
+.objisocpp/sacpp/Constants$(OBJEXT): sacpp/Constants.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/Constants.cpp
 
 .objisocpp/sacpp/sacpp_ExceptionInitializer$(OBJEXT): sacpp/sacpp_ExceptionInitializer.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
@@ -491,49 +535,61 @@ generated: $(GENERATED_DIRTY)
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_LocalObject.cpp
 
-.objisocpp/sacpp/ccpp_DomainParticipantFactory$(OBJEXT): sacpp/ccpp_DomainParticipantFactory.cpp
+.objisocpp/sacpp/QosUtils$(OBJEXT): sacpp/QosUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_DomainParticipantFactory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/QosUtils.cpp
 
-.objisocpp/sacpp/ccpp_Domain_impl$(OBJEXT): sacpp/ccpp_Domain_impl.cpp
+.objisocpp/sacpp/TypeSupport$(OBJEXT): sacpp/TypeSupport.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Domain_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/TypeSupport.cpp
 
-.objisocpp/sacpp/ccpp_DataWriter_impl$(OBJEXT): sacpp/ccpp_DataWriter_impl.cpp
+.objisocpp/sacpp/StatusUtils$(OBJEXT): sacpp/StatusUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_DataWriter_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/StatusUtils.cpp
 
-.objisocpp/sacpp/ccpp_QosUtils$(OBJEXT): sacpp/ccpp_QosUtils.cpp
+.objisocpp/sacpp/PolicyUtils$(OBJEXT): sacpp/PolicyUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_QosUtils.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/PolicyUtils.cpp
+
+.objisocpp/sacpp/ObjSet$(OBJEXT): sacpp/ObjSet.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ObjSet.cpp
 
 .objisocpp/sacpp/sacpp_UserException$(OBJEXT): sacpp/sacpp_UserException.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_UserException.cpp
 
-.objisocpp/sacpp/ccpp_QosProvider$(OBJEXT): sacpp/ccpp_QosProvider.cpp
+.objisocpp/sacpp/DataWriter$(OBJEXT): sacpp/DataWriter.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_QosProvider.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/DataWriter.cpp
 
-.objisocpp/sacpp/ccpp_StatusCondition_impl$(OBJEXT): sacpp/ccpp_StatusCondition_impl.cpp
+.objisocpp/sacpp/ReadCondition$(OBJEXT): sacpp/ReadCondition.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_StatusCondition_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ReadCondition.cpp
+
+.objisocpp/sacpp/DomainParticipantFactory$(OBJEXT): sacpp/DomainParticipantFactory.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/DomainParticipantFactory.cpp
 
 .objisocpp/sacpp/sacpp_Object$(OBJEXT): sacpp/sacpp_Object.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_Object.cpp
 
-.objisocpp/sacpp/ccpp_ReadCondition_impl$(OBJEXT): sacpp/ccpp_ReadCondition_impl.cpp
+.objisocpp/sacpp/MiscUtils$(OBJEXT): sacpp/MiscUtils.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_ReadCondition_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/MiscUtils.cpp
 
 .objisocpp/sacpp/sacpp_SystemException$(OBJEXT): sacpp/sacpp_SystemException.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/sacpp_SystemException.cpp
 
-.objisocpp/sacpp/ccpp_Publisher_impl$(OBJEXT): sacpp/ccpp_Publisher_impl.cpp
+.objisocpp/sacpp/FooDataReader_impl$(OBJEXT): sacpp/FooDataReader_impl.cpp
 	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/ccpp_Publisher_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/FooDataReader_impl.cpp
+
+.objisocpp/sacpp/StrObjMap$(OBJEXT): sacpp/StrObjMap.cpp
+	@$(TESTDIRSTART) ".objisocpp/sacpp" $(TESTDIREND) $(MKDIR) ".objisocpp/sacpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) sacpp/StrObjMap.cpp
 
 clean:
 	-$(RM) $(OBJS)

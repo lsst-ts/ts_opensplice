@@ -1,38 +1,30 @@
-#include "ishapeSplDcps.h"
 #include "ishape_DCPS.hpp"
 
-const char *
-__ShapeType__name(void)
-{
-    return (const char*)"ShapeType";
-}
-
-const char *
-__ShapeType__keys(void)
-{
-    return (const char*)"color";
-}
-
-#include <v_kernel.h>
+#include <v_copyIn.h>
 #include <v_topic.h>
 #include <os_stdlib.h>
 #include <string.h>
 #include <os_report.h>
-#include <org/opensplice/core/EntityRegistry.hpp>
 
-c_bool
+v_copyin_result
 __ShapeType__copyIn(
     c_base base,
-    class ShapeType *from,
+    const class ShapeType *from,
     struct _ShapeType *to)
 {
-    c_bool result = OS_C_TRUE;
+    v_copyin_result result = V_COPYIN_RESULT_OK;
     (void) base;
 
 #ifdef OSPL_BOUNDS_CHECK
-        to->color = c_stringNew(base, from->color_.c_str());
+        to->color = c_stringNew_s(base, from->color_.c_str());
+        if(to->color == NULL) {
+            result = V_COPYIN_RESULT_OUT_OF_MEMORY;
+        }
 #else
-            to->color = c_stringNew(base, from->color_.c_str());
+            to->color = c_stringNew_s(base, from->color_.c_str());
+            if(to->color == NULL) {
+                result = V_COPYIN_RESULT_OUT_OF_MEMORY;
+            }
 #endif
     to->x = (c_long)from->x_;
     to->y = (c_long)from->y_;
@@ -40,18 +32,16 @@ __ShapeType__copyIn(
     return result;
 }
 
-INSTANTIATE_TYPED_REGISTRIES(ShapeType)
-
 void
 __ShapeType__copyOut(
-    void *_from,
+    const void *_from,
     void *_to)
 {
-    struct _ShapeType *from = (struct _ShapeType *)_from;
+    const struct _ShapeType *from = (const struct _ShapeType *)_from;
     class ShapeType *to = (class ShapeType *)_to;
-    to->color_ = (from->color ? from->color : "");
-    to->x_ = (::DDS::Long)from->x;
-    to->y_ = (::DDS::Long)from->y;
-    to->shapesize_ = (::DDS::Long)from->shapesize;
+    to->color(from->color ? from->color : "");
+    to->x((int32_t)from->x);
+    to->y((int32_t)from->y);
+    to->shapesize((int32_t)from->shapesize);
 }
 

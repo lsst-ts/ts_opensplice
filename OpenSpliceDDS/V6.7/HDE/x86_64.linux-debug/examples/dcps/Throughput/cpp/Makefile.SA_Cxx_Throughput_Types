@@ -8,7 +8,7 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"../../../../include" -I"../../../../include/sys" -I"../../../../include/dcps/C++/SACPP" -I"." -I"../../../../examples/include" -I"../../../../examples"
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -I"../../../../include" -I"../../../../include/sys" -I"../../../../include/dcps/C++/SACPP" -I"." -I"../../../../examples/include" -I"../../../../examples"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
@@ -32,14 +32,14 @@ LIBPREFIX     = lib
 LIBSUFFIX     = 
 GENFLAGS      = -O3 -DNDEBUG
 LDLIBS        = -l"dcpssacpp" -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = .obj$(CFG)/ThroughputData$(OBJEXT) .obj$(CFG)/ThroughputDataDcps$(OBJEXT) .obj$(CFG)/ThroughputDataSplDcps$(OBJEXT) .obj$(CFG)/ThroughputDataDcps_impl$(OBJEXT)
+OBJS          = .obj$(CFG)/ThroughputDcps$(OBJEXT) .obj$(CFG)/Throughput$(OBJEXT) .obj$(CFG)/ThroughputSplDcps$(OBJEXT) .obj$(CFG)/ThroughputDcps_impl$(OBJEXT)
 AREXT         = .a
 LIB           = $(LTARGETDIR)$(LIBPREFIX)SA_Cxx_Throughput_Types$(LIBSUFFIX)$(AREXT)
 SOEXT         = .so
 SHTARGETDIR   = ./
 SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)SA_Cxx_Throughput_Types$(LIBSUFFIX)$(SOEXT)
 SHFLAGS       = -shared
-SRC           = ThroughputData.cpp ThroughputDataDcps.cpp ThroughputDataSplDcps.cpp ThroughputDataDcps_impl.cpp
+SRC           = ThroughputDcps.cpp Throughput.cpp ThroughputSplDcps.cpp ThroughputDcps_impl.cpp
 LINK.cc       = $(LD) $(LDFLAGS)
 DYNAMICFLAGS  = -DOSPL_BUILDEXAMPLE_LIB
 EXPORTFLAGS   = $(DYNAMICFLAGS)
@@ -58,7 +58,7 @@ $(LIB): $(OBJS)
 	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
 	$(AR) $(ARFLAGS) $(LIB) $(OBJS) 
 
-GENERATED_DIRTY = ccpp_ThroughputData.h ThroughputData.cpp ThroughputDataDcps.cpp ThroughputDataSplDcps.cpp ThroughputDataDcps_impl.cpp ThroughputDataDcps.h ThroughputDataDcps_impl.h ThroughputDataSplDcps.h ThroughputData.h
+GENERATED_DIRTY = ThroughputDcps.h ThroughputDcps.cpp Throughput.cpp ThroughputSplDcps.cpp ThroughputDcps_impl.cpp ThroughputSplDcps.h ccpp_Throughput.h ThroughputDcps_impl.h Throughput.h
 
 export DYLD_LIBRARY_PATH := $(DYLD_LIBRARY_PATH):../../../../bin:../../../../lib
 export LD_LIBRARY_PATH   := $(LD_LIBRARY_PATH):../../../../bin:../../../../lib
@@ -67,8 +67,8 @@ export LIBPATH           := $(LIBPATH):../../../../bin:../../../../lib
 export PATH              := $(PATH):../../../../bin:../../../../lib
 
 .NOTPARALLEL:
-ccpp_ThroughputData.h ThroughputData.cpp ThroughputDataDcps.cpp ThroughputDataSplDcps.cpp ThroughputDataDcps_impl.cpp ThroughputDataDcps.h ThroughputDataDcps_impl.h ThroughputDataSplDcps.h ThroughputData.h: ../idl/ThroughputData.idl
-	"../../../../bin/idlpp" -I "../../../../etc/idl" -l cpp ../idl/ThroughputData.idl
+ThroughputDcps.h ThroughputDcps.cpp Throughput.cpp ThroughputSplDcps.cpp ThroughputDcps_impl.cpp ThroughputSplDcps.h ccpp_Throughput.h ThroughputDcps_impl.h Throughput.h: ../idl/Throughput.idl
+	"../../../../bin/idlpp" -I "../../../../etc/idl" -l cpp ../idl/Throughput.idl
 
 .PRECIOUS: $(GENERATED_DIRTY)
 $(OBJS): $(GENERATED_DIRTY)
@@ -76,21 +76,21 @@ $(OBJS): $(GENERATED_DIRTY)
 generated: $(GENERATED_DIRTY)
 	@-:
 
-.obj$(CFG)/ThroughputData$(OBJEXT): ThroughputData.cpp
+.obj$(CFG)/ThroughputDcps$(OBJEXT): ThroughputDcps.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/" $(TESTDIREND) $(MKDIR) ".obj$(CFG)/"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputData.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputDcps.cpp
 
-.obj$(CFG)/ThroughputDataDcps$(OBJEXT): ThroughputDataDcps.cpp
+.obj$(CFG)/Throughput$(OBJEXT): Throughput.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/" $(TESTDIREND) $(MKDIR) ".obj$(CFG)/"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputDataDcps.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Throughput.cpp
 
-.obj$(CFG)/ThroughputDataSplDcps$(OBJEXT): ThroughputDataSplDcps.cpp
+.obj$(CFG)/ThroughputSplDcps$(OBJEXT): ThroughputSplDcps.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/" $(TESTDIREND) $(MKDIR) ".obj$(CFG)/"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputDataSplDcps.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputSplDcps.cpp
 
-.obj$(CFG)/ThroughputDataDcps_impl$(OBJEXT): ThroughputDataDcps_impl.cpp
+.obj$(CFG)/ThroughputDcps_impl$(OBJEXT): ThroughputDcps_impl.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/" $(TESTDIREND) $(MKDIR) ".obj$(CFG)/"
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputDataDcps_impl.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ThroughputDcps_impl.cpp
 
 clean:
 	-$(RM) $(OBJS)

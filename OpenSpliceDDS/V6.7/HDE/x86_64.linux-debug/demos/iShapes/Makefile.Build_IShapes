@@ -2,51 +2,15 @@
 #----------------------------------------------------------------------------
 #       Macros
 #----------------------------------------------------------------------------
-CFG = Release
+CFG = Debug
 
-ifeq ($(CFG), Release)
-CC            = gcc
-CXX           = g++
-LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
-AR            = ar
-PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"$(QTDIR)/include" -I"$(QT4_INCLUDE)/." -I"/usr/include/qt4" -I"../../include" -I"../../include/sys" -I"$(BOOST_ROOT)/." -I"../../include/dcps/C++/isocpp" -I"../../include/dcps/C++/SACPP" -I"."
-OBJEXT        = .o
-OUTPUT_OPTION = -o "$@"
-COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
-COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
-LDFLAGS       = -L"." -L"$(QTDIR)/lib" -L"$(QT4_LIB)/." -L"/usr/lib/qt4" -L"../../lib" -Wl,-rpath,\$$ORIGIN
-CCC           = $(CXX)
-MAKEFILE      = Makefile.Build_IShapes
-DEPENDENCIES  = $(MAKEFILE)
-BTARGETDIR    = ../../bin/
-BIN           = $(BTARGETDIR)demo_ishapes$(EXESUFFIX)$(EXEEXT)
-CAT           = cat
-MV            = mv -f
-RM            = rm -rf
-CP            = cp -p
-NUL           = /dev/null
-MKDIR         = mkdir -p
-TESTDIRSTART  = test -d
-TESTDIREND    = ||
-TOUCH         = touch
-EXEEXT        = 
-LIBPREFIX     = lib
-LIBSUFFIX     = 
-GENFLAGS      = -O3 -DNDEBUG
-LDLIBS        = -l"dcpsisocpp$(LIBSUFFIX)" -l"ddskernel" -l"QtGui$(QT_CFG)" -l"QtCore$(QT_CFG)" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = .obj$(CFG)/ishapeDcps$(OBJEXT) .obj$(CFG)/ReaderQosDialog_moc$(OBJEXT) .obj$(CFG)/ShapesDialog_moc$(OBJEXT) .obj$(CFG)/ShapesWidget_moc$(OBJEXT) .obj$(CFG)/WriterQosDialog_moc$(OBJEXT) .obj$(CFG)/FilterDialog_moc$(OBJEXT) .obj$(CFG)/ishape_qrc$(OBJEXT) .obj$(CFG)/Triangle$(OBJEXT) .obj$(CFG)/ShapesWidget$(OBJEXT) .obj$(CFG)/main$(OBJEXT) .obj$(CFG)/ishape$(OBJEXT) .obj$(CFG)/Circle$(OBJEXT) .obj$(CFG)/ShapesDialog$(OBJEXT) .obj$(CFG)/Shape$(OBJEXT) .obj$(CFG)/ishapeSplDcps$(OBJEXT) .obj$(CFG)/ishapeDcps_impl$(OBJEXT) .obj$(CFG)/ShapeDynamics$(OBJEXT) .obj$(CFG)/BouncingShapeDynamics$(OBJEXT) .obj$(CFG)/ReaderQosDialog$(OBJEXT) .obj$(CFG)/FilterDialog$(OBJEXT) .obj$(CFG)/DDSShapeDynamics$(OBJEXT) .obj$(CFG)/WriterQosDialog$(OBJEXT) .obj$(CFG)/Square$(OBJEXT)
-SRC           = ishapeDcps.cpp ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp Triangle.cpp ShapesWidget.cpp main.cpp ishape.cpp Circle.cpp ShapesDialog.cpp Shape.cpp ishapeSplDcps.cpp ishapeDcps_impl.cpp ShapeDynamics.cpp BouncingShapeDynamics.cpp ReaderQosDialog.cpp FilterDialog.cpp DDSShapeDynamics.cpp WriterQosDialog.cpp Square.cpp
-LINK.cc       = $(LD) $(LDFLAGS)
-EXPORTFLAGS   = 
-endif
 ifeq ($(CFG), Debug)
 CC            = gcc
 CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"$(QTDIR)/include" -I"$(QT4_INCLUDE)/." -I"/usr/include/qt4" -I"../../include" -I"../../include/sys" -I"$(BOOST_ROOT)/." -I"../../include/dcps/C++/isocpp" -I"../../include/dcps/C++/SACPP" -I"."
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"$(QTDIR)/include" -I"$(QT4_INCLUDE)/." -I"/usr/include/qt4" -I"../../include" -I"../../include/sys" -I"$(BOOST_ROOT)/." -I"../../include/dcps/C++/isocpp2" -I"../../include/dcps/C++/SACPP" -I"."
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
@@ -70,9 +34,45 @@ EXEEXT        =
 LIBPREFIX     = lib
 LIBSUFFIX     = 
 GENFLAGS      = -g
-LDLIBS        = -l"dcpsisocpp$(LIBSUFFIX)" -l"ddskernel" -l"QtGui$(QT_CFG)" -l"QtCore$(QT_CFG)" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = .obj$(CFG)/ishapeDcps$(OBJEXT) .obj$(CFG)/ReaderQosDialog_moc$(OBJEXT) .obj$(CFG)/ShapesDialog_moc$(OBJEXT) .obj$(CFG)/ShapesWidget_moc$(OBJEXT) .obj$(CFG)/WriterQosDialog_moc$(OBJEXT) .obj$(CFG)/FilterDialog_moc$(OBJEXT) .obj$(CFG)/ishape_qrc$(OBJEXT) .obj$(CFG)/Triangle$(OBJEXT) .obj$(CFG)/ShapesWidget$(OBJEXT) .obj$(CFG)/main$(OBJEXT) .obj$(CFG)/ishape$(OBJEXT) .obj$(CFG)/Circle$(OBJEXT) .obj$(CFG)/ShapesDialog$(OBJEXT) .obj$(CFG)/Shape$(OBJEXT) .obj$(CFG)/ishapeSplDcps$(OBJEXT) .obj$(CFG)/ishapeDcps_impl$(OBJEXT) .obj$(CFG)/ShapeDynamics$(OBJEXT) .obj$(CFG)/BouncingShapeDynamics$(OBJEXT) .obj$(CFG)/ReaderQosDialog$(OBJEXT) .obj$(CFG)/FilterDialog$(OBJEXT) .obj$(CFG)/DDSShapeDynamics$(OBJEXT) .obj$(CFG)/WriterQosDialog$(OBJEXT) .obj$(CFG)/Square$(OBJEXT)
-SRC           = ishapeDcps.cpp ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp Triangle.cpp ShapesWidget.cpp main.cpp ishape.cpp Circle.cpp ShapesDialog.cpp Shape.cpp ishapeSplDcps.cpp ishapeDcps_impl.cpp ShapeDynamics.cpp BouncingShapeDynamics.cpp ReaderQosDialog.cpp FilterDialog.cpp DDSShapeDynamics.cpp WriterQosDialog.cpp Square.cpp
+LDLIBS        = -l"dcpsisocpp2$(LIBSUFFIX)" -l"ddskernel" -l"QtGui$(QT_CFG)" -l"QtCore$(QT_CFG)" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = .obj$(CFG)/ishapeSplDcps$(OBJEXT) .obj$(CFG)/ReaderQosDialog_moc$(OBJEXT) .obj$(CFG)/ShapesDialog_moc$(OBJEXT) .obj$(CFG)/ShapesWidget_moc$(OBJEXT) .obj$(CFG)/WriterQosDialog_moc$(OBJEXT) .obj$(CFG)/FilterDialog_moc$(OBJEXT) .obj$(CFG)/ishape_qrc$(OBJEXT) .obj$(CFG)/Triangle$(OBJEXT) .obj$(CFG)/ShapesWidget$(OBJEXT) .obj$(CFG)/main$(OBJEXT) .obj$(CFG)/ishape$(OBJEXT) .obj$(CFG)/Circle$(OBJEXT) .obj$(CFG)/ShapesDialog$(OBJEXT) .obj$(CFG)/Shape$(OBJEXT) .obj$(CFG)/ShapeDynamics$(OBJEXT) .obj$(CFG)/BouncingShapeDynamics$(OBJEXT) .obj$(CFG)/ReaderQosDialog$(OBJEXT) .obj$(CFG)/FilterDialog$(OBJEXT) .obj$(CFG)/DDSShapeDynamics$(OBJEXT) .obj$(CFG)/WriterQosDialog$(OBJEXT) .obj$(CFG)/Square$(OBJEXT)
+SRC           = ishapeSplDcps.cpp ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp Triangle.cpp ShapesWidget.cpp main.cpp ishape.cpp Circle.cpp ShapesDialog.cpp Shape.cpp ShapeDynamics.cpp BouncingShapeDynamics.cpp ReaderQosDialog.cpp FilterDialog.cpp DDSShapeDynamics.cpp WriterQosDialog.cpp Square.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+EXPORTFLAGS   = 
+endif
+ifeq ($(CFG), Release)
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"$(QTDIR)/include" -I"$(QT4_INCLUDE)/." -I"/usr/include/qt4" -I"../../include" -I"../../include/sys" -I"$(BOOST_ROOT)/." -I"../../include/dcps/C++/isocpp2" -I"../../include/dcps/C++/SACPP" -I"."
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"$(QTDIR)/lib" -L"$(QT4_LIB)/." -L"/usr/lib/qt4" -L"../../lib" -Wl,-rpath,\$$ORIGIN
+CCC           = $(CXX)
+MAKEFILE      = Makefile.Build_IShapes
+DEPENDENCIES  = $(MAKEFILE)
+BTARGETDIR    = ../../bin/
+BIN           = $(BTARGETDIR)demo_ishapes$(EXESUFFIX)$(EXEEXT)
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -O3 -DNDEBUG
+LDLIBS        = -l"dcpsisocpp2$(LIBSUFFIX)" -l"ddskernel" -l"QtGui$(QT_CFG)" -l"QtCore$(QT_CFG)" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = .obj$(CFG)/ishapeSplDcps$(OBJEXT) .obj$(CFG)/ReaderQosDialog_moc$(OBJEXT) .obj$(CFG)/ShapesDialog_moc$(OBJEXT) .obj$(CFG)/ShapesWidget_moc$(OBJEXT) .obj$(CFG)/WriterQosDialog_moc$(OBJEXT) .obj$(CFG)/FilterDialog_moc$(OBJEXT) .obj$(CFG)/ishape_qrc$(OBJEXT) .obj$(CFG)/Triangle$(OBJEXT) .obj$(CFG)/ShapesWidget$(OBJEXT) .obj$(CFG)/main$(OBJEXT) .obj$(CFG)/ishape$(OBJEXT) .obj$(CFG)/Circle$(OBJEXT) .obj$(CFG)/ShapesDialog$(OBJEXT) .obj$(CFG)/Shape$(OBJEXT) .obj$(CFG)/ShapeDynamics$(OBJEXT) .obj$(CFG)/BouncingShapeDynamics$(OBJEXT) .obj$(CFG)/ReaderQosDialog$(OBJEXT) .obj$(CFG)/FilterDialog$(OBJEXT) .obj$(CFG)/DDSShapeDynamics$(OBJEXT) .obj$(CFG)/WriterQosDialog$(OBJEXT) .obj$(CFG)/Square$(OBJEXT)
+SRC           = ishapeSplDcps.cpp ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp Triangle.cpp ShapesWidget.cpp main.cpp ishape.cpp Circle.cpp ShapesDialog.cpp Shape.cpp ShapeDynamics.cpp BouncingShapeDynamics.cpp ReaderQosDialog.cpp FilterDialog.cpp DDSShapeDynamics.cpp WriterQosDialog.cpp Square.cpp
 LINK.cc       = $(LD) $(LDFLAGS)
 EXPORTFLAGS   = 
 endif
@@ -87,7 +87,7 @@ $(BIN): $(OBJS)
 	@$(TESTDIRSTART) "$(BTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(BTARGETDIR)"
 	$(LINK.cc) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
 
-GENERATED_DIRTY = ui_filterForm.h ui_iShapesForm-small.h ui_iShapesForm.h ui_qosForm.h ui_readerQosForm.h ui_writerQosForm.h ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp ishapeDcps_impl.h ishapeDcps.cpp ishapeDcps_impl.cpp ishapeSplDcps.cpp ishape.cpp ishape.h ishapeDcps.h ishapeSplDcps.h ishape_DCPS.hpp
+GENERATED_DIRTY = ui_filterForm.h ui_iShapesForm-small.h ui_iShapesForm.h ui_qosForm.h ui_readerQosForm.h ui_writerQosForm.h ReaderQosDialog_moc.cpp ShapesDialog_moc.cpp ShapesWidget_moc.cpp WriterQosDialog_moc.cpp FilterDialog_moc.cpp ishape_qrc.cpp ishape.h ishapeSplDcps.cpp ishape.cpp ishape_DCPS.hpp ishapeSplDcps.h
 
 
 ui_filterForm.h: filterForm.ui
@@ -135,8 +135,8 @@ export LIBPATH           := $(LIBPATH):../../bin:../../lib
 export PATH              := $(PATH):../../bin:../../lib
 
 .NOTPARALLEL:
-ishapeDcps_impl.h ishapeDcps.cpp ishapeDcps_impl.cpp ishapeSplDcps.cpp ishape.cpp ishape.h ishapeDcps.h ishapeSplDcps.h ishape_DCPS.hpp: ishape.idl
-	"../../bin/idlpp" -I "../../etc/idl" -l isocpp ishape.idl
+ishape.h ishapeSplDcps.cpp ishape.cpp ishape_DCPS.hpp ishapeSplDcps.h: ishape.idl
+	"../../bin/idlpp" -I "../../etc/idl" -l isocpp2 ishape.idl
 
 .PRECIOUS: $(GENERATED_DIRTY)
 $(OBJS): $(GENERATED_DIRTY)
@@ -144,9 +144,9 @@ $(OBJS): $(GENERATED_DIRTY)
 generated: $(GENERATED_DIRTY)
 	@-:
 
-.obj$(CFG)/ishapeDcps$(OBJEXT): ishapeDcps.cpp
+.obj$(CFG)/ishapeSplDcps$(OBJEXT): ishapeSplDcps.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ishapeDcps.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ishapeSplDcps.cpp
 
 .obj$(CFG)/ReaderQosDialog_moc$(OBJEXT): ReaderQosDialog_moc.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."
@@ -199,14 +199,6 @@ generated: $(GENERATED_DIRTY)
 .obj$(CFG)/Shape$(OBJEXT): Shape.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."
 	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Shape.cpp
-
-.obj$(CFG)/ishapeSplDcps$(OBJEXT): ishapeSplDcps.cpp
-	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ishapeSplDcps.cpp
-
-.obj$(CFG)/ishapeDcps_impl$(OBJEXT): ishapeDcps_impl.cpp
-	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ishapeDcps_impl.cpp
 
 .obj$(CFG)/ShapeDynamics$(OBJEXT): ShapeDynamics.cpp
 	@$(TESTDIRSTART) ".obj$(CFG)/." $(TESTDIREND) $(MKDIR) ".obj$(CFG)/."

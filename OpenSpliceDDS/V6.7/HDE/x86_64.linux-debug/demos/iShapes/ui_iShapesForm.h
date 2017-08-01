@@ -55,6 +55,7 @@ public:
     QPushButton *filterButton;
     QPushButton *createReaderButton;
     QFrame *renderFrame;
+    QLabel *PausedLabel;
 
     void setupUi(QDialog *ShapesDialog)
     {
@@ -84,7 +85,7 @@ public:
         frame->setFrameShadow(QFrame::Sunken);
         layoutWidget = new QWidget(frame);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 151, 181));
+        layoutWidget->setGeometry(QRect(10, 10, 157, 183));
         layoutWidget->setFont(font);
         verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -211,9 +212,10 @@ public:
         frame_2->setFrameShadow(QFrame::Sunken);
         layoutWidget1 = new QWidget(frame_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 10, 151, 137));
+        layoutWidget1->setGeometry(QRect(10, 10, 157, 137));
         layoutWidget1->setFont(font);
         verticalLayout_4 = new QVBoxLayout(layoutWidget1);
+        verticalLayout_4->setSpacing(10);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
@@ -221,6 +223,7 @@ public:
         label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setFont(font1);
+        label_3->setLayoutDirection(Qt::LeftToRight);
         label_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         horizontalLayout_2->addWidget(label_3);
@@ -276,6 +279,13 @@ public:
         renderFrame->setAutoFillBackground(true);
         renderFrame->setFrameShape(QFrame::StyledPanel);
         renderFrame->setFrameShadow(QFrame::Raised);
+        PausedLabel = new QLabel(renderFrame);
+        PausedLabel->setObjectName(QString::fromUtf8("PausedLabel"));
+        PausedLabel->setGeometry(QRect(10, 10, 91, 31));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Sans Serif"));
+        font2.setPointSize(20);
+        PausedLabel->setFont(font2);
         frame_2->raise();
         renderFrame->raise();
         frame->raise();
@@ -361,6 +371,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Click Subscribe to Topic</p></body></html>", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         createReaderButton->setText(QApplication::translate("ShapesDialog", "Subscribe", 0, QApplication::UnicodeUTF8));
+        PausedLabel->setText(QApplication::translate("ShapesDialog", "Paused", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

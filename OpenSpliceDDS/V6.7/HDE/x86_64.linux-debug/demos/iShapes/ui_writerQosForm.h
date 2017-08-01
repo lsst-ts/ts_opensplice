@@ -55,6 +55,15 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_3;
     QComboBox *durabilityComboBox;
+    QGroupBox *groupBox_6;
+    QWidget *verticalLayoutWidget_3;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_9;
+    QRadioButton *keepAllWButton;
+    QRadioButton *keepLastWButton;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_5;
+    QSpinBox *depthSpinBoxW;
     QButtonGroup *reliabilityButtonGroup;
     QButtonGroup *ownershipButtonGroup;
 
@@ -63,10 +72,10 @@ public:
         if (WriterQoS->objectName().isEmpty())
             WriterQoS->setObjectName(QString::fromUtf8("WriterQoS"));
         WriterQoS->setWindowModality(Qt::ApplicationModal);
-        WriterQoS->resize(221, 335);
+        WriterQoS->resize(221, 452);
         buttonBox = new QDialogButtonBox(WriterQoS);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(20, 290, 171, 32));
+        buttonBox->setGeometry(QRect(20, 410, 171, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         groupBox = new QGroupBox(WriterQoS);
@@ -74,7 +83,7 @@ public:
         groupBox->setGeometry(QRect(10, 20, 201, 51));
         horizontalLayoutWidget = new QWidget(groupBox);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 20, 181, 21));
+        horizontalLayoutWidget->setGeometry(QRect(10, 20, 181, 23));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -98,7 +107,7 @@ public:
         groupBox_2->setGeometry(QRect(10, 80, 201, 81));
         verticalLayoutWidget = new QWidget(groupBox_2);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 20, 181, 51));
+        verticalLayoutWidget->setGeometry(QRect(10, 20, 181, 53));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -150,7 +159,7 @@ public:
         groupBox_3->setGeometry(QRect(10, 230, 201, 51));
         horizontalLayoutWidget_4 = new QWidget(groupBox_3);
         horizontalLayoutWidget_4->setObjectName(QString::fromUtf8("horizontalLayoutWidget_4"));
-        horizontalLayoutWidget_4->setGeometry(QRect(10, 20, 171, 20));
+        horizontalLayoutWidget_4->setGeometry(QRect(10, 20, 171, 24));
         horizontalLayout_5 = new QHBoxLayout(horizontalLayoutWidget_4);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -171,7 +180,7 @@ public:
         groupBox_4->setGeometry(QRect(10, 170, 201, 51));
         horizontalLayoutWidget_5 = new QWidget(groupBox_4);
         horizontalLayoutWidget_5->setObjectName(QString::fromUtf8("horizontalLayoutWidget_5"));
-        horizontalLayoutWidget_5->setGeometry(QRect(10, 20, 171, 21));
+        horizontalLayoutWidget_5->setGeometry(QRect(10, 20, 183, 25));
         horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_5);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -185,6 +194,58 @@ public:
         durabilityComboBox->setObjectName(QString::fromUtf8("durabilityComboBox"));
 
         horizontalLayout_6->addWidget(durabilityComboBox);
+
+        groupBox_6 = new QGroupBox(WriterQoS);
+        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
+        groupBox_6->setGeometry(QRect(0, 300, 221, 91));
+        QFont font;
+        font.setFamily(QString::fromUtf8("Lucida Grande"));
+        font.setPointSize(10);
+        groupBox_6->setFont(font);
+        verticalLayoutWidget_3 = new QWidget(groupBox_6);
+        verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
+        verticalLayoutWidget_3->setGeometry(QRect(10, 20, 201, 61));
+        verticalLayoutWidget_3->setFont(font);
+        verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget_3);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        keepAllWButton = new QRadioButton(verticalLayoutWidget_3);
+        keepAllWButton->setObjectName(QString::fromUtf8("keepAllWButton"));
+        keepAllWButton->setFont(font);
+
+        horizontalLayout_9->addWidget(keepAllWButton);
+
+        keepLastWButton = new QRadioButton(verticalLayoutWidget_3);
+        keepLastWButton->setObjectName(QString::fromUtf8("keepLastWButton"));
+        keepLastWButton->setFont(font);
+        keepLastWButton->setChecked(true);
+
+        horizontalLayout_9->addWidget(keepLastWButton);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_9);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        label_5 = new QLabel(verticalLayoutWidget_3);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setFont(font);
+        label_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_10->addWidget(label_5);
+
+        depthSpinBoxW = new QSpinBox(verticalLayoutWidget_3);
+        depthSpinBoxW->setObjectName(QString::fromUtf8("depthSpinBoxW"));
+        depthSpinBoxW->setFont(font);
+        depthSpinBoxW->setMinimum(1);
+        depthSpinBoxW->setMaximum(100);
+
+        horizontalLayout_10->addWidget(depthSpinBoxW);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_10);
 
 
         retranslateUi(WriterQoS);
@@ -215,6 +276,10 @@ public:
          << QApplication::translate("WriterQoS", "Transient", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("WriterQoS", "Persistent", 0, QApplication::UnicodeUTF8)
         );
+        groupBox_6->setTitle(QApplication::translate("WriterQoS", "History QoS", 0, QApplication::UnicodeUTF8));
+        keepAllWButton->setText(QApplication::translate("WriterQoS", "Keep All", 0, QApplication::UnicodeUTF8));
+        keepLastWButton->setText(QApplication::translate("WriterQoS", "Keep Last", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("WriterQoS", "Depth:", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

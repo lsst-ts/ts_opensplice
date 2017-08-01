@@ -4,15 +4,14 @@
 //  
 //  File name: dds_namedQosTypesDcps.h
 //  Source: dds_namedQosTypesDcps.idl
-//  Generated: Fri Jul 28 15:31:24 2017
-//  OpenSplice V6.4.140320OSS
+//  Generated: Mon Jul 31 11:30:23 2017
+//  OpenSplice 6.7.170523OSS
 //  
 //******************************************************************
 #ifndef _DDS_NAMEDQOSTYPESDCPS_H_
 #define _DDS_NAMEDQOSTYPESDCPS_H_
 
 #include "sacpp_mapping.h"
-#include "sacpp_DDS_DCPS.h"
 #include "dds_dcps_builtintopics.h"
 #include "dds_dcps.h"
 #include "dds_namedQosTypes.h"
@@ -22,4 +21,4 @@
 
 
 
-#endif 
+#endif

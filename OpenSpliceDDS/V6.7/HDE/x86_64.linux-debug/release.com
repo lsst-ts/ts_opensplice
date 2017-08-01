@@ -1,7 +1,7 @@
-echo "<<< OpenSplice HDE Release V6.4.140320OSS For x86_64.linux-debug, Date 2017-07-28 >>>"
+echo "<<< Vortex OpenSplice HDE Release 6.7.170523OSS For x86_64.linux-debug, Date 2017-07-31 >>>"
 if [ "${SPLICE_ORB:=}" = "" ]
 then
-    SPLICE_ORB=DDS_OpenFusion_2
+    SPLICE_ORB=DDS_OpenFusion_1_6_1
     export SPLICE_ORB
 fi
 if [ "${SPLICE_JDK:=}" = "" ]
@@ -9,11 +9,20 @@ then
     SPLICE_JDK=jdk
     export SPLICE_JDK
 fi
-OSPL_HOME="@@INSTALLDIR@@/HDE/x86_64.linux-debug"
+if [ -n "${BASH_VERSION}" ]
+then
+    OSPL_HOME="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+else
+    echo "Please manually set OSPL_HOME to the install directory."
+fi
 PATH=$OSPL_HOME/bin:$PATH
 LD_LIBRARY_PATH=$OSPL_HOME/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH
 CPATH=$OSPL_HOME/include:$OSPL_HOME/include/sys:${CPATH:=}
-OSPL_URI=file://$OSPL_HOME/etc/config/ospl.xml
+if [ "${OSPL_URI:=}" = "" ]
+then
+    OSPL_URI=file://$OSPL_HOME/etc/config/ospl.xml
+    export OSPL_URI
+fi
 OSPL_TMPL_PATH=$OSPL_HOME/etc/idlpp
 . $OSPL_HOME/etc/java/defs.$SPLICE_JDK
-export OSPL_HOME PATH LD_LIBRARY_PATH CPATH OSPL_TMPL_PATH OSPL_URI
+export OSPL_HOME PATH LD_LIBRARY_PATH CPATH OSPL_TMPL_PATH VORTEX_DIR

@@ -1,0 +1,65 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+JAVAC         = $(SPLICE_JAVAC)
+JAR           = jar
+JAVACFLAGS    = $(GENFLAGS) -sourcepath ../src
+CLASSEXT      = .class
+CLASSDIR      = classes/
+OUTPUT_OPTION = -d $(CLASSDIR)
+COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
+JAVACCPATH    = "$(SPLICE_EXTRA_CP):saj5_listener_types.jar:$(CLASSDIR):../../../../jar/dcpssaj5.jar:"
+MAKEFILE      = Makefile.saj5_listener_pub
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ./
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+GENFLAGS      =  
+CLASSES       =  $(CLASSDIR)ListenerDataPublisher$(CLASSEXT)
+JARCLASSES    =  ListenerDataPublisher$(CLASSEXT)
+JAREXT        = .jar
+MAINCLASS     = ListenerDataPublisher
+JARFILE       = $(LTARGETDIR)$(LIBPREFIX)saj5_listener_pub$(LIBSUFFIX)$(JAREXT)
+MANIFEST      = saj5_listener_pub.manifest
+JARFLAGS      = cvfm
+SRC           = ListenerDataPublisher.java
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES) $(CLASSDIR)$(MANIFEST)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	cd $(CLASSDIR) && $(JAR) $(JARFLAGS) $(JARFILE) $(MANIFEST) $(JARCLASSES) 
+	$(MV) $(CLASSDIR)/$(JARFILE) .
+
+$(CLASSDIR)$(MANIFEST):
+	echo Class-Path: saj5_listener_types.jar ../../../../jar/dcpssaj5.jar > $(CLASSDIR)$(MANIFEST)
+	echo Main-Class: $(MAINCLASS) >> $(CLASSDIR)$(MANIFEST)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+$(CLASSDIR)ListenerDataPublisher$(CLASSEXT): ListenerDataPublisher.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) ListenerDataPublisher.java
+
+clean:
+	-$(RM) $(CLASSES)
+
+realclean: clean
+	-$(RM) $(BIN)
+	-$(RM) $(CLASSDIR)$(MANIFEST)
+
+check-syntax:
+	$(COMPILE.java) $(EXPORTFLAGS) $(CHK_SOURCES)
+

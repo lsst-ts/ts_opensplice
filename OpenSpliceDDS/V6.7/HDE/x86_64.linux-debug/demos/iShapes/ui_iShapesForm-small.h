@@ -55,6 +55,7 @@ public:
     QPushButton *filterButton;
     QPushButton *createReaderButton;
     QFrame *renderFrame;
+    QLabel *PausedLabel;
 
     void setupUi(QDialog *ShapesDialog)
     {
@@ -79,6 +80,7 @@ public:
         QFont font;
         font.setFamily(QString::fromUtf8("Lucida Grande"));
         font.setPointSize(10);
+        font.setBold(true);
         font.setWeight(75);
         frame->setFont(font);
         frame->setFrameShape(QFrame::Box);
@@ -100,6 +102,7 @@ public:
         QFont font1;
         font1.setFamily(QString::fromUtf8("Lucida Grande"));
         font1.setPointSize(10);
+        font1.setBold(true);
         font1.setWeight(75);
         font1.setKerning(false);
         font1.setStyleStrategy(QFont::PreferAntialias);
@@ -141,6 +144,7 @@ public:
         QFont font2;
         font2.setFamily(QString::fromUtf8("Lucida Grande"));
         font2.setPointSize(10);
+        font2.setBold(false);
         font2.setWeight(50);
         font2.setKerning(false);
         font2.setStyleStrategy(QFont::PreferAntialias);
@@ -284,6 +288,13 @@ public:
         renderFrame->setAutoFillBackground(true);
         renderFrame->setFrameShape(QFrame::StyledPanel);
         renderFrame->setFrameShadow(QFrame::Raised);
+        PausedLabel = new QLabel(renderFrame);
+        PausedLabel->setObjectName(QString::fromUtf8("PausedLabel"));
+        PausedLabel->setGeometry(QRect(10, 10, 101, 31));
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Sans Serif"));
+        font3.setPointSize(20);
+        PausedLabel->setFont(font3);
         frame_2->raise();
         renderFrame->raise();
         frame->raise();
@@ -369,6 +380,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Click Subscribe to Topic</p></body></html>", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         createReaderButton->setText(QApplication::translate("ShapesDialog", "Subscribe", 0, QApplication::UnicodeUTF8));
+        PausedLabel->setText(QApplication::translate("ShapesDialog", "Paused", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

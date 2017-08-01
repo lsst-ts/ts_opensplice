@@ -1,14 +1,14 @@
 #----------------------------------------------------------------------------
 #       Macros
 #----------------------------------------------------------------------------
-JAVAC         = javac
+JAVAC         = $(SPLICE_JAVAC)
 JAR           = jar
 JAVACFLAGS    = $(GENFLAGS) -sourcepath ../src
 CLASSEXT      = .class
 CLASSDIR      = classes/
 OUTPUT_OPTION = -d $(CLASSDIR)
 COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
-JAVACCPATH    = "$(CLASSDIR):../../../../../jar/dcpssaj.jar:"
+JAVACCPATH    = "$(SPLICE_EXTRA_CP):$(CLASSDIR):../../../../../jar/dcpssaj.jar:"
 MAKEFILE      = Makefile.saj_builtintopics_sub
 DEPENDENCIES  = $(MAKEFILE)
 LTARGETDIR    = ./

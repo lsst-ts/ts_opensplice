@@ -1,12 +1,20 @@
 /*
  *                         OpenSplice DDS
  *
- *   This software and documentation are Copyright 2006 to 2013 PrismTech
- *   Limited and its licensees. All rights reserved. See file:
+ *   This software and documentation are Copyright 2006 to  PrismTech
+ *   Limited, its affiliated companies and licensors. All rights reserved.
  *
- *                     $OSPL_HOME/LICENSE
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
  *
- *   for full copyright notice and license terms.
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
  *
  */
 
@@ -926,43 +934,6 @@ DDS::TypeSupport_ptr DDS::TypeSupport::_unchecked_narrow (DDS::Object_ptr p)
 {
    DDS::TypeSupport_ptr result;
    result = dynamic_cast<DDS::TypeSupport_ptr> (p);
-   if (result) result->m_count++;
-   return result;
-}
-
-const char * DDS::TypeSupportFactory::_local_id = "IDL:DDS/TypeSupportFactory:1.0";
-
-DDS::TypeSupportFactory_ptr DDS::TypeSupportFactory::_duplicate (DDS::TypeSupportFactory_ptr p)
-{
-   if (p) p->m_count++;
-   return p;
-}
-
-DDS::Boolean DDS::TypeSupportFactory::_local_is_a (const char * _id)
-{
-   if (strcmp (_id, DDS::TypeSupportFactory::_local_id) == 0)
-   {
-      return TRUE;
-   }
-
-   return FALSE;
-}
-
-DDS::TypeSupportFactory_ptr DDS::TypeSupportFactory::_narrow (DDS::Object_ptr p)
-{
-   DDS::TypeSupportFactory_ptr result = NULL;
-   if (p && p->_is_a (DDS::TypeSupportFactory::_local_id))
-   {
-      result = dynamic_cast<DDS::TypeSupportFactory_ptr> (p);
-      if (result) result->m_count++;
-   }
-   return result;
-}
-
-DDS::TypeSupportFactory_ptr DDS::TypeSupportFactory::_unchecked_narrow (DDS::Object_ptr p)
-{
-   DDS::TypeSupportFactory_ptr result;
-   result = dynamic_cast<DDS::TypeSupportFactory_ptr> (p);
    if (result) result->m_count++;
    return result;
 }

@@ -8,16 +8,21 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/custom_lib
+# /home/dmills/apps/OpenSpliceDDS_6.7/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/custom_lib
 #
 #----------------------------------------------------------------------------
 
 
-all: Build_DCPS_ISO_Cpp_Lib Build_DCPS_Stand_Alone_Cpp_Lib
+all: Build_DCPS_ISO_Cpp2_Lib Build_DCPS_ISO_Cpp_Lib Build_DCPS_Stand_Alone_Cpp_Lib
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
+	@$(MAKE) -f Makefile.Build_DCPS_ISO_Cpp2_Lib $(@)
 	@$(MAKE) -f Makefile.Build_DCPS_ISO_Cpp_Lib $(@)
 	@$(MAKE) -f Makefile.Build_DCPS_Stand_Alone_Cpp_Lib $(@)
+
+.PHONY: Build_DCPS_ISO_Cpp2_Lib
+Build_DCPS_ISO_Cpp2_Lib:
+	@$(MAKE) -f Makefile.Build_DCPS_ISO_Cpp2_Lib all
 
 .PHONY: Build_DCPS_ISO_Cpp_Lib
 Build_DCPS_ISO_Cpp_Lib:
@@ -28,5 +33,6 @@ Build_DCPS_Stand_Alone_Cpp_Lib:
 	@$(MAKE) -f Makefile.Build_DCPS_Stand_Alone_Cpp_Lib all
 
 project_name_list:
+	@echo Build_DCPS_ISO_Cpp2_Lib
 	@echo Build_DCPS_ISO_Cpp_Lib
 	@echo Build_DCPS_Stand_Alone_Cpp_Lib

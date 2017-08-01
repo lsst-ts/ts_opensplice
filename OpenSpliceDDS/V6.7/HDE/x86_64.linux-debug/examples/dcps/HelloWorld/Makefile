@@ -8,12 +8,12 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dmills/apps/OpenSpliceDDS/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make HDE/x86_64.linux-debug/examples/examples_simple.mwc
+# /home/dmills/apps/OpenSpliceDDS_6.7/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -value_template lib_modifier= -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -type make -features isocpp2_cxx11=1 HDE/x86_64.linux-debug/examples/examples_simple.mwc
 #
 #----------------------------------------------------------------------------
 
 
-all: sac_helloworld_types sac_helloworld_pub sac_helloworld_sub sacpp_helloworld_types sacpp_helloworld_pub sacpp_helloworld_sub ISO_Cxx_HelloWorld_Types ISO_Cxx_HelloWorld_Impl ISO_Cxx_HelloWorld_Pub ISO_Cxx_HelloWorld_Sub
+all: sac_helloworld_types sac_helloworld_pub sac_helloworld_sub sacpp_helloworld_types sacpp_helloworld_pub sacpp_helloworld_sub ISO_Cxx_HelloWorld_Types ISO_Cxx_HelloWorld_Impl ISO_Cxx_HelloWorld_Pub ISO_Cxx_HelloWorld_Sub ISO_Cxx_V2_HelloWorld_Types ISO_Cxx_V2_HelloWorld_Impl ISO_Cxx_V2_HelloWorld_Pub ISO_Cxx_V2_HelloWorld_Sub
 
 clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd c/standalone && $(MAKE) -f Makefile.sac_helloworld_types $(@)
@@ -26,6 +26,10 @@ clean depend generated realclean check-syntax $(CUSTOM_TARGETS):
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Impl $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Pub $(@)
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Sub $(@)
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Types $(@)
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Impl $(@)
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Pub $(@)
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Sub $(@)
 
 .PHONY: sac_helloworld_types
 sac_helloworld_types:
@@ -67,6 +71,22 @@ ISO_Cxx_HelloWorld_Pub: ISO_Cxx_HelloWorld_Impl
 ISO_Cxx_HelloWorld_Sub: ISO_Cxx_HelloWorld_Impl
 	@cd isocpp && $(MAKE) -f Makefile.ISO_Cxx_HelloWorld_Sub all
 
+.PHONY: ISO_Cxx_V2_HelloWorld_Types
+ISO_Cxx_V2_HelloWorld_Types:
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Types all
+
+.PHONY: ISO_Cxx_V2_HelloWorld_Impl
+ISO_Cxx_V2_HelloWorld_Impl: ISO_Cxx_V2_HelloWorld_Types
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Impl all
+
+.PHONY: ISO_Cxx_V2_HelloWorld_Pub
+ISO_Cxx_V2_HelloWorld_Pub: ISO_Cxx_V2_HelloWorld_Impl
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Pub all
+
+.PHONY: ISO_Cxx_V2_HelloWorld_Sub
+ISO_Cxx_V2_HelloWorld_Sub: ISO_Cxx_V2_HelloWorld_Impl
+	@cd isocpp2 && $(MAKE) -f Makefile.ISO_Cxx_V2_HelloWorld_Sub all
+
 project_name_list:
 	@echo sac_helloworld_pub
 	@echo sac_helloworld_sub
@@ -78,3 +98,7 @@ project_name_list:
 	@echo ISO_Cxx_HelloWorld_Pub
 	@echo ISO_Cxx_HelloWorld_Sub
 	@echo ISO_Cxx_HelloWorld_Types
+	@echo ISO_Cxx_V2_HelloWorld_Impl
+	@echo ISO_Cxx_V2_HelloWorld_Pub
+	@echo ISO_Cxx_V2_HelloWorld_Sub
+	@echo ISO_Cxx_V2_HelloWorld_Types

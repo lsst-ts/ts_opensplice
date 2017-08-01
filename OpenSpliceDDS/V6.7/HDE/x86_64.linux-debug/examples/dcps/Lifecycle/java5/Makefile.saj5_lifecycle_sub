@@ -1,0 +1,65 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+JAVAC         = $(SPLICE_JAVAC)
+JAR           = jar
+JAVACFLAGS    = $(GENFLAGS) -sourcepath ../src
+CLASSEXT      = .class
+CLASSDIR      = classes/
+OUTPUT_OPTION = -d $(CLASSDIR)
+COMPILE.java  = $(JAVAC) $(JAVACFLAGS) -cp $(JAVACCPATH) 
+JAVACCPATH    = "$(SPLICE_EXTRA_CP):saj5_lifecycle_types.jar:$(CLASSDIR):../../../../jar/dcpssaj5.jar:"
+MAKEFILE      = Makefile.saj5_lifecycle_sub
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ./
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+GENFLAGS      =  
+CLASSES       =  $(CLASSDIR)LifecycleDataSubscriber$(CLASSEXT)
+JARCLASSES    =  LifecycleDataSubscriber$(CLASSEXT)
+JAREXT        = .jar
+MAINCLASS     = LifecycleDataSubscriber
+JARFILE       = $(LTARGETDIR)$(LIBPREFIX)saj5_lifecycle_sub$(LIBSUFFIX)$(JAREXT)
+MANIFEST      = saj5_lifecycle_sub.manifest
+JARFLAGS      = cvfm
+SRC           = LifecycleDataSubscriber.java
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES) $(CLASSDIR)$(MANIFEST)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	cd $(CLASSDIR) && $(JAR) $(JARFLAGS) $(JARFILE) $(MANIFEST) $(JARCLASSES) 
+	$(MV) $(CLASSDIR)/$(JARFILE) .
+
+$(CLASSDIR)$(MANIFEST):
+	echo Class-Path: saj5_lifecycle_types.jar ../../../../jar/dcpssaj5.jar > $(CLASSDIR)$(MANIFEST)
+	echo Main-Class: $(MAINCLASS) >> $(CLASSDIR)$(MANIFEST)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+$(CLASSDIR)LifecycleDataSubscriber$(CLASSEXT): LifecycleDataSubscriber.java
+	@$(TESTDIRSTART) "$(CLASSDIR)" $(TESTDIREND) $(MKDIR) "$(CLASSDIR)"
+	$(COMPILE.java) $(EXPORTFLAGS) $(OUTPUT_OPTION) LifecycleDataSubscriber.java
+
+clean:
+	-$(RM) $(CLASSES)
+
+realclean: clean
+	-$(RM) $(BIN)
+	-$(RM) $(CLASSDIR)$(MANIFEST)
+
+check-syntax:
+	$(COMPILE.java) $(EXPORTFLAGS) $(CHK_SOURCES)
+

@@ -4,15 +4,14 @@
 //  
 //  File name: dds_dcps_builtintopicsDcps.h
 //  Source: dds_dcps_builtintopicsDcps.idl
-//  Generated: Fri Jul 28 15:31:23 2017
-//  OpenSplice V6.4.140320OSS
+//  Generated: Mon Jul 31 11:30:23 2017
+//  OpenSplice 6.7.170523OSS
 //  
 //******************************************************************
 #ifndef _DDS_DCPS_BUILTINTOPICSDCPS_H_
 #define _DDS_DCPS_BUILTINTOPICSDCPS_H_
 
 #include "sacpp_mapping.h"
-#include "sacpp_DDS_DCPS.h"
 #include "dds_dcps_builtintopics.h"
 #include "dds_dcps.h"
 
@@ -21,4 +20,4 @@
 
 
 
-#endif 
+#endif

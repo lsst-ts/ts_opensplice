@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['_5fptr_5ftype',['_ptr_type',['../class_shape_type_type_support_interface.html#af9395e3507110f82132d58f69a957e67',1,'ShapeTypeTypeSupportInterface::_ptr_type()'],['../class_shape_type_data_writer.html#a4f17ecad2a5df6cb8bf1c570993bff6f',1,'ShapeTypeDataWriter::_ptr_type()'],['../class_shape_type_data_reader.html#aa196d06b74eeb1f0289c8508ed9bc123',1,'ShapeTypeDataReader::_ptr_type()'],['../class_shape_type_data_reader_view.html#adea2f7c53869f3e7c481e471c2dd5b92',1,'ShapeTypeDataReaderView::_ptr_type()']]],
-  ['_5fvar_5ftype',['_var_type',['../class_shape_type_type_support_interface.html#a459455b4fdba0e70bef25aed0be6e05b',1,'ShapeTypeTypeSupportInterface::_var_type()'],['../class_shape_type_data_writer.html#a76fc265913091a1d5c4b5846d51075e6',1,'ShapeTypeDataWriter::_var_type()'],['../class_shape_type_data_reader.html#ad2038f684e7092de635c3b21ff1ef1b9',1,'ShapeTypeDataReader::_var_type()'],['../class_shape_type_data_reader_view.html#aa28cd9bd54e7c3060fc5020b750ea08b',1,'ShapeTypeDataReaderView::_var_type()']]]
-];

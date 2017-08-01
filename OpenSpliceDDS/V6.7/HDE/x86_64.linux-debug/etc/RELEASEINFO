@@ -1,13 +1,15 @@
-PACKAGE_NAME="OpenSplice DDS"
+PACKAGE_NAME="Vortex OpenSplice"
 OSPL_MAJOR="6"
-OSPL_MINOR="4"
-OSPL_MAINT="140320"
+OSPL_MINOR="7"
+OSPL_MAINT="170523"
 OSPL_PATCH="OSS"
-#this file is also parsed as java properties so PACKAGE_VERSION must be hardcoded here#
-PACKAGE_VERSION=V6.4.140320OSS
 
-PACKAGE_DATE="2017-07-28"
-CS_DLL_VERSION="6.4.17375.0"
+#this file is also parsed as java properties so PACKAGE_VERSION must be hardcoded here#
+PACKAGE_VERSION=6.7.170523OSS
+VORTEX_VERSION=_v2
+
+PACKAGE_DATE="2017-07-31"
+CS_DLL_VERSION="6.7.17378.0"
 
 export PACKAGE_NAME
 export OSPL_MAJOR
@@ -17,3 +19,4 @@ export OSPL_PATCH
 export PACKAGE_VERSION
 export PACKAGE_DATE
 export CS_DLL_VERSION
+export VORTEX_VERSION
