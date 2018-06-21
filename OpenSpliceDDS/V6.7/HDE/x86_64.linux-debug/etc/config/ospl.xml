@@ -7,9 +7,9 @@
         <Service name="ddsi2">
             <Command>ddsi2</Command>
         </Service>
-       <Service name="durability">
-          <Command>durability</Command>
-       </Service>
+        <Service name="cmsoap">
+            <Command>cmsoap</Command>
+        </Service>
         <DurablePolicies>
             <Policy obtain="*.*"/>
         </DurablePolicies>
@@ -27,26 +27,13 @@
             <!-- the following one is necessary only for TwinOaks CoreDX DDS compatibility -->
             <!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
         </Compatibility>
+        <Discovery>
+           <ParticipantIndex>none</ParticipantIndex>
+        </Discovery>
     </DDSI2Service>
-   <DurabilityService name="durability">
-      <Network>
-         <InitialDiscoveryPeriod>0.1</InitialDiscoveryPeriod>
-         <Alignment>
-            <TimeAlignment>false</TimeAlignment>
-            <RequestCombinePeriod>
-               <Initial>1.0</Initial>
-               <Operational>0.1</Operational>
-            </RequestCombinePeriod>
-         </Alignment>
-         <WaitForAttachment maxWaitCount="1">
-            <ServiceName>ddsi2</ServiceName>
-         </WaitForAttachment>
-      </Network>
-      <NameSpaces>
-         <NameSpace name="defaultNamespace">
-            <Partition>*</Partition>
-         </NameSpace>
-         <Policy alignee="Initial" aligner="true" durability="Durable" nameSpace="defaultNamespace"/>
-      </NameSpaces>
-   </DurabilityService>
+    <TunerService name="cmsoap">
+        <Server>
+            <PortNr>Auto</PortNr>
+        </Server>
+    </TunerService>
 </OpenSplice>

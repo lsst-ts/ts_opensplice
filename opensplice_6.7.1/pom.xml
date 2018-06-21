@@ -1,0 +1,85 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>opensplice.dds</groupId>
+  <artifactId>dcpssaj</artifactId>
+  <packaging>jar</packaging>
+  <name>dcpssaj</name>
+  <version>6.7.1</version>
+
+  <licenses>
+   <license>
+    <name>LSST GPL</name>
+    <url>http://lsst-tsvm.lsst.org/LICENSE/</url>
+    <distribution>repo</distribution>
+    <comments>A business-friendly OSS license</comments>
+   </license>
+  </licenses>
+  <organization>
+      <name>LSST</name>
+         <url>http://lsst-tsvm.lsst.org</url>
+  </organization>
+  <developers>
+   <developer>
+    <id>dmills</id>
+    <name>Dave Mills</name>
+    <email>dmills@lsst.org</email>
+    <url>http://www.lsstcorp.org</url>
+    <organization>LSST</organization>
+    <roles>
+      <role>developer</role>
+    </roles>
+    <timezone>-7</timezone>
+   </developer>
+  </developers>
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+    <reporting>                                                                              
+        <plugins>                                                                            
+            <plugin>                                                                         
+                <groupId>org.apache.maven.plugins</groupId>                                  
+                <artifactId>maven-javadoc-plugin</artifactId>                                
+                <version>2.9</version>                                                       
+                <configuration>                                                              
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>                         
+                    <docletArtifact>                                                         
+                        <groupId>org.umlgraph</groupId>                                      
+                        <artifactId>umlgraph</artifactId>                                    
+                        <version>5.6</version>                                               
+                    </docletArtifact>                                                        
+                    <additionalparam>-views -all</additionalparam>                           
+                    <useStandardDocletOptions>true</useStandardDocletOptions>                
+                </configuration>                                                             
+            </plugin>                                                                        
+        </plugins>                                                                           
+    </reporting>     
+
+    <repositories>
+        <repository>
+            <id>ocs-maven2-public</id>
+            <name>OCS Maven 2 central repository</name>
+            <url>http://dev.lsstcorp.org:8081/nexus/content/groups/ocs-maven2-public/</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>ocs-maven2</id>
+            <name>OCS Maven2 Release repository</name>
+            <url>http://dev.lsstcorp.org:8081/nexus/content/repositories/ocs-maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ocs-maven2-snapshots</id>
+            <name>OCS Maven2 SNAPSHOTS repository</name>
+            <url>http://dev.lsstcorp.org:8081/nexus/content/repositories/ocs-maven2-snapshots/</url>
+        </snapshotRepository>
+        <site>
+            <id>ocs-maven2-site</id>
+            <name>OCS Maven2 site repository</name>
+            <url>dav:http://dev.lsstcorp.org:8081/nexus/content/sites/ocs-site/</url>
+        </site>
+    </distributionManagement>
+  </project>
+

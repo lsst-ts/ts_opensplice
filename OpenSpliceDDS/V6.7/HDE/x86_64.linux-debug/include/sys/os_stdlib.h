@@ -728,6 +728,23 @@ struct os_stat {
   os_timeW  stat_mtime;
 };
 
+struct os_stat_s {
+/* The mode_t macro's (like OS_ISDIR) are defined in the platform specific header files! */
+/* NEVER name these fields identical to the POSIX standard! Since e.g. the Linux implementation
+   has defined it as follows:
+   struct stat {
+     ...
+       struct timespec st_mtim;
+   #define st_mtime st_mtim.tvsec
+     ...
+   };
+   This results in the fact that our definition is also changed, causing compilation errors!
+*/
+  os_mode_t stat_mode;
+  os_size_t stat_size;
+  os_timeW  stat_mtime;
+};
+
 OS_API os_result
 os_stat(
     const char *path,
