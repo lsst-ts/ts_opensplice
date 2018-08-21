@@ -4,7 +4,7 @@
 //  
 //  File name: dds_namedQosTypesDcps.h
 //  Source: dds_namedQosTypesDcps.idl
-//  Generated: Wed Jun 21 08:57:08 2017
+//  Generated: Mon Jul 31 11:30:23 2017
 //  OpenSplice 6.7.170523OSS
 //  
 //******************************************************************

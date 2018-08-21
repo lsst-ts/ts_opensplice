@@ -1,131 +1,106 @@
 /****************************************************************************
-** demo::ishapes::ShapesDialog meta object code from reading C++ file 'ShapesDialog.hpp'
+** Meta object code from reading C++ file 'ShapesDialog.hpp'
 **
-** Created: Wed Jun 21 13:35:21 2017
-**      by: The Qt MOC ($Id: qt/moc_yacc.cpp   3.3.8   edited Feb 2 14:59 $)
+** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#undef QT_NO_COMPAT
 #include "ShapesDialog.hpp"
-#include <qmetaobject.h>
-#include <qapplication.h>
-
-#include <private/qucomextra_p.h>
-#if !defined(Q_MOC_OUTPUT_REVISION) || (Q_MOC_OUTPUT_REVISION != 26)
-#error "This file was generated using the moc from 3.3.8b. It"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'ShapesDialog.hpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
-const char *demo::ishapes::ShapesDialog::className() const
-{
-    return "demo::ishapes::ShapesDialog";
-}
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_demo__ishapes__ShapesDialog[] = {
 
-QMetaObject *demo::ishapes::ShapesDialog::metaObj = 0;
-static QMetaObjectCleanUp cleanUp_demo__ishapes__ShapesDialog( "demo::ishapes::ShapesDialog", &demo::ishapes::ShapesDialog::staticMetaObject );
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       5,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
 
-#ifndef QT_NO_TRANSLATION
-QString demo::ishapes::ShapesDialog::tr( const char *s, const char *c )
-{
-    if ( qApp )
-	return qApp->translate( "demo::ishapes::ShapesDialog", s, c, QApplication::DefaultCodec );
-    else
-	return QString::fromLatin1( s );
-}
-#ifndef QT_NO_TRANSLATION_UTF8
-QString demo::ishapes::ShapesDialog::trUtf8( const char *s, const char *c )
-{
-    if ( qApp )
-	return qApp->translate( "demo::ishapes::ShapesDialog", s, c, QApplication::UnicodeUTF8 );
-    else
-	return QString::fromUtf8( s );
-}
-#endif // QT_NO_TRANSLATION_UTF8
+ // slots: signature, parameters, type, tag, flags
+      29,   28,   28,   28, 0x0a,
+      54,   28,   28,   28, 0x0a,
+      81,   28,   28,   28, 0x0a,
+     108,   28,   28,   28, 0x0a,
+     135,   28,   28,   28, 0x0a,
 
-#endif // QT_NO_TRANSLATION
+       0        // eod
+};
 
-QMetaObject* demo::ishapes::ShapesDialog::staticMetaObject()
-{
-    if ( metaObj )
-	return metaObj;
-    QMetaObject* parentObject = QDialog::staticMetaObject();
-    static const QUMethod slot_0 = {"onPublishButtonClicked", 0, 0 };
-    static const QUMethod slot_1 = {"onSubscribeButtonClicked", 0, 0 };
-    static const QUMethod slot_2 = {"onReaderQosButtonClicked", 0, 0 };
-    static const QUMethod slot_3 = {"onWriterQosButtonClicked", 0, 0 };
-    static const QUMethod slot_4 = {"onFilterButtonClicked", 0, 0 };
-    static const QUMethod slot_5 = {"CreatePublisher", 0, 0 };
-    static const QUMethod slot_6 = {"CreateSubscriber", 0, 0 };
-    static const QUMethod slot_7 = {"CreatePublisherMMQos", 0, 0 };
-    static const QUMethod slot_8 = {"CreateSubscriberMMQos", 0, 0 };
-    static const QUMethod slot_9 = {"logShape", 0, 0 };
-    static const QUMethod slot_10 = {"logDDSShape", 0, 0 };
-    static const QMetaData slot_tbl[] = {
-	{ "onPublishButtonClicked()", &slot_0, QMetaData::Public },
-	{ "onSubscribeButtonClicked()", &slot_1, QMetaData::Public },
-	{ "onReaderQosButtonClicked()", &slot_2, QMetaData::Public },
-	{ "onWriterQosButtonClicked()", &slot_3, QMetaData::Public },
-	{ "onFilterButtonClicked()", &slot_4, QMetaData::Public },
-	{ "CreatePublisher()", &slot_5, QMetaData::Private },
-	{ "CreateSubscriber()", &slot_6, QMetaData::Private },
-	{ "CreatePublisherMMQos()", &slot_7, QMetaData::Private },
-	{ "CreateSubscriberMMQos()", &slot_8, QMetaData::Private },
-	{ "logShape()", &slot_9, QMetaData::Private },
-	{ "logDDSShape()", &slot_10, QMetaData::Private }
-    };
-    metaObj = QMetaObject::new_metaobject(
-	"demo::ishapes::ShapesDialog", parentObject,
-	slot_tbl, 11,
-	0, 0,
-#ifndef QT_NO_PROPERTIES
-	0, 0,
-	0, 0,
-#endif // QT_NO_PROPERTIES
-	0, 0 );
-    cleanUp_demo__ishapes__ShapesDialog.setMetaObject( metaObj );
-    return metaObj;
-}
+static const char qt_meta_stringdata_demo__ishapes__ShapesDialog[] = {
+    "demo::ishapes::ShapesDialog\0\0"
+    "onPublishButtonClicked()\0"
+    "onSubscribeButtonClicked()\0"
+    "onReaderQosButtonClicked()\0"
+    "onWriterQosButtonClicked()\0"
+    "onFilterButtonClicked()\0"
+};
 
-void* demo::ishapes::ShapesDialog::qt_cast( const char* clname )
+void demo::ishapes::ShapesDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    if ( !qstrcmp( clname, "demo::ishapes::ShapesDialog" ) )
-	return this;
-    return QDialog::qt_cast( clname );
-}
-
-bool demo::ishapes::ShapesDialog::qt_invoke( int _id, QUObject* _o )
-{
-    switch ( _id - staticMetaObject()->slotOffset() ) {
-    case 0: onPublishButtonClicked(); break;
-    case 1: onSubscribeButtonClicked(); break;
-    case 2: onReaderQosButtonClicked(); break;
-    case 3: onWriterQosButtonClicked(); break;
-    case 4: onFilterButtonClicked(); break;
-    case 5: CreatePublisher(); break;
-    case 6: CreateSubscriber(); break;
-    case 7: CreatePublisherMMQos(); break;
-    case 8: CreateSubscriberMMQos(); break;
-    case 9: logShape(); break;
-    case 10: logDDSShape(); break;
-    default:
-	return QDialog::qt_invoke( _id, _o );
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        ShapesDialog *_t = static_cast<ShapesDialog *>(_o);
+        switch (_id) {
+        case 0: _t->onPublishButtonClicked(); break;
+        case 1: _t->onSubscribeButtonClicked(); break;
+        case 2: _t->onReaderQosButtonClicked(); break;
+        case 3: _t->onWriterQosButtonClicked(); break;
+        case 4: _t->onFilterButtonClicked(); break;
+        default: ;
+        }
     }
-    return TRUE;
+    Q_UNUSED(_a);
 }
 
-bool demo::ishapes::ShapesDialog::qt_emit( int _id, QUObject* _o )
+const QMetaObjectExtraData demo::ishapes::ShapesDialog::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject demo::ishapes::ShapesDialog::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_demo__ishapes__ShapesDialog,
+      qt_meta_data_demo__ishapes__ShapesDialog, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &demo::ishapes::ShapesDialog::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *demo::ishapes::ShapesDialog::metaObject() const
 {
-    return QDialog::qt_emit(_id,_o);
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
-#ifndef QT_NO_PROPERTIES
 
-bool demo::ishapes::ShapesDialog::qt_property( int id, int f, QVariant* v)
+void *demo::ishapes::ShapesDialog::qt_metacast(const char *_clname)
 {
-    return QDialog::qt_property( id, f, v);
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_demo__ishapes__ShapesDialog))
+        return static_cast<void*>(const_cast< ShapesDialog*>(this));
+    return QDialog::qt_metacast(_clname);
 }
 
-bool demo::ishapes::ShapesDialog::qt_static_property( QObject* , int , int , QVariant* ){ return FALSE; }
-#endif // QT_NO_PROPERTIES
+int demo::ishapes::ShapesDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 5)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 5;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

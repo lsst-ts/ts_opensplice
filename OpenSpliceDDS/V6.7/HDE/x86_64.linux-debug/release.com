@@ -1,7 +1,7 @@
-echo "<<< Vortex OpenSplice HDE Release 6.7.170523OSS For x86_64.linux-debug, Date 2017-06-21 >>>"
+echo "<<< Vortex OpenSplice HDE Release 6.7.170523OSS For x86_64.linux-debug, Date 2017-07-31 >>>"
 if [ "${SPLICE_ORB:=}" = "" ]
 then
-    SPLICE_ORB=DDS_OpenFusion_2
+    SPLICE_ORB=DDS_OpenFusion_1_6_1
     export SPLICE_ORB
 fi
 if [ "${SPLICE_JDK:=}" = "" ]

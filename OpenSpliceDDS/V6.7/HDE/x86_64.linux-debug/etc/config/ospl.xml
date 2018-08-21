@@ -7,6 +7,9 @@
         <Service name="ddsi2">
             <Command>ddsi2</Command>
         </Service>
+        <Service name="cmsoap">
+            <Command>cmsoap</Command>
+        </Service>
         <DurablePolicies>
             <Policy obtain="*.*"/>
         </DurablePolicies>
@@ -24,8 +27,10 @@
             <!-- the following one is necessary only for TwinOaks CoreDX DDS compatibility -->
             <!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
         </Compatibility>
-        <Discovery>
-           <ParticipantIndex>none</ParticipantIndex>
-        </Discovery>
     </DDSI2Service>
+    <TunerService name="cmsoap">
+        <Server>
+            <PortNr>Auto</PortNr>
+        </Server>
+    </TunerService>
 </OpenSplice>

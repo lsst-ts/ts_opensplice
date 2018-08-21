@@ -1,5 +1,0 @@
-var a00305 =
-[
-    [ "ANNOTATION_MEMBER_MEMBER_ID", "a00305.html#a8f1ab90478888ee3ea5e357ea132387e", null ],
-    [ "PROPERTY_MEMBER_MEMBER_ID", "a00305.html#a967ade27100ddc8b20988159a98a9641", null ]
-];

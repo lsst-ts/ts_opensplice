@@ -1,153 +1,117 @@
 /****************************************************************************
-** demo::ishapes::FilterDialog meta object code from reading C++ file 'FilterDialog.hpp'
+** Meta object code from reading C++ file 'FilterDialog.hpp'
 **
-** Created: Wed Jun 21 13:35:21 2017
-**      by: The Qt MOC ($Id: qt/moc_yacc.cpp   3.3.8   edited Feb 2 14:59 $)
+** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#undef QT_NO_COMPAT
 #include "FilterDialog.hpp"
-#include <qmetaobject.h>
-#include <qapplication.h>
-
-#include <private/qucomextra_p.h>
-#if !defined(Q_MOC_OUTPUT_REVISION) || (Q_MOC_OUTPUT_REVISION != 26)
-#error "This file was generated using the moc from 3.3.8b. It"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'FilterDialog.hpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
-#include <qvariant.h>
-const char *demo::ishapes::FilterDialog::className() const
-{
-    return "demo::ishapes::FilterDialog";
-}
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_demo__ishapes__FilterDialog[] = {
 
-QMetaObject *demo::ishapes::FilterDialog::metaObj = 0;
-static QMetaObjectCleanUp cleanUp_demo__ishapes__FilterDialog( "demo::ishapes::FilterDialog", &demo::ishapes::FilterDialog::staticMetaObject );
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      10,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
 
-#ifndef QT_NO_TRANSLATION
-QString demo::ishapes::FilterDialog::tr( const char *s, const char *c )
-{
-    if ( qApp )
-	return qApp->translate( "demo::ishapes::FilterDialog", s, c, QApplication::DefaultCodec );
-    else
-	return QString::fromLatin1( s );
-}
-#ifndef QT_NO_TRANSLATION_UTF8
-QString demo::ishapes::FilterDialog::trUtf8( const char *s, const char *c )
-{
-    if ( qApp )
-	return qApp->translate( "demo::ishapes::FilterDialog", s, c, QApplication::UnicodeUTF8 );
-    else
-	return QString::fromUtf8( s );
-}
-#endif // QT_NO_TRANSLATION_UTF8
+ // slots: signature, parameters, type, tag, flags
+      29,   28,   28,   28, 0x0a,
+      38,   28,   28,   28, 0x0a,
+      49,   47,   28,   28, 0x0a,
+      65,   63,   28,   28, 0x0a,
+      81,   79,   28,   28, 0x0a,
+      97,   95,   28,   28, 0x0a,
+     114,  111,   28,   28, 0x0a,
+     144,   28,  139,   28, 0x0a,
+     162,   28,  156,   28, 0x0a,
+     180,   28,  139,   28, 0x0a,
 
-#endif // QT_NO_TRANSLATION
+       0        // eod
+};
 
-QMetaObject* demo::ishapes::FilterDialog::staticMetaObject()
-{
-    if ( metaObj )
-	return metaObj;
-    QMetaObject* parentObject = QDialog::staticMetaObject();
-    static const QUMethod slot_0 = {"accept", 0, 0 };
-    static const QUMethod slot_1 = {"reject", 0, 0 };
-    static const QUParameter param_slot_2[] = {
-	{ "x", &static_QUType_int, 0, QUParameter::In }
-    };
-    static const QUMethod slot_2 = {"updateX0", 1, param_slot_2 };
-    static const QUParameter param_slot_3[] = {
-	{ "y", &static_QUType_int, 0, QUParameter::In }
-    };
-    static const QUMethod slot_3 = {"updateY0", 1, param_slot_3 };
-    static const QUParameter param_slot_4[] = {
-	{ "w", &static_QUType_int, 0, QUParameter::In }
-    };
-    static const QUMethod slot_4 = {"updateX1", 1, param_slot_4 };
-    static const QUParameter param_slot_5[] = {
-	{ "h", &static_QUType_int, 0, QUParameter::In }
-    };
-    static const QUMethod slot_5 = {"updateY1", 1, param_slot_5 };
-    static const QUParameter param_slot_6[] = {
-	{ "on", &static_QUType_bool, 0, QUParameter::In }
-    };
-    static const QUMethod slot_6 = {"updateFilterStatus", 1, param_slot_6 };
-    static const QUParameter param_slot_7[] = {
-	{ 0, &static_QUType_bool, 0, QUParameter::Out }
-    };
-    static const QUMethod slot_7 = {"isEnabled", 1, param_slot_7 };
-    static const QUParameter param_slot_8[] = {
-	{ 0, &static_QUType_QVariant, "\x08", QUParameter::Out }
-    };
-    static const QUMethod slot_8 = {"getFilterBounds", 1, param_slot_8 };
-    static const QUParameter param_slot_9[] = {
-	{ 0, &static_QUType_bool, 0, QUParameter::Out }
-    };
-    static const QUMethod slot_9 = {"filterOutside", 1, param_slot_9 };
-    static const QMetaData slot_tbl[] = {
-	{ "accept()", &slot_0, QMetaData::Public },
-	{ "reject()", &slot_1, QMetaData::Public },
-	{ "updateX0(int)", &slot_2, QMetaData::Public },
-	{ "updateY0(int)", &slot_3, QMetaData::Public },
-	{ "updateX1(int)", &slot_4, QMetaData::Public },
-	{ "updateY1(int)", &slot_5, QMetaData::Public },
-	{ "updateFilterStatus(bool)", &slot_6, QMetaData::Public },
-	{ "isEnabled()", &slot_7, QMetaData::Public },
-	{ "getFilterBounds()", &slot_8, QMetaData::Public },
-	{ "filterOutside()", &slot_9, QMetaData::Public }
-    };
-    metaObj = QMetaObject::new_metaobject(
-	"demo::ishapes::FilterDialog", parentObject,
-	slot_tbl, 10,
-	0, 0,
-#ifndef QT_NO_PROPERTIES
-	0, 0,
-	0, 0,
-#endif // QT_NO_PROPERTIES
-	0, 0 );
-    cleanUp_demo__ishapes__FilterDialog.setMetaObject( metaObj );
-    return metaObj;
-}
+static const char qt_meta_stringdata_demo__ishapes__FilterDialog[] = {
+    "demo::ishapes::FilterDialog\0\0accept()\0"
+    "reject()\0x\0updateX0(int)\0y\0updateY0(int)\0"
+    "w\0updateX1(int)\0h\0updateY1(int)\0on\0"
+    "updateFilterStatus(bool)\0bool\0isEnabled()\0"
+    "QRect\0getFilterBounds()\0filterOutside()\0"
+};
 
-void* demo::ishapes::FilterDialog::qt_cast( const char* clname )
+void demo::ishapes::FilterDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    if ( !qstrcmp( clname, "demo::ishapes::FilterDialog" ) )
-	return this;
-    return QDialog::qt_cast( clname );
-}
-
-bool demo::ishapes::FilterDialog::qt_invoke( int _id, QUObject* _o )
-{
-    switch ( _id - staticMetaObject()->slotOffset() ) {
-    case 0: accept(); break;
-    case 1: reject(); break;
-    case 2: updateX0((int)static_QUType_int.get(_o+1)); break;
-    case 3: updateY0((int)static_QUType_int.get(_o+1)); break;
-    case 4: updateX1((int)static_QUType_int.get(_o+1)); break;
-    case 5: updateY1((int)static_QUType_int.get(_o+1)); break;
-    case 6: updateFilterStatus((bool)static_QUType_bool.get(_o+1)); break;
-    case 7: static_QUType_bool.set(_o,isEnabled()); break;
-    case 8: static_QUType_QVariant.set(_o,QVariant(getFilterBounds())); break;
-    case 9: static_QUType_bool.set(_o,filterOutside()); break;
-    default:
-	return QDialog::qt_invoke( _id, _o );
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        FilterDialog *_t = static_cast<FilterDialog *>(_o);
+        switch (_id) {
+        case 0: _t->accept(); break;
+        case 1: _t->reject(); break;
+        case 2: _t->updateX0((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->updateY0((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->updateX1((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->updateY1((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->updateFilterStatus((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: { bool _r = _t->isEnabled();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 8: { QRect _r = _t->getFilterBounds();
+            if (_a[0]) *reinterpret_cast< QRect*>(_a[0]) = _r; }  break;
+        case 9: { bool _r = _t->filterOutside();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        default: ;
+        }
     }
-    return TRUE;
 }
 
-bool demo::ishapes::FilterDialog::qt_emit( int _id, QUObject* _o )
+const QMetaObjectExtraData demo::ishapes::FilterDialog::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject demo::ishapes::FilterDialog::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_demo__ishapes__FilterDialog,
+      qt_meta_data_demo__ishapes__FilterDialog, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &demo::ishapes::FilterDialog::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *demo::ishapes::FilterDialog::metaObject() const
 {
-    return QDialog::qt_emit(_id,_o);
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
-#ifndef QT_NO_PROPERTIES
 
-bool demo::ishapes::FilterDialog::qt_property( int id, int f, QVariant* v)
+void *demo::ishapes::FilterDialog::qt_metacast(const char *_clname)
 {
-    return QDialog::qt_property( id, f, v);
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_demo__ishapes__FilterDialog))
+        return static_cast<void*>(const_cast< FilterDialog*>(this));
+    return QDialog::qt_metacast(_clname);
 }
 
-bool demo::ishapes::FilterDialog::qt_static_property( QObject* , int , int , QVariant* ){ return FALSE; }
-#endif // QT_NO_PROPERTIES
+int demo::ishapes::FilterDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 10)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 10;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

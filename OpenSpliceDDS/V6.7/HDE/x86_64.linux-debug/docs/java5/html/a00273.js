@@ -1,7 +1,0 @@
-var a00273 =
-[
-    [ "NOT_REJECTED", "a00273.html#aff70cc1ca7e6365d5b3901a187c636ae", null ],
-    [ "REJECTED_BY_INSTANCES_LIMIT", "a00273.html#a952d009c7508c29aea3390d1a2f5e428", null ],
-    [ "REJECTED_BY_SAMPLES_LIMIT", "a00273.html#aa676c24ebae4a3d8ec455d38e7148a97", null ],
-    [ "REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT", "a00273.html#a195126334a836a8329fd7700aeaaa772", null ]
-];
