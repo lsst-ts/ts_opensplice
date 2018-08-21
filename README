@@ -4,7 +4,8 @@ It is the version currently used by LSST developers.
 The Release corresponding to the required version of the SAL
 should be installed in the same directory as the SAL release.
 
-OpenSpliceDDS directory contains the HDE
+OpenSpliceDDS directory contains the HDE for versions 6.4.1 and 6.7
+V6.4.1 is the preferred default.
 
 opensplice_x.y.z directory contains a maven project build of the Java interface
 

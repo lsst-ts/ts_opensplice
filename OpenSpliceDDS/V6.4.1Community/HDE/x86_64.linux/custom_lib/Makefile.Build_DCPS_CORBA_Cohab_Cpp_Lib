@@ -1,0 +1,395 @@
+# -*-Makefile-*-
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+CFG = Release
+
+ifeq ($(CFG), Release)
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"$(ACE_ROOT)" -I"$(TAO_ROOT)" -I"$(TAO_ROOT)/include" -I"$(ACE_ROOT)/include" -I"../include" -I"../include/sys" -I"../include/dcps/C++/CCPP" -I"ccpp/generated" -I"../include/dcps/C++/CCPP/DDS_OpenFusion_2" -DDDS_OpenFusion_2 -DOSPL_VERSION
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"$(ACE_ROOT)/lib" -L"$(TAO_ROOT)/lib" -L"../lib" -Wl,-rpath,\$$ORIGIN
+CCC           = $(CXX)
+MAKEFILE      = Makefile.Build_DCPS_CORBA_Cohab_Cpp_Lib
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ../lib/
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -O3 -DNDEBUG
+LDLIBS        = -l"TAO$(LIBSUFFIX)" -l"ACE$(LIBSUFFIX)" -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_interfacesC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_interfacesS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesS$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Condition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ContentFilteredTopic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataReader_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataReaderView_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataWriter_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Domain_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DomainParticipant_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DomainParticipantFactory$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Entity_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ErrorInfo$(OBJEXT) ./obj/ccpp/ccpp/ccpp_GuardCondition$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ListenerUtils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_MultiTopic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Publisher_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QosProvider$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QosUtils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QueryCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ReadCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_StatusCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Subscriber_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Topic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_TopicDescription_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_TypeSupport_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Utils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_WaitSet$(OBJEXT)
+AREXT         = .a
+LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsccpp$(LIBSUFFIX)$(AREXT)
+SOEXT         = .so
+SHTARGETDIR   = ../lib/
+SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsccpp$(LIBSUFFIX)$(SOEXT)
+SHFLAGS       = -shared
+SRC           = ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsSplDcps.cpp ccpp/generated/dds_namedQosTypesDcps_impl.cpp ccpp/generated/dds_namedQosTypesSplDcps.cpp ccpp/generated/dds_dcpsC.cpp ccpp/generated/dds_dcpsS.cpp ccpp/generated/dds_dcps_builtintopicsC.cpp ccpp/generated/dds_dcps_builtintopicsS.cpp ccpp/generated/dds_builtinTopicsC.cpp ccpp/generated/dds_builtinTopicsS.cpp ccpp/generated/dds_namedQosTypesDcpsC.cpp ccpp/generated/dds_namedQosTypesDcpsS.cpp ccpp/generated/dds_builtinTopicsDcpsC.cpp ccpp/generated/dds_builtinTopicsDcpsS.cpp ccpp/generated/dds_dcps_interfacesC.cpp ccpp/generated/dds_dcps_interfacesS.cpp ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp ccpp/generated/dds_namedQosTypesC.cpp ccpp/generated/dds_namedQosTypesS.cpp ccpp/ccpp_Condition_impl.cpp ccpp/ccpp_ContentFilteredTopic_impl.cpp ccpp/ccpp_DataReader_impl.cpp ccpp/ccpp_DataReaderView_impl.cpp ccpp/ccpp_DataWriter_impl.cpp ccpp/ccpp_Domain_impl.cpp ccpp/ccpp_DomainParticipant_impl.cpp ccpp/ccpp_DomainParticipantFactory.cpp ccpp/ccpp_Entity_impl.cpp ccpp/ccpp_ErrorInfo.cpp ccpp/ccpp_GuardCondition.cpp ccpp/ccpp_ListenerUtils.cpp ccpp/ccpp_MultiTopic_impl.cpp ccpp/ccpp_Publisher_impl.cpp ccpp/ccpp_QosProvider.cpp ccpp/ccpp_QosUtils.cpp ccpp/ccpp_QueryCondition_impl.cpp ccpp/ccpp_ReadCondition_impl.cpp ccpp/ccpp_StatusCondition_impl.cpp ccpp/ccpp_Subscriber_impl.cpp ccpp/ccpp_Topic_impl.cpp ccpp/ccpp_TopicDescription_impl.cpp ccpp/ccpp_TypeSupport_impl.cpp ccpp/ccpp_Utils.cpp ccpp/ccpp_WaitSet.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+DYNAMICFLAGS  = -DOSPL_BUILD_DCPSCCPP
+STATICFLAGS   = -DACE_AS_STATIC_LIBS -DTAO_AS_STATIC_LIBS
+EXPORTFLAGS   = $(DYNAMICFLAGS)
+endif
+ifeq ($(CFG), Debug)
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -Wall -I"$(ACE_ROOT)" -I"$(TAO_ROOT)" -I"$(TAO_ROOT)/include" -I"$(ACE_ROOT)/include" -I"../include" -I"../include/sys" -I"../include/dcps/C++/CCPP" -I"ccpp/generated" -I"../include/dcps/C++/CCPP/DDS_OpenFusion_2" -DDDS_OpenFusion_2 -DOSPL_VERSION
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"$(ACE_ROOT)/lib" -L"$(TAO_ROOT)/lib" -L"../lib" -Wl,-rpath,\$$ORIGIN
+CCC           = $(CXX)
+MAKEFILE      = Makefile.Build_DCPS_CORBA_Cohab_Cpp_Lib
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ../lib/
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -g
+LDLIBS        = -l"TAO$(LIBSUFFIX)" -l"ACE$(LIBSUFFIX)" -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesSplDcps$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_interfacesC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_interfacesS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsS$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesC$(OBJEXT) ./obj/ccpp/ccpp/generated/dds_namedQosTypesS$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Condition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ContentFilteredTopic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataReader_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataReaderView_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DataWriter_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Domain_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DomainParticipant_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_DomainParticipantFactory$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Entity_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ErrorInfo$(OBJEXT) ./obj/ccpp/ccpp/ccpp_GuardCondition$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ListenerUtils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_MultiTopic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Publisher_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QosProvider$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QosUtils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_QueryCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_ReadCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_StatusCondition_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Subscriber_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Topic_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_TopicDescription_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_TypeSupport_impl$(OBJEXT) ./obj/ccpp/ccpp/ccpp_Utils$(OBJEXT) ./obj/ccpp/ccpp/ccpp_WaitSet$(OBJEXT)
+AREXT         = .a
+LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsccpp$(LIBSUFFIX)$(AREXT)
+SOEXT         = .so
+SHTARGETDIR   = ../lib/
+SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsccpp$(LIBSUFFIX)$(SOEXT)
+SHFLAGS       = -shared
+SRC           = ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsSplDcps.cpp ccpp/generated/dds_namedQosTypesDcps_impl.cpp ccpp/generated/dds_namedQosTypesSplDcps.cpp ccpp/generated/dds_dcpsC.cpp ccpp/generated/dds_dcpsS.cpp ccpp/generated/dds_dcps_builtintopicsC.cpp ccpp/generated/dds_dcps_builtintopicsS.cpp ccpp/generated/dds_builtinTopicsC.cpp ccpp/generated/dds_builtinTopicsS.cpp ccpp/generated/dds_namedQosTypesDcpsC.cpp ccpp/generated/dds_namedQosTypesDcpsS.cpp ccpp/generated/dds_builtinTopicsDcpsC.cpp ccpp/generated/dds_builtinTopicsDcpsS.cpp ccpp/generated/dds_dcps_interfacesC.cpp ccpp/generated/dds_dcps_interfacesS.cpp ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp ccpp/generated/dds_namedQosTypesC.cpp ccpp/generated/dds_namedQosTypesS.cpp ccpp/ccpp_Condition_impl.cpp ccpp/ccpp_ContentFilteredTopic_impl.cpp ccpp/ccpp_DataReader_impl.cpp ccpp/ccpp_DataReaderView_impl.cpp ccpp/ccpp_DataWriter_impl.cpp ccpp/ccpp_Domain_impl.cpp ccpp/ccpp_DomainParticipant_impl.cpp ccpp/ccpp_DomainParticipantFactory.cpp ccpp/ccpp_Entity_impl.cpp ccpp/ccpp_ErrorInfo.cpp ccpp/ccpp_GuardCondition.cpp ccpp/ccpp_ListenerUtils.cpp ccpp/ccpp_MultiTopic_impl.cpp ccpp/ccpp_Publisher_impl.cpp ccpp/ccpp_QosProvider.cpp ccpp/ccpp_QosUtils.cpp ccpp/ccpp_QueryCondition_impl.cpp ccpp/ccpp_ReadCondition_impl.cpp ccpp/ccpp_StatusCondition_impl.cpp ccpp/ccpp_Subscriber_impl.cpp ccpp/ccpp_Topic_impl.cpp ccpp/ccpp_TopicDescription_impl.cpp ccpp/ccpp_TypeSupport_impl.cpp ccpp/ccpp_Utils.cpp ccpp/ccpp_WaitSet.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+DYNAMICFLAGS  = -DOSPL_BUILD_DCPSCCPP
+STATICFLAGS   = -DACE_AS_STATIC_LIBS -DTAO_AS_STATIC_LIBS
+EXPORTFLAGS   = $(DYNAMICFLAGS)
+endif
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: __prebuild__ $(SHLIB) __postbuild__
+
+$(SHLIB): $(OBJS)
+	@$(TESTDIRSTART) "$(SHTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(SHTARGETDIR)"
+	$(LINK.cc) $(SHFLAGS) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
+
+$(LIB): $(OBJS)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	$(AR) $(ARFLAGS) $(LIB) $(OBJS) 
+
+GENERATED_DIRTY = ccpp/generated/dds_dcps_builtintopicsDcpsC.inl ccpp/generated/dds_dcps_builtintopicsDcpsC.h ccpp/generated/dds_dcps_builtintopicsDcpsS.h ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp ccpp/generated/dds_builtinTopicsDcpsC.inl ccpp/generated/dds_builtinTopicsDcpsC.h ccpp/generated/dds_builtinTopicsDcpsS.h ccpp/generated/dds_builtinTopicsDcpsC.cpp ccpp/generated/dds_builtinTopicsDcpsS.cpp ccpp/generated/dds_namedQosTypesDcpsC.inl ccpp/generated/dds_namedQosTypesDcpsC.h ccpp/generated/dds_namedQosTypesDcpsS.h ccpp/generated/dds_namedQosTypesDcpsC.cpp ccpp/generated/dds_namedQosTypesDcpsS.cpp ccpp/generated/dds_builtinTopicsC.inl ccpp/generated/dds_builtinTopicsC.h ccpp/generated/dds_builtinTopicsS.h ccpp/generated/dds_builtinTopicsC.cpp ccpp/generated/dds_builtinTopicsS.cpp ccpp/generated/dds_dcps_builtintopicsC.inl ccpp/generated/dds_dcps_builtintopicsC.h ccpp/generated/dds_dcps_builtintopicsS.h ccpp/generated/dds_dcps_builtintopicsC.cpp ccpp/generated/dds_dcps_builtintopicsS.cpp ccpp/generated/dds_dcps_interfacesC.inl ccpp/generated/dds_dcps_interfacesC.h ccpp/generated/dds_dcps_interfacesS.h ccpp/generated/dds_dcps_interfacesC.cpp ccpp/generated/dds_dcps_interfacesS.cpp ccpp/generated/dds_dcpsC.inl ccpp/generated/dds_dcpsC.h ccpp/generated/dds_dcpsS.h ccpp/generated/dds_dcpsC.cpp ccpp/generated/dds_dcpsS.cpp ccpp/generated/dds_namedQosTypesC.inl ccpp/generated/dds_namedQosTypesC.h ccpp/generated/dds_namedQosTypesS.h ccpp/generated/dds_namedQosTypesC.cpp ccpp/generated/dds_namedQosTypesS.cpp ccpp/generated/dds_builtinTopicsDcps.idl ccpp/generated/dds_builtinTopicsDcps_impl.h ccpp/generated/dds_builtinTopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsSplDcps.cpp ccpp/generated/dds_builtinTopicsSplDcps.h ccpp/generated/ccpp_dds_builtinTopics.h ccpp/generated/dds_dcps_builtintopicsDcps.idl ccpp/generated/dds_dcps_builtintopicsSplDcps.h ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp ccpp/generated/ccpp_dds_dcps_builtintopics.h ccpp/generated/dds_dcps_builtintopicsDcps_impl.h ccpp/generated/dds_namedQosTypesDcps.idl ccpp/generated/dds_namedQosTypesSplDcps.h ccpp/generated/dds_namedQosTypesDcps_impl.cpp ccpp/generated/dds_namedQosTypesSplDcps.cpp ccpp/generated/dds_namedQosTypesDcps_impl.h ccpp/generated/ccpp_dds_namedQosTypes.h
+
+
+export DYLD_LIBRARY_PATH := $(DYLD_LIBRARY_PATH):$(ACE_ROOT)/lib
+export LD_LIBRARY_PATH   := $(LD_LIBRARY_PATH):$(ACE_ROOT)/lib
+export SHLIB_PATH        := $(SHLIB_PATH):$(ACE_ROOT)/lib
+export LIBPATH           := $(LIBPATH):$(ACE_ROOT)/lib
+export PATH              := $(PATH):$(ACE_ROOT)/lib
+
+.NOTPARALLEL:
+ccpp/generated/dds_dcps_builtintopicsDcpsC.inl ccpp/generated/dds_dcps_builtintopicsDcpsC.h ccpp/generated/dds_dcps_builtintopicsDcpsS.h ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp: ccpp/generated/dds_dcps_builtintopicsDcps.idl
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ccpp/generated/dds_dcps_builtintopicsDcps.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_builtinTopicsDcpsC.inl ccpp/generated/dds_builtinTopicsDcpsC.h ccpp/generated/dds_builtinTopicsDcpsS.h ccpp/generated/dds_builtinTopicsDcpsC.cpp ccpp/generated/dds_builtinTopicsDcpsS.cpp: ccpp/generated/dds_builtinTopicsDcps.idl
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ccpp/generated/dds_builtinTopicsDcps.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_namedQosTypesDcpsC.inl ccpp/generated/dds_namedQosTypesDcpsC.h ccpp/generated/dds_namedQosTypesDcpsS.h ccpp/generated/dds_namedQosTypesDcpsC.cpp ccpp/generated/dds_namedQosTypesDcpsS.cpp: ccpp/generated/dds_namedQosTypesDcps.idl
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ccpp/generated/dds_namedQosTypesDcps.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_builtinTopicsC.inl ccpp/generated/dds_builtinTopicsC.h ccpp/generated/dds_builtinTopicsS.h ccpp/generated/dds_builtinTopicsC.cpp ccpp/generated/dds_builtinTopicsS.cpp: ../etc/idl/dds_builtinTopics.idl
+	@$(TESTDIRSTART) "ccpp/generated" $(TESTDIREND) $(MKDIR) "ccpp/generated"
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ../etc/idl/dds_builtinTopics.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_dcps_builtintopicsC.inl ccpp/generated/dds_dcps_builtintopicsC.h ccpp/generated/dds_dcps_builtintopicsS.h ccpp/generated/dds_dcps_builtintopicsC.cpp ccpp/generated/dds_dcps_builtintopicsS.cpp: ../etc/idl/dds_dcps_builtintopics.idl
+	@$(TESTDIRSTART) "ccpp/generated" $(TESTDIREND) $(MKDIR) "ccpp/generated"
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ../etc/idl/dds_dcps_builtintopics.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_dcps_interfacesC.inl ccpp/generated/dds_dcps_interfacesC.h ccpp/generated/dds_dcps_interfacesS.h ccpp/generated/dds_dcps_interfacesC.cpp ccpp/generated/dds_dcps_interfacesS.cpp: ../etc/idl/dds_dcps_interfaces.idl
+	@$(TESTDIRSTART) "ccpp/generated" $(TESTDIREND) $(MKDIR) "ccpp/generated"
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ../etc/idl/dds_dcps_interfaces.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_dcpsC.inl ccpp/generated/dds_dcpsC.h ccpp/generated/dds_dcpsS.h ccpp/generated/dds_dcpsC.cpp ccpp/generated/dds_dcpsS.cpp: ../etc/idl/dds_dcps.idl
+	@$(TESTDIRSTART) "ccpp/generated" $(TESTDIREND) $(MKDIR) "ccpp/generated"
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ../etc/idl/dds_dcps.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_namedQosTypesC.inl ccpp/generated/dds_namedQosTypesC.h ccpp/generated/dds_namedQosTypesS.h ccpp/generated/dds_namedQosTypesC.cpp ccpp/generated/dds_namedQosTypesS.cpp: ../etc/idl/dds_namedQosTypes.idl
+	@$(TESTDIRSTART) "ccpp/generated" $(TESTDIREND) $(MKDIR) "ccpp/generated"
+	$(ACE_ROOT)/bin/tao_idl -Wb,pre_include=ace/pre.h -Wb,post_include=ace/post.h -I$(TAO_ROOT) -Sa -St -Wb,export_macro=OS_DCPS_API -Wb,export_include=ccpp_dcps_if.h -Sp -Sd -o ccpp/generated -I "../etc/idl" ../etc/idl/dds_namedQosTypes.idl
+
+
+
+
+
+export DYLD_LIBRARY_PATH := $(DYLD_LIBRARY_PATH):../bin:../lib
+export LD_LIBRARY_PATH   := $(LD_LIBRARY_PATH):../bin:../lib
+export SHLIB_PATH        := $(SHLIB_PATH):../bin:../lib
+export LIBPATH           := $(LIBPATH):../bin:../lib
+export PATH              := $(PATH):../bin:../lib
+
+.NOTPARALLEL:
+ccpp/generated/dds_builtinTopicsDcps.idl ccpp/generated/dds_builtinTopicsDcps_impl.h ccpp/generated/dds_builtinTopicsDcps_impl.cpp ccpp/generated/dds_builtinTopicsSplDcps.cpp ccpp/generated/dds_builtinTopicsSplDcps.h ccpp/generated/ccpp_dds_builtinTopics.h: ../etc/idl/dds_builtinTopics.idl
+	"../bin/idlpp" -I "../etc/idl" -C -l cpp -d ccpp/generated -b CCPP/DDS_OpenFusion_2 ../etc/idl/dds_builtinTopics.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_dcps_builtintopicsDcps.idl ccpp/generated/dds_dcps_builtintopicsSplDcps.h ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp ccpp/generated/ccpp_dds_dcps_builtintopics.h ccpp/generated/dds_dcps_builtintopicsDcps_impl.h: ../etc/idl/dds_dcps_builtintopics.idl
+	"../bin/idlpp" -I "../etc/idl" -C -l cpp -d ccpp/generated -b CCPP/DDS_OpenFusion_2 ../etc/idl/dds_dcps_builtintopics.idl
+
+
+.NOTPARALLEL:
+ccpp/generated/dds_namedQosTypesDcps.idl ccpp/generated/dds_namedQosTypesSplDcps.h ccpp/generated/dds_namedQosTypesDcps_impl.cpp ccpp/generated/dds_namedQosTypesSplDcps.cpp ccpp/generated/dds_namedQosTypesDcps_impl.h ccpp/generated/ccpp_dds_namedQosTypes.h: ../etc/idl/dds_namedQosTypes.idl
+	"../bin/idlpp" -I "../etc/idl" -C -l cpp -d ccpp/generated -b CCPP/DDS_OpenFusion_2 ../etc/idl/dds_namedQosTypes.idl
+
+.PRECIOUS: $(GENERATED_DIRTY)
+$(OBJS): $(GENERATED_DIRTY)
+
+generated: __prebuild__ $(GENERATED_DIRTY)
+	@-:
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsSplDcps$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsSplDcps.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcps_impl$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsDcps_impl.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsDcps_impl$(OBJEXT): ccpp/generated/dds_builtinTopicsDcps_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsDcps_impl.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsSplDcps$(OBJEXT): ccpp/generated/dds_builtinTopicsSplDcps.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsSplDcps.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesDcps_impl$(OBJEXT): ccpp/generated/dds_namedQosTypesDcps_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesDcps_impl.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesSplDcps$(OBJEXT): ccpp/generated/dds_namedQosTypesSplDcps.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesSplDcps.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcpsC$(OBJEXT): ccpp/generated/dds_dcpsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcpsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcpsS$(OBJEXT): ccpp/generated/dds_dcpsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcpsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsC$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsS$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsC$(OBJEXT): ccpp/generated/dds_builtinTopicsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsS$(OBJEXT): ccpp/generated/dds_builtinTopicsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsC$(OBJEXT): ccpp/generated/dds_namedQosTypesDcpsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesDcpsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesDcpsS$(OBJEXT): ccpp/generated/dds_namedQosTypesDcpsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesDcpsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsC$(OBJEXT): ccpp/generated/dds_builtinTopicsDcpsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsDcpsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_builtinTopicsDcpsS$(OBJEXT): ccpp/generated/dds_builtinTopicsDcpsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_builtinTopicsDcpsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_interfacesC$(OBJEXT): ccpp/generated/dds_dcps_interfacesC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_interfacesC.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_interfacesS$(OBJEXT): ccpp/generated/dds_dcps_interfacesS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_interfacesS.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsC$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsDcpsC.cpp
+
+./obj/ccpp/ccpp/generated/dds_dcps_builtintopicsDcpsS$(OBJEXT): ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_dcps_builtintopicsDcpsS.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesC$(OBJEXT): ccpp/generated/dds_namedQosTypesC.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesC.cpp
+
+./obj/ccpp/ccpp/generated/dds_namedQosTypesS$(OBJEXT): ccpp/generated/dds_namedQosTypesS.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp/generated" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp/generated"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/generated/dds_namedQosTypesS.cpp
+
+./obj/ccpp/ccpp/ccpp_Condition_impl$(OBJEXT): ccpp/ccpp_Condition_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Condition_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_ContentFilteredTopic_impl$(OBJEXT): ccpp/ccpp_ContentFilteredTopic_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_ContentFilteredTopic_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_DataReader_impl$(OBJEXT): ccpp/ccpp_DataReader_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_DataReader_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_DataReaderView_impl$(OBJEXT): ccpp/ccpp_DataReaderView_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_DataReaderView_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_DataWriter_impl$(OBJEXT): ccpp/ccpp_DataWriter_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_DataWriter_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_Domain_impl$(OBJEXT): ccpp/ccpp_Domain_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Domain_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_DomainParticipant_impl$(OBJEXT): ccpp/ccpp_DomainParticipant_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_DomainParticipant_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_DomainParticipantFactory$(OBJEXT): ccpp/ccpp_DomainParticipantFactory.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_DomainParticipantFactory.cpp
+
+./obj/ccpp/ccpp/ccpp_Entity_impl$(OBJEXT): ccpp/ccpp_Entity_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Entity_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_ErrorInfo$(OBJEXT): ccpp/ccpp_ErrorInfo.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_ErrorInfo.cpp
+
+./obj/ccpp/ccpp/ccpp_GuardCondition$(OBJEXT): ccpp/ccpp_GuardCondition.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_GuardCondition.cpp
+
+./obj/ccpp/ccpp/ccpp_ListenerUtils$(OBJEXT): ccpp/ccpp_ListenerUtils.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_ListenerUtils.cpp
+
+./obj/ccpp/ccpp/ccpp_MultiTopic_impl$(OBJEXT): ccpp/ccpp_MultiTopic_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_MultiTopic_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_Publisher_impl$(OBJEXT): ccpp/ccpp_Publisher_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Publisher_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_QosProvider$(OBJEXT): ccpp/ccpp_QosProvider.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_QosProvider.cpp
+
+./obj/ccpp/ccpp/ccpp_QosUtils$(OBJEXT): ccpp/ccpp_QosUtils.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_QosUtils.cpp
+
+./obj/ccpp/ccpp/ccpp_QueryCondition_impl$(OBJEXT): ccpp/ccpp_QueryCondition_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_QueryCondition_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_ReadCondition_impl$(OBJEXT): ccpp/ccpp_ReadCondition_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_ReadCondition_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_StatusCondition_impl$(OBJEXT): ccpp/ccpp_StatusCondition_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_StatusCondition_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_Subscriber_impl$(OBJEXT): ccpp/ccpp_Subscriber_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Subscriber_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_Topic_impl$(OBJEXT): ccpp/ccpp_Topic_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Topic_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_TopicDescription_impl$(OBJEXT): ccpp/ccpp_TopicDescription_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_TopicDescription_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_TypeSupport_impl$(OBJEXT): ccpp/ccpp_TypeSupport_impl.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_TypeSupport_impl.cpp
+
+./obj/ccpp/ccpp/ccpp_Utils$(OBJEXT): ccpp/ccpp_Utils.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_Utils.cpp
+
+./obj/ccpp/ccpp/ccpp_WaitSet$(OBJEXT): ccpp/ccpp_WaitSet.cpp
+	@$(TESTDIRSTART) "./obj/ccpp/ccpp" $(TESTDIREND) $(MKDIR) "./obj/ccpp/ccpp"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) ccpp/ccpp_WaitSet.cpp
+
+clean:
+	-$(RM) $(OBJS)
+
+realclean: clean
+	-$(RM) $(SHLIB) $(LIB)
+	-$(RM) $(GENERATED_DIRTY)
+	-$(RM) ./obj/ccpp/
+
+check-syntax:
+	$(COMPILE.cc) $(EXPORTFLAGS) $(CHK_SOURCES)
+
+__prebuild__:
+	@rm -rf  "../include/dcps/C++/CCPP/DDS_OpenFusion_2/ccpp_*" ; rm -rf  "../include/dcps/C++/CCPP/DDS_OpenFusion_2/dds_*"
+
+__postbuild__:
+	@cp -f  ./ccpp/generated/*.h "../include/dcps/C++/CCPP/DDS_OpenFusion_2" ; cp -f  ./ccpp/generated/*.inl "../include/dcps/C++/CCPP/DDS_OpenFusion_2"
+
