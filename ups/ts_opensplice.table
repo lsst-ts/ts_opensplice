@@ -1,0 +1,2 @@
+envSet(OSPL_HOME, ${PRODUCT_DIR}/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux)
+
