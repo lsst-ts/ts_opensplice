@@ -7,6 +7,20 @@ should be installed in the same directory as the SAL release.
 OpenSpliceDDS directory contains the HDE for versions 6.4.1 and 6.7
 V6.4.1 is the preferred default.
 
-opensplice_x.y.z directory contains a maven project build of the Java interface
+
+An environment variable, OSPL_HOME, must point to the subdirectory:
+ ./OpenSpliceDDS/V6.4.1/HDE/x86_64.linux 
+If this package is set up with eups, this environment variable is automatically set.
+
+Note that there are firewall rules that must be modified to use DDS/Opensplice. 
+These changes to the firewall should only need to occur once, and thus are not part of
+the eups installation or setup. 
+
+Please see $TS_SAL_DIR/SAL_User_Guide.pdf for instructions on the firewall setup (section 1 and most of section 2). 
+If you wish to support running more than one simulation at a time, the port range specified in the manual needs 
+to be extended to accommodate this. The lowest port number is always 7400. To figure out the highest port number necessary, 
+use this formula:
+
+```7413 + (14 * (Njobs - 1))```
 
 
