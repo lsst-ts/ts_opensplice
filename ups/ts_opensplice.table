@@ -1,3 +1,14 @@
-envSet(OSPL_HOME, ${PRODUCT_DIR}/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux)
+envSet(OSPL_HOME, "${PRODUCT_DIR}/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux")
+envSet(OSPL_URI, "file://${OSPL_HOME}/config/ospl.xml")
+envSet(OSPL_TMPL_PATH, ${OSPL_HOME}/etc/idlpp)
 
+envSet(SPLICE_ORB, DDS_OpenFusion_2)
+envSet(SPLICE_JDK, jdk)
+envSet(SPLICE_JAVA, java)
+envSet(SPLICE_JAVAC, javac)
 
+envPrepend(PATH, ${OSPL_HOME}/bin)
+envPrepend(LD_LIBRARY_PATH, ${OSPL_HOME}/lib)
+envPrepend(CPATH, ${OSPL_HOME}/include:${OSPL_HOME}/include/sys:)
+
+print("<<< OpenSplice HDE Release V6.4.140320OSS For x86_64.linux, Date 2014-03-19 >>>")
