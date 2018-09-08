@@ -1,5 +1,5 @@
 envSet(OSPL_HOME, "${PRODUCT_DIR}/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux")
-envSet(OSPL_URI, "file://${OSPL_HOME}/config/ospl.xml")
+envSet(OSPL_URI, "file://${OSPL_HOME}/etc/config/ospl.xml")
 envSet(OSPL_TMPL_PATH, ${OSPL_HOME}/etc/idlpp)
 
 envSet(SPLICE_ORB, DDS_OpenFusion_2)
