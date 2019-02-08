@@ -1,0 +1,42 @@
+Summary: OpenSplice DDS Community Edition
+Name: OpenSpliceDDS
+Version: ${OPENSPLICE_VERSION}
+Release: ${OPENSPLICE_RELEASE}
+License: GPL
+Group: Development/System
+URL: https://github.com/lsst-ts/ts_opensplice
+Source0: OpenSpliceDDS-v${OPENSPLICE_VERSION}.tar.gz
+Patch0: lsst.patch
+
+%description
+OpenSplice DDS Community Edition.
+
+%prep
+%setup -n OpenSpliceDDS-${OPENSPLICE_VERSION}
+%patch0 -p1
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/opt/OpenSpliceDDS
+cp -r %{_builddir}/OpenSpliceDDS-${OPENSPLICE_VERSION}/OpenSpliceDDS/V${OPENSPLICE_VERSION}/HDE %{buildroot}/opt/OpenSpliceDDS/HDE
+# problematic unused library
+rm -f %{buildroot}/opt/OpenSpliceDDS/HDE/x86_64.linux/lib/libdcpsccpp.so
+# problematic unused executable
+rm -f %{buildroot}/opt/OpenSpliceDDS/HDE/x86_64.linux/bin/demo_ishapes
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(0644,root,root,0755)
+/opt/OpenSpliceDDS/HDE/x86_64.linux/LICENSE
+/opt/OpenSpliceDDS/HDE/x86_64.linux/custom_lib/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/docs/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/etc/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/include/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/index.html
+/opt/OpenSpliceDDS/HDE/x86_64.linux/jar/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/lib/*
+/opt/OpenSpliceDDS/HDE/x86_64.linux/release.com
+%defattr(0755,root,root,0755)
+/opt/OpenSpliceDDS/HDE/x86_64.linux/bin/*
