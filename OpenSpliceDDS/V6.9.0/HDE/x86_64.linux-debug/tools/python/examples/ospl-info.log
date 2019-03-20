@@ -1,0 +1,80 @@
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:07:40-0700
+Description : Removed 1228 objects
+Node        : localhost.localdomain
+Process     : python3.4 <1208269>
+Thread      : main thread 7f8446dc8740
+Internals   : 6.9.190227OSS///Database close/c_base.c/3272/0/1552687660.548781378/-1
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:30-0700
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 0 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 2100388193 from [1,2147483647]
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : spliced 7fbfc273e700
+Internals   : 6.9.190227OSS///The OpenSplice domain service/u_domain.c/785/0/1552687770.336084899/0
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:30-0700
+Description : Service cmsoap disabled
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : spliced 7fbfc273e700
+Internals   : 6.9.190227OSS///OpenSplice domain service/sr_componentInfo.c/446/0/1552687770.336752881/0
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:30-0700
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : spliced 7fbfc273e700
+Internals   : 6.9.190227OSS///v_serviceChangeState/v_service.c/266/0/1552687770.337672059/0
+========================================================================================
+Report      : WARNING
+Date        : 2019-03-15T15:09:30-0700
+Description : using network interface enp14s0 (192.168.0.60) selected arbitrarily from: enp14s0, virbr0, cscotun0
+
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : ddsi2 7fbf8bc52700
+Internals   : 6.9.190227OSS///ddsi2/q_nwif.c/989/0/1552687770.344253344/0
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:30-0700
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : ddsi2 7fbf8bc52700
+Internals   : 6.9.190227OSS///v_serviceChangeState/v_service.c/266/0/1552687770.356141422/0
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:30-0700
+Description : The durability service can be identified by ID: 2100388193
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : durability 7fbf8bd53700
+Internals   : 6.9.190227OSS///DurabilityService/d_durability.c/554/0/1552687770.665871781/0
+========================================================================================
+Report      : INFO
+Date        : 2019-03-15T15:09:32-0700
+Description : Removed 1228 objects
+Node        : localhost.localdomain
+Process     : python3.4 <1208388>
+Thread      : main thread 7fbfc270d740
+Internals   : 6.9.190227OSS///Database close/c_base.c/3272/0/1552687772.399340499/0

@@ -1,0 +1,25 @@
+========================================================================================
+Context     : dds_participant_create
+Date        : 2019-03-15T15:07:40-0700
+Node        : localhost.localdomain
+Process     : python3.4 <1208269>
+Thread      : main thread 7f8446dc8740
+Internals   : dds_domainParticipant.c/426/6.9.190227OSS///-1
+----------------------------------------------------------------------------------------
+Report      : Bad parameter: Claim of object of type DDS_DOMAINPARTICIPANT pointed to by 0x0 failed
+Internals   : /mnt/h/home/rfactory/opensplice-master/src/api/dcps/sac/code/sac_object.c/DDS_Object_claim/174/3/1552687660.541308774
+----------------------------------------------------------------------------------------
+Report      : Bad parameter: Object (0x0) is not a valid DDS_DOMAINPARTICIPANT pointer
+Internals   : /mnt/h/home/rfactory/opensplice-master/src/api/dcps/sac/code/sac_object.c/DDS_Object_check/71/3/1552687660.541318657
+----------------------------------------------------------------------------------------
+Report      : Unable to connect to domain id = <ANY>.
+              The most common causes of this error are an incorrect configuration file or
+              that OpenSpliceDDS is not running (when using shared memory mode).
+Internals   : u_participantNew/u_participant.c/234/773/1552687660.541325578
+----------------------------------------------------------------------------------------
+Report      : Attach to shared memory segment failed
+Internals   : user::u_domain::attachToFederatedDomain/u_domain.c/1349/769/1552687660.541332877
+----------------------------------------------------------------------------------------
+Report      : Cannot connect to domainId (0) and domainName (The default Domain).
+              Please make sure to start OpenSplice before creating a DomainParticipant.
+Internals   : user::u_domain::attachSharedMemory/u_domain.c/1317/773/1552687660.541339576
