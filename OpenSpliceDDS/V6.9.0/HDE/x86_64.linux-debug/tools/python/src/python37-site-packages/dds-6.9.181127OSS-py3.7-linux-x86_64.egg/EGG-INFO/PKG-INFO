@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: dds
+Version: 6.9.181127OSS
+Summary: A python implementation of the OMG DDS Data-Centric Publish-Subscribe (DCPS) API, for use with Vortex OpenSplice DDS middleware.
+Home-page: http://vortex.adlinktech.com
+Author: ADLINK Technology
+Author-email: ist_support@adlinktech.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

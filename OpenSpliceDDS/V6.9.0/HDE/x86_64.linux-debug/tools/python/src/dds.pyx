@@ -1,7 +1,7 @@
 #
 #                         Vortex OpenSplice
 #
-#   This software and documentation are Copyright 2006 to  ADLINK
+#   This software and documentation are Copyright 2006 to 2020 ADLINK
 #   Technology Limited, its affiliated companies and licensors. All rights
 #   reserved.
 #
@@ -25,15 +25,66 @@ cimport dds
 from enum import Enum
 from libc.stdlib cimport malloc, free
 from libc.string cimport memset
-from libc.stdint cimport intptr_t
+from libc.stdint cimport intptr_t, int32_t, int8_t
+# make C99 bool available. See: https://github.com/cython/cython/wiki/FAQ#how-do-i-declare-an-object-of-type-bool
+from libcpp cimport bool
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from collections import namedtuple
 import inspect
 import time
+import threading
 
 # Required to have listener's successfully call back into Python
 PyEval_InitThreads()
 
+DDS_STRING_ENCODING = 'ISO-8859-1'
+
+'''
+This variable holds the cleanup list
+and cleanup count
+'''
+localThreadCleanup = threading.local()
+
+def localThreadCleanupInitialized():
+    return getattr(localThreadCleanup, 'initialized', None) is not None
+
+def localThreadDepth():
+    if not localThreadCleanupInitialized():
+        return 0
+    return localThreadCleanup.count
+
+def localThreadCleanupList():
+    if not localThreadCleanupInitialized():
+        return None
+    return localThreadCleanup.list
+
+class CleanupContext:
+    def __init__(self):
+        pass
+    
+    def __enter__(self):
+        # if vars are not initialized, then set them
+        if not localThreadCleanupInitialized():
+            localThreadCleanup.count = 0
+            localThreadCleanup.list = None
+            localThreadCleanup.initialized = True
+        
+        if localThreadCleanup.count == 0:
+            localThreadCleanup.list = []
+        localThreadCleanup.count += 1
+
+    def __exit__(self, t, val, tb):
+        localThreadCleanup.count -= 1
+        if localThreadCleanup.count == 0:
+            localThreadCleanup.list = None
+
+    @staticmethod
+    def add(bytepointer):
+        if not localThreadCleanupInitialized():
+            raise Exception('No CleanupContext is active')
+        if localThreadCleanup.list is None:
+            raise Exception('No CleanupContext is active')
+        localThreadCleanup.list.append(bytepointer)
 
 #############################################################################
 ### Special notes on GIL retention when calling C99 APIs
@@ -219,7 +270,7 @@ class DDSSampleRejectedStatusKind(Enum):
     REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT = 3
 
 # Basic Qos Policy class
-class QosPolicy():
+class QosPolicy:
     '''
     Abstract QoS policy class.
     Users should not instantiate this class.
@@ -245,6 +296,20 @@ class QosPolicy():
         '''
         return self._kind
 
+    def __eq__(self, other):
+        '''
+        We overload the equality operator on the QosPolicy class.
+        [https://docs.python.org/3/reference/datamodel.html, §3.3.1.]
+
+        The __dict__ attribute of a Python class is a dictionary containing all the attributes
+        of the class. Two dictionaries are equal if they have equal (key,value) pairs
+        [https://docs.python.org/3/reference/expressions.html, §6.10.1].
+        '''
+
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        return False
+
 class DurabilityQosPolicy(QosPolicy):
     '''
     Durability QoS Policy
@@ -258,6 +323,15 @@ class DurabilityQosPolicy(QosPolicy):
         '''
         QosPolicy.__init__(self, QosPolicyId.DURABILITY_QOS_POLICY_ID)
         self._kind = kind
+    
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_durability_kind_t kind
+        dds.dds_qget_durability(q.handle(), &kind)
+        return DurabilityQosPolicy(DDSDurabilityKind(kind))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_durability(q.handle(), self.kind.value) 
 
 
 class HistoryQosPolicy(QosPolicy):
@@ -280,6 +354,17 @@ class HistoryQosPolicy(QosPolicy):
     @property
     def depth(self):
         return self._depth
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_history_kind kind
+        cdef int32_t depth
+        dds.dds_qget_history(q.handle(), &kind, &depth)
+        return HistoryQosPolicy(DDSHistoryKind(kind), depth)
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_history(q.handle(), self.kind.value, self.depth)
+    
 
 class ResourceLimitsQosPolicy(QosPolicy):
     '''
@@ -312,6 +397,25 @@ class ResourceLimitsQosPolicy(QosPolicy):
     def max_samples_per_instance(self):
         return self._max_samples_per_instance
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef int32_t max_samples
+        cdef int32_t max_instances
+        cdef int32_t max_samples_per_instance
+
+        dds.dds_qget_resource_limits(q.handle(),
+            &max_samples,
+            &max_instances,
+            &max_samples_per_instance)
+
+        return ResourceLimitsQosPolicy(max_samples, max_instances,
+            max_samples_per_instance)
+    
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_resource_limits(q.handle(), self.max_samples,
+                                         self.max_instances, self.max_samples_per_instance)
+    
+
 class PresentationQosPolicy(QosPolicy):
     '''
     Presentation QoS Policy
@@ -341,6 +445,26 @@ class PresentationQosPolicy(QosPolicy):
     def ordered_access(self):
         return self._ordered_access
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds_presentation_access_scope_kind access_scope
+        cdef bool coherent_access
+        cdef bool ordered_access
+
+        dds.dds_qget_presentation(q.handle(), &access_scope,
+            &coherent_access,
+            &ordered_access)
+
+        return PresentationQosPolicy(DDSPresentationAccessScopeKind(access_scope),
+            coherent_access,
+            ordered_access)
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_presentation(q.handle(), self.kind.value,
+                                    int(self.coherent_access), int(self.ordered_access))
+
+    
+
 class LifespanQosPolicy(QosPolicy):
     '''
     Lifespan QoS Policy
@@ -356,6 +480,17 @@ class LifespanQosPolicy(QosPolicy):
     @property
     def lifespan(self):
         return self._lifespan
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t value
+        dds.dds_qget_lifespan(q.handle(), &value)
+        return LifespanQosPolicy(DDSDuration(0,value))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_lifespan(q.handle(), self.lifespan)
+
+
 
 class DeadlineQosPolicy(QosPolicy):
     '''
@@ -373,6 +508,15 @@ class DeadlineQosPolicy(QosPolicy):
     def deadline(self):
         return self._deadline
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t deadline
+        dds.dds_qget_deadline(q.handle(), &deadline)
+        return DeadlineQosPolicy(DDSDuration(0,deadline))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_deadline(q.handle(), self.deadline)
+
 class LatencyBudgetQosPolicy(QosPolicy):
     '''
     Latency budget QoS Policy
@@ -389,6 +533,15 @@ class LatencyBudgetQosPolicy(QosPolicy):
     def duration(self):
         return self._duration
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t value
+        dds.dds_qget_latency_budget(q.handle(), &value)
+        return LatencyBudgetQosPolicy(DDSDuration(0,value))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_latency_budget(q.handle(), self.duration)
+
 class OwnershipQosPolicy(QosPolicy):
     '''
     Ownership QoS Policy
@@ -400,6 +553,15 @@ class OwnershipQosPolicy(QosPolicy):
     def __init__(self, kind=DDSOwnershipKind.SHARED):
         QosPolicy.__init__(self, QosPolicyId.OWNERSHIP_QOS_POLICY_ID)
         self._kind = kind
+    
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_ownership_kind kind
+        dds.dds_qget_ownership(q.handle(), &kind)
+        return OwnershipQosPolicy(DDSOwnershipKind(kind))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_ownership(q.handle(), self.kind.value)
 
 class OwnershipStrengthQosPolicy(QosPolicy):
     '''
@@ -416,6 +578,15 @@ class OwnershipStrengthQosPolicy(QosPolicy):
     @property
     def value(self):
         return self._value
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef int32_t value
+        dds.dds_qget_ownership_strength(q.handle(), &value)
+        return OwnershipStrengthQosPolicy(value)
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_ownership_strength(q.handle(), self.value)
 
 
 class LivelinessQosPolicy(QosPolicy):
@@ -437,6 +608,16 @@ class LivelinessQosPolicy(QosPolicy):
     def lease_duration(self):
         return self._lease
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds_liveliness_kind kind
+        cdef dds_duration_t lease_duration
+        dds.dds_qget_liveliness(q.handle(), &kind, &lease_duration)
+        return LivelinessQosPolicy(DDSLivelinessKind(kind), DDSDuration(0, lease_duration))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_liveliness(q.handle(), self.kind.value, self.lease_duration)
+
 class TimeBasedFilterQosPolicy(QosPolicy):
     '''
     Time based filter QoS Policy
@@ -453,6 +634,15 @@ class TimeBasedFilterQosPolicy(QosPolicy):
     def minimum_separation(self):
         return self._minimum_separation
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t value
+        dds.dds_qget_time_based_filter(q.handle(), &value)
+        return TimeBasedFilterQosPolicy(DDSDuration(0, value))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_time_based_filter(q.handle(), self.minimum_separation)
+
 class PartitionQosPolicy(QosPolicy):
     '''
     Partition QoS Policy
@@ -468,6 +658,37 @@ class PartitionQosPolicy(QosPolicy):
     @property
     def ps(self):
         return self._names
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef uint32_t num_pars
+        cdef char **par_list
+        python_par_list = []
+
+        dds.dds_qget_partition(q.handle(), &num_pars, &par_list)
+
+        if num_pars == 0:
+            python_par_list = []
+        else:
+            for i in range(0, num_pars):
+                python_par_list.append(par_list[i].decode(DDS_STRING_ENCODING))
+        
+        return PartitionQosPolicy(python_par_list)
+    
+    def set_onto_cqos(self, Qos q):
+        cdef char **_c_partitions = NULL
+        partitions = self.ps
+        numpar = len(partitions)
+
+        if numpar > 0:
+            _c_partitions = <char **>PyMem_Malloc(numpar * sizeof(char *))
+            if _c_partitions is NULL:
+                raise DDSException()
+            for i in range(numpar):
+                s = partitions[i].encode()
+                _c_partitions[i] = s
+        dds.dds_qset_partition(q.handle(), numpar, <const char **>_c_partitions) #gil_ok
+        PyMem_Free(_c_partitions)
 
 class ReliabilityQosPolicy(QosPolicy):
     '''
@@ -488,6 +709,16 @@ class ReliabilityQosPolicy(QosPolicy):
     def max_blocking_time(self):
         return self._max_blocking_time
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_reliability_kind kind
+        cdef dds.dds_duration_t max_blocking_time
+        dds.dds_qget_reliability(q.handle(), &kind, &max_blocking_time)
+        return ReliabilityQosPolicy(DDSReliabilityKind(kind), DDSDuration(0, max_blocking_time))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_reliability(q.handle(), self.kind.value, self.max_blocking_time)
+
 class TransportPriorityQosPolicy(QosPolicy):
     '''
     Transport priority QoS Policy
@@ -504,6 +735,15 @@ class TransportPriorityQosPolicy(QosPolicy):
     def value(self):
         return self._value
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef int32_t value
+        dds.dds_qget_transport_priority(q.handle(), &value)
+        return TransportPriorityQosPolicy(value)
+    
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_transport_priority(q.handle(), self.value)
+
 class DestinationOrderQosPolicy(QosPolicy):
     '''
     Destination order QoS Policy
@@ -516,6 +756,15 @@ class DestinationOrderQosPolicy(QosPolicy):
         QosPolicy.__init__(self, QosPolicyId.DESTINATIONORDER_QOS_POLICY_ID)
         self._kind = kind
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_destination_order_kind kind
+        dds.dds_qget_destination_order(q.handle(), &kind);
+        return DestinationOrderQosPolicy(DDSDestinationOrderKind(kind))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_destination_order(q.handle(), self.kind.value)
+    
 class WriterDataLifecycleQosPolicy(QosPolicy):
     '''
     Writer data lifecycle QoS Policy
@@ -531,6 +780,17 @@ class WriterDataLifecycleQosPolicy(QosPolicy):
     @property
     def autodispose_unregistered_instances(self):
         return self._autodispose_unregistered_instances
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef bool autodispose_unregistered_instances = False
+        dds.dds_qget_writer_data_lifecycle(q.handle(),
+            &autodispose_unregistered_instances)
+        return WriterDataLifecycleQosPolicy(autodispose_unregistered_instances)
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_writer_data_lifecycle(q.handle(),
+                                        int(self.autodispose_unregistered_instances))
 
 class ReaderDataLifecycleQosPolicy(QosPolicy):
     '''
@@ -554,6 +814,21 @@ class ReaderDataLifecycleQosPolicy(QosPolicy):
     @property
     def autopurge_disposed_samples_delay(self):
         return self._autopurge_disposed_samples_delay
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t autopurge_nowriter_samples
+        cdef dds.dds_duration_t autopurge_disposed_samples_delay
+        dds.dds_qget_reader_data_lifecycle(q.handle(),
+            &autopurge_nowriter_samples,
+            &autopurge_disposed_samples_delay)
+        return ReaderDataLifecycleQosPolicy(DDSDuration(0,autopurge_nowriter_samples),
+            DDSDuration(0,autopurge_disposed_samples_delay))
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_reader_data_lifecycle(q.handle(),
+                                        self.autopurge_nowriter_samples,
+                                        self.autopurge_disposed_samples_delay)
 
 class DurabilityServiceQosPolicy(QosPolicy):
     '''
@@ -614,6 +889,37 @@ class DurabilityServiceQosPolicy(QosPolicy):
     def max_samples_per_instance(self):
         return self._max_samples_per_instance
 
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef dds.dds_duration_t service_cleanup_delay
+        cdef dds.dds_history_kind history_kind
+        cdef int32_t history_depth
+        cdef int32_t max_samples
+        cdef int32_t max_instances
+        cdef int32_t max_samples_per_instance
+
+        dds.dds_qget_durability_service (q.handle(),
+            &service_cleanup_delay,
+            &history_kind,
+            &history_depth,
+            &max_samples,
+            &max_instances,
+            &max_samples_per_instance)
+        
+        return DurabilityServiceQosPolicy(DDSDuration(0, service_cleanup_delay),
+            DDSHistoryKind(history_kind),
+            history_depth,
+            max_samples,
+            max_instances,
+            max_samples_per_instance)
+
+    def set_onto_cqos(self, Qos q):
+        dds.dds_qset_durability_service(q.handle(), self.service_cleanup_delay,
+                                        self.history_kind.value, self.history_depth,
+                                        self.max_samples, self.max_instances,
+                                        self.max_samples_per_instance)
+
+
 class UserdataQosPolicy(QosPolicy):
     '''
     Userdata QoS Policy
@@ -629,8 +935,31 @@ class UserdataQosPolicy(QosPolicy):
     @property
     def value(self):
         return self._value
+    
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef char *value
+        cdef size_t sz
 
-class TopicdataQosPolicy(UserdataQosPolicy):
+        dds.dds_qget_userdata(q.handle(), <void **>&value, &sz)
+
+        if sz == 0:
+            value = ''
+
+        return UserdataQosPolicy(value.decode(DDS_STRING_ENCODING))
+
+    def set_onto_cqos(self, Qos q):
+        bytes_value = None
+        if isinstance(self.value, str):
+            bytes_value = self.value.encode(DDS_STRING_ENCODING)
+        elif isinstance(self.value, bytes):
+            bytes_value = self.value
+        if bytes_value is not None:
+            _c_xxxdata_value = <char *>bytes_value
+            _c_xxxdata_length = len(bytes_value)
+            dds.dds_qset_userdata(q.handle(), <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
+
+class TopicdataQosPolicy(QosPolicy):
     '''
     Topic data QoS Policy
 
@@ -642,7 +971,34 @@ class TopicdataQosPolicy(UserdataQosPolicy):
         QosPolicy.__init__(self, QosPolicyId.TOPICDATA_QOS_POLICY_ID)
         self._value = value
 
-class GroupdataQosPolicy(UserdataQosPolicy):
+    @property
+    def value(self):
+        return self._value
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef char *value
+        cdef size_t sz
+
+        dds.dds_qget_topicdata(q.handle(), <void **>&value, &sz)
+
+        if sz == 0:
+            value = ''
+
+        return TopicdataQosPolicy(value.decode(DDS_STRING_ENCODING))
+
+    def set_onto_cqos(self, Qos q):
+        bytes_value = None
+        if isinstance(self.value, str):
+            bytes_value = self.value.encode(DDS_STRING_ENCODING)
+        elif isinstance(self.value, bytes):
+            bytes_value = self.value
+        if bytes_value is not None:
+            _c_xxxdata_value = <char *>bytes_value
+            _c_xxxdata_length = len(bytes_value)
+            dds.dds_qset_topicdata(q.handle(), <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
+
+class GroupdataQosPolicy(QosPolicy):
     '''
     Group data QoS Policy
 
@@ -654,8 +1010,35 @@ class GroupdataQosPolicy(UserdataQosPolicy):
         QosPolicy.__init__(self, QosPolicyId.GROUPDATA_QOS_POLICY_ID)
         self._value = value
 
+    @property
+    def value(self):
+        return self._value
+
+    @staticmethod
+    def get_from_cqos(Qos q):
+        cdef char *value
+        cdef size_t sz
+
+        dds.dds_qget_groupdata(q.handle(), <void **>&value, &sz)
+
+        if sz == 0:
+            value = ''
+
+        return GroupdataQosPolicy(value.decode(DDS_STRING_ENCODING))
+
+    def set_onto_cqos(self, Qos q):
+        bytes_value = None
+        if isinstance(self.value, str):
+            bytes_value = self.value.encode(DDS_STRING_ENCODING)
+        elif isinstance(self.value, bytes):
+            bytes_value = self.value
+        if bytes_value is not None:
+            _c_xxxdata_value = <char *>bytes_value
+            _c_xxxdata_length = len(bytes_value)
+            dds.dds_qset_groupdata(q.handle(), <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
+
 # The QoS wrapper.
-cdef class Qos:
+cdef class Qos: 
     '''
     QoS class
 
@@ -670,125 +1053,203 @@ cdef class Qos:
         self._c_qos = dds.dds_qos_create() #gil_ok
         self._policies = {}
         for p in policies:
-            self._policies[p.id] = p
-        self._apply_all()
-
-    def __dealloc__(self):
-        if self._c_qos is not NULL:
-            dds.dds_qos_delete(self._c_qos) #gil_ok
+            p.set_onto_cqos(self)
 
     def set_policies(self, policies):
-        '''set_policies(policies)
+        ''' set_policies(policies)
         Set policies
         :type policies: list
         :param policies: list of QoS policies
         '''
         for p in policies:
             self._policies[p.id] = p
-            self._apply_policy(p)
+            p.set_onto_cqos(self)
 
-    cdef _apply_all(self):
-        for key, p in self._policies.items():
-            self._apply_policy(p)
+    def __dealloc__(self):
+        if self._c_qos is not NULL:
+            dds.dds_qos_delete(self._c_qos) #gil_ok
 
-    cdef _apply_policy(self, policy):
-
-        cdef char **_c_partitions = NULL;
-        cdef char *_c_xxxdata_value = NULL
-        cdef size_t _c_xxxdata_length = 0;
-
-        if policy.id == QosPolicyId.PARTITION_QOS_POLICY_ID:
-            partitions = policy.ps
-            numpar = len(partitions)
-
-            if numpar > 0:
-                _c_partitions = <char **>PyMem_Malloc(numpar * sizeof(char *))
-                if _c_partitions is NULL:
-                    raise DDSException()
-                for i in range(numpar):
-                    s = partitions[i].encode()
-                    _c_partitions[i] = s
-            dds.dds_qset_partition(self._c_qos, numpar, <const char **>_c_partitions) #gil_ok
-            PyMem_Free(_c_partitions)
-
-        elif policy.id == QosPolicyId.USERDATA_QOS_POLICY_ID \
-                or policy.id == QosPolicyId.TOPICDATA_QOS_POLICY_ID \
-                or policy.id == QosPolicyId.GROUPDATA_QOS_POLICY_ID :
-            bytes_value = None
-            if isinstance(policy.value, str):
-                bytes_value = policy.value.encode('ISO-8859-1')
-            elif isinstance(policy.value, bytes):
-                bytes_value = policy.value
-            if bytes_value is not None:
-                _c_xxxdata_value = <char *>bytes_value
-                _c_xxxdata_length = len(bytes_value)
-                if policy.id == QosPolicyId.USERDATA_QOS_POLICY_ID:
-                    dds.dds_qset_userdata(self._c_qos, <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
-                elif policy.id == QosPolicyId.TOPICDATA_QOS_POLICY_ID:
-                    dds.dds_qset_topicdata(self._c_qos, <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
-                elif policy.id == QosPolicyId.GROUPDATA_QOS_POLICY_ID:
-                    dds.dds_qset_groupdata(self._c_qos, <const void *> _c_xxxdata_value, _c_xxxdata_length) #gil_ok
-
-        elif policy.id == QosPolicyId.DURABILITY_QOS_POLICY_ID:
-            dds.dds_qset_durability(self._c_qos, policy.kind.value) #gil_ok
-
-        elif policy.id == QosPolicyId.HISTORY_QOS_POLICY_ID:
-            dds.dds_qset_history(self._c_qos, policy.kind.value, policy.depth) #gil_ok
-
-        elif policy.id == QosPolicyId.RESOURCELIMITS_QOS_POLICY_ID:
-            dds.dds_qset_resource_limits(self._c_qos, policy.max_samples,
-                                         policy.max_instances, policy.max_samples_per_instance) #gil_ok
-
-        elif policy.id == QosPolicyId.PRESENTATION_QOS_POLICY_ID:
-            dds.dds_qset_presentation(self._c_qos, policy.kind.value,
-                                      int(policy.coherent_access), int(policy.ordered_access)) #gil_ok
-
-        elif policy.id == QosPolicyId.LIFESPAN_QOS_POLICY_ID:
-            dds.dds_qset_lifespan(self._c_qos, policy.lifespan) #gil_ok
-
-        elif policy.id == QosPolicyId.DEADLINE_QOS_POLICY_ID:
-            dds.dds_qset_deadline(self._c_qos, policy.deadline) #gil_ok
-
-        elif policy.id == QosPolicyId.LATENCYBUDGET_QOS_POLICY_ID:
-            dds.dds_qset_latency_budget(self._c_qos, policy.duration) #gil_ok
-
-        elif policy.id == QosPolicyId.OWNERSHIP_QOS_POLICY_ID:
-            dds.dds_qset_ownership(self._c_qos, policy.kind.value) #gil_ok
-
-        elif policy.id == QosPolicyId.OWNERSHIPSTRENGTH_QOS_POLICY_ID:
-            dds.dds_qset_ownership_strength(self._c_qos, policy.value) #gil_ok
-
-        elif policy.id == QosPolicyId.LIVELINESS_QOS_POLICY_ID:
-            dds.dds_qset_liveliness(self._c_qos, policy.kind.value, policy.lease_duration) #gil_ok
-
-        elif policy.id == QosPolicyId.TIMEBASEDFILTER_QOS_POLICY_ID:
-            dds.dds_qset_time_based_filter(self._c_qos, policy.minimum_separation) #gil_ok
-
-        elif policy.id == QosPolicyId.RELIABILITY_QOS_POLICY_ID:
-            dds.dds_qset_reliability(self._c_qos, policy.kind.value, policy.max_blocking_time) #gil_ok
-
-        elif policy.id == QosPolicyId.TRANSPORTPRIORITY_QOS_POLICY_ID:
-            dds.dds_qset_transport_priority(self._c_qos, policy.value) #gil_ok
-
-        elif policy.id == QosPolicyId.DESTINATIONORDER_QOS_POLICY_ID:
-            dds.dds_qset_destination_order(self._c_qos, policy.kind.value) #gil_ok
-
-        elif policy.id == QosPolicyId.WRITERDATALIFECYCLE_QOS_POLICY_ID:
-            dds.dds_qset_writer_data_lifecycle(self._c_qos,
-                                               int(policy.autodispose_unregistered_instances)) #gil_ok
-
-        elif policy.id == QosPolicyId.READERDATALIFECYCLE_QOS_POLICY_ID:
-            dds.dds_qset_reader_data_lifecycle(self._c_qos,
-                                               policy.autopurge_nowriter_samples,
-                                               policy.autopurge_disposed_samples_delay) #gil_ok
-        elif policy.id == QosPolicyId.DURABILITYSERVICE_QOS_POLICY_ID:
-            dds.dds_qset_durability_service(self._c_qos, policy.service_cleanup_delay,
-                                            policy.history_kind.value, policy.history_depth,
-                                            policy.max_samples, policy.max_instances,
-                                            policy.max_samples_per_instance) #gil_ok
+    @staticmethod
+    cdef Qos from_ptr(dds.dds_qos_t *cqos):
+        qos = Qos()
+        dds.dds_free(qos._c_qos)
+        qos._c_qos = cqos
+        qos._policies = {}
+        return qos
 
     cdef dds.dds_qos_t * handle(self):
         return self._c_qos
+
+    '''
+    Qos policy getters and setters
+    '''
+    @property
+    def userdata(self):
+        return UserdataQosPolicy.get_from_cqos(self)
+    
+    @userdata.setter
+    def userdata(self, user_data):
+        user_data.set_onto_cqos(self)
+
+    @property
+    def topicdata(self):
+        return TopicdataQosPolicy.get_from_cqos(self)
+    
+    @topicdata.setter
+    def topicdata(self, topic_data):
+        topic_data.set_onto_cqos(self)
+
+    @property
+    def groupdata(self):
+        return GroupdataQosPolicy.get_from_cqos(self)
+
+    @groupdata.setter
+    def groupdata(self, group_data):
+        group_data.set_onto_cqos(self)
+
+    @property
+    def durability(self):
+        return DurabilityQosPolicy.get_from_cqos(self)
+    
+    @durability.setter
+    def durability(self, d):
+        d.set_onto_cqos(self)
+
+    @property
+    def durability_service(self):
+        return DurabilityServiceQosPolicy.get_from_cqos(self)
+
+    @durability_service.setter
+    def durability_service(self, d):
+        d.set_onto_cqos(self)
+
+    @property
+    def presentation(self):
+        return PresentationQosPolicy.get_from_cqos(self)
+
+    @presentation.setter
+    def presentation(self, p):
+        p.set_onto_cqos(self)
+
+    @property
+    def deadline(self):
+        return DeadlineQosPolicy.get_from_cqos(self)
+    
+    @deadline.setter
+    def deadline(self, d):
+        d.set_onto_cqos(self)
+    
+    @property
+    def latency_budget(self):
+        return LatencyBudgetQosPolicy.get_from_cqos(self)
+    
+    @latency_budget.setter
+    def latency_budget(self, l):
+        l.set_onto_cqos(self)
+
+    @property
+    def ownership(self):
+        return OwnershipQosPolicy.get_from_cqos(self)
+
+    @ownership.setter
+    def ownership(self, o):
+        o.set_onto_cqos(self)
+
+    @property
+    def ownership_strength(self):
+        return OwnershipStrengthQosPolicy.get_from_cqos(self)
+    
+    @ownership_strength.setter
+    def ownership_strength(self, o):
+        o.set_onto_cqos(self)
+    
+    @property
+    def liveliness(self):
+        return LivelinessQosPolicy.get_from_cqos(self)
+    
+    @liveliness.setter
+    def liveliness(self, l):
+        l.set_onto_cqos(self)
+
+    @property
+    def time_based_filter(self):
+        return TimeBasedFilterQosPolicy.get_from_cqos(self)
+
+    @time_based_filter.setter
+    def time_based_filter(self, t):
+        t.set_onto_cqos(self)
+
+    @property
+    def partition(self):
+        return PartitionQosPolicy.get_from_cqos(self)
+
+    @partition.setter
+    def partition(self, p):
+        p.set_onto_cqos(self)
+    
+    @property
+    def reliability(self):
+        return ReliabilityQosPolicy.get_from_cqos(self)
+    
+    @reliability.setter
+    def reliability(self, r):
+        r.set_onto_cqos(self)
+    
+    @property
+    def transport_priority(self):
+        return TransportPriorityQosPolicy.get_from_cqos(self)
+
+    @transport_priority.setter
+    def transport_priority(self, t):
+        t.set_onto_cqos(self)
+
+    @property
+    def lifespan(self):
+        return LifespanQosPolicy.get_from_cqos(self)
+    
+    @lifespan.setter
+    def lifespan(self, l):
+        l.set_onto_cqos(self)
+
+    @property
+    def destination_order(self):
+        return DestinationOrderQosPolicy.get_from_cqos(self)
+    
+    @destination_order.setter
+    def destination_order(self, d):
+        d.set_onto_cqos(self)
+
+    @property
+    def history(self):
+        return HistoryQosPolicy.get_from_cqos(self)
+
+    @history.setter
+    def history(self, h):
+        h.set_onto_cqos(self)
+
+    @property
+    def resource_limits(self):
+        return ResourceLimitsQosPolicy.get_from_cqos(self)
+    
+    @resource_limits.setter
+    def resource_limits(self, r):
+        r.set_onto_cqos(self)
+
+    @property
+    def writer_data_lifecycle(self):
+        return WriterDataLifecycleQosPolicy.get_from_cqos(self)
+    
+    @writer_data_lifecycle.setter
+    def writer_data_lifecycle(self, w):
+        w.set_onto_cqos(self)
+
+    @property
+    def reader_data_lifecycle(self):
+        return ReaderDataLifecycleQosPolicy.get_from_cqos(self)
+
+    @reader_data_lifecycle.setter
+    def reader_data_lifecycle(self, r):
+        r.set_onto_cqos(self)
 
 # Functions to set the state mask
 class DDSMaskUtil:
@@ -1035,7 +1496,7 @@ cdef class Entity(object):
     '''
     cdef dds.dds_entity_t _c_handle
     cdef object _parent
-    cdef object _listener
+    cdef object _listener    
 
     def __cinit__(self):
         self._c_handle = NULL
@@ -1049,6 +1510,13 @@ cdef class Entity(object):
         _entity_register_remove(self)
         self._c_handle = NULL
         self._listener = None
+
+    @property
+    def qos(self):
+        cdef dds.dds_qos_t *cqos
+        cqos = dds.dds_qos_create()
+        dds.dds_qos_get(self._c_handle, cqos)
+        return Qos.from_ptr(cqos)
 
     def close(self):
         '''
@@ -1102,7 +1570,6 @@ cdef class Entity(object):
     def get_statuscondition(self):
         return StatusCondition(self)
 
-
 # Global variable to map the C99 entity handles on the corresponding Entity class
 cdef object _entity_register = {}
 
@@ -1144,7 +1611,7 @@ cdef Entity _entity_register_find(dds_entity_t e):
 # unpacking dds API char * values to Python Strings
 cdef str _to_pystr_and_free(const char *c_str):
     try:
-        return c_str.decode('ISO-8859-1','strict')
+        return c_str.decode(DDS_STRING_ENCODING,'strict')
     finally:
         dds_free(<void*>c_str) #gil_ok
 
@@ -1746,7 +2213,7 @@ cdef class DomainParticipant(Entity):
         :rtype: Topic
         '''
         cdef dds.dds_entity_t c_topic
-        name_as_bytes = name.encode('ISO-8859-1')
+        name_as_bytes = name.encode(DDS_STRING_ENCODING)
         cdef char *name_as_char = name_as_bytes
         cdef dds_entity_t c_entity = self.handle()
         with nogil:
@@ -1755,6 +2222,26 @@ cdef class DomainParticipant(Entity):
             return _FoundTopic_Init(self, c_topic)
         else:
             return None
+    
+    def create_topic(self, str name, topic_data, Qos qos = None, listener = None):
+        '''create_topic(str name, topic_data, Qos qos = None, listener = None)
+        Create a topic
+
+        :type name: str
+        :param name: the topic name
+
+        :type topic_data: ddsutil.TopicDataClass
+        :param topic_data: the topic class data
+
+        :type qos: Qos
+        :param qos: the qos to be used on this topic
+
+        :type listener: Listener
+        :param listener: Listener
+
+        :rtype: Topic
+        '''
+        return Topic(self, name, topic_data.get_type_support(), qos, listener)
 
 
 # Abstract class which represents the Topic type
@@ -1831,9 +2318,9 @@ cdef const dds.dds_topic_descriptor_t * get_descriptor(ts):
     elif ts._name == 'DDS::TypeBuiltinTopicData':
         return &DDS_TypeBuiltinTopicData_desc
     else:
-        name_as_bytes = ts._name.encode('ISO-8859-1')
-        keys_as_bytes = ts._keys.encode('ISO-8859-1')
-        spec_as_bytes = ts._spec.encode('ISO_8859-1')
+        name_as_bytes = ts._name.encode(DDS_STRING_ENCODING)
+        keys_as_bytes = ts._keys.encode(DDS_STRING_ENCODING)
+        spec_as_bytes = ts._spec.encode(DDS_STRING_ENCODING)
         c_name = name_as_bytes
         c_keys = keys_as_bytes
         c_spec = spec_as_bytes
@@ -1889,7 +2376,7 @@ cdef class Topic(Entity):
             _c_listener = &topic_listener
 
         cdef const dds_topic_descriptor_t *descriptor = get_descriptor(ts)
-        name_as_bytes = name.encode('ISO-8859-1')
+        name_as_bytes = name.encode(DDS_STRING_ENCODING)
         cdef char *c_name = name_as_bytes
         # enabling a listener requires three steps, done as a indivisible action:
         #   1) dds_topic_create
@@ -2218,12 +2705,13 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-        with nogil:
-            r = dds.dds_write(self._c_handle, <const void *>p)
-        if r < 0:
-            raise DDSException('Failed to write data', r)
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                r = dds.dds_write(self._c_handle, <const void *>p)
+            if r < 0:
+                raise DDSException('Failed to write data', r)
 
     def write_ts(self, data, ts):
         '''
@@ -2236,13 +2724,14 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
         cdef dds_time_t c_time = ts.value
-        with nogil:
-            r = dds.dds_write_ts(self._c_handle, <const void *>p, c_time)
-        if r < 0:
-            raise DDSException('Failed to write data', r)
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                r = dds.dds_write_ts(self._c_handle, <const void *>p, c_time)
+            if r < 0:
+                raise DDSException('Failed to write data', r)
 
     def dispose_instance(self, data):
         '''dispose_instance(data)
@@ -2253,12 +2742,13 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-        with nogil:
-            r = dds.dds_instance_dispose(self._c_handle, <const void *>p)
-        if r < 0:
-            raise DDSException('Failed to dispose instance', r)
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                r = dds.dds_instance_dispose(self._c_handle, <const void *>p)
+            if r < 0:
+                raise DDSException('Failed to dispose instance', r)
 
     def dispose_instance_ts(self, data, ts):
         '''dispose_instance_ts(data, ts)
@@ -2272,14 +2762,14 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-
         cdef dds_time_t _c_ts = ts
-        with nogil:
-            r = dds.dds_instance_dispose_ts(self._c_handle, <const void *>p, _c_ts)
-        if r < 0:
-            raise DDSException('Failed to dispose instance', r)
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                r = dds.dds_instance_dispose_ts(self._c_handle, <const void *>p, _c_ts)
+            if r < 0:
+                raise DDSException('Failed to dispose instance', r)
 
     def publication_matched_status(self):
         '''
@@ -2386,10 +2876,12 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-        with nogil:
-            r = dds.dds_instance_register(self._c_handle, <const void *>p)
+        cdef dds_instance_handle_t r = DDS_HANDLE_NIL
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                r = dds.dds_instance_register(self._c_handle, <const void *>p)
         return r
 
     def unregister_instance(self, data=None, handle=None, timestamp=None):
@@ -2413,20 +2905,21 @@ cdef class DataWriter(Entity):
         cdef dds_time_t c_time
         if data is None and handle is None:
             raise DDSException('Either data or handle must be provided')
-        if handle:
-            h = handle
-        else:
-            b = self._typesupport._serialize(data)[:self._typesupport.size]
-            p = <bytes>b
-        if not isinstance(timestamp,DDSTime):
-            with nogil:
-                r = dds.dds_instance_unregister(self._c_handle, <const void *>p, h)
-        else:
-            c_time = timestamp.value
-            with nogil:
-                r = dds.dds_instance_unregister_ts(self._c_handle, <const void *>p, h, c_time)
-        if r < 0:
-            raise DDSException('Failure unregistering handle', r)
+        with CleanupContext() as cc:
+            if handle:
+                h = handle
+            else:
+                b = self._typesupport._serialize(data)[:self._typesupport.size]
+                p = <bytes>b
+            if not isinstance(timestamp,DDSTime):
+                with nogil:
+                    r = dds.dds_instance_unregister(self._c_handle, <const void *>p, h)
+            else:
+                c_time = timestamp.value
+                with nogil:
+                    r = dds.dds_instance_unregister_ts(self._c_handle, <const void *>p, h, c_time)
+            if r < 0:
+                raise DDSException('Failure unregistering handle', r)
 
     def lookup_instance(self, data):
         '''
@@ -2439,46 +2932,42 @@ cdef class DataWriter(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-        with nogil:
-            h = dds.dds_instance_lookup(self._c_handle, <const void *>p)
+        cdef dds_instance_handle_t h = DDS_HANDLE_NIL
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                h = dds.dds_instance_lookup(self._c_handle, <const void *>p)
         if h == 0:
             return None
         else:
             return h
 
-# FIXME: cannot implement. dds_instance_get_key blows up
-#     def get_key(self, handle):
-#         '''
-#         Accept an instance handle and return a key-value corresponding to it
-#
-#         :param handle: an instance handle
-#         :type handle: int
-#         :return: a data instance, with key-values initialized
-#         :rtype: object
-#         '''
-#         cdef char *c_data = NULL;
-#         cdef size_t sz = self._typesupport.size
-#         cdef dds_instance_handle_t h = handle
-#         self._check_handle()
-#         print('get_key: handle = {}'.format(h))
-#         print('get_key: sz = {}'.format(sz))
-#         c_data = <char *>malloc(sz)
-#         print('get_key: malloc''d')
-#         memset(c_data, 0, sz)
-#         print('get_key: memset''d')
-#         try:
-#             r = dds_instance_get_key(self._c_handle, h, c_data)
-#             print('get_key: dds_instance_get_key')
-#             if r < 0:
-#                 print('get_key: dds_instance_get_key')
-#                 raise DDSException('Could not get key', r)
-#
-#             data = self._typesupport._deserialize(c_data[:sz])
-#             print('get_key: serialized')
-#         finally:
-#             free(c_data)
+    def get_key(self, handle):
+        '''
+        Accept an instance handle and return a key-value corresponding to it
+
+        :param handle: an instance handle
+        :type handle: int
+        :return: a data instance, with key-values initialized
+        :rtype: object
+        '''
+        cdef char *c_data = NULL;
+        cdef size_t sz = self._typesupport.size
+        cdef dds_instance_handle_t h = handle
+        cdef int r = 0
+        self._check_handle()
+        c_data = <char *>malloc(sz)
+        memset(c_data, 0, sz)
+        try:
+            r = dds_instance_get_key(self._c_handle, h, c_data)
+            if r < 0:
+                raise DDSException('Could not get key', r)
+
+            data = self._typesupport._deserialize(c_data[:sz])
+            return data
+        finally:
+            free(c_data)
 
 
 class SampleInfo:
@@ -2943,46 +3432,41 @@ cdef class DataReader(Entity):
         '''
         self._check_handle()
         cdef char *p = NULL
-        b = self._typesupport._serialize(data)[:self._typesupport.size]
-        p = <bytes>b
-        with nogil:
-            h = dds.dds_instance_lookup(self._c_handle, <const void *>p)
+        cdef dds_instance_handle_t h = DDS_HANDLE_NIL
+        with CleanupContext() as cc:
+            b = self._typesupport._serialize(data)[:self._typesupport.size]
+            p = <bytes>b
+            with nogil:
+                h = dds.dds_instance_lookup(self._c_handle, <const void *>p)
         if h == 0:
             return None
         else:
             return h
 
-# FIXME: cannot implement. dds_instance_get_key blows up
-#     def get_key(self, handle):
-#         '''
-#         Accept an instance handle and return a key-value corresponding to it
-#
-#         :param handle: an instance handle
-#         :type handle: int
-#         :return: a data instance, with key-values initialized
-#         :rtype: object
-#         '''
-#         cdef char *c_data = NULL;
-#         cdef size_t sz = self._typesupport.size
-#         cdef dds_instance_handle_t h = handle
-#         self._check_handle()
-#         print('get_key: handle = {}'.format(h))
-#         print('get_key: sz = {}'.format(sz))
-#         c_data = <char *>malloc(sz)
-#         print('get_key: malloc''d')
-#         memset(c_data, 0, sz)
-#         print('get_key: memset''d')
-#         try:
-#             r = dds_instance_get_key(self._c_handle, h, c_data)
-#             print('get_key: dds_instance_get_key')
-#             if r < 0:
-#                 print('get_key: dds_instance_get_key')
-#                 raise DDSException('Could not get key', r)
-#
-#             data = self._typesupport._deserialize(c_data[:sz])
-#             print('get_key: serialized')
-#         finally:
-#             free(c_data)
+    def get_key(self, handle):
+        '''
+        Accept an instance handle and return a key-value corresponding to it
+
+        :param handle: an instance handle
+        :type handle: int
+        :return: a data instance, with key-values initialized
+        :rtype: object
+        '''
+        cdef char *c_data = NULL;
+        cdef size_t sz = self._typesupport.size
+        cdef dds_instance_handle_t h = handle
+        self._check_handle()
+        c_data = <char *>malloc(sz)
+        memset(c_data, 0, sz)
+        try:
+            r = dds_instance_get_key(self._c_handle, h, c_data)
+            if r < 0:
+                raise DDSException('Could not get key', r)
+
+            data = self._typesupport._deserialize(c_data[:sz])
+            return data
+        finally:
+            free(c_data)
 
 # Abstract Condition wrapper
 # maintains the handle to the C99 condition
@@ -3142,7 +3626,7 @@ cdef class QueryCondition(Condition):
             for i in range(numpar):
                 s = parameters[i].encode()
                 _c_parameters[i] = s
-        expression_bytes = expression.encode('ISO-8859-1')
+        expression_bytes = expression.encode(DDS_STRING_ENCODING)
         cdef char *c_expression = expression_bytes
         cdef dds_entity_t c_entity = reader.get_handle()
         with nogil:
@@ -3248,6 +3732,8 @@ cdef class WaitSet:
             for i in range(r):
                 key = <intptr_t>_c_conditions[i]
                 conditions.append(self._conditions[key])
+
+        free(_c_conditions)
         return conditions
 
 cdef class QosProvider:
@@ -3265,8 +3751,8 @@ cdef class QosProvider:
 
     # The init function takes a list of QosPolicies
     def __cinit__(self, uri, profile):
-        uri_bytes = uri.encode('ISO-8859-1')
-        profile_bytes = profile.encode('ISO-8859.1')
+        uri_bytes = uri.encode(DDS_STRING_ENCODING)
+        profile_bytes = profile.encode(DDS_STRING_ENCODING)
         cdef char *c_uri = uri_bytes
         cdef char *c_profile = profile_bytes
         with nogil:
@@ -3375,7 +3861,7 @@ class DDSException(Exception):
     def __init__(self, message = '', code = 0):
         msg = message
         if code != 0:
-            msg = message + "  Return code: " + dds.dds_err_str(code).decode('ISO-8859-1') #gil_ok
+            msg = message + "  Return code: " + dds.dds_err_str(code).decode(DDS_STRING_ENCODING) #gil_ok
         super(DDSException, self).__init__(msg)
 
 cdef class _SerializationHelper:

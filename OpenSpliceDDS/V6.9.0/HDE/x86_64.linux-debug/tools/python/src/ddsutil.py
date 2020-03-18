@@ -1,7 +1,7 @@
 #
 #                         Vortex OpenSplice
 #
-#   This software and documentation are Copyright 2006 to  ADLINK
+#   This software and documentation are Copyright 2006 to 2020 ADLINK
 #   Technology Limited, its affiliated companies and licensors. All rights
 #   reserved.
 #
@@ -31,6 +31,7 @@ import subprocess
 import dds
 import struct
 import enum
+import re
 from collections import OrderedDict, namedtuple
 import functools
 from dds import DDSException
@@ -53,6 +54,8 @@ _SIZE_ATTRIBUTE  = 'size'
 _VALUE_ATTRIBUTE = 'value'
 
 _MODULE_SEPARATOR = '::'
+
+DDS_STRING_ENCODING = 'ISO-8859-1'
 
 #############################################################################
 ### integer range constants
@@ -216,6 +219,13 @@ def _get_dds_descriptor_from_idl(idl_path, type_name):
     """
     out = subprocess.Popen(["idlpp", "-l", "pythondesc", idl_path], stdout=subprocess.PIPE).communicate()[0]
     #print ("Descriptor : ", out)
+
+    # Eval version of idlpp puts out a problematic header, remove it.
+    evalHeader = br'[^\n]*EVALUATION VERSION\r?\n'
+    match = re.match(evalHeader, out)
+    if match:
+        out = out[match.end():].strip() # strip leading/training spaces, too
+
     if not out.startswith(b'<topics'):
         raise RuntimeError("Problem found with given IDL file:\n" + out.decode())
 
@@ -505,7 +515,7 @@ def _deserialize_data(mem_type, data):
         typename = mem_type.attrib[_NAME_ATTRIBUTE]
         actual_type = _get_actual_type(typename)
         if isinstance(actual_type, enum.EnumMeta):
-            val = actual_type(data.pop(0))
+            val = actual_type(next(data))
             return val
         elif isinstance(actual_type, type):
             _cls = actual_type()
@@ -515,10 +525,9 @@ def _deserialize_data(mem_type, data):
             mem_type = actual_type
 
     if mem_type.tag == _STRING_TAG:
-        s = _ptr_to_bytes(data.pop(0)).decode('ISO-8859-1')
-        return s
+        return _deserialize_string(next(data))
     elif mem_type.tag == _CHAR_TAG:
-        return data.pop(0).decode('ISO-8859-1')
+        return next(data).decode(DDS_STRING_ENCODING)
     elif mem_type.tag == _SEQUENCE_TAG:
         result = _deserialize_sequence(mem_type, data)
         return result
@@ -528,16 +537,16 @@ def _deserialize_data(mem_type, data):
         return result
 
     else:
-        return data.pop(0)
+        return next(data)
 
 def _deserialize_sequence(mem_type, data):
     ''' Helper function to deserialize sequence data
     '''
     seq_type = mem_type[0].tag
-    seq_bound = data.pop(0)
-    seq_size = data.pop(0)
-    seq_ptr = data.pop(0)
-    seq_release = data.pop(0)
+    next(data) # seq_max - we don't care about this value
+    seq_size = next(data)
+    seq_ptr = next(data)
+    next(data) # seq 'free' flag - dont' care about this value
     actual_type = mem_type[0]
     result = []
     if seq_size != 0:
@@ -549,14 +558,14 @@ def _deserialize_sequence(mem_type, data):
                 fmt_size = struct.calcsize(fmt)
                 buff = _ptr_to_bytes(seq_ptr, fmt_size)
                 unpacked = struct.unpack(fmt, buff)
-                [result.append(actual_type(unpacked.pop(0))) for _ in range(seq_size)]
+                [result.append(actual_type(unpacked[i])) for i in range(seq_size)]
                 return result
             elif isinstance(actual_type, type):
                 cls = actual_type()
                 cls_fmt = seq_size * cls._get_packing_fmt()
                 fmt_size = struct.calcsize(cls_fmt)
                 buff = _ptr_to_bytes(seq_ptr, fmt_size)
-                unpacked = list(struct.unpack(cls_fmt, buff))
+                unpacked = iter(struct.unpack(cls_fmt, buff))
                 for _ in range(seq_size):
                     cls = actual_type()
                     cls._deserialize(unpacked)
@@ -568,7 +577,7 @@ def _deserialize_sequence(mem_type, data):
         fmt = seq_size * ''.join(seq_fmt_args)
         fmt_size = struct.calcsize(fmt)
         buff = _ptr_to_bytes(seq_ptr, fmt_size)
-        unpacked = list(struct.unpack(fmt, buff))
+        unpacked = iter(struct.unpack(fmt, buff))
         [result.append(_deserialize_data(actual_type, unpacked)) for _ in range(seq_size)]
     return result
 
@@ -581,21 +590,26 @@ def _deserialize_array(mem_type, data):
     '''
     array_size = int(mem_type.attrib[_SIZE_ATTRIBUTE])
     array_type = mem_type[0]
-    result = []
-    [result.append(_deserialize_data(array_type, data)) for _ in range(array_size)]
+    result = [_deserialize_data(array_type, data) for _ in range(array_size)]
     return result
 
-# Global variables
+# THIS GLOBAL "_global_packed" IS OBSOLETE. It was used as a temporary place to
+# hold references
+# to python objects while the _serialize method runs. Strings and sequence
+# objects must be kept for a bit so as to avoid the Python garbage collector
+# deleting those objects before they are packed via struct.pack.
+# This solution has been replaced by the use of the CleanupContext class
+# in dds.pyx.
 _global_packed = []
 
 def _bytes_to_ptr(packed):
     ''' Call to bytes to pointer
     '''
-
     encoded = packed
     if isinstance(packed, str):
-        encoded = str.encode(packed, 'ISO-8859-1')
-    _global_packed.append(encoded)
+        encoded = str.encode(packed, DDS_STRING_ENCODING)
+    dds.CleanupContext.add(encoded)
+
     return dds._SerializationHelper.bytes_to_ptr(encoded)
 
 def _ptr_to_bytes(addr, size = 0):
@@ -630,7 +644,7 @@ def _compute_packing_args(mem_type, args, val):
         addr = _bytes_to_ptr(val)
         args.append(addr)
     elif mem_type.tag == _CHAR_TAG:
-        args.append(val[0:1].encode('ISO-8859-1'))
+        args.append(val[0:1].encode(DDS_STRING_ENCODING))
     elif mem_type.tag == _SEQUENCE_TAG:
         _compute_sequence_packing_args(mem_type, args, val)
 
@@ -657,11 +671,21 @@ def _compute_sequence_packing_args(mem_type, args, val):
     if seq_type == _TYPE_TAG:
         typename = mem_type[0].attrib[_NAME_ATTRIBUTE]
         actual_type = _get_actual_type(typename)
+        if isinstance(actual_type, enum.EnumMeta):
+            seq_fmt_args = []
+            _compute_packing_fmt(mem_type[0], seq_fmt_args, 1)
+            seq_fmt = seq_size * ''.join(seq_fmt_args)
+            seq_args = []
+            for i in range(seq_size):
+                _compute_packing_args(mem_type[0], seq_args, val[i])
+            packed = struct.pack(seq_fmt, *seq_args)
+            addr = _bytes_to_ptr(packed)
+            args.extend([seq_bound, seq_size, addr, True])
+            return
         if isinstance(actual_type, type):
             cls_packed = []
             [cls_packed.append(cls._serialize()) for cls in val]
             packed = b''.join(cls_packed)
-            #print("packed", packed)
             addr = _bytes_to_ptr(packed)
             args.extend([seq_bound, seq_size, addr, True])
             return
@@ -699,7 +723,7 @@ def _compute_cls_packing_fmt(o, fmt_args):
         align = _compute_packing_fmt(mem_type, sub_fmt_args, align)
     fmt_args.extend(list(_align(''.join(fmt_args),''.join(sub_fmt_args))))
     offset = struct.calcsize(''.join(fmt_args))
-    paddings = _get_padding(offset, align)
+    paddings = _padding(offset, align)
     if paddings :
         fmt_args.append(paddings)
         fmt_args.append(' ')
@@ -718,8 +742,7 @@ def _compute_packing_fmt(mem_type, fmt_args, align):
         actual_key = mem_type.attrib[_NAME_ATTRIBUTE]
         actual_type = _get_actual_type(actual_key)
         if isinstance(actual_type, enum.EnumMeta):
-            size = struct.calcsize('i')
-            align = max(size, align)
+            align = _calcalign('i')
             fmt_args.append('i')
             return align
         elif isinstance(actual_type, type):
@@ -734,7 +757,7 @@ def _compute_packing_fmt(mem_type, fmt_args, align):
         seq_align = struct.calcsize('P')
         align = max(align, seq_align)
         offset = struct.calcsize(''.join(fmt_args))
-        paddings = _get_padding(offset, align)
+        paddings = _padding(offset, align)
         if paddings:
             if fmt_args[-1] == ' ':
                 fmt_args.pop()
@@ -742,7 +765,7 @@ def _compute_packing_fmt(mem_type, fmt_args, align):
             fmt_args.append(' ')
         seq_fmt = _to_packing_fmt([mem_type.tag])
         seq_offset = struct.calcsize(seq_fmt)
-        seq_paddings = _get_padding(seq_offset, seq_align)
+        seq_paddings = _padding(seq_offset, seq_align)
         fmt_args.append(seq_fmt)
         fmt_args.append(seq_paddings)
 
@@ -752,8 +775,7 @@ def _compute_packing_fmt(mem_type, fmt_args, align):
     else:
         mem_type = mem_type.tag
         fmt = _to_packing_fmt([mem_type])
-        size = struct.calcsize(fmt)
-        align = max(size, align)
+        align = _calcalign(fmt)
         fmt_args.append(fmt)
 
     fmt_args.append(' ')
@@ -773,7 +795,7 @@ def _compute_array_packing_fmt(mem_type, fmt_args, align):
     align =_compute_packing_fmt(array_type, array_fmt, align)
 
     offset = struct.calcsize(''.join(fmt_args))
-    paddings = _get_padding(offset, align)
+    paddings = _padding(offset, align)
     if paddings:
         if fmt_args[-1] == ' ':
             fmt_args.pop()
@@ -782,15 +804,6 @@ def _compute_array_packing_fmt(mem_type, fmt_args, align):
 
     fmt = ''.join(array_fmt)
     fmt_args.append("{}".format(array_size * fmt))
-
-def _get_padding(offset, align):
-    ''' Calculate paddings required
-    '''
-    remainder = offset % align
-    if remainder != 0:
-        return str(align - remainder) + 'x';
-    else:
-        ''
 
 def _get_actual_type(type_name):
     ''' Return actual type
@@ -837,7 +850,6 @@ def _dds_type_support(descriptor, type_name, keys, data_class):
     def _serialize(self, o):
         global _global_packed
         # initialize stack
-        _global_packed.clear()
 
         if not isinstance(o, self._cls):
             raise TypeError('Incorrect data type')
@@ -850,7 +862,7 @@ def _dds_type_support(descriptor, type_name, keys, data_class):
         #print("incoming buff: {}".format(buf))
         data = struct.unpack(self._packing_format, buf)
         result = self._cls()
-        result._deserialize(list(data))
+        result._deserialize(iter(data))
         return result
     # create methods
     methods = {'__init__': __init__, '_serialize':_serialize, '_deserialize':_deserialize}
@@ -937,6 +949,11 @@ def _align(existing_fmt, fmt):
     sz = struct.calcsize(existing_fmt)
     return _padding(sz, align) + fmt
 
+def _align_union(existing_fmt, union_fmt, align):
+    ''' add appropriate struct.pack pad characters prior union format '''
+    sz = struct.calcsize(existing_fmt)
+    return _padding(sz, align) + union_fmt
+
 def _lin_map_array(nDArray, ndims, helper):
     ''' do a function map of a multi-dimenional array by first linearizing it then calling helper on each element'''
     result = nDArray
@@ -949,13 +966,13 @@ def _deserialize_seq(data, seq_content_fmt, helper):
     ''' deserialize a sequence struct for 'data', then find the referenced buffer
      and deserialize its contents, calling helper to properly instantiate the sequence
      data '''
-    seq_length = data.pop(0)
-    data.pop(0) # seq_max - we don't care about this value
-    buffer_pointer = data.pop(0)
-    data.pop(0) # seq 'free' flag - dont' care about this value
+    next(data) # seq_max - we don't care about this value
+    seq_length = next(data)
+    buffer_pointer = next(data)
+    next(data) # seq 'free' flag - dont' care about this value
     if buffer_pointer != 0:
         buffer = _ptr_to_bytes(buffer_pointer, struct.calcsize(seq_content_fmt) * seq_length)
-        seq_data = list(struct.unpack(seq_content_fmt * seq_length, buffer))
+        seq_data = iter(struct.unpack(seq_content_fmt * seq_length, buffer))
         return [helper(seq_data) for _ in range(seq_length)]
     else:
         return []
@@ -974,7 +991,26 @@ def _serialize_seq(seq, seq_content_fmt, helper):
         buffer_pointer = 0
     return [seq_length, seq_length, buffer_pointer, False]
 
+def _deserialize_string(str_ptr):
+    if str_ptr != 0:
+        return _ptr_to_bytes(str_ptr).decode(DDS_STRING_ENCODING)
+    else:
+        return ''
+
 def _calc_union_formats(discriminator_fmt, label_map):
+    '''
+    @param discriminator_fmt: str
+    @param label_map: dict
+    '''
+    from warnings import warn
+    warn('IDL generation has changed since this code was generated.'\
+    + 'Please recompile your IDL with your current version of OpenSplice.')
+    
+    fmt, label_to_padded_packing_fmt, _ = _calc_union_formats2(discriminator_fmt, label_map)
+    return (fmt, label_to_padded_packing_fmt)
+
+
+def _calc_union_formats2(discriminator_fmt, label_map):
     '''
     @param discriminator_fmt: str
     @param label_map: dict
@@ -996,7 +1032,7 @@ def _calc_union_formats(discriminator_fmt, label_map):
             ffmt += '{}x'.format(sz_diff)
         label_to_padded_packing_fmt[label] = ffmt
 
-    return (fmt, label_to_padded_packing_fmt)
+    return (fmt, label_to_padded_packing_fmt, max(dalign,ualign))
 
 def _bool_checker(self,value):
     if not isinstance(value, bool):
@@ -1074,7 +1110,7 @@ def _char_checker(self,value):
     if len(value) != 1:
         raise TypeError('must have length of 1')
     try:
-        value.encode('ISO-8859-1')
+        value.encode(DDS_STRING_ENCODING)
     except UnicodeEncodeError as e:
         raise TypeError('must encode to ISO-8859-1: ' + e.args[0])
 
@@ -1085,7 +1121,7 @@ def _bounded_str_checker(bound):
         if bound > 0 and len(value) > bound:
             raise TypeError('String length of {} exceeds maximum allowed of {}'.format(len(value),bound))
         try:
-            value.encode('ISO-8859-1')
+            value.encode(DDS_STRING_ENCODING)
         except UnicodeEncodeError as e:
             raise TypeError('must encode to ISO-8859-1: ' + e.args[0])
     return checker
@@ -1097,4 +1133,3 @@ def _class_checker(class_type):
         if not isinstance(value, class_type):
             raise TypeError('must be of type {}'.format(class_type.__name__))
     return checker
-
