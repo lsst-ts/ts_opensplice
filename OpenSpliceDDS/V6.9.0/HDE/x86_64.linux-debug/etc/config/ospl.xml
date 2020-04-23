@@ -48,7 +48,11 @@
             <NameSpace name="defaultNamespace">
                 <Partition>*</Partition>
             </NameSpace>
-            <Policy alignee="Initial" aligner="true" durability="Durable" nameSpace="defaultNamespace"/>
+            <Policy alignee="Initial"
+                    aligner="true"
+                    durability="Durable"
+                    masterPriority="${OSPL_MASTER_PRIORITY:-1}"
+                    nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
     <TunerService name="cmsoap">
