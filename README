@@ -1,15 +1,12 @@
-This is a copy of the community edition of OpenSplice DDS.
-It is the version currently used by LSST developers.
+# Rubin Observatory build of the community edition of OpenSplice DDS.
 
-The Release corresponding to the required version of the SAL
-should be installed in the same directory as the SAL release.
+It is the version currently used by Rubin Observatory  developers.
 
-OpenSpliceDDS directory contains the HDE for versions 6.4.1 and 6.9.0
-V6.4.1 is the preferred default.
-
+OpenSpliceDDS directory contains the HDE for versions 6.9.0
 
 An environment variable, OSPL_HOME, must point to the subdirectory:
- ./OpenSpliceDDS/V6.4.1/HDE/x86_64.linux 
+ ./OpenSpliceDDS/V6.9.0/HDE/x86_64.linux 
+
 If this package is set up with eups, this environment variable is automatically set.
 
 Note that there are firewall rules that must be modified to use DDS/Opensplice. 
