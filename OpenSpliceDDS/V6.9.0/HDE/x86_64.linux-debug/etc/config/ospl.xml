@@ -47,13 +47,6 @@
                </Scheduling>
                <StackSize>6000000</StackSize>
             </ResendManager>
-            <Heartbeat>
-               <Scheduling>
-                  <Class>Default</Class>
-                  <Priority>0</Priority>
-               </Scheduling>
-               <StackSize>6000000</StackSize>
-            </Heartbeat>
          </Daemon>
          <Listeners>
             <StackSize>6000000</StackSize>
