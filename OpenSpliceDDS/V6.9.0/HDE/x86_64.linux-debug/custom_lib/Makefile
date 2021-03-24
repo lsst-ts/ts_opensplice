@@ -8,7 +8,7 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/dds/OvernightTests/ExtraToday/opensplice-test/tags/OSPL_V6_9_181127OSS_RELEASE/rhel72a/x86_64.linux-release/build/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -features ndebug=1 -type make -features no_c99=0 -features isocpp2_cxx11=1 HDE/x86_64.linux/custom_lib
+# /home/rfactory/lsst/opensplice/bin/mwc.pl -features ospl_os_host_linux=1 -features ospl_os_linux=1 -features ospl_64_bit=1 -include /bin/MakeProjectCreator/config -include /bin/MakeProjectCreator/config/TAO -features x86_64_linux=1 -features ospl_arch_x86_64=1 -features ndebug=1 -type make -features no_c99=0 -features isocpp2_cxx11=1 HDE/x86_64.linux-dev/custom_lib
 #
 #----------------------------------------------------------------------------
 

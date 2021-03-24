@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.12)
 project (ts_opensplice)
 
 set (OPENSPLICE_VERSION "6.9.0" CACHE STRING "Version number of OpenSplice RPM")
-set (OPENSPLICE_RELEASE 11 CACHE STRING "Release number of OpenSplice RPM")
+set (OPENSPLICE_RELEASE 15 CACHE STRING "Release number of OpenSplice RPM")
 set (OPENSPLICE_PLATFORM "x86_64" CACHE STRING "Platform for OpenSplice RPM")
 set (Rpm_topdir ${CMAKE_BINARY_DIR}/rpmbuild)
 

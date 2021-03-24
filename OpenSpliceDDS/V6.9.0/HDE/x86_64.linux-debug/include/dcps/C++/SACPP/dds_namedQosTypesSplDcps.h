@@ -1,5 +1,5 @@
-#ifndef DDS_NAMEDQOSTYPESSPLTYPES_H
-#define DDS_NAMEDQOSTYPESSPLTYPES_H
+#ifndef dds_namedQosTypesSPLTYPES_H
+#define dds_namedQosTypesSPLTYPES_H
 
 #include <c_base.h>
 #include <c_misc.h>

@@ -1,5 +1,5 @@
-#ifndef DDS_PREDEFTYPESSACDCPS_H
-#define DDS_PREDEFTYPESSACDCPS_H
+#ifndef dds_predefTypesSACDCPS_H
+#define dds_predefTypesSACDCPS_H
 
 #include "dds_dcps.h"
 #include "dds_predefTypesDcps.h"

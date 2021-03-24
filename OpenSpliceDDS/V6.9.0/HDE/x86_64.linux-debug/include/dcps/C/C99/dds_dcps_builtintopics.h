@@ -1,5 +1,5 @@
-#ifndef VORTEX_C99_DDS_DCPS_BUILTINTOPICS_H_
-#define VORTEX_C99_DDS_DCPS_BUILTINTOPICS_H_
+#ifndef VORTEX_C99_dds_dcps_builtintopics_H_
+#define VORTEX_C99_dds_dcps_builtintopics_H_
 
 #include "dds.h"
 #include "dds_dcps_builtintopicsDcps.h" /* add to C file instead? */
@@ -14,4 +14,4 @@ extern "C" {
 }
 #endif
 
-#endif /* VORTEX_C99_DDS_DCPS_BUILTINTOPICS_H_ */
+#endif /* VORTEX_C99_dds_dcps_builtintopics_H_ */

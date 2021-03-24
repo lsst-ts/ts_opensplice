@@ -1,5 +1,5 @@
-#ifndef DDS_DCPS_BUILTINTOPICSSACDCPS_H
-#define DDS_DCPS_BUILTINTOPICSSACDCPS_H
+#ifndef dds_dcps_builtintopicsSACDCPS_H
+#define dds_dcps_builtintopicsSACDCPS_H
 
 #include "dds_dcps.h"
 #include "dds_dcps_builtintopicsDcps.h"

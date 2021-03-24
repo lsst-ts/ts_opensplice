@@ -1,5 +1,5 @@
-#ifndef DDS_IOTDATASACDCPS_H
-#define DDS_IOTDATASACDCPS_H
+#ifndef dds_IoTDataSACDCPS_H
+#define dds_IoTDataSACDCPS_H
 
 #include "dds_dcps.h"
 #include "dds_IoTDataDcps.h"

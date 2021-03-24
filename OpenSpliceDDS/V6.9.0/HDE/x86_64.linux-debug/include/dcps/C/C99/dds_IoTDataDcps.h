@@ -1,5 +1,5 @@
-#ifndef DDS_IOTDATADCPS_H
-#define DDS_IOTDATADCPS_H
+#ifndef dds_IoTDataDCPS_H
+#define dds_IoTDataDCPS_H
 
 #include <dds_primitive_types.h>
 #include <stdint.h>

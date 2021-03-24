@@ -1,5 +1,5 @@
-#ifndef VORTEX_C99_DDS_PREDEFTYPES_H_
-#define VORTEX_C99_DDS_PREDEFTYPES_H_
+#ifndef VORTEX_C99_dds_predefTypes_H_
+#define VORTEX_C99_dds_predefTypes_H_
 
 #include "dds.h"
 #include "dds_predefTypesDcps.h" /* add to C file instead? */
@@ -38,4 +38,4 @@ extern "C" {
 }
 #endif
 
-#endif /* VORTEX_C99_DDS_PREDEFTYPES_H_ */
+#endif /* VORTEX_C99_dds_predefTypes_H_ */

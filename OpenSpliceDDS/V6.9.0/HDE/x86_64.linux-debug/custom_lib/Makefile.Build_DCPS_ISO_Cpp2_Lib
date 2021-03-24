@@ -11,7 +11,7 @@ LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
 CCFLAGS        =  
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -I"isocpp2/generatedIoTData" -DOSPL_VERSION=6.9.181127OSS
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -I"isocpp2/generatedIoTData" -DOSPL_VERSION=6.9.190925OSS
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
@@ -54,7 +54,7 @@ LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
 CCFLAGS        =  
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -I"isocpp2/generatedIoTData" -DOSPL_VERSION=6.9.181127OSS
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -I"isocpp2/generatedIoTData" -DOSPL_VERSION=6.9.190925OSS
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c

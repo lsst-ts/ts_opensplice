@@ -1,5 +1,5 @@
-#ifndef _DDS_IOTDATA_H_
-#define _DDS_IOTDATA_H_
+#ifndef _dds_IoTData_H_
+#define _dds_IoTData_H_
 
 #include <dds/core/ddscore.hpp>
 
@@ -33,31 +33,31 @@ namespace DDS
 
         typedef char IoTCh;
 
-        typedef std::vector< ::DDS::IoT::IoTUI8 > IoTUI8Seq;
+        typedef std::vector<DDS::IoT::IoTUI8>  IoTUI8Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTUI16 > IoTUI16Seq;
+        typedef std::vector<DDS::IoT::IoTUI16>  IoTUI16Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTUI32 > IoTUI32Seq;
+        typedef std::vector<DDS::IoT::IoTUI32>  IoTUI32Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTUI64 > IoTUI64Seq;
+        typedef std::vector<DDS::IoT::IoTUI64>  IoTUI64Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTI8 > IoTI8Seq;
+        typedef std::vector<DDS::IoT::IoTI8>  IoTI8Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTI16 > IoTI16Seq;
+        typedef std::vector<DDS::IoT::IoTI16>  IoTI16Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTI32 > IoTI32Seq;
+        typedef std::vector<DDS::IoT::IoTI32>  IoTI32Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTI64 > IoTI64Seq;
+        typedef std::vector<DDS::IoT::IoTI64>  IoTI64Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTF32 > IoTF32Seq;
+        typedef std::vector<DDS::IoT::IoTF32>  IoTF32Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTF64 > IoTF64Seq;
+        typedef std::vector<DDS::IoT::IoTF64>  IoTF64Seq;
 
-        typedef std::vector< ::DDS::IoT::IoTB > IoTBSeq;
+        typedef std::vector<DDS::IoT::IoTB>  IoTBSeq;
 
-        typedef std::vector< ::DDS::IoT::IoTStr > IoTStrSeq;
+        typedef std::vector<DDS::IoT::IoTStr>  IoTStrSeq;
 
-        typedef std::vector< ::DDS::IoT::IoTCh > IoTChSeq;
+        typedef std::vector<DDS::IoT::IoTCh>  IoTChSeq;
 
         OSPL_ENUM IoTType {
             TYPE_IoTUI8,
@@ -1413,7 +1413,7 @@ namespace DDS
 #endif
         };
 
-        typedef std::vector< ::DDS::IoT::IoTNVP > IoTNVPSeq;
+        typedef std::vector<DDS::IoT::IoTNVP>  IoTNVPSeq;
 
         class IoTData OSPL_DDS_FINAL
         {
@@ -1501,4 +1501,4 @@ namespace DDS
 
 }
 
-#endif /* _DDS_IOTDATA_H_ */
+#endif /* _dds_IoTData_H_ */
