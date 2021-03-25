@@ -1,5 +1,5 @@
-#ifndef DDS_IOTDATASPLDCPS_H
-#define DDS_IOTDATASPLDCPS_H
+#ifndef dds_IoTDataSPLDCPS_H
+#define dds_IoTDataSPLDCPS_H
 
 #include <c_base.h>
 #include <c_misc.h>
@@ -15,83 +15,135 @@ extern c_metaObject __dds_IoTData_DDS__load (c_base base);
 
 extern c_metaObject __dds_IoTData_DDS_IoT__load (c_base base);
 
-extern c_metaObject __DDS_IoT_IoTUI8__load (c_base base);
 typedef c_octet _DDS_IoT_IoTUI8;
+extern c_metaObject __DDS_IoT_IoTUI8__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI8__copyIn(c_type dbType, const DDS::IoT::IoTUI8 *from, _DDS_IoT_IoTUI8 *to);
+extern  void __DDS_IoT_IoTUI8__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI16__load (c_base base);
 typedef c_ushort _DDS_IoT_IoTUI16;
+extern c_metaObject __DDS_IoT_IoTUI16__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI16__copyIn(c_type dbType, const DDS::IoT::IoTUI16 *from, _DDS_IoT_IoTUI16 *to);
+extern  void __DDS_IoT_IoTUI16__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI32__load (c_base base);
 typedef c_ulong _DDS_IoT_IoTUI32;
+extern c_metaObject __DDS_IoT_IoTUI32__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI32__copyIn(c_type dbType, const DDS::IoT::IoTUI32 *from, _DDS_IoT_IoTUI32 *to);
+extern  void __DDS_IoT_IoTUI32__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI64__load (c_base base);
 typedef c_ulonglong _DDS_IoT_IoTUI64;
+extern c_metaObject __DDS_IoT_IoTUI64__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI64__copyIn(c_type dbType, const DDS::IoT::IoTUI64 *from, _DDS_IoT_IoTUI64 *to);
+extern  void __DDS_IoT_IoTUI64__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI8__load (c_base base);
 typedef c_char _DDS_IoT_IoTI8;
+extern c_metaObject __DDS_IoT_IoTI8__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI8__copyIn(c_type dbType, const DDS::IoT::IoTI8 *from, _DDS_IoT_IoTI8 *to);
+extern  void __DDS_IoT_IoTI8__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI16__load (c_base base);
 typedef c_short _DDS_IoT_IoTI16;
+extern c_metaObject __DDS_IoT_IoTI16__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI16__copyIn(c_type dbType, const DDS::IoT::IoTI16 *from, _DDS_IoT_IoTI16 *to);
+extern  void __DDS_IoT_IoTI16__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI32__load (c_base base);
 typedef c_long _DDS_IoT_IoTI32;
+extern c_metaObject __DDS_IoT_IoTI32__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI32__copyIn(c_type dbType, const DDS::IoT::IoTI32 *from, _DDS_IoT_IoTI32 *to);
+extern  void __DDS_IoT_IoTI32__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI64__load (c_base base);
 typedef c_longlong _DDS_IoT_IoTI64;
+extern c_metaObject __DDS_IoT_IoTI64__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI64__copyIn(c_type dbType, const DDS::IoT::IoTI64 *from, _DDS_IoT_IoTI64 *to);
+extern  void __DDS_IoT_IoTI64__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTF32__load (c_base base);
 typedef c_float _DDS_IoT_IoTF32;
+extern c_metaObject __DDS_IoT_IoTF32__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTF32__copyIn(c_type dbType, const DDS::IoT::IoTF32 *from, _DDS_IoT_IoTF32 *to);
+extern  void __DDS_IoT_IoTF32__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTF64__load (c_base base);
 typedef c_double _DDS_IoT_IoTF64;
+extern c_metaObject __DDS_IoT_IoTF64__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTF64__copyIn(c_type dbType, const DDS::IoT::IoTF64 *from, _DDS_IoT_IoTF64 *to);
+extern  void __DDS_IoT_IoTF64__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTB__load (c_base base);
 typedef c_bool _DDS_IoT_IoTB;
+extern c_metaObject __DDS_IoT_IoTB__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTB__copyIn(c_type dbType, const DDS::IoT::IoTB *from, _DDS_IoT_IoTB *to);
+extern  void __DDS_IoT_IoTB__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTStr__load (c_base base);
 typedef c_string _DDS_IoT_IoTStr;
+extern c_metaObject __DDS_IoT_IoTStr__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTStr__copyIn(c_type dbType, const DDS::IoT::IoTStr *from, _DDS_IoT_IoTStr *to);
+extern  void __DDS_IoT_IoTStr__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTCh__load (c_base base);
 typedef c_char _DDS_IoT_IoTCh;
+extern c_metaObject __DDS_IoT_IoTCh__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTCh__copyIn(c_type dbType, const DDS::IoT::IoTCh *from, _DDS_IoT_IoTCh *to);
+extern  void __DDS_IoT_IoTCh__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI8Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTUI8Seq;
+extern c_metaObject __DDS_IoT_IoTUI8Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI8Seq__copyIn(c_type dbType, const DDS::IoT::IoTUI8Seq *from, _DDS_IoT_IoTUI8Seq *to);
+extern  void __DDS_IoT_IoTUI8Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI16Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTUI16Seq;
+extern c_metaObject __DDS_IoT_IoTUI16Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI16Seq__copyIn(c_type dbType, const DDS::IoT::IoTUI16Seq *from, _DDS_IoT_IoTUI16Seq *to);
+extern  void __DDS_IoT_IoTUI16Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI32Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTUI32Seq;
+extern c_metaObject __DDS_IoT_IoTUI32Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI32Seq__copyIn(c_type dbType, const DDS::IoT::IoTUI32Seq *from, _DDS_IoT_IoTUI32Seq *to);
+extern  void __DDS_IoT_IoTUI32Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTUI64Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTUI64Seq;
+extern c_metaObject __DDS_IoT_IoTUI64Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTUI64Seq__copyIn(c_type dbType, const DDS::IoT::IoTUI64Seq *from, _DDS_IoT_IoTUI64Seq *to);
+extern  void __DDS_IoT_IoTUI64Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI8Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTI8Seq;
+extern c_metaObject __DDS_IoT_IoTI8Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI8Seq__copyIn(c_type dbType, const DDS::IoT::IoTI8Seq *from, _DDS_IoT_IoTI8Seq *to);
+extern  void __DDS_IoT_IoTI8Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI16Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTI16Seq;
+extern c_metaObject __DDS_IoT_IoTI16Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI16Seq__copyIn(c_type dbType, const DDS::IoT::IoTI16Seq *from, _DDS_IoT_IoTI16Seq *to);
+extern  void __DDS_IoT_IoTI16Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI32Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTI32Seq;
+extern c_metaObject __DDS_IoT_IoTI32Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI32Seq__copyIn(c_type dbType, const DDS::IoT::IoTI32Seq *from, _DDS_IoT_IoTI32Seq *to);
+extern  void __DDS_IoT_IoTI32Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTI64Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTI64Seq;
+extern c_metaObject __DDS_IoT_IoTI64Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTI64Seq__copyIn(c_type dbType, const DDS::IoT::IoTI64Seq *from, _DDS_IoT_IoTI64Seq *to);
+extern  void __DDS_IoT_IoTI64Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTF32Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTF32Seq;
+extern c_metaObject __DDS_IoT_IoTF32Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTF32Seq__copyIn(c_type dbType, const DDS::IoT::IoTF32Seq *from, _DDS_IoT_IoTF32Seq *to);
+extern  void __DDS_IoT_IoTF32Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTF64Seq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTF64Seq;
+extern c_metaObject __DDS_IoT_IoTF64Seq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTF64Seq__copyIn(c_type dbType, const DDS::IoT::IoTF64Seq *from, _DDS_IoT_IoTF64Seq *to);
+extern  void __DDS_IoT_IoTF64Seq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTBSeq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTBSeq;
+extern c_metaObject __DDS_IoT_IoTBSeq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTBSeq__copyIn(c_type dbType, const DDS::IoT::IoTBSeq *from, _DDS_IoT_IoTBSeq *to);
+extern  void __DDS_IoT_IoTBSeq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTStrSeq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTStrSeq;
+extern c_metaObject __DDS_IoT_IoTStrSeq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTStrSeq__copyIn(c_type dbType, const DDS::IoT::IoTStrSeq *from, _DDS_IoT_IoTStrSeq *to);
+extern  void __DDS_IoT_IoTStrSeq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_IoT_IoTChSeq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTChSeq;
+extern c_metaObject __DDS_IoT_IoTChSeq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTChSeq__copyIn(c_type dbType, const DDS::IoT::IoTChSeq *from, _DDS_IoT_IoTChSeq *to);
+extern  void __DDS_IoT_IoTChSeq__copyOut(const void *_from, void *_to);
 
 extern c_metaObject __DDS_IoT_IoTType__load (c_base base);
 enum _DDS_IoT_IoTType {
@@ -173,8 +225,10 @@ struct _DDS_IoT_IoTNVP {
     struct _DDS_IoT_IoTValue value;
 };
 
-extern c_metaObject __DDS_IoT_IoTNVPSeq__load (c_base base);
 typedef c_sequence _DDS_IoT_IoTNVPSeq;
+extern c_metaObject __DDS_IoT_IoTNVPSeq__load (c_base base);
+extern  v_copyin_result __DDS_IoT_IoTNVPSeq__copyIn(c_type dbType, const DDS::IoT::IoTNVPSeq *from, _DDS_IoT_IoTNVPSeq *to);
+extern  void __DDS_IoT_IoTNVPSeq__copyOut(const void *_from, void *_to);
 
 extern const char *DDS_IoT_IoTData_metaDescriptor[];
 extern const c_ulong DDS_IoT_IoTData_metaDescriptorArrLength;

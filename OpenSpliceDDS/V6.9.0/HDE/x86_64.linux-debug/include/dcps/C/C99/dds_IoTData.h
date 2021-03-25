@@ -1,5 +1,5 @@
-#ifndef VORTEX_C99_DDS_IOTDATA_H_
-#define VORTEX_C99_DDS_IOTDATA_H_
+#ifndef VORTEX_C99_dds_IoTData_H_
+#define VORTEX_C99_dds_IoTData_H_
 
 #include "dds.h"
 #include "dds_IoTDataDcps.h" /* add to C file instead? */
@@ -20,4 +20,4 @@ extern "C" {
 }
 #endif
 
-#endif /* VORTEX_C99_DDS_IOTDATA_H_ */
+#endif /* VORTEX_C99_dds_IoTData_H_ */

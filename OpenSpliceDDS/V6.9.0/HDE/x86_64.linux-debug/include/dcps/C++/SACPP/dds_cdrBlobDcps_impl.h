@@ -1,5 +1,5 @@
-#ifndef DDS_CDRBLOBDCPS_IMPL_H_
-#define DDS_CDRBLOBDCPS_IMPL_H_
+#ifndef dds_cdrBlobDCPS_IMPL_H_
+#define dds_cdrBlobDCPS_IMPL_H_
 
 #include "ccpp.h"
 #include "ccpp_dds_cdrBlob.h"

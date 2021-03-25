@@ -1,5 +1,5 @@
-#ifndef DDS_DCPS_BUILTINTOPICSDCPS_IMPL_H_
-#define DDS_DCPS_BUILTINTOPICSDCPS_IMPL_H_
+#ifndef dds_dcps_builtintopicsDCPS_IMPL_H_
+#define dds_dcps_builtintopicsDCPS_IMPL_H_
 
 #include "ccpp.h"
 #include "ccpp_dds_dcps_builtintopics.h"

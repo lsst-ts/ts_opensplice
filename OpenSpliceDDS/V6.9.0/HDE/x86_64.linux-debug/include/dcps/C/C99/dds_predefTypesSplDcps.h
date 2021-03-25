@@ -1,5 +1,5 @@
-#ifndef DDS_PREDEFTYPESSPLTYPES_H
-#define DDS_PREDEFTYPESSPLTYPES_H
+#ifndef dds_predefTypesSPLTYPES_H
+#define dds_predefTypesSPLTYPES_H
 
 #include <c_base.h>
 #include <c_misc.h>
@@ -13,8 +13,10 @@
 
 extern c_metaObject __dds_predefTypes_DDS__load (c_base base);
 
-extern c_metaObject __DDS_ByteSeq__load (c_base base);
 typedef c_sequence _DDS_ByteSeq;
+extern c_metaObject __DDS_ByteSeq__load (c_base base);
+extern  v_copyin_result __DDS_ByteSeq__copyIn(c_base base, const void *from, void *to);
+extern  void __DDS_ByteSeq__copyOut(const void *_from, void *_to);
 
 extern const char *DDS_String_metaDescriptor[];
 extern const int DDS_String_metaDescriptorArrLength;

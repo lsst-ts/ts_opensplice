@@ -1,5 +1,5 @@
-#ifndef CCPP_DDS_BUILTINTOPICS_H
-#define CCPP_DDS_BUILTINTOPICS_H
+#ifndef CCPP_dds_builtinTopics_H
+#define CCPP_dds_builtinTopics_H
 
 #include "dds_builtinTopics.h"
 #undef OS_API
@@ -9,4 +9,4 @@
 #include <orb_abstraction.h>
 #include "dds_builtinTopicsDcps_impl.h"
 
-#endif /* CCPP_DDS_BUILTINTOPICS_H */
+#endif /* CCPP_dds_builtinTopics_H */

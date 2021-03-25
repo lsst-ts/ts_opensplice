@@ -1,5 +1,5 @@
-#ifndef DDS_BUILTINTOPICSSPLTYPES_H
-#define DDS_BUILTINTOPICSSPLTYPES_H
+#ifndef dds_builtinTopicsSPLTYPES_H
+#define dds_builtinTopicsSPLTYPES_H
 
 #include <c_base.h>
 #include <c_misc.h>
@@ -13,17 +13,25 @@
 
 extern c_metaObject __dds_builtinTopics_DDS__load (c_base base);
 
-extern c_metaObject __DDS_octSeq__load (c_base base);
 typedef c_sequence _DDS_octSeq;
+extern c_metaObject __DDS_octSeq__load (c_base base);
+extern  v_copyin_result __DDS_octSeq__copyIn(c_base base, const DDS::octSeq *from, _DDS_octSeq *to);
+extern  void __DDS_octSeq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_BuiltinTopicKey_t__load (c_base base);
 typedef c_long _DDS_BuiltinTopicKey_t[3];
+extern c_metaObject __DDS_BuiltinTopicKey_t__load (c_base base);
+extern  v_copyin_result __DDS_BuiltinTopicKey_t__copyIn(c_base base, const DDS::BuiltinTopicKey_t *from, _DDS_BuiltinTopicKey_t *to);
+extern  void __DDS_BuiltinTopicKey_t__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_StringSeq__load (c_base base);
 typedef c_sequence _DDS_StringSeq;
+extern c_metaObject __DDS_StringSeq__load (c_base base);
+extern  v_copyin_result __DDS_StringSeq__copyIn(c_base base, const DDS::StringSeq *from, _DDS_StringSeq *to);
+extern  void __DDS_StringSeq__copyOut(const void *_from, void *_to);
 
-extern c_metaObject __DDS_DataRepresentationId_t__load (c_base base);
 typedef c_short _DDS_DataRepresentationId_t;
+extern c_metaObject __DDS_DataRepresentationId_t__load (c_base base);
+extern  v_copyin_result __DDS_DataRepresentationId_t__copyIn(c_base base, const DDS::DataRepresentationId_t *from, _DDS_DataRepresentationId_t *to);
+extern  void __DDS_DataRepresentationId_t__copyOut(const void *_from, void *_to);
 
 extern const char *DDS_Duration_t_metaDescriptor[];
 extern const int DDS_Duration_t_metaDescriptorArrLength;

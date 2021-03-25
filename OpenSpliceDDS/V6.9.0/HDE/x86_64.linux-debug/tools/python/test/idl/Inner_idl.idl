@@ -1,6 +1,0 @@
-module inner_mod {
-	struct Inner {
-		short short1;
-		double double1;
-	};
-};

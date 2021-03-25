@@ -1,5 +1,5 @@
-#ifndef DDS_BUILTINTOPICSDCPS_H
-#define DDS_BUILTINTOPICSDCPS_H
+#ifndef dds_builtinTopicsDCPS_H
+#define dds_builtinTopicsDCPS_H
 
 #include <dds_primitive_types.h>
 

@@ -1,5 +1,5 @@
-#ifndef DDS_NAMEDQOSTYPESSACDCPS_H
-#define DDS_NAMEDQOSTYPESSACDCPS_H
+#ifndef dds_namedQosTypesSACDCPS_H
+#define dds_namedQosTypesSACDCPS_H
 
 #include "dds_dcps.h"
 #include "dds_namedQosTypesDcps.h"

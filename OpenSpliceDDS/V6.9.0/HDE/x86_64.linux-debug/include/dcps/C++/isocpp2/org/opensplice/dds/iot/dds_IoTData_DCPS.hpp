@@ -1,5 +1,5 @@
-#ifndef ISOCPP2_DDS_IOTDATA_H
-#define ISOCPP2_DDS_IOTDATA_H
+#ifndef ISOCPP2_dds_IoTData_H
+#define ISOCPP2_dds_IoTData_H
 
 #include "dds/dds.hpp"
 
@@ -130,4 +130,4 @@ struct topic_type_name<DDS::IoT::IoTData>
 
 REGISTER_TOPIC_TYPE(DDS::IoT::IoTData)
 
-#endif /* ISOCPP2_DDS_IOTDATA_H */
+#endif /* ISOCPP2_dds_IoTData_H */

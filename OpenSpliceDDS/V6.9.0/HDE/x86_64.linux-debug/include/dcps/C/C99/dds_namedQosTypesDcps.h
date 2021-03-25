@@ -1,5 +1,5 @@
-#ifndef DDS_NAMEDQOSTYPESDCPS_H
-#define DDS_NAMEDQOSTYPESDCPS_H
+#ifndef dds_namedQosTypesDCPS_H
+#define dds_namedQosTypesDCPS_H
 
 #include <dds_primitive_types.h>
 #include <stdint.h>

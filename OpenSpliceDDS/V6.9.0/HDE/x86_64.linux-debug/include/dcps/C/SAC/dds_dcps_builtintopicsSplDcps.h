@@ -1,5 +1,5 @@
-#ifndef DDS_DCPS_BUILTINTOPICSSPLTYPES_H
-#define DDS_DCPS_BUILTINTOPICSSPLTYPES_H
+#ifndef dds_dcps_builtintopicsSPLTYPES_H
+#define dds_dcps_builtintopicsSPLTYPES_H
 
 #include <c_base.h>
 #include <c_misc.h>

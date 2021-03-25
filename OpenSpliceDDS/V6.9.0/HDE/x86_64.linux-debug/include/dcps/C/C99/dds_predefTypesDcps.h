@@ -1,5 +1,5 @@
-#ifndef DDS_PREDEFTYPESDCPS_H
-#define DDS_PREDEFTYPESDCPS_H
+#ifndef dds_predefTypesDCPS_H
+#define dds_predefTypesDCPS_H
 
 #include <dds_primitive_types.h>
 #include <stdint.h>
