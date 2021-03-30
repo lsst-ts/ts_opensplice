@@ -8,4 +8,3 @@ html_title = project
 html_short_title = project
 doxylink = {}  # Avoid warning: Could not find tag file _doxygen/doxygen.tag
 intersphinx_mapping["ts_opensplice"] = ("https://ts-opensplice.lsst.io", None)
-
